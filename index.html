@@ -855,9 +855,9 @@
                     </div>
                 </div>
 
-                <!-- Right: 3D Mac Mini (Spline Viewer for transparent bg) -->
+                <!-- Right: 3D Mac Mini (transparent bg) -->
                 <div id="mac-mini-container" class="reveal delay-200 relative h-[400px] md:h-[500px]" style="pointer-events: none;">
-                    <!-- Spline viewer loads here on scroll -->
+                    <!-- Lazy-loaded on scroll -->
                 </div>
             </div>
         </section>
@@ -1583,7 +1583,7 @@
             obs.observe(document.getElementById('demo'));
         })();
 
-        // Lazy-load Mac Mini Spline viewer when section scrolls into view
+        // Lazy-load Mac Mini Spline when section scrolls into view
         (function() {
             const container = document.getElementById('mac-mini-container');
             if (!container) return;
@@ -1592,24 +1592,16 @@
                 entries.forEach(e => {
                     if (e.isIntersecting && !loaded) {
                         loaded = true;
-                        // Create spline-viewer element for transparent background
-                        const viewer = document.createElement('spline-viewer');
-                        viewer.setAttribute('url', 'https://prod.spline.design/applemacminidesign-pCMCf7c20FjcNLaYC9OI9uVm/scene.splinecode');
-                        viewer.style.cssText = 'width:100%; height:100%; pointer-events:none; background:transparent;';
-                        viewer.setAttribute('background', 'transparent');
-                        container.appendChild(viewer);
-
-                        // Fallback: if spline-viewer doesn't load in 5s, try iframe approach
-                        setTimeout(() => {
-                            if (!viewer.shadowRoot || !viewer.shadowRoot.querySelector('canvas')) {
-                                container.innerHTML = '<iframe src="https://my.spline.design/applemacminidesign-pCMCf7c20FjcNLaYC9OI9uVm/" frameborder="0" width="100%" height="100%" style="border:none; pointer-events:none; border-radius:24px;" loading="lazy"></iframe>';
-                            }
-                        }, 5000);
-
+                        const iframe = document.createElement('iframe');
+                        iframe.src = 'https://my.spline.design/applemacminidesign-pCMCf7c20FjcNLaYC9OI9uVm/';
+                        iframe.frameBorder = '0';
+                        iframe.style.cssText = 'width:100%; height:100%; border:none; pointer-events:none; background:transparent;';
+                        iframe.setAttribute('allowtransparency', 'true');
+                        container.appendChild(iframe);
                         obs.unobserve(e.target);
                     }
                 });
-            }, { threshold: 0.05, rootMargin: '200px' });
+            }, { threshold: 0.05, rootMargin: '300px' });
             obs.observe(container);
         })();
 
