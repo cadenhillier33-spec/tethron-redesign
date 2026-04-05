@@ -1178,12 +1178,14 @@
 
         // 4. Terminal Typewriter Effect
         const phrases = [
-            "Responding to local lead in 38 seconds...",
-            "Booking roof inspection for Thursday 2PM...",
-            "Drafting Instagram post about storm damage...",
-            "Sending SMS follow-up sequence #3...",
-            "Generating daily revenue brief...",
-            "Executing autonomous workload..."
+            "Responding to new inquiry in 34 seconds...",
+            "Booking consultation for Thursday 2 PM...",
+            "Drafting Instagram post for 9 AM...",
+            "Sending follow-up sequence to cold lead...",
+            "Generating morning revenue brief...",
+            "Replying to 5-star Google review...",
+            "Scheduling client onboarding docs...",
+            "Monitoring competitor activity..."
         ];
         
         let phraseIndex = 0;
@@ -1548,8 +1550,9 @@
             <div id="audit-success" class="hidden text-center py-8">
                 <i class="ph ph-check-circle-fill text-tethron-cyan text-4xl mb-3"></i>
                 <h4 class="text-white font-bold text-lg mb-2">Audit Request Received!</h4>
-                <p class="text-zinc-400 text-sm">We'll review your business and send your personalized AI audit within 24 hours.</p>
+                <p class="text-zinc-400 text-sm">We'll review your business and send your personalized audit within 24 hours.</p>
             </div>
+
         </div>
     </div>
 
@@ -1566,6 +1569,8 @@
             body: JSON.stringify(data)
         }).then(r => {
             form.classList.add('hidden');
+            document.querySelector('#audit-modal h3').style.display = 'none';
+            document.querySelector('#audit-modal h3 + p').style.display = 'none';
             document.getElementById('audit-success').classList.remove('hidden');
         }).catch(e => {
             btn.textContent = 'Error — Call (203) 671-4631';
