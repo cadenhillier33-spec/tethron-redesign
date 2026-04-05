@@ -853,10 +853,14 @@
                 </div>
 
                 <!-- Right: 3D Mac Mini -->
-                <div class="reveal delay-200 relative h-[400px] md:h-[500px] overflow-hidden rounded-3xl" style="pointer-events: none;">
-                    <iframe src='https://my.spline.design/applemacminidesign-pCMCf7c20FjcNLaYC9OI9uVm/' frameborder='0' width='100%' height='100%' style="border:none; pointer-events:none;"></iframe>
-                    <!-- Soft edge blend -->
-                    <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 80px 40px #07080a;"></div>
+                <div class="reveal delay-200 relative h-[400px] md:h-[500px] overflow-hidden" style="pointer-events: none;">
+                    <iframe id="mac-mini-spline" data-src='https://my.spline.design/applemacminidesign-pCMCf7c20FjcNLaYC9OI9uVm/' frameborder='0' width='140%' height='140%' style="border:none; pointer-events:none; position:absolute; top:-20%; left:-20%; mix-blend-mode: lighten;"></iframe>
+                    <!-- Heavy edge fades on all sides to blend into bg -->
+                    <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 120px 60px #07080a;"></div>
+                    <div class="absolute top-0 left-0 right-0 h-[25%] pointer-events-none" style="background: linear-gradient(to bottom, #07080a 0%, transparent 100%);"></div>
+                    <div class="absolute bottom-0 left-0 right-0 h-[25%] pointer-events-none" style="background: linear-gradient(to top, #07080a 0%, transparent 100%);"></div>
+                    <div class="absolute left-0 top-0 bottom-0 w-[20%] pointer-events-none" style="background: linear-gradient(to right, #07080a 0%, transparent 100%);"></div>
+                    <div class="absolute right-0 top-0 bottom-0 w-[15%] pointer-events-none" style="background: linear-gradient(to left, #07080a 0%, transparent 100%);"></div>
                 </div>
             </div>
         </section>
@@ -1582,7 +1586,20 @@
             obs.observe(document.getElementById('demo'));
         })();
 
-        // (Carousel is pure CSS — no JS needed)
+        // Lazy-load Mac Mini Spline when section is visible
+        (function() {
+            const macFrame = document.getElementById('mac-mini-spline');
+            if (!macFrame) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting && !macFrame.src) {
+                        macFrame.src = macFrame.dataset.src;
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            obs.observe(macFrame.parentElement);
+        })();
 
         // --- GSAP SCROLLTRIGGER ANIMATIONS ---
         gsap.registerPlugin(ScrollTrigger);
