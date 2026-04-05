@@ -1500,13 +1500,14 @@
                 for (const step of scriptData) {
                     await sleep(step.delayBefore);
                     if (step.role === 'ai') {
-                        // AI typing indicator (teal dots)
-                        typingIndicator.classList.remove('hidden');
-                        typingIndicator.style.display = 'flex';
+                        // AI typing indicator (teal dots) — fresh each time
+                        const at = document.createElement('div');
+                        at.className = 'flex w-full justify-end max-w-[80%] ml-auto';
+                        at.innerHTML = '<div class="rounded-2xl rounded-br-md px-5 py-4 flex items-center gap-2" style="background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.1);"><div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan typing-dot"></div></div>';
+                        chatContainer.appendChild(at);
                         scrollChat();
                         await sleep(1200 + Math.min(step.text.length * 5, 3000));
-                        typingIndicator.style.display = 'none';
-                        typingIndicator.classList.add('hidden');
+                        at.remove();
                         chatContainer.insertAdjacentHTML('beforeend', mkAI(step));
                         if (step.logText) addLog(step.logText);
                         if (step.stats) updateStats(step.stats);
