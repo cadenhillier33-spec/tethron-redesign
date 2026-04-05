@@ -1506,36 +1506,35 @@
                     let startX = 0;
                     let dragOffset = 0;
 
-                    function wrapPosition() {
-                        // Keep position in the middle clone range for seamless loop
-                        if (pos >= 0) pos -= oneSetWidth;
-                        if (pos <= -oneSetWidth * 2) pos += oneSetWidth;
-                    }
-
                     function animate() {
                         if (!dragging) {
                             pos += speed;
-                            wrapPosition();
+                            // Seamless wrap — only during auto-scroll
+                            if (pos >= 0) pos -= oneSetWidth;
+                            if (pos <= -oneSetWidth * 2) pos += oneSetWidth;
                         }
                         el.style.transform = `translateX(${pos}px)`;
                         requestAnimationFrame(animate);
                     }
 
                     // Mouse drag
+                    let thisElDragging = false;
                     el.addEventListener('mousedown', (e) => {
                         dragging = true;
+                        thisElDragging = true;
                         startX = e.clientX;
                         dragOffset = pos;
                         e.preventDefault();
                     });
                     window.addEventListener('mousemove', (e) => {
-                        if (!dragging) return;
+                        if (!thisElDragging) return;
                         pos = dragOffset + (e.clientX - startX);
                     });
                     window.addEventListener('mouseup', () => {
-                        if (dragging) {
+                        if (thisElDragging) {
                             dragging = false;
-                            wrapPosition();
+                            thisElDragging = false;
+                            // Don't wrap — just let auto-scroll continue from here
                         }
                     });
 
@@ -1550,10 +1549,8 @@
                         pos = dragOffset + (e.touches[0].clientX - startX);
                     }, { passive: true });
                     el.addEventListener('touchend', () => {
-                        if (dragging) {
-                            dragging = false;
-                            wrapPosition();
-                        }
+                        dragging = false;
+                        // Don't wrap — auto-scroll picks up from current pos
                     });
 
                     animate();
