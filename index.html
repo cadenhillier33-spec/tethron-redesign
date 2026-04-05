@@ -869,38 +869,18 @@
                         </div>
                     </div>
 
-                    <!-- Live Stats -->
-                    <div class="p-5 flex flex-col gap-4">
-                        <div class="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">Performance</div>
-
-                        <div class="flex items-center justify-between py-2">
-                            <span class="text-[13px] text-zinc-400">Tasks Done</span>
-                            <span id="stat-tasks" class="font-mono text-lg font-semibold text-white">0</span>
-                        </div>
-                        <div class="h-px bg-white/[0.04]"></div>
-
-                        <div class="flex items-center justify-between py-2">
-                            <span class="text-[13px] text-zinc-400">Revenue</span>
-                            <span id="stat-revenue" class="font-mono text-lg font-semibold text-tethron-cyan">$0</span>
-                        </div>
-                        <div class="h-px bg-white/[0.04]"></div>
-
-                        <div class="flex items-center justify-between py-2">
-                            <span class="text-[13px] text-zinc-400">Leads</span>
-                            <span id="stat-leads" class="font-mono text-lg font-semibold text-white">0</span>
-                        </div>
-                        <div class="h-px bg-white/[0.04]"></div>
-
-                        <div class="flex items-center justify-between py-2">
-                            <span class="text-[13px] text-zinc-400">Reviews</span>
-                            <span id="stat-reviews" class="font-mono text-lg font-semibold text-white">0</span>
-                        </div>
+                    <!-- Hidden stat elements for JS compatibility -->
+                    <div class="hidden">
+                        <span id="stat-tasks">0</span>
+                        <span id="stat-revenue">$0</span>
+                        <span id="stat-leads">0</span>
+                        <span id="stat-reviews">0</span>
                     </div>
 
-                    <!-- Activity Log -->
+                    <!-- Activity Log — Full sidebar -->
                     <div class="flex-1 overflow-hidden p-5 flex flex-col">
-                        <div class="text-[11px] font-medium text-zinc-500 uppercase tracking-wider mb-3">Activity</div>
-                        <ul id="activity-log" class="flex flex-col gap-3 text-[12px] text-zinc-400 overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;"></ul>
+                        <div class="text-[11px] font-medium text-zinc-500 uppercase tracking-wider mb-4">Live Activity</div>
+                        <ul id="activity-log" class="flex flex-col gap-3 text-[13px] text-zinc-400 overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;"></ul>
                     </div>
 
                     <div class="p-5 border-t border-white/[0.04]">
