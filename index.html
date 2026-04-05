@@ -248,17 +248,38 @@
             transform: translateY(-1px);
         }
 
-        /* Infinite scroll carousel */
-        .carousel-track {
-            display: flex;
-            gap: 24px;
-            will-change: transform;
-            cursor: grab;
-            user-select: none;
-            -webkit-user-select: none;
+        /* Infinite scroll carousel — from tethron.ai */
+        .logo-carousel-wrap {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .carousel-track:active { cursor: grabbing; }
-        .carousel-track > div { flex-shrink: 0; }
+        .logo-carousel-wrap:hover .logo-carousel-track { animation-play-state: paused; }
+        .logo-carousel-track {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+        }
+        .logo-carousel-track.scroll-left { animation: logoScrollLeft 25s linear infinite; }
+        .logo-carousel-track.scroll-right { animation: logoScrollRight 30s linear infinite; }
+        @keyframes logoScrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes logoScrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .logo-carousel-item {
+            flex: 0 0 auto;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .logo-carousel-item:hover { opacity: 1; }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -991,42 +1012,57 @@
                 <p class="text-zinc-400 text-lg max-w-xl mx-auto reveal">No rip-and-replace. Your AI employee wires directly into your existing stack — from day one.</p>
             </div>
 
-            <!-- Infinite scrolling carousel -->
-            <div class="relative py-8">
-                <!-- Fade edges -->
-                <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#070810] to-transparent z-10 pointer-events-none"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#070810] to-transparent z-10 pointer-events-none"></div>
-
-                <!-- Row 1 — scrolls left -->
-                <div id="carousel-row-1" class="carousel-track mb-6"
-                    <div class="flex gap-6 shrink-0">
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope text-xl text-red-400"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-slack-logo text-xl text-purple-400"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-calendar text-xl text-blue-400"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-stripe-logo text-xl text-indigo-400"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-database text-xl text-orange-400"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-instagram-logo text-xl text-pink-400"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-book-open text-xl text-green-400"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-google-logo text-xl text-yellow-400"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-phone text-xl text-tethron-cyan"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-linkedin-logo text-xl text-blue-500"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
-                    </div>
+            <!-- Row 1 — scrolls left -->
+            <div class="logo-carousel-wrap mb-4">
+                <div class="logo-carousel-track scroll-left">
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
                 </div>
+            </div>
 
-                <!-- Row 2 — scrolls right -->
-                <div id="carousel-row-2" class="carousel-track"
-                    <div class="flex gap-6 shrink-0">
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope-simple text-xl text-cyan-400"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-cloud text-xl text-blue-300"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-note text-xl text-zinc-300"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-star text-xl text-red-500"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-shopping-bag text-xl text-green-500"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-chart-bar text-xl text-yellow-500"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-lightning text-xl text-orange-500"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-facebook-logo text-xl text-blue-600"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-chat-circle text-xl text-green-400"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
-                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-calendar-check text-xl text-tethron-cyan"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
-                    </div>
+            <!-- Row 2 — scrolls right -->
+            <div class="logo-carousel-wrap">
+                <div class="logo-carousel-track scroll-right">
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope-simple text-xl text-cyan-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-cloud text-xl text-blue-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-note text-xl text-zinc-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-star text-xl text-red-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-shopping-bag text-xl text-green-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chart-bar text-xl text-yellow-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-lightning text-xl text-orange-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-facebook-logo text-xl text-blue-600 mr-2"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chat-circle text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar-check text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope-simple text-xl text-cyan-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-cloud text-xl text-blue-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-note text-xl text-zinc-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-star text-xl text-red-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-shopping-bag text-xl text-green-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chart-bar text-xl text-yellow-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-lightning text-xl text-orange-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-facebook-logo text-xl text-blue-600 mr-2"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chat-circle text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar-check text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
                 </div>
             </div>
 
@@ -1482,91 +1518,7 @@
             obs.observe(document.getElementById('demo'));
         })();
 
-        // --- JS CAROUSEL ENGINE ---
-        (function() {
-            function initCarousel(el, pxPerFrame) {
-                if (!el) return;
-                const original = el.children[0];
-                if (!original) return;
-
-                // Flatten: take all items out of their wrapper and put them directly in the track
-                const items = Array.from(original.children);
-                el.innerHTML = '';
-                items.forEach(item => el.appendChild(item));
-
-                // Clone all items 3x for plenty of seamless buffer
-                for (let i = 0; i < 3; i++) {
-                    items.forEach(item => el.appendChild(item.cloneNode(true)));
-                }
-
-                // Measure one full set width (number of original items * item width + gaps)
-                requestAnimationFrame(() => {
-                    const itemCount = items.length;
-                    const allChildren = el.children;
-                    let oneSetWidth = 0;
-                    for (let i = 0; i < itemCount; i++) {
-                        oneSetWidth += allChildren[i].offsetWidth + 24; // 24 = gap
-                    }
-
-                    let pos = -oneSetWidth; // start offset so we can scroll both directions
-                    let dragging = false;
-                    let startX = 0;
-                    let dragStartPos = 0;
-
-                    function tick() {
-                        if (!dragging) {
-                            pos += pxPerFrame;
-                        }
-
-                        // Wrap seamlessly in either direction
-                        if (pos > 0) pos -= oneSetWidth;
-                        if (pos < -oneSetWidth * 2) pos += oneSetWidth;
-
-                        el.style.transform = 'translateX(' + pos + 'px)';
-                        requestAnimationFrame(tick);
-                    }
-
-                    // Touch
-                    el.addEventListener('touchstart', (e) => {
-                        dragging = true;
-                        startX = e.touches[0].clientX;
-                        dragStartPos = pos;
-                    }, {passive: true});
-
-                    el.addEventListener('touchmove', (e) => {
-                        if (!dragging) return;
-                        const dx = e.touches[0].clientX - startX;
-                        pos = dragStartPos + dx;
-                    }, {passive: true});
-
-                    el.addEventListener('touchend', () => { dragging = false; });
-
-                    // Mouse
-                    let mouseActive = false;
-                    el.addEventListener('mousedown', (e) => {
-                        dragging = true;
-                        mouseActive = true;
-                        startX = e.clientX;
-                        dragStartPos = pos;
-                        e.preventDefault();
-                    });
-                    window.addEventListener('mousemove', (e) => {
-                        if (!mouseActive) return;
-                        pos = dragStartPos + (e.clientX - startX);
-                    });
-                    window.addEventListener('mouseup', () => {
-                        if (mouseActive) { dragging = false; mouseActive = false; }
-                    });
-
-                    tick();
-                });
-            }
-
-            window.addEventListener('load', () => {
-                initCarousel(document.getElementById('carousel-row-1'), -1.0);
-                initCarousel(document.getElementById('carousel-row-2'), 0.7);
-            });
-        })();
+        // (Carousel is pure CSS — no JS needed)
 
         // --- GSAP SCROLLTRIGGER ANIMATIONS ---
         gsap.registerPlugin(ScrollTrigger);
