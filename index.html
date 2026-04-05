@@ -281,12 +281,14 @@
         <section class="max-w-7xl mx-auto w-full px-6 flex flex-col items-center text-center mt-16 md:mt-28 relative min-h-[85vh]">
 
             <!-- SPLINE 3D SCENE — Behind hero text -->
-            <div class="absolute inset-0 w-full h-full z-[0] opacity-60 reveal delay-500 overflow-hidden" style="pointer-events: auto;">
+            <div class="absolute inset-0 w-full h-full z-[0] opacity-50 reveal delay-500 overflow-hidden" style="pointer-events: auto; mix-blend-mode: lighten;">
                 <iframe src='https://my.spline.design/reactiveorb-XG9jCQD2Qj2Pb8KocqjbigRy/' frameborder='0' width='100%' height='100%' style="border:none; position:absolute; top:0; left:0; right:0; bottom:0;"></iframe>
-                <!-- Soft edge fades into background -->
-                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 150px 80px #070810;"></div>
-                <div class="absolute bottom-0 left-0 right-0 h-[20%] pointer-events-none bg-gradient-to-t from-[#070810] to-transparent"></div>
-                <div class="absolute top-0 left-0 right-0 h-[10%] pointer-events-none bg-gradient-to-b from-[#070810] to-transparent"></div>
+                <!-- Heavy edge fades to blend Spline's black bg into our #070810 -->
+                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 250px 120px #070810;"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none" style="background: linear-gradient(to top, #070810 0%, transparent 100%);"></div>
+                <div class="absolute top-0 left-0 right-0 h-[20%] pointer-events-none" style="background: linear-gradient(to bottom, #070810 0%, transparent 100%);"></div>
+                <div class="absolute left-0 top-0 bottom-0 w-[20%] pointer-events-none" style="background: linear-gradient(to right, #070810 0%, transparent 100%);"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-[15%] pointer-events-none" style="background: linear-gradient(to left, #070810 0%, transparent 100%);"></div>
             </div>
 
             <div class="reveal relative z-20">
