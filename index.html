@@ -1486,68 +1486,83 @@
         (function() {
             function initCarousel(el, speed) {
                 if (!el) return;
-                // Clone the first child for seamless loop
-                const firstSet = el.children[0];
-                const cloned = firstSet.cloneNode(true);
-                el.appendChild(cloned);
-                const setWidth = firstSet.scrollWidth + 24; // + gap
-                let pos = speed > 0 ? 0 : -setWidth;
-                let dragging = false;
-                let startX = 0;
-                let dragOffset = 0;
-                let autoSpeed = speed; // px per frame
 
-                function animate() {
-                    if (!dragging) {
-                        pos += autoSpeed;
-                        // Loop seamlessly
-                        if (autoSpeed < 0 && pos <= -setWidth) pos += setWidth;
-                        if (autoSpeed > 0 && pos >= 0) pos -= setWidth;
+                // Get the single set of items
+                const original = el.children[0];
+                if (!original) return;
+
+                // Clone it twice for seamless infinite scroll
+                el.appendChild(original.cloneNode(true));
+                el.appendChild(original.cloneNode(true));
+
+                // Wait a frame for layout to calculate
+                requestAnimationFrame(() => {
+                    const gap = 24;
+                    // Width of one full set including its internal gaps
+                    const oneSetWidth = original.offsetWidth + gap;
+
+                    let pos = -oneSetWidth; // Start at the middle clone
+                    let dragging = false;
+                    let startX = 0;
+                    let dragOffset = 0;
+
+                    function wrapPosition() {
+                        // Keep position in the middle clone range for seamless loop
+                        if (pos >= 0) pos -= oneSetWidth;
+                        if (pos <= -oneSetWidth * 2) pos += oneSetWidth;
                     }
-                    el.style.transform = `translateX(${pos}px)`;
-                    requestAnimationFrame(animate);
-                }
 
-                // Mouse drag
-                el.addEventListener('mousedown', (e) => {
-                    dragging = true;
-                    startX = e.clientX;
-                    dragOffset = pos;
-                    e.preventDefault();
-                });
-                window.addEventListener('mousemove', (e) => {
-                    if (!dragging) return;
-                    pos = dragOffset + (e.clientX - startX);
-                });
-                window.addEventListener('mouseup', () => {
-                    if (dragging) {
-                        dragging = false;
+                    function animate() {
+                        if (!dragging) {
+                            pos += speed;
+                            wrapPosition();
+                        }
+                        el.style.transform = `translateX(${pos}px)`;
+                        requestAnimationFrame(animate);
                     }
-                });
 
-                // Touch drag
-                el.addEventListener('touchstart', (e) => {
-                    dragging = true;
-                    startX = e.touches[0].clientX;
-                    dragOffset = pos;
-                }, { passive: true });
-                el.addEventListener('touchmove', (e) => {
-                    if (!dragging) return;
-                    pos = dragOffset + (e.touches[0].clientX - startX);
-                }, { passive: true });
-                el.addEventListener('touchend', () => {
-                    if (dragging) {
-                        dragging = false;
-                    }
-                });
+                    // Mouse drag
+                    el.addEventListener('mousedown', (e) => {
+                        dragging = true;
+                        startX = e.clientX;
+                        dragOffset = pos;
+                        e.preventDefault();
+                    });
+                    window.addEventListener('mousemove', (e) => {
+                        if (!dragging) return;
+                        pos = dragOffset + (e.clientX - startX);
+                    });
+                    window.addEventListener('mouseup', () => {
+                        if (dragging) {
+                            dragging = false;
+                            wrapPosition();
+                        }
+                    });
 
-                requestAnimationFrame(animate);
+                    // Touch drag
+                    el.addEventListener('touchstart', (e) => {
+                        dragging = true;
+                        startX = e.touches[0].clientX;
+                        dragOffset = pos;
+                    }, { passive: true });
+                    el.addEventListener('touchmove', (e) => {
+                        if (!dragging) return;
+                        pos = dragOffset + (e.touches[0].clientX - startX);
+                    }, { passive: true });
+                    el.addEventListener('touchend', () => {
+                        if (dragging) {
+                            dragging = false;
+                            wrapPosition();
+                        }
+                    });
+
+                    animate();
+                });
             }
 
-            // Row 1: scroll left (negative speed), Row 2: scroll right (positive speed... wait, reverse)
             window.addEventListener('load', () => {
-                initCarousel(document.getElementById('carousel-row-1'), -1.2);
-                initCarousel(document.getElementById('carousel-row-2'), 0.8);
+                initCarousel(document.getElementById('carousel-row-1'), -1.0);
+                initCarousel(document.getElementById('carousel-row-2'), 0.7);
             });
         })();
 
