@@ -249,24 +249,16 @@
         }
 
         /* Infinite scroll carousel */
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            will-change: transform;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
         }
-        @keyframes scrollRight {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-        .animate-scroll-left {
-            animation: scrollLeft 6s linear infinite;
-        }
-        .animate-scroll-right {
-            animation: scrollRight 8s linear infinite;
-        }
-        .animate-scroll-left:hover,
-        .animate-scroll-right:hover {
-            animation-play-state: paused;
-        }
+        .carousel-track:active { cursor: grabbing; }
+        .carousel-track > div { flex-shrink: 0; }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -1006,7 +998,7 @@
                 <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#070810] to-transparent z-10 pointer-events-none"></div>
 
                 <!-- Row 1 — scrolls left -->
-                <div class="flex gap-6 mb-6 animate-scroll-left"
+                <div id="carousel-row-1" class="carousel-track mb-6"
                     <div class="flex gap-6 shrink-0">
                         <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope text-xl text-red-400"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
                         <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-slack-logo text-xl text-purple-400"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
@@ -1035,7 +1027,7 @@
                 </div>
 
                 <!-- Row 2 — scrolls right -->
-                <div class="flex gap-6 animate-scroll-right"
+                <div id="carousel-row-2" class="carousel-track"
                     <div class="flex gap-6 shrink-0">
                         <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope-simple text-xl text-cyan-400"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
                         <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-cloud text-xl text-blue-300"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
@@ -1514,6 +1506,79 @@
                 entries.forEach(e => { if (e.isIntersecting) { runDemo(); obs.unobserve(e.target); } });
             }, { threshold: 0.15 });
             obs.observe(document.getElementById('demo'));
+        })();
+
+        // --- JS CAROUSEL ENGINE (auto-scroll + drag/swipe) ---
+        (function() {
+            function initCarousel(el, speed) {
+                if (!el) return;
+                const clone = el.children[0].nextElementSibling;
+                // Get total width of first set of items
+                const firstSet = el.children[0];
+                const setWidth = firstSet.scrollWidth + 24; // + gap
+                let pos = speed > 0 ? 0 : -setWidth;
+                let dragging = false;
+                let startX = 0;
+                let dragOffset = 0;
+                let autoSpeed = speed; // px per frame
+
+                function animate() {
+                    if (!dragging) {
+                        pos += autoSpeed;
+                        // Loop seamlessly
+                        if (autoSpeed < 0 && pos <= -setWidth) pos += setWidth;
+                        if (autoSpeed > 0 && pos >= 0) pos -= setWidth;
+                    }
+                    el.style.transform = `translateX(${pos}px)`;
+                    requestAnimationFrame(animate);
+                }
+
+                // Mouse drag
+                el.addEventListener('mousedown', (e) => {
+                    dragging = true;
+                    startX = e.clientX;
+                    dragOffset = pos;
+                    e.preventDefault();
+                });
+                window.addEventListener('mousemove', (e) => {
+                    if (!dragging) return;
+                    pos = dragOffset + (e.clientX - startX);
+                });
+                window.addEventListener('mouseup', () => {
+                    if (dragging) {
+                        dragging = false;
+                        // Normalize position
+                        while (pos > 0) pos -= setWidth;
+                        while (pos < -setWidth) pos += setWidth;
+                    }
+                });
+
+                // Touch drag
+                el.addEventListener('touchstart', (e) => {
+                    dragging = true;
+                    startX = e.touches[0].clientX;
+                    dragOffset = pos;
+                }, { passive: true });
+                el.addEventListener('touchmove', (e) => {
+                    if (!dragging) return;
+                    pos = dragOffset + (e.touches[0].clientX - startX);
+                }, { passive: true });
+                el.addEventListener('touchend', () => {
+                    if (dragging) {
+                        dragging = false;
+                        while (pos > 0) pos -= setWidth;
+                        while (pos < -setWidth) pos += setWidth;
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            // Row 1: scroll left (negative speed), Row 2: scroll right (positive speed... wait, reverse)
+            window.addEventListener('load', () => {
+                initCarousel(document.getElementById('carousel-row-1'), -1.2);
+                initCarousel(document.getElementById('carousel-row-2'), 0.8);
+            });
         })();
 
         // --- GSAP SCROLLTRIGGER ANIMATIONS ---
