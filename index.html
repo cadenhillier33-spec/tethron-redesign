@@ -248,6 +248,26 @@
             transform: translateY(-1px);
         }
 
+        /* Infinite scroll carousel */
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .animate-scroll-left {
+            animation: scrollLeft 30s linear infinite;
+        }
+        .animate-scroll-right {
+            animation: scrollRight 30s linear infinite;
+        }
+        .animate-scroll-left:hover,
+        .animate-scroll-right:hover {
+            animation-play-state: paused;
+        }
+
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #070810; }
@@ -971,29 +991,80 @@
             </div>
         </section>
 
-        <!-- 7. INTEGRATIONS -->
-        <section class="max-w-7xl mx-auto w-full px-6 mt-32 text-center">
-            <div class="text-center mb-12 reveal">
-                <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-2 text-white">Connects to Everything You Already Use</h2>
+        <!-- 7. INTEGRATIONS — Infinite scroll carousel -->
+        <section class="w-full mt-32 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 text-center mb-12">
+                <p class="text-tethron-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal">Integrations</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white reveal">Plugs into the tools <span class="text-tethron-cyan">you already use.</span></h2>
+                <p class="text-zinc-400 text-lg max-w-xl mx-auto reveal">No rip-and-replace. Your AI employee wires directly into your existing stack — from day one.</p>
             </div>
-            
-            <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto items-center">
-                <!-- Hardcoded to ensure SEO and exact classes -->
-                <script>
-                    const tools = ['Gmail', 'Slack', 'Google Calendar', 'Stripe', 'HubSpot', 'Instagram', 'QuickBooks', 'Google Reviews', 'SMS/Phone', 'LinkedIn', 'Mailchimp', 'Salesforce', 'Notion', 'Yelp', 'Shopify', 'Google Analytics', 'Zapier', 'Facebook', 'iMessage', 'Calendly'];
-                    let html = '';
-                    tools.forEach((tool, index) => {
-                        let delay = (index % 10) * 50; 
-                        html += `
-                            <div class="reveal glass-panel px-4 py-2.5 flex items-center gap-2 hover:bg-white/10 hover:border-white/20 transition-all cursor-default select-none shadow-[0_4px_15px_rgba(0,0,0,0.3)]" style="transition-delay: ${delay}ms;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan shadow-[0_0_5px_rgba(0,212,170,0.8)] animate-pulse"></div>
-                                <span class="text-sm font-medium text-zinc-300 whitespace-nowrap">${tool}</span>
-                            </div>
-                        `;
-                    });
-                    document.write(html);
-                </script>
+
+            <!-- Infinite scrolling carousel -->
+            <div class="relative py-8">
+                <!-- Fade edges -->
+                <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#070810] to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#070810] to-transparent z-10 pointer-events-none"></div>
+
+                <!-- Row 1 — scrolls left -->
+                <div class="flex gap-6 mb-6 animate-scroll-left">
+                    <div class="flex gap-6 shrink-0">
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope text-xl text-red-400"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-slack-logo text-xl text-purple-400"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-calendar text-xl text-blue-400"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-stripe-logo text-xl text-indigo-400"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-database text-xl text-orange-400"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-instagram-logo text-xl text-pink-400"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-book-open text-xl text-green-400"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-google-logo text-xl text-yellow-400"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-phone text-xl text-tethron-cyan"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-linkedin-logo text-xl text-blue-500"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="flex gap-6 shrink-0">
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope text-xl text-red-400"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-slack-logo text-xl text-purple-400"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-calendar text-xl text-blue-400"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-stripe-logo text-xl text-indigo-400"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-database text-xl text-orange-400"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-instagram-logo text-xl text-pink-400"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-book-open text-xl text-green-400"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-google-logo text-xl text-yellow-400"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-phone text-xl text-tethron-cyan"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-linkedin-logo text-xl text-blue-500"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
+                    </div>
+                </div>
+
+                <!-- Row 2 — scrolls right -->
+                <div class="flex gap-6 animate-scroll-right">
+                    <div class="flex gap-6 shrink-0">
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope-simple text-xl text-cyan-400"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-cloud text-xl text-blue-300"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-note text-xl text-zinc-300"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-star text-xl text-red-500"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-shopping-bag text-xl text-green-500"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-chart-bar text-xl text-yellow-500"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-lightning text-xl text-orange-500"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-facebook-logo text-xl text-blue-600"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-chat-circle text-xl text-green-400"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-calendar-check text-xl text-tethron-cyan"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="flex gap-6 shrink-0">
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-envelope-simple text-xl text-cyan-400"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-cloud text-xl text-blue-300"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-note text-xl text-zinc-300"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-star text-xl text-red-500"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-shopping-bag text-xl text-green-500"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-chart-bar text-xl text-yellow-500"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-lightning text-xl text-orange-500"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-facebook-logo text-xl text-blue-600"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-chat-circle text-xl text-green-400"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
+                        <div class="glass-panel px-6 py-4 flex items-center gap-3 min-w-[180px]"><i class="ph ph-calendar-check text-xl text-tethron-cyan"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
+                    </div>
+                </div>
             </div>
+
+            <p class="text-zinc-500 text-sm text-center mt-6 reveal">+ dozens more. If your business uses it, we can wire into it.</p>
         </section>
 
         <!-- 8. TESTIMONIALS -->
