@@ -486,41 +486,41 @@
                 <!-- Orbit ring (visual) -->
                 <div class="absolute w-[400px] h-[400px] rounded-full border border-white/[0.04]"></div>
 
-                <!-- Orbiting pills -->
-                <div class="absolute w-[400px] h-[400px]" style="animation: orbitSpin 30s linear infinite;">
-                    <!-- Pill 1: top -->
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                <!-- Orbiting pills — positioned with transform rotate + translateY on a 220px radius -->
+                <div class="absolute w-0 h-0" style="animation: orbitSpin 30s linear infinite;">
+                    <!-- 0° (top) -->
+                    <div class="absolute" style="transform: rotate(0deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
                             <i class="ph ph-chat-circle-text text-tethron-cyan"></i> Instant Response
                         </div>
                     </div>
-                    <!-- Pill 2: top-right -->
-                    <div class="absolute top-[13%] right-0 translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                    <!-- 60° -->
+                    <div class="absolute" style="transform: rotate(60deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
                             <i class="ph ph-instagram-logo text-tethron-cyan"></i> Social Media
                         </div>
                     </div>
-                    <!-- Pill 3: bottom-right -->
-                    <div class="absolute bottom-[13%] right-0 translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-calendar-check text-tethron-cyan"></i> Smart Scheduling
+                    <!-- 120° -->
+                    <div class="absolute" style="transform: rotate(120deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-calendar-check text-tethron-cyan"></i> Scheduling
                         </div>
                     </div>
-                    <!-- Pill 4: bottom -->
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2" style="animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-star text-tethron-cyan"></i> Review Management
+                    <!-- 180° (bottom) -->
+                    <div class="absolute" style="transform: rotate(180deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-star text-tethron-cyan"></i> Reviews
                         </div>
                     </div>
-                    <!-- Pill 5: bottom-left -->
-                    <div class="absolute bottom-[13%] left-0 -translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                    <!-- 240° -->
+                    <div class="absolute" style="transform: rotate(240deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
                             <i class="ph ph-paper-plane-tilt text-tethron-cyan"></i> Follow-Ups
                         </div>
                     </div>
-                    <!-- Pill 6: top-left -->
-                    <div class="absolute top-[13%] left-0 -translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                    <!-- 300° -->
+                    <div class="absolute" style="transform: rotate(300deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
                             <i class="ph ph-chart-line-up text-tethron-cyan"></i> Business Intel
                         </div>
                     </div>
