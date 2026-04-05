@@ -386,14 +386,14 @@
                     Get Free Audit
                 </a>
                 <!-- Mobile hamburger -->
-                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.15);" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                     <i class="ph ph-list text-tethron-cyan text-xl"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 pt-2" style="background: rgba(7,8,10,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);">
+        <!-- Mobile menu — frosted clear glass -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 pt-2" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(60px) saturate(2); -webkit-backdrop-filter: blur(60px) saturate(2); border-top: 1px solid rgba(255,255,255,0.06);">
             <div class="flex flex-col gap-1">
                 <a href="#capabilities" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Capabilities</a>
                 <a href="#how-it-works" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">How It Works</a>
