@@ -362,12 +362,10 @@
 
     <!-- Loading Screen -->
     <div id="loader" class="fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background: #07080a; transition: opacity 0.6s ease, visibility 0.6s ease;">
-        <img src="logo.png" alt="Tethron" class="w-16 h-16 mb-4" style="animation: loaderPulse 1.5s ease-in-out infinite;">
-        <span class="text-white font-semibold tracking-tight text-lg opacity-0" style="animation: loaderFadeIn 0.8s ease 0.3s forwards;">Tethron</span>
+        <img src="logo.png" alt="Tethron" class="w-16 h-16" style="animation: loaderSpin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;">
     </div>
     <style>
-        @keyframes loaderPulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); } }
-        @keyframes loaderFadeIn { to { opacity: 1; } }
+        @keyframes loaderSpin { 0% { transform: rotate(0deg); opacity: 0.6; } 50% { opacity: 1; } 100% { transform: rotate(360deg); opacity: 0.6; } }
     </style>
     <script>
         window.addEventListener('load', () => {
