@@ -486,45 +486,45 @@
                 <!-- Orbit ring (visual) -->
                 <div class="absolute w-[400px] h-[400px] rounded-full border border-white/[0.04]"></div>
 
-                <!-- Orbiting pills — positioned with transform rotate + translateY on a 220px radius -->
-                <div class="absolute w-0 h-0" style="animation: orbitSpin 30s linear infinite;">
-                    <!-- 0° (top) -->
-                    <div class="absolute" style="transform: rotate(0deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-chat-circle-text text-tethron-cyan"></i> Instant Response
-                        </div>
-                    </div>
-                    <!-- 60° -->
-                    <div class="absolute" style="transform: rotate(60deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-instagram-logo text-tethron-cyan"></i> Social Media
-                        </div>
-                    </div>
-                    <!-- 120° -->
-                    <div class="absolute" style="transform: rotate(120deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-calendar-check text-tethron-cyan"></i> Scheduling
-                        </div>
-                    </div>
-                    <!-- 180° (bottom) -->
-                    <div class="absolute" style="transform: rotate(180deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-star text-tethron-cyan"></i> Reviews
-                        </div>
-                    </div>
-                    <!-- 240° -->
-                    <div class="absolute" style="transform: rotate(240deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-paper-plane-tilt text-tethron-cyan"></i> Follow-Ups
-                        </div>
-                    </div>
-                    <!-- 300° -->
-                    <div class="absolute" style="transform: rotate(300deg) translateY(-220px); animation: counterSpin 30s linear infinite;">
-                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                            <i class="ph ph-chart-line-up text-tethron-cyan"></i> Business Intel
-                        </div>
-                    </div>
-                </div>
+                <!-- Orbiting pills — JS positioned for precise 60° spacing -->
+                <div id="orbit-container" class="absolute" style="width:0; height:0;"></div>
+                <script>
+                (function(){
+                    const container = document.getElementById('orbit-container');
+                    const pills = [
+                        {icon:'ph-chat-circle-text', label:'Instant Response'},
+                        {icon:'ph-instagram-logo', label:'Social Media'},
+                        {icon:'ph-calendar-check', label:'Scheduling'},
+                        {icon:'ph-star', label:'Reviews'},
+                        {icon:'ph-paper-plane-tilt', label:'Follow-Ups'},
+                        {icon:'ph-chart-line-up', label:'Business Intel'}
+                    ];
+                    const radius = 200;
+                    let angle = 0;
+                    const speed = 0.003; // radians per frame
+
+                    const els = pills.map((p, i) => {
+                        const el = document.createElement('div');
+                        el.className = 'absolute';
+                        el.style.cssText = 'transition: transform 0.1s linear;';
+                        el.innerHTML = '<div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default whitespace-nowrap" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(20px);"><i class="ph '+p.icon+' text-tethron-cyan"></i> '+p.label+'</div>';
+                        container.appendChild(el);
+                        return el;
+                    });
+
+                    function tick() {
+                        angle += speed;
+                        els.forEach((el, i) => {
+                            const a = angle + (i * Math.PI * 2 / 6);
+                            const x = Math.cos(a) * radius;
+                            const y = Math.sin(a) * radius;
+                            el.style.transform = 'translate('+x+'px, '+y+'px) translate(-50%, -50%)';
+                        });
+                        requestAnimationFrame(tick);
+                    }
+                    tick();
+                })();
+                </script>
             </div>
 
             <!-- Mobile: Clean vertical list -->
