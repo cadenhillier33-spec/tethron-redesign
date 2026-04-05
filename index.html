@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#070810] text-white dark">
+<html lang="en" class="scroll-smooth bg-[#07080a] text-white dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,13 +35,27 @@
                     },
                     colors: {
                         tethron: {
-                            bg: '#070810',
+                            bg: '#07080a',
                             cyan: '#00d4aa',
                             darkteal: '#0A9A87',
-                            surface: 'rgba(255, 255, 255, 0.03)',
-                            border: 'rgba(255, 255, 255, 0.08)'
+                            card: '#101111',
+                            primary: '#f9f9f9',
+                            secondary: '#cecece',
+                            tertiary: '#9c9c9d',
+                            muted: '#6a6b6c',
+                            border: 'rgba(255, 255, 255, 0.06)'
                         }
                     },
+                    fontSize: {
+                        'body': ['17px', { lineHeight: '1.47', letterSpacing: '0.2px', fontWeight: '500' }],
+                        'small': ['14px', { lineHeight: '1.4', letterSpacing: '0.2px', fontWeight: '500' }],
+                        'h1-desk': ['64px', { lineHeight: '1.10', letterSpacing: '0px', fontWeight: '600' }],
+                        'h2-desk': ['48px', { lineHeight: '1.10', letterSpacing: '-1px', fontWeight: '600' }],
+                        'btn': ['16px', { letterSpacing: '0.3px', fontWeight: '600' }]
+                    },
+                    boxShadow: {
+                        'raycast-card': '0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10)',
+                    }
                 }
             }
         }
@@ -50,10 +64,19 @@
     <style>
         /* Base Environment */
         html, body {
-            background-color: #070810 !important;
-            color: #ffffff;
+            background-color: #07080a !important;
+            color: #f9f9f9;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* Nav Glass */
+        .nav-glass {
+            background-color: rgba(7, 8, 10, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
         }
 
         /* Abstract Grid Background with Mask */
@@ -61,11 +84,11 @@
             position: fixed;
             inset: 0;
             z-index: -3;
-            background-color: #070810;
-            background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), 
-                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background-color: #07080a;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 64px 64px;
             mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
             -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
         }
@@ -74,7 +97,7 @@
         .noise-overlay {
             position: fixed;
             inset: 0;
-            z-index: 9998; /* Just below cursor */
+            z-index: 9998;
             pointer-events: none;
             opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -120,34 +143,17 @@
             #custom-cursor { display: none !important; }
         }
 
-        /* Glass Panel Styling */
+        /* Raycast Elevated Cards */
         .glass-panel {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background-color: #101111;
             position: relative;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-panel.hoverable:hover {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.03) 100%);
-        }
-
-        .glass-panel::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inset;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 10;
+        .glass-panel.hoverable:not(.no-hover-opacity):hover {
+            opacity: 0.9;
         }
 
         /* Spotlight Effect */
@@ -159,18 +165,20 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(0, 212, 170, 0.15), transparent 40%);
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(0, 212, 170, 0.12), transparent 40%);
             z-index: 1;
             opacity: 0;
             transition: opacity 0.5s ease;
             pointer-events: none;
+            border-radius: inherit;
         }
         .spotlight-wrapper:hover::after { opacity: 1; }
         .spotlight-wrapper > * { position: relative; z-index: 2; }
 
-        /* Typography */
+
+        /* Typography Features */
         .text-gradient {
-            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
+            background: linear-gradient(180deg, #f9f9f9 0%, rgba(249, 249, 249, 0.6) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -179,7 +187,7 @@
 
         /* Kinetic Shimmer Text */
         .shimmer-text {
-            background: linear-gradient(120deg, rgba(255,255,255,0.5) 20%, #00d4aa 50%, rgba(255,255,255,0.5) 80%);
+            background: linear-gradient(120deg, rgba(249,249,249,0.5) 20%, #00d4aa 50%, rgba(249,249,249,0.5) 80%);
             background-size: 200% auto;
             color: #00d4aa;
             -webkit-background-clip: text;
@@ -283,7 +291,7 @@
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #070810; }
+        ::-webkit-scrollbar-track { background: #07080a; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
@@ -302,10 +310,8 @@
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
-        .delay-500 { transition-delay: 500ms; }
 
-        /* FAQ Accordion Styling */
+        /* Details Accordion */
         details summary::-webkit-details-marker { display: none; }
         details[open] summary ~ * { animation: sweep .3s ease-in-out; }
         @keyframes sweep {
@@ -313,7 +319,11 @@
             100%  {opacity: 1; transform: translateY(0)}
         }
 
-        /* Hover Glowing Button */
+        /* Hover Glowing Pill Button */
+        .btn-pill {
+            border-radius: 980px;
+            transition: opacity 0.3s ease;
+        }
         .btn-glow {
             position: relative;
         }
@@ -323,15 +333,15 @@
             top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: #00d4aa;
             z-index: -1;
-            filter: blur(12px);
-            opacity: 0.5;
+            filter: blur(14px);
+            opacity: 0.4;
             border-radius: inherit;
             transition: opacity 0.3s ease;
         }
-        .btn-glow:hover::before { opacity: 0.8; }
+        .btn-glow:hover::before { opacity: 0.7; }
     </style>
 </head>
-<body class="bg-[#070810] text-white antialiased selection:bg-tethron-cyan selection:text-[#070810]">
+<body class="bg-[#07080a] text-white antialiased selection:bg-tethron-cyan selection:text-[#07080a]">
 
     <!-- Environmental Textures -->
     <div class="bg-grid"></div>
@@ -340,7 +350,7 @@
     <div id="custom-cursor"></div>
 
     <!-- 1. NAVIGATION -->
-    <nav class="fixed top-0 w-full z-50 border-b border-tethron-border bg-[#070810]/60 backdrop-blur-xl reveal">
+    <nav class="fixed top-0 w-full z-50 border-b border-tethron-border bg-[#07080a]/60 backdrop-blur-xl reveal">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2 cursor-pointer">
                 <i class="ph-duotone ph-cpu text-tethron-cyan text-2xl"></i>
@@ -372,12 +382,12 @@
             <!-- SPLINE 3D SCENE — Behind hero text (hidden on mobile) -->
             <div class="absolute inset-0 w-full h-full z-[0] opacity-50 reveal delay-500 overflow-hidden hidden md:block" style="pointer-events: auto; mix-blend-mode: lighten;">
                 <iframe src='https://my.spline.design/reactiveorb-XG9jCQD2Qj2Pb8KocqjbigRy/' frameborder='0' width='100%' height='100%' style="border:none; position:absolute; top:0; left:0; right:0; bottom:0;"></iframe>
-                <!-- Heavy edge fades to blend Spline's black bg into our #070810 -->
-                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 250px 120px #070810;"></div>
-                <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none" style="background: linear-gradient(to top, #070810 0%, transparent 100%);"></div>
-                <div class="absolute top-0 left-0 right-0 h-[20%] pointer-events-none" style="background: linear-gradient(to bottom, #070810 0%, transparent 100%);"></div>
-                <div class="absolute left-0 top-0 bottom-0 w-[20%] pointer-events-none" style="background: linear-gradient(to right, #070810 0%, transparent 100%);"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-[15%] pointer-events-none" style="background: linear-gradient(to left, #070810 0%, transparent 100%);"></div>
+                <!-- Heavy edge fades to blend Spline's black bg into our #07080a -->
+                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 250px 120px #07080a;"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none" style="background: linear-gradient(to top, #07080a 0%, transparent 100%);"></div>
+                <div class="absolute top-0 left-0 right-0 h-[20%] pointer-events-none" style="background: linear-gradient(to bottom, #07080a 0%, transparent 100%);"></div>
+                <div class="absolute left-0 top-0 bottom-0 w-[20%] pointer-events-none" style="background: linear-gradient(to right, #07080a 0%, transparent 100%);"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-[15%] pointer-events-none" style="background: linear-gradient(to left, #07080a 0%, transparent 100%);"></div>
             </div>
 
             <div class="reveal relative z-20">
@@ -421,9 +431,9 @@
         <section class="w-full relative h-[200px] -mt-8 mb-[-80px] z-[1] overflow-hidden" style="pointer-events: none;">
             <iframe src='https://my.spline.design/reactiveorb-XG9jCQD2Qj2Pb8KocqjbigRy/' frameborder='0' width='100%' height='800px' style="border:none; position:absolute; bottom:0; left:0; right:0; pointer-events:auto; transform: scale(1.5); transform-origin: bottom center;"></iframe>
             <!-- Fade top into hero background -->
-            <div class="absolute top-0 left-0 right-0 h-[40%] pointer-events-none bg-gradient-to-b from-[#070810] to-transparent z-10"></div>
+            <div class="absolute top-0 left-0 right-0 h-[40%] pointer-events-none bg-gradient-to-b from-[#07080a] to-transparent z-10"></div>
             <!-- Fade bottom into next section -->
-            <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none bg-gradient-to-t from-[#070810] to-transparent z-10"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none bg-gradient-to-t from-[#07080a] to-transparent z-10"></div>
         </section>
 
         <!-- 3. METRICS BAR -->
@@ -469,7 +479,7 @@
                     <div class="relative w-full max-w-[300px] mx-auto mt-auto flex-grow flex items-end">
                         <div class="relative w-full h-[260px] bg-[#0a0c13] rounded-t-[2.5rem] border-x-8 border-t-8 border-[#1a1c23] shadow-2xl transition-transform duration-500 group-hover:translate-y-2 group-hover:scale-[1.03] overflow-visible z-10 flex flex-col justify-end p-5 pb-0 gap-4">
                             <!-- Floating Badge -->
-                            <div class="absolute -right-8 top-16 bg-[#070810] border border-tethron-cyan text-tethron-cyan px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-[0_0_20px_rgba(0,212,170,0.4)] z-20 transition-transform duration-700 delay-100 group-hover:-translate-y-2 group-hover:scale-110">
+                            <div class="absolute -right-8 top-16 bg-[#07080a] border border-tethron-cyan text-tethron-cyan px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-[0_0_20px_rgba(0,212,170,0.4)] z-20 transition-transform duration-700 delay-100 group-hover:-translate-y-2 group-hover:scale-110">
                                 <i class="ph-fill ph-lightning text-sm"></i> 34s
                             </div>
                             <!-- Fake notch -->
@@ -665,7 +675,7 @@
 
                             <!-- Day 7 -->
                             <div class="relative">
-                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-tethron-cyan shadow-[0_0_10px_#00d4aa] rounded-full flex items-center justify-center"><i class="ph-bold ph-phone text-[8px] text-[#070810]"></i></div>
+                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-tethron-cyan shadow-[0_0_10px_#00d4aa] rounded-full flex items-center justify-center"><i class="ph-bold ph-phone text-[8px] text-[#07080a]"></i></div>
                                 <div class="flex items-center gap-2 mb-0.5">
                                     <div class="text-[10px] font-bold text-tethron-cyan uppercase tracking-widest">Day 7: Final SMS</div>
                                     <span class="bg-tethron-cyan/20 text-tethron-cyan text-[8px] px-1.5 rounded font-bold">REPLIED ✓</span>
@@ -756,7 +766,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <!-- Step 1 -->
                 <div class="relative reveal flex flex-col">
-                    <div class="w-12 h-12 bg-[#070810] border border-tethron-cyan/50 flex items-center justify-center rounded-full text-tethron-cyan font-bold text-xl shadow-[0_0_15px_rgba(0,212,170,0.2)] mb-6 mx-auto md:mx-0">1</div>
+                    <div class="w-12 h-12 bg-[#07080a] border border-tethron-cyan/50 flex items-center justify-center rounded-full text-tethron-cyan font-bold text-xl shadow-[0_0_15px_rgba(0,212,170,0.2)] mb-6 mx-auto md:mx-0">1</div>
                     <h3 class="text-xl font-semibold mb-3 text-center md:text-left text-white">We Audit</h3>
                     <p class="text-zinc-400 text-sm mb-6 text-center md:text-left">Free deep-dive into your ops. We map every workflow an AI can effectively own.</p>
                     <div class="glass-panel hoverable p-4 h-32 flex flex-col justify-center relative group">
@@ -769,7 +779,7 @@
 
                 <!-- Step 2 -->
                 <div class="relative reveal delay-100 flex flex-col">
-                    <div class="w-12 h-12 bg-[#070810] border border-tethron-cyan/50 flex items-center justify-center rounded-full text-tethron-cyan font-bold text-xl shadow-[0_0_15px_rgba(0,212,170,0.2)] mb-6 mx-auto md:mx-0">2</div>
+                    <div class="w-12 h-12 bg-[#07080a] border border-tethron-cyan/50 flex items-center justify-center rounded-full text-tethron-cyan font-bold text-xl shadow-[0_0_15px_rgba(0,212,170,0.2)] mb-6 mx-auto md:mx-0">2</div>
                     <h3 class="text-xl font-semibold mb-3 text-center md:text-left text-white">We Deploy</h3>
                     <p class="text-zinc-400 text-sm mb-6 text-center md:text-left">Dedicated Mac Mini hardware, custom-configured. Ships ready to plug 'n play.</p>
                     <div class="glass-panel hoverable p-4 h-32 flex items-center justify-center relative overflow-hidden group">
@@ -782,7 +792,7 @@
 
                 <!-- Step 3 -->
                 <div class="relative reveal delay-200 flex flex-col">
-                    <div class="w-12 h-12 bg-[#070810] border border-tethron-cyan flex items-center justify-center rounded-full text-[#070810] bg-tethron-cyan font-bold text-xl shadow-[0_0_25px_rgba(0,212,170,0.5)] mb-6 mx-auto md:mx-0">3</div>
+                    <div class="w-12 h-12 bg-[#07080a] border border-tethron-cyan flex items-center justify-center rounded-full text-[#07080a] bg-tethron-cyan font-bold text-xl shadow-[0_0_25px_rgba(0,212,170,0.5)] mb-6 mx-auto md:mx-0">3</div>
                     <h3 class="text-xl font-semibold mb-3 text-center md:text-left text-white">It Runs 24/7</h3>
                     <p class="text-zinc-400 text-sm mb-6 text-center md:text-left">Monitor from your dashboard. AI handles the grind, you focus on scale.</p>
                     <div class="glass-panel hoverable p-4 h-32 flex flex-col gap-3 relative">
@@ -813,7 +823,7 @@
                     <div class="p-6 border-b border-white/5 flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center relative" style="box-shadow: 0 0 15px rgba(0,212,170,0.2);">
                             <i class="ph ph-robot text-tethron-cyan text-lg"></i>
-                            <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-tethron-cyan rounded-full border-2 border-[#070810]"></div>
+                            <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-tethron-cyan rounded-full border-2 border-[#07080a]"></div>
                         </div>
                         <div>
                             <h3 class="font-medium text-sm text-white">Tethron</h3>
@@ -886,7 +896,7 @@
 
                 <!-- RIGHT MAIN PANEL -->
                 <div class="flex-1 flex flex-col relative overflow-hidden">
-                    <div class="px-6 py-5 border-b border-white/5 flex flex-col gap-3 shrink-0 bg-[#070810]/50 backdrop-blur-md z-20">
+                    <div class="px-6 py-5 border-b border-white/5 flex flex-col gap-3 shrink-0 bg-[#07080a]/50 backdrop-blur-md z-20">
                         <div class="flex items-center justify-between">
                             <h3 class="font-medium text-[15px]">Summit Roofing Co. <span class="text-zinc-500">•</span> A Day With Your AI Employee</h3>
                             <div class="flex items-center gap-1.5 px-3 py-1 bg-tethron-cyan/10 rounded-full border border-tethron-cyan/20">
@@ -920,7 +930,7 @@
                         </div>
                     </div>
 
-                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#070810] via-[#070810]/90 to-transparent z-20">
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#07080a] via-[#07080a]/90 to-transparent z-20">
                         <div class="max-w-3xl mx-auto flex items-center gap-3">
                             <div class="flex-1 h-12 bg-white/[0.03] border border-white/10 rounded-xl px-4 flex items-center justify-between cursor-not-allowed">
                                 <span class="text-zinc-600 text-sm">Type a message...</span>
@@ -1141,10 +1151,10 @@
                     <a href="https://calendly.com/cadenhillier33/30min" class="block w-full py-3 rounded-xl border border-tethron-border text-center text-sm font-semibold hover:bg-white/5 transition-colors text-white">Start Foundation</a>
                 </div>
 
-                <div class="glass-panel p-8 md:p-10 relative transform md:scale-105 z-10 reveal delay-100 bg-[#070810]/80 shadow-[0_0_50px_rgba(0,212,170,0.1)] overflow-visible">
+                <div class="glass-panel p-8 md:p-10 relative transform md:scale-105 z-10 reveal delay-100 bg-[#07080a]/80 shadow-[0_0_50px_rgba(0,212,170,0.1)] overflow-visible">
                     <div class="absolute inset-0 border border-tethron-cyan/40 rounded-[20px] pointer-events-none"></div>
                     <div class="absolute -inset-0.5 bg-gradient-to-b from-tethron-cyan/20 to-transparent rounded-[20px] pointer-events-none blur-sm -z-10"></div>
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-tethron-cyan text-[#070810] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(0,212,170,0.5)]">Most Popular</div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-tethron-cyan text-[#07080a] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(0,212,170,0.5)]">Most Popular</div>
 
                     <h3 class="text-2xl font-bold mb-2 text-white">AI Employee <span class="text-tethron-cyan">(Premium)</span></h3>
                     <p class="text-sm text-zinc-400 mb-6 h-10">Fully autonomous agent deployed on local hardware.</p>
@@ -1160,7 +1170,7 @@
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> Priority Support Channel</li>
                     </ul>
                     
-                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow block w-full py-3.5 rounded-xl bg-tethron-cyan text-[#070810] text-center text-sm font-bold hover:bg-[#00e3b6] transition-colors relative z-20">Book Strategy Call</a>
+                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow block w-full py-3.5 rounded-xl bg-tethron-cyan text-[#07080a] text-center text-sm font-bold hover:bg-[#00e3b6] transition-colors relative z-20">Book Strategy Call</a>
                 </div>
 
             </div>
@@ -1247,7 +1257,7 @@
                 <p class="text-zinc-400 mb-8 max-w-xl mx-auto">We'll show you exactly where an AI employee saves you 40+ hours a week and recovers lost revenue.</p>
                 
                 <div class="flex justify-center z-10 relative">
-                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow bg-tethron-cyan text-[#070810] font-bold px-8 py-4 rounded-xl hover:bg-[#00e3b6] transition-colors whitespace-nowrap text-lg shadow-[0_0_20px_rgba(0,212,170,0.4)]">
+                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow bg-tethron-cyan text-[#07080a] font-bold px-8 py-4 rounded-xl hover:bg-[#00e3b6] transition-colors whitespace-nowrap text-lg shadow-[0_0_20px_rgba(0,212,170,0.4)]">
                         Book Your Strategy Call
                     </a>
                 </div>
@@ -1257,7 +1267,7 @@
     </main>
 
     <!-- 12. FOOTER -->
-    <footer class="border-t border-tethron-border bg-[#070810] pt-16 pb-8 relative z-10">
+    <footer class="border-t border-tethron-border bg-[#07080a] pt-16 pb-8 relative z-10">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
             
             <div class="lg:col-span-2 pr-8">
@@ -1464,9 +1474,9 @@
 
             const mkOwner = (d) => `<div class="flex w-full justify-start max-w-[85%]" style="animation: fadeSlideUp 0.5s ease forwards;"><div class="flex flex-col gap-1.5"><div class="flex items-center gap-2 mb-1"><div class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center"><i class="ph ph-user text-[10px] text-zinc-400"></i></div><span class="text-[10px] font-mono text-zinc-500">Owner</span></div><div class="bg-white/[0.06] border border-white/[0.08] text-white px-4 py-3.5 rounded-2xl rounded-tl-sm text-[15px] leading-relaxed">${nl2br(d.text)}</div><span class="text-[10px] font-mono text-zinc-500 ml-1">${d.time}</span></div></div>`;
 
-            const mkAI = (d) => `<div class="flex w-full justify-end max-w-[85%] ml-auto" style="animation: fadeSlideUp 0.5s ease forwards;"><div class="flex flex-col gap-1.5 items-end"><div class="bg-tethron-cyan/10 border border-tethron-cyan/20 text-white px-4 py-3.5 rounded-2xl rounded-tr-sm text-[15px] leading-relaxed relative" style="box-shadow: 0 4px 20px rgba(0,212,170,0.05);"><div class="absolute -top-3 -right-2 bg-[#070810] border border-white/10 rounded-full px-2 py-0.5 flex items-center gap-1"><i class="ph ph-robot text-[10px] text-tethron-cyan"></i><span class="text-[9px] font-mono font-medium text-zinc-300">AI</span></div>${nl2br(d.text)}</div><div class="flex items-center gap-2 mr-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-tethron-cyan/10 text-tethron-cyan border border-tethron-cyan/10">${d.metric}</span><span class="text-[10px] font-mono text-zinc-500">${d.time}</span></div></div></div>`;
+            const mkAI = (d) => `<div class="flex w-full justify-end max-w-[85%] ml-auto" style="animation: fadeSlideUp 0.5s ease forwards;"><div class="flex flex-col gap-1.5 items-end"><div class="bg-tethron-cyan/10 border border-tethron-cyan/20 text-white px-4 py-3.5 rounded-2xl rounded-tr-sm text-[15px] leading-relaxed relative" style="box-shadow: 0 4px 20px rgba(0,212,170,0.05);"><div class="absolute -top-3 -right-2 bg-[#07080a] border border-white/10 rounded-full px-2 py-0.5 flex items-center gap-1"><i class="ph ph-robot text-[10px] text-tethron-cyan"></i><span class="text-[9px] font-mono font-medium text-zinc-300">AI</span></div>${nl2br(d.text)}</div><div class="flex items-center gap-2 mr-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-tethron-cyan/10 text-tethron-cyan border border-tethron-cyan/10">${d.metric}</span><span class="text-[10px] font-mono text-zinc-500">${d.time}</span></div></div></div>`;
 
-            const mkResults = () => `<div class="w-full mt-4 mb-8 text-center max-w-lg mx-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="w-full bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden" style="box-shadow: 0 24px 64px -12px rgba(0,0,0,0.5);"><div class="absolute -top-10 -right-10 w-32 h-32 bg-tethron-cyan/20 rounded-full blur-3xl"></div><div class="flex items-center justify-center gap-2 mb-4"><i class="ph ph-check-circle-fill text-tethron-cyan text-xl"></i><h4 class="text-white font-medium">6 Minutes. 14 Tasks. Zero Stress.</h4></div><div class="flex flex-col gap-2.5 text-left mb-6"><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Owner's Time Spent:</span><span class="font-mono text-tethron-cyan">6 minutes</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Tasks Completed:</span><span class="font-medium text-white">14</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Revenue Touched:</span><span class="font-mono text-tethron-cyan">$14,800</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Capabilities Used:</span><span class="font-medium text-white text-right text-xs">Leads, Quotes, Reviews, Social, Calendar, Invoicing, Vendor Mgmt, Competitor Intel</span></div><div class="flex items-center justify-between text-sm"><span class="text-zinc-400">Cost:</span><span class="font-mono text-tethron-cyan">$600/mo</span></div></div><p class="text-zinc-500 text-xs text-center mb-4 italic">And this is just a Tuesday morning. Imagine what it does all week.</p><a href="https://calendly.com/cadenhillier33/30min" class="block w-full bg-tethron-cyan text-[#070810] font-semibold py-3.5 rounded-xl hover:bg-[#00e3b6] transition-colors text-center text-lg">See What It'd Do For YOUR Business →</a></div></div>`;
+            const mkResults = () => `<div class="w-full mt-4 mb-8 text-center max-w-lg mx-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="w-full bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden" style="box-shadow: 0 24px 64px -12px rgba(0,0,0,0.5);"><div class="absolute -top-10 -right-10 w-32 h-32 bg-tethron-cyan/20 rounded-full blur-3xl"></div><div class="flex items-center justify-center gap-2 mb-4"><i class="ph ph-check-circle-fill text-tethron-cyan text-xl"></i><h4 class="text-white font-medium">6 Minutes. 14 Tasks. Zero Stress.</h4></div><div class="flex flex-col gap-2.5 text-left mb-6"><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Owner's Time Spent:</span><span class="font-mono text-tethron-cyan">6 minutes</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Tasks Completed:</span><span class="font-medium text-white">14</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Revenue Touched:</span><span class="font-mono text-tethron-cyan">$14,800</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Capabilities Used:</span><span class="font-medium text-white text-right text-xs">Leads, Quotes, Reviews, Social, Calendar, Invoicing, Vendor Mgmt, Competitor Intel</span></div><div class="flex items-center justify-between text-sm"><span class="text-zinc-400">Cost:</span><span class="font-mono text-tethron-cyan">$600/mo</span></div></div><p class="text-zinc-500 text-xs text-center mb-4 italic">And this is just a Tuesday morning. Imagine what it does all week.</p><a href="https://calendly.com/cadenhillier33/30min" class="block w-full bg-tethron-cyan text-[#07080a] font-semibold py-3.5 rounded-xl hover:bg-[#00e3b6] transition-colors text-center text-lg">See What It'd Do For YOUR Business →</a></div></div>`;
 
             const updateStats = (s) => {
                 if (s.tasks) document.getElementById('stat-tasks').textContent = s.tasks;
