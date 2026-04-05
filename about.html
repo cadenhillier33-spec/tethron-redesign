@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#07080a] text-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Tethron</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { tethron: { bg: '#07080a', cyan: '#00d4aa', border: 'rgba(255,255,255,0.06)' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { background-color: #07080a !important; color: #f9f9f9; font-weight: 500; letter-spacing: 0.2px; -webkit-font-smoothing: antialiased; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/[0.06]" style="background: rgba(7,8,10,0.7); backdrop-filter: blur(20px) saturate(1.8);">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2">
+                <img src="logo.png" alt="Tethron" class="w-7 h-7">
+                <span class="text-lg font-semibold tracking-tight text-white">Tethron</span>
+            </a>
+            <a href="/" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors">← Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6">
+        <div class="max-w-4xl mx-auto">
+
+            <!-- Hero -->
+            <div class="text-center mb-20">
+                <p class="text-tethron-cyan text-sm font-semibold tracking-widest uppercase mb-4">About Tethron</p>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.07] mb-6">Built by a founder<br>who gets it.</h1>
+            </div>
+
+            <!-- Founder -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-24">
+                <div>
+                    <img src="caden.jpg" class="w-full max-w-[300px] rounded-3xl mx-auto md:mx-0" alt="Caden Hillier" style="border: 1px solid rgba(255,255,255,0.06);">
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Caden Hillier</h2>
+                    <p class="text-tethron-cyan text-sm font-medium mb-6">Founder & CEO • Madison, CT</p>
+                    <p class="text-zinc-400 text-[16px] leading-relaxed mb-4">I started Tethron because I watched business owners spend their entire day on busywork — answering the same questions, chasing the same leads, manually posting on social media — instead of actually growing their business.</p>
+                    <p class="text-zinc-400 text-[16px] leading-relaxed mb-4">The fix was simple: build AI employees that run on dedicated hardware, trained specifically on YOUR business, deployed and managed so you never have to think about it.</p>
+                    <p class="text-zinc-400 text-[16px] leading-relaxed mb-6">Every deployment is personally approved before launch. No templates. No shortcuts. Your AI employee is built for YOUR business — not a one-size-fits-all chatbot.</p>
+                    <div class="flex gap-4">
+                        <a href="mailto:caden@tethron.ai" class="text-sm text-zinc-500 hover:text-tethron-cyan transition-colors">caden@tethron.ai</a>
+                        <span class="text-zinc-700">•</span>
+                        <a href="tel:+12036714631" class="text-sm text-zinc-500 hover:text-tethron-cyan transition-colors">(203) 671-4631</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                <div class="text-center">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-shield-check text-tethron-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Dedicated Hardware</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Your AI runs on its own machine. Not shared servers. Not cloud instances. Your data, your hardware.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-fingerprint text-tethron-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Custom Built</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Every AI employee is trained on your voice, your processes, your business. No two are the same.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-eye text-tethron-cyan text-2xl"></i>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Personal Oversight</h3>
+                    <p class="text-zinc-500 text-sm leading-relaxed">I personally approve every deployment before it goes live. Your reputation is on the line — I treat it like mine.</p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center">
+                <p class="text-zinc-500 text-lg mb-6">Ready to see what an AI employee would do for your business?</p>
+                <a href="/" class="inline-block px-8 py-4 rounded-full bg-tethron-cyan text-[#07080a] font-bold text-lg hover:bg-[#00e3b6] transition-colors">Get Your Free Audit →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/[0.04] py-8 px-6 text-center">
+        <p class="text-zinc-600 text-xs">© 2026 Tethron.ai. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
