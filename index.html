@@ -382,9 +382,9 @@
 
             <div class="flex items-center gap-4">
                 <a href="https://calendly.com/cadenhillier33/30min" class="hidden md:block text-sm font-medium text-zinc-300 hover:text-white transition-colors">Book a Call</a>
-                <a href="https://calendly.com/cadenhillier33/30min" class="hidden md:inline-block liquid-glass text-sm font-semibold px-4 py-2 rounded-xl">
+                <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="hidden md:inline-block liquid-glass text-sm font-semibold px-4 py-2 rounded-xl cursor-pointer">
                     Get Free Audit
-                </a>
+                </button>
                 <!-- Mobile hamburger -->
                 <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                     <i class="ph ph-list text-tethron-cyan text-xl"></i>
@@ -400,10 +400,13 @@
                 <a href="#demo" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">See It Live</a>
                 <a href="#pricing" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Pricing</a>
                 <a href="#faq" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">FAQ</a>
-                <div class="mt-3 pt-3 border-t border-white/[0.06]">
-                    <a href="https://calendly.com/cadenhillier33/30min" class="block w-full text-center liquid-glass text-sm font-semibold px-4 py-3 rounded-xl">
-                        Get Free Audit
+                <div class="mt-3 pt-3 border-t border-white/[0.06] flex flex-col gap-2">
+                    <a href="https://calendly.com/cadenhillier33/30min" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block w-full text-center px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">
+                        <i class="ph ph-phone text-tethron-cyan mr-2"></i>Book a Call
                     </a>
+                    <button onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('audit-modal').classList.remove('hidden');" class="block w-full text-center liquid-glass text-sm font-semibold px-4 py-3 rounded-xl">
+                        Get Free Audit
+                    </button>
                 </div>
             </div>
         </div>
@@ -781,7 +784,7 @@
 
             <div class="text-center mt-16 reveal delay-200">
                 <p class="text-xl md:text-2xl font-semibold"><span class="text-zinc-500">Better results.</span> <span class="text-tethron-cyan">87% less cost.</span></p>
-                <a href="https://calendly.com/cadenhillier33/30min" class="inline-block mt-8 liquid-glass px-8 py-4 rounded-2xl font-bold text-lg">Get Your Free Audit</a>
+                <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="inline-block mt-8 liquid-glass px-8 py-4 rounded-2xl font-bold text-lg cursor-pointer">Get Your Free Audit</button>
             </div>
         </section>
 
@@ -1032,8 +1035,8 @@
                 <p class="text-zinc-400 mb-8 max-w-xl mx-auto">We'll show you exactly where an AI employee saves you 40+ hours a week and recovers lost revenue.</p>
                 
                 <div class="flex justify-center z-10 relative">
-                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow bg-tethron-cyan text-[#07080a] font-bold px-8 py-4 rounded-xl hover:bg-[#00e3b6] transition-colors whitespace-nowrap text-lg shadow-[0_0_20px_rgba(0,212,170,0.4)]">
-                        Book Your Strategy Call
+                    <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="btn-glow bg-tethron-cyan text-[#07080a] font-bold px-8 py-4 rounded-xl hover:bg-[#00e3b6] transition-colors whitespace-nowrap text-lg shadow-[0_0_20px_rgba(0,212,170,0.4)] cursor-pointer">
+                        Get Your Free Audit
                     </a>
                 </div>
             </div>
@@ -1517,6 +1520,58 @@
             }
         });
 
+    </script>
+
+    <!-- Audit Form Modal -->
+    <div id="audit-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" style="background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);" onclick="if(event.target===this)this.classList.add('hidden')">
+        <div class="w-full max-w-md rounded-3xl p-8 relative" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); box-shadow: 0 24px 64px rgba(0,0,0,0.5);">
+            <button onclick="document.getElementById('audit-modal').classList.add('hidden')" class="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center text-zinc-400 hover:text-white transition-colors" style="background: rgba(255,255,255,0.05);">
+                <i class="ph ph-x text-lg"></i>
+            </button>
+
+            <h3 class="text-xl font-bold text-white mb-1">Get Your Free AI Audit</h3>
+            <p class="text-zinc-500 text-sm mb-6">We'll show you exactly where an AI employee saves you 40+ hours a week.</p>
+
+            <form id="audit-form" class="flex flex-col gap-4" onsubmit="event.preventDefault(); submitAudit();">
+                <input name="name" required placeholder="Your Name" class="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-zinc-600 outline-none focus:border-tethron-cyan/50 transition-colors" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+                <input name="business" required placeholder="Business Name" class="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-zinc-600 outline-none focus:border-tethron-cyan/50 transition-colors" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+                <input name="website" placeholder="Website URL (optional)" class="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-zinc-600 outline-none focus:border-tethron-cyan/50 transition-colors" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+                <input name="email" type="email" required placeholder="Email" class="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-zinc-600 outline-none focus:border-tethron-cyan/50 transition-colors" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+                <input name="phone" placeholder="Phone" class="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-zinc-600 outline-none focus:border-tethron-cyan/50 transition-colors" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+                <textarea name="about_business" rows="3" placeholder="Tell us about your business" class="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-zinc-600 outline-none focus:border-tethron-cyan/50 transition-colors resize-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);"></textarea>
+                <input type="hidden" name="_gotcha" value="">
+                <button type="submit" id="audit-submit" class="w-full liquid-glass text-center px-6 py-4 rounded-xl font-bold text-lg mt-2">
+                    Submit Audit Request
+                </button>
+            </form>
+
+            <div id="audit-success" class="hidden text-center py-8">
+                <i class="ph ph-check-circle-fill text-tethron-cyan text-4xl mb-3"></i>
+                <h4 class="text-white font-bold text-lg mb-2">Audit Request Received!</h4>
+                <p class="text-zinc-400 text-sm">We'll review your business and send your personalized AI audit within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function submitAudit() {
+        const form = document.getElementById('audit-form');
+        const btn = document.getElementById('audit-submit');
+        const data = Object.fromEntries(new FormData(form));
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        fetch('https://slmdfgunkmvbqbzjfpdz.supabase.co/functions/v1/contact-form', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(r => {
+            form.classList.add('hidden');
+            document.getElementById('audit-success').classList.remove('hidden');
+        }).catch(e => {
+            btn.textContent = 'Error — Call (203) 671-4631';
+            btn.disabled = false;
+        });
+    }
     </script>
 </body>
 </html>
