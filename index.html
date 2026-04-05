@@ -1511,15 +1511,14 @@
                         if (step.logText) addLog(step.logText);
                         if (step.stats) updateStats(step.stats);
                     } else {
-                        // Owner typing indicator (gray dots)
-                        chatContainer.appendChild(ownerTyping);
-                        ownerTyping.classList.remove('hidden');
-                        ownerTyping.style.display = 'flex';
+                        // Owner typing indicator (gray dots) — clone fresh each time
+                        const ot = document.createElement('div');
+                        ot.className = 'flex w-full justify-start max-w-[80%]';
+                        ot.innerHTML = '<div class="rounded-2xl rounded-bl-md px-5 py-4 flex items-center gap-2" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06);"><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div></div>';
+                        chatContainer.appendChild(ot);
                         scrollChat();
                         await sleep(800 + Math.min(step.text.length * 6, 2000));
-                        ownerTyping.style.display = 'none';
-                        ownerTyping.classList.add('hidden');
-                        ownerTyping.remove();
+                        ot.remove();
                         chatContainer.insertAdjacentHTML('beforeend', mkOwner(step));
                     }
                     scrollChat();
