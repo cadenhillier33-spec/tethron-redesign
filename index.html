@@ -200,6 +200,14 @@
         @keyframes shimmer {
             to { background-position: -200% center; }
         }
+        @keyframes orbitSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes counterSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
         @keyframes fadeSlideUp {
             0% { opacity: 0; transform: translateY(16px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -461,300 +469,72 @@
             </div>
         </section>
 
-        <!-- 4. CAPABILITIES BENTO GRID -->
-        <section id="capabilities" class="max-w-7xl mx-auto w-full px-6 mt-32">
+        <!-- 4. CAPABILITIES — Orbiting Ring -->
+        <section id="capabilities" class="max-w-7xl mx-auto w-full px-6 mt-[120px] py-16">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">What Your AI Employee Does</h2>
-                <p class="text-lg text-zinc-400">Six roles. One system. Zero sick days.</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">What Your AI Employee Does</h2>
+                <p class="text-zinc-500 mt-3">Six roles. One system. Zero sick days.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
-                <!-- Card 1: Instant Customer Response -->
-                <div class="glass-panel hoverable spotlight-wrapper md:col-span-4 p-8 min-h-[400px] flex flex-col items-start reveal group overflow-hidden">
-                    <div class="mb-6 relative z-10">
-                        <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 flex items-center justify-center mb-6 border border-tethron-cyan/20">
-                            <i class="ph-duotone ph-chats text-2xl text-tethron-cyan"></i>
+            <!-- Desktop: Orbiting ring -->
+            <div class="hidden md:flex items-center justify-center relative" style="height: 450px;">
+                <!-- Center glow -->
+                <div class="absolute w-24 h-24 rounded-full flex items-center justify-center z-10" style="background: rgba(0,212,170,0.1); box-shadow: 0 0 60px rgba(0,212,170,0.15);">
+                    <i class="ph ph-cpu text-tethron-cyan text-3xl"></i>
+                </div>
+
+                <!-- Orbit ring (visual) -->
+                <div class="absolute w-[400px] h-[400px] rounded-full border border-white/[0.04]"></div>
+
+                <!-- Orbiting pills -->
+                <div class="absolute w-[400px] h-[400px]" style="animation: orbitSpin 30s linear infinite;">
+                    <!-- Pill 1: top -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-chat-circle-text text-tethron-cyan"></i> Instant Response
                         </div>
-                        <h3 class="text-xl font-semibold mb-2 text-white">Instant Customer Response</h3>
-                        <p class="text-zinc-400 text-sm max-w-sm">38-second response across phone, email, text, social DMs, and web chat. It never drops a lead.</p>
                     </div>
-                    
-                    <div class="relative w-full max-w-[300px] mx-auto mt-auto flex-grow flex items-end">
-                        <div class="relative w-full h-[260px] bg-[#0a0c13] rounded-t-[2.5rem] border-x-8 border-t-8 border-[#1a1c23] shadow-2xl transition-transform duration-500 group-hover:translate-y-2 group-hover:scale-[1.03] overflow-visible z-10 flex flex-col justify-end p-5 pb-0 gap-4">
-                            <!-- Floating Badge -->
-                            <div class="absolute -right-8 top-16 bg-[#07080a] border border-tethron-cyan text-tethron-cyan px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-[0_0_20px_rgba(0,212,170,0.4)] z-20 transition-transform duration-700 delay-100 group-hover:-translate-y-2 group-hover:scale-110">
-                                <i class="ph-fill ph-lightning text-sm"></i> 34s
-                            </div>
-                            <!-- Fake notch -->
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#1a1c23] rounded-b-xl z-20"></div>
-
-                            <!-- Messages -->
-                            <div class="flex flex-col gap-1 w-[85%] self-start mb-2">
-                                <div class="bg-white/10 border border-white/5 py-2.5 px-4 rounded-2xl rounded-tl-sm text-zinc-200 text-[13px] leading-snug shadow-md">
-                                    Hi, is anyone available to check my roof tomorrow?
-                                </div>
-                                <span class="text-[10px] text-zinc-500 ml-1">1:42 PM</span>
-                            </div>
-
-                            <div class="flex flex-col gap-1 w-[90%] self-end">
-                                <div class="bg-tethron-darkteal/10 backdrop-blur-md border border-tethron-cyan/40 py-2.5 px-4 rounded-2xl rounded-tr-sm text-white text-[13px] leading-snug shadow-[inset_0_0_20px_rgba(0,212,170,0.1),_0_8px_20px_rgba(0,0,0,0.5)] relative">
-                                    <div class="absolute inset-0 bg-tethron-cyan/10 blur-[10px] rounded-2xl -z-10"></div>
-                                    Yes! I can schedule a free inspection for tomorrow at 2 PM. Should I lock that in?
-                                </div>
-                                <span class="text-[10px] text-zinc-500 text-right mr-1 flex items-center justify-end gap-1">1:43 PM <i class="ph-bold ph-check text-tethron-cyan text-[10px]"></i></span>
-                            </div>
+                    <!-- Pill 2: top-right -->
+                    <div class="absolute top-[13%] right-0 translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-instagram-logo text-tethron-cyan"></i> Social Media
+                        </div>
+                    </div>
+                    <!-- Pill 3: bottom-right -->
+                    <div class="absolute bottom-[13%] right-0 translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-calendar-check text-tethron-cyan"></i> Smart Scheduling
+                        </div>
+                    </div>
+                    <!-- Pill 4: bottom -->
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2" style="animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-star text-tethron-cyan"></i> Review Management
+                        </div>
+                    </div>
+                    <!-- Pill 5: bottom-left -->
+                    <div class="absolute bottom-[13%] left-0 -translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-paper-plane-tilt text-tethron-cyan"></i> Follow-Ups
+                        </div>
+                    </div>
+                    <!-- Pill 6: top-left -->
+                    <div class="absolute top-[13%] left-0 -translate-x-1/2" style="animation: counterSpin 30s linear infinite;">
+                        <div class="px-5 py-3 rounded-2xl text-sm font-medium text-white flex items-center gap-2 hover:scale-110 transition-transform cursor-default" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                            <i class="ph ph-chart-line-up text-tethron-cyan"></i> Business Intel
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Card 2: Social Auto-Pilot -->
-                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-100 group overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 flex items-center justify-center mb-6 border border-tethron-cyan/20">
-                        <i class="ph-duotone ph-instagram-logo text-2xl text-tethron-cyan"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Social Auto-Pilot</h3>
-                    <p class="text-zinc-400 text-sm mb-6">Automated posting, engagement, and DM handling.</p>
-                    
-                    <div class="relative h-48 w-full mt-auto mb-4 perspective-1000">
-                        <!-- Back Card -->
-                        <div class="absolute top-2 right-0 left-8 h-40 bg-white/5 border border-white/10 rounded-xl rotate-6 opacity-40 transition-transform duration-500 group-hover:rotate-12 group-hover:translate-x-4"></div>
-                        
-                        <!-- Front Card -->
-                        <div class="absolute bottom-0 left-0 right-4 bg-[#0a0c13] border border-white/10 rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-[1.05] group-hover:-translate-y-2 z-10 flex flex-col overflow-visible">
-                            <!-- Scheduled Badge -->
-                            <div class="absolute -top-3 -right-3 bg-tethron-cyan/20 border border-tethron-cyan text-tethron-cyan px-2 py-1 rounded-lg text-[10px] font-bold shadow-[0_0_10px_rgba(0,212,170,0.2)] flex items-center gap-1 z-20 backdrop-blur-md">
-                                <i class="ph-fill ph-clock"></i> Scheduled
-                            </div>
-                            
-                            <div class="p-3 flex items-center gap-2 border-b border-white/5">
-                                <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center"><i class="ph-fill ph-user text-zinc-500 text-xs"></i></div>
-                                <span class="text-xs font-semibold text-white">summit_roofing</span>
-                                <i class="ph-fill ph-seal-check text-blue-400 text-xs"></i>
-                            </div>
-                            
-                            <div class="h-24 w-full bg-gradient-to-br from-tethron-darkteal/40 to-[#1a1c23] relative">
-                                <div class="absolute inset-0 flex items-center justify-center text-tethron-cyan/30"><i class="ph-duotone ph-image text-3xl"></i></div>
-                            </div>
-                            
-                            <div class="p-3">
-                                <div class="flex gap-3 mb-2">
-                                    <i class="ph-bold ph-heart text-white text-sm"></i>
-                                    <i class="ph-bold ph-chat-circle text-white text-sm"></i>
-                                    <i class="ph-bold ph-paper-plane-tilt text-white text-sm"></i>
-                                </div>
-                                <div class="text-[10px] font-semibold text-white mb-1">127 likes</div>
-                                <div class="text-[10px] text-zinc-400 truncate text-ellipsis">Protect your home this winter...</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Smart Scheduling -->
-                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-0 group overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 flex items-center justify-center mb-6 border border-tethron-cyan/20">
-                        <i class="ph-duotone ph-calendar-check text-2xl text-tethron-cyan"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Smart Scheduling</h3>
-                    <p class="text-zinc-400 text-sm mb-6">Reads intent, negotiates times, and books directly.</p>
-                    
-                    <div class="mt-auto w-full transition-transform duration-500 group-hover:scale-[1.04] p-4 bg-[#0a0c13] rounded-2xl border border-white/5 shadow-2xl">
-                        <!-- Calendar Header -->
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-sm font-semibold text-white">October</span>
-                            <div class="flex gap-2">
-                                <i class="ph-bold ph-caret-left text-zinc-500 text-xs"></i>
-                                <i class="ph-bold ph-caret-right text-zinc-500 text-xs"></i>
-                            </div>
-                        </div>
-                        
-                        <!-- Grid Header -->
-                        <div class="grid grid-cols-7 gap-1 text-center text-[10px] text-zinc-500 font-medium mb-2">
-                            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-                        </div>
-                        
-                        <!-- Grid Dates -->
-                        <div class="grid grid-cols-7 gap-1 text-center text-xs text-zinc-300 font-mono mb-4">
-                            <span class="opacity-30">29</span><span class="opacity-30">30</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-                            <span>13</span>
-                            <span class="bg-tethron-cyan/20 text-tethron-cyan rounded shadow-[inset_0_0_5px_rgba(0,212,170,0.3)]">14</span>
-                            <span class="relative text-white font-bold">15<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-tethron-cyan rounded-full animate-pulse"></span></span>
-                            <span class="bg-tethron-cyan/20 text-tethron-cyan rounded shadow-[inset_0_0_5px_rgba(0,212,170,0.3)]">16</span>
-                            <span>17</span>
-                            <span class="bg-tethron-cyan/20 text-tethron-cyan rounded shadow-[inset_0_0_5px_rgba(0,212,170,0.3)]">18</span>
-                            <span>19</span>
-                        </div>
-                        
-                        <!-- Appointment Card -->
-                        <div class="bg-tethron-cyan/10 border border-tethron-cyan/30 rounded-lg p-2 flex justify-between items-center group-hover:bg-tethron-cyan/20 transition-colors">
-                            <div class="flex flex-col">
-                                <span class="text-tethron-cyan text-[10px] font-bold">2:00 PM</span>
-                                <span class="text-white text-xs whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">Roof Inspection</span>
-                            </div>
-                            <div class="w-5 h-5 rounded-full bg-tethron-cyan/20 flex items-center justify-center border border-tethron-cyan text-tethron-cyan shadow-[0_0_10px_rgba(0,212,170,0.3)]">
-                                <i class="ph-bold ph-check text-[10px]"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4: Review Management -->
-                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-100 group overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 flex items-center justify-center mb-6 border border-tethron-cyan/20">
-                        <i class="ph-duotone ph-star text-2xl text-tethron-cyan"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Review Management</h3>
-                    <p class="text-zinc-400 text-sm mb-6">Monitors Google/Yelp, drafts customized replies, flags complaints.</p>
-                    
-                    <div class="mt-auto relative w-full h-48 transition-transform duration-500 group-hover:scale-[1.04]">
-                        <!-- Background Bars -->
-                        <div class="absolute top-0 right-2 w-24 flex flex-col gap-1.5 opacity-30 z-0 delay-100 group-hover:translate-x-2 transition-transform">
-                            <div class="text-[10px] text-zinc-400 font-mono flex items-center gap-1">5 <div class="h-1 bg-tethron-cyan w-full rounded"></div></div>
-                            <div class="text-[10px] text-zinc-400 font-mono flex items-center gap-1">4 <div class="h-1 bg-white/40 w-1/4 rounded"></div></div>
-                            <div class="text-[10px] text-zinc-400 font-mono flex items-center gap-1">3 <div class="h-1 bg-white/20 w-[10%] rounded"></div></div>
-                        </div>
-                        
-                        <!-- Large Number -->
-                        <div class="absolute top-0 left-2 text-4xl font-black text-white z-0 opacity-80">4.8</div>
-
-                        <!-- Review Card -->
-                        <div class="absolute bottom-0 left-0 right-0 bg-[#0a0c13] border border-white/10 rounded-xl p-4 shadow-2xl z-10">
-                            <div class="flex items-center gap-2 mb-2">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=64&q=80" alt="Avatar" class="w-6 h-6 rounded-full object-cover">
-                                <span class="text-xs font-semibold text-white">Jessica L.</span>
-                                <div class="flex text-[#FFB800] ml-auto pb-1 text-[10px]">
-                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                                </div>
-                            </div>
-                            <p class="text-[11px] text-zinc-300 italic mb-3">"Fastest response I've ever gotten from a contractor..."</p>
-                            
-                            <!-- AI Reply -->
-                            <div class="pl-3 border-l-2 border-tethron-cyan/50 relative">
-                                <div class="absolute -top-3 right-0 bg-tethron-cyan/10 border border-tethron-cyan text-tethron-cyan px-1.5 rounded text-[8px] font-bold tracking-wider flex items-center gap-1 backdrop-blur-md shrink-0">
-                                    <i class="ph-bold ph-paper-plane-right"></i> SENT
-                                </div>
-                                <span class="text-[10px] text-zinc-400 font-semibold mb-1 block">Response from owner</span>
-                                <p class="text-[10px] text-zinc-500 leading-tight">Thank you, Jessica! We pride ourselves on speed. See you tomorrow at 2 PM!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5: Follow-Up Sequences -->
-                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-200 group overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 flex items-center justify-center mb-6 border border-tethron-cyan/20">
-                        <i class="ph-duotone ph-paper-plane-tilt text-2xl text-tethron-cyan"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Follow-Up Seq.</h3>
-                    <p class="text-zinc-400 text-sm mb-6">Contextual multi-channel drip campaigns that revive dead leads.</p>
-                    
-                    <div class="mt-auto w-full transition-transform duration-500 group-hover:scale-[1.04] bg-[#0a0c13] border border-white/5 rounded-2xl p-5 shadow-2xl flex flex-col gap-6">
-                        <!-- Top Progress Bar -->
-                        <div>
-                            <div class="flex justify-between text-[10px] font-mono mb-2">
-                                <span class="text-zinc-400">Sequence Health</span>
-                                <span class="text-tethron-cyan font-bold">67% Reply Rate</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-white/10 rounded overflow-hidden">
-                                <div class="h-full bg-tethron-cyan w-[67%] rounded relative"><div class="absolute inset-0 bg-white/30 mix-blend-overlay w-full animate-pulse"></div></div>
-                            </div>
-                        </div>
-
-                        <!-- Timeline -->
-                        <div class="relative pl-5 border-l border-white/10 flex flex-col gap-4">
-                            <!-- Day 1 -->
-                            <div class="relative">
-                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-[#1a1c23] border border-white/20 rounded-full flex items-center justify-center"><i class="ph-fill ph-chat-teardrop-text text-[8px] text-zinc-400"></i></div>
-                                <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-0.5">Day 1: SMS</div>
-                                <div class="text-xs text-zinc-400 truncate">Quote Details Sent</div>
-                            </div>
-                            
-                            <!-- Day 3 -->
-                            <div class="relative">
-                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-[#1a1c23] border border-white/20 rounded-full flex items-center justify-center"><i class="ph-fill ph-envelope-simple text-[8px] text-zinc-400"></i></div>
-                                <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-0.5">Day 3: Email</div>
-                                <div class="text-xs text-zinc-400 truncate">Gentle Check-in</div>
-                            </div>
-
-                            <!-- Day 7 -->
-                            <div class="relative">
-                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-tethron-cyan shadow-[0_0_10px_#00d4aa] rounded-full flex items-center justify-center"><i class="ph-bold ph-phone text-[8px] text-[#07080a]"></i></div>
-                                <div class="flex items-center gap-2 mb-0.5">
-                                    <div class="text-[10px] font-bold text-tethron-cyan uppercase tracking-widest">Day 7: Final SMS</div>
-                                    <span class="bg-tethron-cyan/20 text-tethron-cyan text-[8px] px-1.5 rounded font-bold">REPLIED ✓</span>
-                                </div>
-                                <div class="text-xs text-white truncate">Client confirmed to proceed.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6: Strategic Intelligence -->
-                <div class="glass-panel hoverable spotlight-wrapper md:col-span-6 p-8 min-h-[300px] flex flex-col md:flex-row items-center gap-10 reveal group overflow-hidden">
-                    <div class="w-full md:w-1/3 flex flex-col items-start z-10">
-                        <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 flex items-center justify-center mb-6 border border-tethron-cyan/20">
-                            <i class="ph-duotone ph-chart-line-up text-2xl text-tethron-cyan"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2 text-white">Strategic Intelligence</h3>
-                        <p class="text-zinc-400 text-sm">Sends you daily business briefs, tracks revenue targets, flags seasonal anomalies, and generates growth plans while you sleep.</p>
-                    </div>
-                    
-                    <div class="w-full md:w-2/3 h-[220px] bg-[#0a0c13] border border-white/10 rounded-2xl p-5 shadow-2xl flex gap-4 transition-transform duration-500 group-hover:scale-[1.02] z-10 relative">
-                        <!-- Left: Line Chart -->
-                        <div class="flex-1 bg-white/[0.02] border border-white/5 rounded-xl flex flex-col p-4 relative overflow-hidden">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-[10px] text-zinc-400 font-mono uppercase">Total Leads (30d)</span>
-                                <span class="text-[10px] text-tethron-cyan bg-tethron-cyan/10 px-1.5 rounded border border-tethron-cyan/20">+14%</span>
-                            </div>
-                            <span class="text-2xl text-white font-bold block mb-2">2,491</span>
-                            
-                            <div class="absolute bottom-0 left-0 right-0 h-[50%] pointer-events-none">
-                                <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="w-full h-full">
-                                    <defs>
-                                        <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="0%" stop-color="#00d4aa" stop-opacity="0.3"/>
-                                            <stop offset="100%" stop-color="#00d4aa" stop-opacity="0"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <polygon points="0,50 0,30 20,40 40,15 60,25 80,5 100,0 100,50" fill="url(#chartGlow)" />
-                                    <polyline points="0,30 20,40 40,15 60,25 80,5 100,0" fill="none" stroke="#00d4aa" stroke-width="2" vector-effect="non-scaling-stroke" class="drop-shadow-[0_2px_4px_rgba(0,212,170,0.5)]"/>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Center: Cards -->
-                        <div class="flex-1 flex flex-col gap-3">
-                            <div class="bg-white/5 border border-white/10 rounded-lg p-3 flex justify-between items-center h-full hover:bg-white/10 transition-colors">
-                                <span class="text-xs text-zinc-400 font-medium">Revenue</span>
-                                <span class="text-sm font-bold text-white">$47.2K</span>
-                            </div>
-                            <div class="bg-tethron-cyan/10 border border-tethron-cyan/30 rounded-lg p-3 flex justify-between items-center h-full shadow-[0_0_15px_rgba(0,212,170,0.1)]">
-                                <span class="text-xs text-tethron-cyan font-bold tracking-tight">Conversion</span>
-                                <span class="text-sm font-bold text-white">34.8%</span>
-                            </div>
-                            <div class="bg-white/5 border border-white/10 rounded-lg p-3 flex justify-between items-center h-full hover:bg-white/10 transition-colors">
-                                <span class="text-xs text-zinc-400 font-medium">Auto-Replies</span>
-                                <span class="text-sm font-bold text-white">1,842</span>
-                            </div>
-                        </div>
-
-                        <!-- Right: Bar Chart -->
-                        <div class="hidden sm:flex flex-col bg-white/[0.02] border border-white/5 rounded-xl p-4 w-[140px]">
-                            <span class="text-[10px] text-zinc-400 font-mono uppercase mb-4 text-center">MT vs LM</span>
-                            <div class="flex-1 flex gap-3 items-end justify-center pt-4">
-                                <div class="w-6 h-[60%] bg-zinc-700/50 rounded-t-sm relative group cursor-default">
-                                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] text-zinc-500 font-mono opacity-0 group-hover:opacity-100 transition-opacity">$32k</div>
-                                    <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-zinc-600 font-mono">Last</div>
-                                </div>
-                                <div class="w-6 h-[95%] bg-gradient-to-t from-tethron-cyan/80 to-[#00ffcc] rounded-t-sm relative shadow-[0_0_15px_rgba(0,212,170,0.4)] group cursor-default">
-                                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] text-tethron-cyan font-bold font-mono">$47k</div>
-                                    <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-zinc-400 font-mono">This</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Mobile: Clean vertical list -->
+            <div class="md:hidden flex flex-col items-center gap-3 reveal">
+                <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 w-full max-w-xs" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-chat-circle-text text-tethron-cyan text-lg"></i> Instant Response</div>
+                <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 w-full max-w-xs" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-instagram-logo text-tethron-cyan text-lg"></i> Social Media</div>
+                <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 w-full max-w-xs" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-calendar-check text-tethron-cyan text-lg"></i> Smart Scheduling</div>
+                <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 w-full max-w-xs" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-star text-tethron-cyan text-lg"></i> Review Management</div>
+                <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 w-full max-w-xs" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-paper-plane-tilt text-tethron-cyan text-lg"></i> Follow-Ups</div>
+                <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 w-full max-w-xs" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-chart-line-up text-tethron-cyan text-lg"></i> Business Intelligence</div>
             </div>
         </section>
 
