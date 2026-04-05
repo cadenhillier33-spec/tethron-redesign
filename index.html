@@ -473,78 +473,60 @@
             </div>
         </section>
 
-        <!-- 4. CAPABILITIES — Floating Pills -->
-        <section id="capabilities" class="max-w-5xl mx-auto w-full px-6 mt-[120px] py-12">
+        <!-- 4. CAPABILITIES -->
+        <section id="capabilities" class="max-w-4xl mx-auto w-full px-6 mt-[120px] py-12">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">What Your AI Employee Does</h2>
-                <p class="text-zinc-500 mt-3">Hover to explore.</p>
             </div>
 
-            <!-- Desktop: Floating scattered pills -->
-            <div class="hidden md:flex flex-wrap justify-center gap-4 max-w-3xl mx-auto reveal">
-                <div class="group relative" style="animation: floatA 4s ease-in-out infinite;">
-                    <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-2.5 cursor-default transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(0,212,170,0.2)]" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                        <i class="ph ph-chat-circle-text text-tethron-cyan text-lg"></i> Instant Response
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 reveal">
+                <div class="flex flex-col items-center text-center gap-3" style="animation: floatA 4s ease-in-out infinite;">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-chat-circle-text text-tethron-cyan text-xl"></i>
                     </div>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-5 py-3 rounded-xl text-[13px] text-zinc-200 text-center max-w-[280px] opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0 pointer-events-none z-20" style="background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.2); backdrop-filter: blur(10px);">
-                        Phone, email, text, DMs, web chat. Every lead gets a response in under 60 seconds. No one slips through.
-                    </div>
+                    <h3 class="text-white font-semibold text-[15px]">Instant Response</h3>
+                    <p class="text-zinc-500 text-[13px] leading-relaxed">Every lead, under 60 seconds. Phone, email, text, DMs.</p>
                 </div>
 
-                <div class="group relative" style="animation: floatB 5s ease-in-out infinite;">
-                    <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-2.5 cursor-default transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(0,212,170,0.2)]" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                        <i class="ph ph-instagram-logo text-tethron-cyan text-lg"></i> Social Media
+                <div class="flex flex-col items-center text-center gap-3" style="animation: floatB 5s ease-in-out infinite;">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-instagram-logo text-tethron-cyan text-xl"></i>
                     </div>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-5 py-3 rounded-xl text-[13px] text-zinc-200 text-center max-w-[280px] opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0 pointer-events-none z-20" style="background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.2); backdrop-filter: blur(10px);">
-                        Drafts posts, schedules them, and publishes across platforms. Your brand stays active 24/7.
-                    </div>
+                    <h3 class="text-white font-semibold text-[15px]">Social Media</h3>
+                    <p class="text-zinc-500 text-[13px] leading-relaxed">Drafts, schedules, and posts across platforms. 24/7.</p>
                 </div>
 
-                <div class="group relative" style="animation: floatC 4.5s ease-in-out infinite;">
-                    <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-2.5 cursor-default transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(0,212,170,0.2)]" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                        <i class="ph ph-calendar-check text-tethron-cyan text-lg"></i> Smart Scheduling
+                <div class="flex flex-col items-center text-center gap-3" style="animation: floatC 4.5s ease-in-out infinite;">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-calendar-check text-tethron-cyan text-xl"></i>
                     </div>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-5 py-3 rounded-xl text-[13px] text-zinc-200 text-center max-w-[280px] opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0 pointer-events-none z-20" style="background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.2); backdrop-filter: blur(10px);">
-                        Books appointments, sends confirmations, handles reschedules. No-shows drop to near zero.
-                    </div>
+                    <h3 class="text-white font-semibold text-[15px]">Scheduling</h3>
+                    <p class="text-zinc-500 text-[13px] leading-relaxed">Books, confirms, reschedules. No-shows drop to near zero.</p>
                 </div>
 
-                <div class="group relative" style="animation: floatA 5.5s ease-in-out infinite;">
-                    <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-2.5 cursor-default transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(0,212,170,0.2)]" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                        <i class="ph ph-star text-tethron-cyan text-lg"></i> Review Management
+                <div class="flex flex-col items-center text-center gap-3" style="animation: floatB 5.5s ease-in-out infinite;">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-star text-tethron-cyan text-xl"></i>
                     </div>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-5 py-3 rounded-xl text-[13px] text-zinc-200 text-center max-w-[280px] opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0 pointer-events-none z-20" style="background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.2); backdrop-filter: blur(10px);">
-                        Monitors Google, Yelp, and Facebook. Responds to every review in minutes. Flags anything under 4 stars for your approval.
-                    </div>
+                    <h3 class="text-white font-semibold text-[15px]">Reviews</h3>
+                    <p class="text-zinc-500 text-[13px] leading-relaxed">Responds to every review in minutes. Flags anything under 4 stars.</p>
                 </div>
 
-                <div class="group relative" style="animation: floatB 4.2s ease-in-out infinite;">
-                    <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-2.5 cursor-default transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(0,212,170,0.2)]" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                        <i class="ph ph-paper-plane-tilt text-tethron-cyan text-lg"></i> Follow-Ups
+                <div class="flex flex-col items-center text-center gap-3" style="animation: floatA 4.2s ease-in-out infinite;">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-paper-plane-tilt text-tethron-cyan text-xl"></i>
                     </div>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-5 py-3 rounded-xl text-[13px] text-zinc-200 text-center max-w-[280px] opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0 pointer-events-none z-20" style="background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.2); backdrop-filter: blur(10px);">
-                        Multi-channel drip sequences that re-engage leads who went cold. Timed perfectly to convert.
-                    </div>
+                    <h3 class="text-white font-semibold text-[15px]">Follow-Ups</h3>
+                    <p class="text-zinc-500 text-[13px] leading-relaxed">Re-engages cold leads with perfectly timed sequences.</p>
                 </div>
 
-                <div class="group relative" style="animation: floatC 5.2s ease-in-out infinite;">
-                    <div class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-2.5 cursor-default transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(0,212,170,0.2)]" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
-                        <i class="ph ph-chart-line-up text-tethron-cyan text-lg"></i> Business Intel
+                <div class="flex flex-col items-center text-center gap-3" style="animation: floatC 5.2s ease-in-out infinite;">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.12);">
+                        <i class="ph ph-chart-line-up text-tethron-cyan text-xl"></i>
                     </div>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-5 py-3 rounded-xl text-[13px] text-zinc-200 text-center max-w-[280px] opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-1 group-hover:translate-y-0 pointer-events-none z-20" style="background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.2); backdrop-filter: blur(10px);">
-                        Morning briefs, revenue tracking, competitor monitoring. Know everything before your first coffee.
-                    </div>
+                    <h3 class="text-white font-semibold text-[15px]">Business Intel</h3>
+                    <p class="text-zinc-500 text-[13px] leading-relaxed">Morning briefs, revenue tracking, competitor monitoring.</p>
                 </div>
-            </div>
-
-            <!-- Mobile: Tap to expand -->
-            <div class="md:hidden flex flex-col items-center gap-3 reveal">
-                <details class="w-full max-w-xs group"><summary class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 cursor-pointer list-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-chat-circle-text text-tethron-cyan text-lg"></i> Instant Response</summary><p class="px-6 py-2 text-[13px] text-zinc-400">Responds to every lead in under 60 seconds.</p></details>
-                <details class="w-full max-w-xs"><summary class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 cursor-pointer list-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-instagram-logo text-tethron-cyan text-lg"></i> Social Media</summary><p class="px-6 py-2 text-[13px] text-zinc-400">Creates and posts content while you sleep.</p></details>
-                <details class="w-full max-w-xs"><summary class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 cursor-pointer list-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-calendar-check text-tethron-cyan text-lg"></i> Smart Scheduling</summary><p class="px-6 py-2 text-[13px] text-zinc-400">Books, confirms, and reschedules automatically.</p></details>
-                <details class="w-full max-w-xs"><summary class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 cursor-pointer list-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-star text-tethron-cyan text-lg"></i> Review Management</summary><p class="px-6 py-2 text-[13px] text-zinc-400">Replies to every Google review within minutes.</p></details>
-                <details class="w-full max-w-xs"><summary class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 cursor-pointer list-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-paper-plane-tilt text-tethron-cyan text-lg"></i> Follow-Ups</summary><p class="px-6 py-2 text-[13px] text-zinc-400">Re-engages cold leads at exactly the right time.</p></details>
-                <details class="w-full max-w-xs"><summary class="px-6 py-3.5 rounded-2xl text-[15px] font-medium text-white flex items-center gap-3 cursor-pointer list-none" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);"><i class="ph ph-chart-line-up text-tethron-cyan text-lg"></i> Business Intel</summary><p class="px-6 py-2 text-[13px] text-zinc-400">Daily briefs, competitor tracking, revenue reports.</p></details>
             </div>
         </section>
 
