@@ -857,8 +857,10 @@
 
                 <!-- Right: 3D Mac Mini (spline-viewer, transparent bg) -->
                 <!-- 3D Mac Mini — responsive height -->
-                <div id="mac-mini-container" class="reveal delay-200 relative h-[250px] md:h-[600px] md:-mr-24 md:max-w-none max-w-[300px] mx-auto md:mx-0" style="pointer-events: none; overflow: visible;">
-                    <spline-viewer url="https://prod.spline.design/ekptR0pvH75Woc2X/scene.splinecode" style="width:100%; height:100%; pointer-events:none;" background="transparent"></spline-viewer>
+                <div id="mac-mini-container" class="reveal delay-200 relative h-[280px] md:h-[600px] md:-mr-24 w-full" style="pointer-events: none; overflow: visible;">
+                    <div class="w-full h-full transform scale-[0.5] md:scale-100 origin-center -translate-x-[10%] md:translate-x-0">
+                        <spline-viewer url="https://prod.spline.design/ekptR0pvH75Woc2X/scene.splinecode" style="width:100%; height:100%; pointer-events:none;" background="transparent"></spline-viewer>
+                    </div>
                 </div>
             </div>
         </section>
