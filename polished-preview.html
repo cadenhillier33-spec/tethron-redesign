@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#07080a] text-tethron-primary dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your next employee never clocks out.</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        tethron: {
+                            bg: '#07080a',
+                            cyan: '#00d4aa',
+                            darkteal: '#0A9A87',
+                            card: '#101111',
+                            primary: '#f9f9f9',
+                            secondary: '#cecece',
+                            tertiary: '#9c9c9d',
+                            muted: '#6a6b6c',
+                            border: 'rgba(255, 255, 255, 0.06)'
+                        }
+                    },
+                    fontSize: {
+                        'body': ['17px', { lineHeight: '1.47', letterSpacing: '0.2px', fontWeight: '500' }],
+                        'small': ['14px', { lineHeight: '1.4', letterSpacing: '0.2px', fontWeight: '500' }],
+                        'h1-desk': ['64px', { lineHeight: '1.10', letterSpacing: '0px', fontWeight: '600' }],
+                        'h2-desk': ['48px', { lineHeight: '1.10', letterSpacing: '-1px', fontWeight: '600' }],
+                        'btn': ['16px', { letterSpacing: '0.3px', fontWeight: '600' }]
+                    },
+                    boxShadow: {
+                        'raycast-card': '0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Environment */
+        html, body {
+            background-color: #07080a !important;
+            color: #f9f9f9;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* Nav Glass */
+        .nav-glass {
+            background-color: rgba(7, 8, 10, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        /* Abstract Grid Background with Mask */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background-color: #07080a;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), 
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+
+        /* Ambient Top Glow */
+        .ambient-glow {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(0,212,170,0.15) 0%, transparent 60%);
+            filter: blur(100px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Custom Desktop Cursor */
+        @media (pointer: fine) {
+            #custom-cursor {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 8px;
+                height: 8px;
+                background-color: #00d4aa;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                box-shadow: 0 0 12px 2px rgba(0, 212, 170, 0.6);
+            }
+            body:hover #custom-cursor {
+                opacity: 1;
+            }
+        }
+        @media (pointer: coarse) {
+            #custom-cursor { display: none !important; }
+        }
+
+        /* Raycast Elevated Cards */
+        .glass-panel {
+            background-color: #101111;
+            position: relative;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel.hoverable:not(.no-hover-opacity):hover {
+            opacity: 0.9;
+        }
+
+        /* Spotlight Effect */
+        .spotlight-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(0, 212, 170, 0.12), transparent 40%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .spotlight-wrapper:hover::after { opacity: 1; }
+        .spotlight-wrapper > * { position: relative; z-index: 2; }
+
+        /* Typography Features */
+        .text-gradient {
+            background: linear-gradient(180deg, #f9f9f9 0%, rgba(249, 249, 249, 0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        /* Kinetic Shimmer Text */
+        .shimmer-text {
+            background: linear-gradient(120deg, rgba(249,249,249,0.5) 20%, #00d4aa 50%, rgba(249,249,249,0.5) 80%);
+            background-size: 200% auto;
+            color: #00d4aa;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: -200% center; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #07080a; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Details Accordion */
+        details summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-5px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+
+        /* Hover Glowing Pill Button */
+        .btn-pill {
+            border-radius: 980px;
+            transition: opacity 0.3s ease;
+        }
+        .btn-glow {
+            position: relative;
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: #00d4aa;
+            z-index: -1;
+            filter: blur(14px);
+            opacity: 0.4;
+            border-radius: inherit;
+            transition: opacity 0.3s ease;
+        }
+        .btn-glow:hover::before { opacity: 0.7; }
+    </style>
+</head>
+<body class="selection:bg-tethron-cyan selection:text-[#07080a]">
+
+    <!-- Environmental Textures -->
+    <div class="bg-grid"></div>
+    <div class="ambient-glow"></div>
+    <div class="noise-overlay"></div>
+    <div id="custom-cursor"></div>
+
+    <!-- 1. NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 nav-glass border-b border-tethron-border reveal">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <i class="ph-duotone ph-cpu text-tethron-cyan text-2xl"></i>
+                <span class="text-lg font-[600] tracking-[-0.02em] text-tethron-primary">Tethron</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#capabilities" class="text-[16px] font-[500] tracking-[0.3px] text-tethron-tertiary hover:text-tethron-primary transition-colors">Capabilities</a>
+                <a href="#how-it-works" class="text-[16px] font-[500] tracking-[0.3px] text-tethron-tertiary hover:text-tethron-primary transition-colors">How It Works</a>
+                <a href="#industries" class="text-[16px] font-[500] tracking-[0.3px] text-tethron-tertiary hover:text-tethron-primary transition-colors">Industries</a>
+                <a href="#pricing" class="text-[16px] font-[500] tracking-[0.3px] text-tethron-tertiary hover:text-tethron-primary transition-colors">Pricing</a>
+                <a href="#faq" class="text-[16px] font-[500] tracking-[0.3px] text-tethron-tertiary hover:text-tethron-primary transition-colors">FAQ</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="https://calendly.com/cadenhillier33/30min" class="hidden md:block text-[16px] font-[500] tracking-[0.3px] text-tethron-secondary hover:text-tethron-primary transition-colors">Book a Call</a>
+                <a href="https://calendly.com/cadenhillier33/30min" class="btn-pill bg-tethron-cyan text-[#07080a] text-btn px-4 py-2 hover:opacity-80 transition-opacity shadow-[0_0_15px_rgba(0,212,170,0.3)]">
+                    Get Free Audit
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-[120px] pb-24 relative z-0 flex flex-col items-center">
+        
+        <!-- 2. HERO SECTION -->
+        <section class="max-w-7xl mx-auto w-full px-6 flex flex-col items-center text-center mt-[40px] md:mt-[80px] relative">
+            
+            <!-- SPLINE 3D EMBED PLACEHOLDER -->
+            <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1000px] h-[500px] z-[-1] opacity-40 flex items-center justify-center mix-blend-screen pointer-events-none reveal delay-300">
+                <!-- SPLINE 3D EMBED: Replace with <spline-viewer url="YOUR_URL"></spline-viewer> -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#07080a]/0 via-tethron-cyan/5 to-[#07080a]/0 rounded-full blur-[100px]"></div>
+            </div>
+
+            <div class="reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-tethron-border bg-tethron-card text-small text-tethron-secondary mb-8 shadow-raycast-card">
+                    <div class="w-2 h-2 rounded-full bg-tethron-cyan animate-pulse"></div>
+                    Systems Operational • All Agents Active
+                </div>
+            </div>
+
+            <div class="reveal delay-100">
+                <h1 class="text-[40px] md:text-h1-desk font-[600] leading-[1.10] tracking-[0px] mb-6 max-w-5xl text-gradient relative z-10">
+                    Your next employee never <span class="shimmer-text relative">clocks out.</span>
+                </h1>
+            </div>
+            
+            <div class="reveal delay-200">
+                <p class="text-body text-tethron-tertiary max-w-2xl mx-auto mb-10">
+                    We deploy dedicated AI agents on physical hardware that run your business 24/7. Customer comms, scheduling, marketing, reporting — handled.
+                </p>
+            </div>
+
+            <div class="reveal delay-300 flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative z-10">
+                <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow btn-pill bg-tethron-cyan text-[#07080a] text-center px-8 py-4 text-btn hover:opacity-80">
+                    Get Free Audit
+                </a>
+                <a href="#how-it-works" class="btn-pill border border-white/10 bg-transparent text-center px-8 py-4 text-btn text-tethron-primary hover:opacity-80 flex items-center justify-center gap-2 group shadow-[0_0_0_1px_rgba(27,28,30,1)]">
+                    <i class="ph ph-play-circle text-xl text-tethron-tertiary group-hover:text-tethron-primary transition-colors"></i>
+                    See It Live
+                </a>
+            </div>
+
+            <!-- Animated Terminal Bar -->
+            <div class="reveal delay-200 mt-16 w-full max-w-xl glass-panel p-4 flex items-center gap-3 text-left relative z-10 rounded-[12px] shadow-raycast-card">
+                <i class="ph-duotone ph-terminal-window text-tethron-cyan text-xl"></i>
+                <div class="font-mono text-small text-tethron-secondary h-5" id="typewriter"></div>
+                <span class="w-[8px] h-[16px] bg-tethron-cyan animate-pulse"></span>
+            </div>
+        </section>
+
+        <!-- 3. METRICS BAR -->
+        <section class="max-w-7xl mx-auto w-full px-6 mt-[120px]">
+            <div class="glass-panel p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-8 divide-y md:divide-y-0 md:divide-x divide-tethron-border reveal">
+                
+                <div class="w-full text-center px-4 pt-4 md:pt-0">
+                    <div class="text-[40px] font-[600] tracking-[-1px] text-tethron-primary mb-1"><span class="counter font-mono" data-target="47">0</span>+</div>
+                    <div class="text-small text-tethron-tertiary uppercase tracking-[0.5px]">AI Employees Deployed</div>
+                </div>
+                
+                <div class="w-full text-center px-4 pt-4 md:pt-0">
+                    <div class="text-[40px] font-[600] tracking-[-1px] text-tethron-primary mb-1"><span class="counter font-mono" data-target="38">0</span>s</div>
+                    <div class="text-small text-tethron-tertiary uppercase tracking-[0.5px]">Avg Response Time</div>
+                </div>
+                
+                <div class="w-full text-center px-4 pt-4 md:pt-0">
+                    <div class="text-[40px] font-[600] tracking-[-1px] text-tethron-cyan mb-1">$<span class="counter font-mono" data-target="480">0</span>K+</div>
+                    <div class="text-small text-tethron-tertiary uppercase tracking-[0.5px]">Client Revenue Recovered</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. CAPABILITIES BENTO GRID -->
+        <section id="capabilities" class="max-w-7xl mx-auto w-full px-6 mt-[120px]">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-[32px] md:text-h2-desk text-tethron-primary font-[600] leading-[1.10] tracking-[-1px] mb-4">What Your AI Employee Does</h2>
+                <p class="text-body text-tethron-tertiary">Six roles. One system. Zero sick days.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+                <!-- Card 1: Instant Customer Response -->
+                <div class="glass-panel hoverable spotlight-wrapper md:col-span-4 p-8 min-h-[400px] flex flex-col items-start reveal group overflow-hidden">
+                    <div class="mb-6 relative z-10">
+                        <div class="w-12 h-12 rounded-[12px] bg-tethron-card border border-tethron-border flex items-center justify-center mb-6 shadow-raycast-card">
+                            <i class="ph-duotone ph-chats text-2xl text-tethron-cyan"></i>
+                        </div>
+                        <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Instant Customer Response</h3>
+                        <p class="text-small text-tethron-tertiary max-w-sm">38-second response across phone, email, text, social DMs, and web chat. It never drops a lead.</p>
+                    </div>
+                    
+                    <div class="relative w-full max-w-[300px] mx-auto mt-auto flex-grow flex items-end">
+                        <div class="relative w-full h-[260px] bg-[#07080a] rounded-t-[2.5rem] border-x-8 border-t-8 border-[#1a1c23] shadow-2xl transition-transform duration-500 group-hover:-translate-y-1 overflow-visible z-10 flex flex-col justify-end p-5 pb-0 gap-4 box-border">
+                            <!-- Floating Badge -->
+                            <div class="absolute -right-8 top-16 bg-[#07080a] border border-white/10 text-tethron-cyan px-3 py-1.5 rounded-xl text-[12px] font-[600] flex items-center gap-1.5 shadow-[0_4px_15px_rgba(0,0,0,0.5)] z-20 transition-transform duration-700 delay-100 group-hover:-translate-y-2">
+                                <i class="ph-fill ph-lightning text-[14px]"></i> 34s
+                            </div>
+                            <!-- Fake notch -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#1a1c23] rounded-b-xl z-20"></div>
+
+                            <!-- Messages -->
+                            <div class="flex flex-col gap-1 w-[85%] self-start mb-2">
+                                <div class="bg-white/5 border border-white/5 py-2.5 px-4 rounded-[16px] rounded-tl-sm text-[#cecece] text-[13px] leading-[1.3] shadow-md font-[500]">
+                                    Hi, is anyone available to check my roof tomorrow?
+                                </div>
+                                <span class="text-[10px] text-tethron-muted ml-1 font-[500]">1:42 PM</span>
+                            </div>
+
+                            <div class="flex flex-col gap-1 w-[90%] self-end">
+                                <div class="bg-tethron-darkteal/10 backdrop-blur-md border border-tethron-cyan/20 py-2.5 px-4 rounded-[16px] rounded-tr-sm text-tethron-primary text-[13px] leading-[1.3] shadow-[inset_0_0_15px_rgba(0,212,170,0.05),_0_8px_20px_rgba(0,0,0,0.5)] relative font-[500]">
+                                    <div class="absolute inset-0 bg-tethron-cyan/5 blur-[10px] rounded-[16px] -z-10"></div>
+                                    Yes! I can schedule a free inspection for tomorrow at 2 PM. Should I lock that in?
+                                </div>
+                                <span class="text-[10px] text-tethron-muted text-right mr-1 flex items-center justify-end gap-1 font-[500]">1:43 PM <i class="ph-bold ph-check text-tethron-cyan text-[10px]"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Social Auto-Pilot -->
+                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-100 group overflow-hidden">
+                    <div class="w-12 h-12 rounded-[12px] bg-tethron-card border border-tethron-border flex items-center justify-center mb-6 shadow-raycast-card">
+                        <i class="ph-duotone ph-instagram-logo text-2xl text-tethron-cyan"></i>
+                    </div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Social Auto-Pilot</h3>
+                    <p class="text-small text-tethron-tertiary mb-6">Automated posting, engagement, and DM handling.</p>
+                    
+                    <div class="relative h-48 w-full mt-auto mb-4 perspective-1000">
+                        <!-- Back Card -->
+                        <div class="absolute top-2 right-0 left-8 h-40 bg-white/5 border border-white/5 rounded-xl rotate-6 opacity-40 transition-transform duration-500 group-hover:rotate-12 group-hover:translate-x-2"></div>
+                        
+                        <!-- Front Card -->
+                        <div class="absolute bottom-0 left-0 right-4 bg-[#07080a] border border-white/10 rounded-[12px] shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:-translate-y-1 z-10 flex flex-col overflow-visible">
+                            <!-- Scheduled Badge -->
+                            <div class="absolute -top-3 -right-3 bg-tethron-cyan/10 border border-tethron-cyan/40 text-tethron-cyan px-2 py-1 rounded-[8px] text-[10px] font-[600] shadow-[0_4px_10px_rgba(0,0,0,0.5)] flex items-center gap-1 z-20 backdrop-blur-md">
+                                <i class="ph-fill ph-clock"></i> Scheduled
+                            </div>
+                            
+                            <div class="p-3 flex items-center gap-2 border-b border-white/5">
+                                <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center"><i class="ph-fill ph-user text-tethron-muted text-[10px]"></i></div>
+                                <span class="text-[12px] font-[600] text-tethron-secondary">summit_roofing</span>
+                                <i class="ph-fill ph-seal-check text-blue-400 text-[12px]"></i>
+                            </div>
+                            
+                            <div class="h-24 w-full bg-gradient-to-br from-tethron-darkteal/20 to-[#101111] relative">
+                                <div class="absolute inset-0 flex items-center justify-center text-tethron-cyan/20"><i class="ph-duotone ph-image text-3xl"></i></div>
+                            </div>
+                            
+                            <div class="p-3">
+                                <div class="flex gap-3 mb-2">
+                                    <i class="ph-bold ph-heart text-tethron-primary text-[14px]"></i>
+                                    <i class="ph-bold ph-chat-circle text-tethron-primary text-[14px]"></i>
+                                    <i class="ph-bold ph-paper-plane-tilt text-tethron-primary text-[14px]"></i>
+                                </div>
+                                <div class="text-[10px] font-[600] text-tethron-primary mb-1">127 likes</div>
+                                <div class="text-[11px] text-tethron-tertiary truncate text-ellipsis tracking-[0px]">Protect your home...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Smart Scheduling -->
+                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-0 group overflow-hidden">
+                    <div class="w-12 h-12 rounded-[12px] bg-tethron-card border border-tethron-border flex items-center justify-center mb-6 shadow-raycast-card">
+                        <i class="ph-duotone ph-calendar-check text-2xl text-tethron-cyan"></i>
+                    </div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Smart Scheduling</h3>
+                    <p class="text-small text-tethron-tertiary mb-6">Reads intent, negotiates times, and books directly.</p>
+                    
+                    <div class="mt-auto w-full transition-transform duration-500 group-hover:-translate-y-1 p-4 bg-[#07080a] border border-white/5 rounded-[12px] shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+                        <!-- Calendar Header -->
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-[13px] font-[600] text-tethron-primary">October</span>
+                            <div class="flex gap-2">
+                                <i class="ph-bold ph-caret-left text-tethron-muted text-[10px]"></i>
+                                <i class="ph-bold ph-caret-right text-tethron-muted text-[10px]"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Grid Header -->
+                        <div class="grid grid-cols-7 gap-1 text-center text-[10px] text-tethron-muted font-[600] mb-2">
+                            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                        </div>
+                        
+                        <!-- Grid Dates -->
+                        <div class="grid grid-cols-7 gap-1 text-center text-[11px] text-tethron-secondary font-mono mb-4">
+                            <span class="opacity-30">29</span><span class="opacity-30">30</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+                            <span>13</span>
+                            <span class="bg-white/5 text-tethron-secondary rounded">14</span>
+                            <span class="relative text-tethron-cyan font-[700]">15<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-tethron-cyan rounded-full animate-pulse"></span></span>
+                            <span class="bg-white/5 text-tethron-secondary rounded">16</span>
+                            <span>17</span>
+                            <span class="bg-white/5 text-tethron-secondary rounded">18</span>
+                            <span>19</span>
+                        </div>
+                        
+                        <!-- Appointment Card -->
+                        <div class="bg-tethron-cyan/5 border border-tethron-cyan/20 rounded-[8px] p-2 flex justify-between items-center transition-colors">
+                            <div class="flex flex-col">
+                                <span class="text-tethron-cyan text-[10px] font-[600] tracking-[0.2px]">2:00 PM</span>
+                                <span class="text-tethron-primary text-[11px] whitespace-nowrap overflow-hidden text-ellipsis max-w-[120px]">Roof Inspection</span>
+                            </div>
+                            <div class="w-5 h-5 rounded-full bg-tethron-cyan/10 flex items-center justify-center border border-tethron-cyan text-tethron-cyan shadow-[0_0_10px_rgba(0,212,170,0.1)]">
+                                <i class="ph-bold ph-check text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Review Management -->
+                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-100 group overflow-hidden">
+                    <div class="w-12 h-12 rounded-[12px] bg-tethron-card border border-tethron-border flex items-center justify-center mb-6 shadow-raycast-card">
+                        <i class="ph-duotone ph-star text-2xl text-tethron-cyan"></i>
+                    </div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Review Management</h3>
+                    <p class="text-small text-tethron-tertiary mb-6">Monitors Google/Yelp, drafts customized replies, flags complaints.</p>
+                    
+                    <div class="mt-auto relative w-full h-48 transition-transform duration-500 group-hover:-translate-y-1">
+                        <!-- Background Bars -->
+                        <div class="absolute top-0 right-2 w-24 flex flex-col gap-1.5 opacity-40 z-0">
+                            <div class="text-[10px] text-tethron-tertiary font-mono flex items-center gap-1">5 <div class="h-1 bg-tethron-cyan w-full rounded"></div></div>
+                            <div class="text-[10px] text-tethron-tertiary font-mono flex items-center gap-1">4 <div class="h-1 bg-white/20 w-1/4 rounded"></div></div>
+                            <div class="text-[10px] text-tethron-tertiary font-mono flex items-center gap-1">3 <div class="h-1 bg-white/10 w-[10%] rounded"></div></div>
+                        </div>
+                        
+                        <!-- Large Number -->
+                        <div class="absolute top-0 left-2 text-[40px] font-[700] text-tethron-primary z-0 opacity-80 leading-none">4.8</div>
+
+                        <!-- Review Card -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-[#07080a] border border-white/5 rounded-[12px] p-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] z-10 transition-transform duration-500 group-hover:translate-x-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=64&q=80" alt="Avatar" class="w-6 h-6 rounded-full object-cover grayscale opacity-80">
+                                <span class="text-[12px] font-[600] text-tethron-primary">Jessica L.</span>
+                                <div class="flex text-[#cecece] ml-auto pb-1 text-[10px] gap-0.5">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-tethron-secondary italic mb-3 font-[500] tracking-[0.2px] leading-[1.4]">"Fastest response I've ever gotten from a contractor..."</p>
+                            
+                            <!-- AI Reply -->
+                            <div class="pl-3 border-l-[1.5px] border-white/10 relative">
+                                <div class="absolute -top-3 right-0 bg-white/5 border border-white/10 text-tethron-secondary px-1.5 py-0.5 rounded text-[8px] font-[600] tracking-wider flex items-center gap-1 backdrop-blur-md shrink-0">
+                                    <i class="ph-bold ph-paper-plane-right"></i> SENT
+                                </div>
+                                <span class="text-[10px] text-tethron-tertiary font-[600] mb-1 block">Response from owner</span>
+                                <p class="text-[10px] text-tethron-muted leading-tight font-[500]">Thank you, Jessica! We pride ourselves on speed. See you tomorrow at 2 PM!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Follow-Up Sequences -->
+                <div class="glass-panel hoverable spotlight-wrapper md:col-span-2 p-8 min-h-[400px] flex flex-col reveal delay-200 group overflow-hidden">
+                    <div class="w-12 h-12 rounded-[12px] bg-tethron-card border border-tethron-border flex items-center justify-center mb-6 shadow-raycast-card">
+                        <i class="ph-duotone ph-paper-plane-tilt text-2xl text-tethron-cyan"></i>
+                    </div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Follow-Up Seq.</h3>
+                    <p class="text-small text-tethron-tertiary mb-6">Contextual multi-channel drip campaigns that revive dead leads.</p>
+                    
+                    <div class="mt-auto w-full transition-transform duration-500 group-hover:-translate-y-1 bg-[#07080a] border border-white/5 rounded-[12px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col gap-6">
+                        <!-- Top Progress Bar -->
+                        <div>
+                            <div class="flex justify-between text-[10px] font-mono mb-2">
+                                <span class="text-tethron-tertiary">Sequence Health</span>
+                                <span class="text-tethron-cyan font-[600]">67% Reply Rate</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-white/10 rounded overflow-hidden">
+                                <div class="h-full bg-tethron-cyan w-[67%] rounded relative"><div class="absolute inset-0 bg-white/30 mix-blend-overlay w-full animate-pulse"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline -->
+                        <div class="relative pl-5 border-l border-white/10 flex flex-col gap-4">
+                            <!-- Day 1 -->
+                            <div class="relative">
+                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-[#101111] border border-white/10 rounded-full flex items-center justify-center"><i class="ph-fill ph-chat-teardrop-text text-[8px] text-tethron-muted"></i></div>
+                                <div class="text-[10px] font-[600] text-tethron-muted uppercase tracking-widest mb-0.5">Day 1: SMS</div>
+                                <div class="text-[11px] text-tethron-tertiary truncate font-[500]">Quote Details Sent</div>
+                            </div>
+                            
+                            <!-- Day 3 -->
+                            <div class="relative">
+                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-[#101111] border border-white/10 rounded-full flex items-center justify-center"><i class="ph-fill ph-envelope-simple text-[8px] text-tethron-muted"></i></div>
+                                <div class="text-[10px] font-[600] text-tethron-muted uppercase tracking-widest mb-0.5">Day 3: Email</div>
+                                <div class="text-[11px] text-tethron-tertiary truncate font-[500]">Gentle Check-in</div>
+                            </div>
+
+                            <!-- Day 7 -->
+                            <div class="relative">
+                                <div class="absolute -left-[27px] top-1 w-4 h-4 bg-tethron-cyan shadow-[0_0_10px_rgba(0,212,170,0.6)] rounded-full flex items-center justify-center"><i class="ph-bold ph-phone text-[8px] text-[#07080a]"></i></div>
+                                <div class="flex items-center gap-2 mb-0.5">
+                                    <div class="text-[10px] font-[600] text-tethron-cyan uppercase tracking-widest">Day 7: Final SMS</div>
+                                    <span class="bg-tethron-cyan/10 text-tethron-cyan border border-tethron-cyan/20 text-[8px] px-1.5 py-0.5 rounded font-[600]">REPLIED ✓</span>
+                                </div>
+                                <div class="text-[11px] text-tethron-primary truncate font-[500]">Client confirmed to proceed.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Strategic Intelligence -->
+                <div class="glass-panel hoverable spotlight-wrapper md:col-span-6 p-8 min-h-[300px] flex flex-col md:flex-row items-center gap-10 reveal group overflow-hidden">
+                    <div class="w-full md:w-1/3 flex flex-col items-start z-10">
+                        <div class="w-12 h-12 rounded-[12px] bg-tethron-card border border-tethron-border flex items-center justify-center mb-6 shadow-raycast-card">
+                            <i class="ph-duotone ph-chart-line-up text-2xl text-tethron-cyan"></i>
+                        </div>
+                        <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Strategic Intelligence</h3>
+                        <p class="text-small text-tethron-tertiary">Sends you daily business briefs, tracks revenue targets, flags seasonal anomalies, and generates growth plans while you sleep.</p>
+                    </div>
+                    
+                    <div class="w-full md:w-2/3 h-[220px] bg-[#07080a] border border-white/5 rounded-[12px] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex gap-4 transition-transform duration-500 group-hover:scale-[1.01] z-10 relative">
+                        <!-- Left: Line Chart -->
+                        <div class="flex-1 bg-white/[0.02] border border-white/5 rounded-xl flex flex-col p-4 relative overflow-hidden">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] text-tethron-tertiary font-mono uppercase">Total Leads (30d)</span>
+                                <span class="text-[10px] text-tethron-cyan bg-tethron-cyan/5 px-1.5 rounded border border-tethron-cyan/20">+14%</span>
+                            </div>
+                            <span class="text-[24px] text-tethron-primary font-[600] block mb-2">2,491</span>
+                            
+                            <div class="absolute bottom-0 left-0 right-0 h-[50%] pointer-events-none">
+                                <svg viewBox="0 0 100 50" preserveAspectRatio="none" class="w-full h-full">
+                                    <defs>
+                                        <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#00d4aa" stop-opacity="0.2"/>
+                                            <stop offset="100%" stop-color="#00d4aa" stop-opacity="0"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <polygon points="0,50 0,30 20,40 40,15 60,25 80,5 100,0 100,50" fill="url(#chartGlow)" />
+                                    <polyline points="0,30 20,40 40,15 60,25 80,5 100,0" fill="none" stroke="#00d4aa" stroke-width="2" vector-effect="non-scaling-stroke" class="drop-shadow-[0_2px_4px_rgba(0,212,170,0.3)]"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Center: Cards -->
+                        <div class="flex-1 flex flex-col gap-3">
+                            <div class="bg-white/5 border border-white/5 rounded-lg p-3 flex justify-between items-center h-full hover:bg-white/10 transition-colors">
+                                <span class="text-[12px] text-tethron-tertiary font-[500]">Revenue</span>
+                                <span class="text-[14px] font-[600] text-tethron-primary">$47.2K</span>
+                            </div>
+                            <div class="bg-tethron-cyan/5 border border-tethron-cyan/20 rounded-lg p-3 flex justify-between items-center h-full shadow-[0_0_15px_rgba(0,212,170,0.05)]">
+                                <span class="text-[12px] text-tethron-cyan font-[600] tracking-tight">Conversion</span>
+                                <span class="text-[14px] font-[600] text-tethron-primary">34.8%</span>
+                            </div>
+                            <div class="bg-white/5 border border-white/5 rounded-lg p-3 flex justify-between items-center h-full hover:bg-white/10 transition-colors">
+                                <span class="text-[12px] text-tethron-tertiary font-[500]">Auto-Replies</span>
+                                <span class="text-[14px] font-[600] text-tethron-primary">1,842</span>
+                            </div>
+                        </div>
+
+                        <!-- Right: Bar Chart -->
+                        <div class="hidden sm:flex flex-col bg-white/[0.02] border border-white/5 rounded-xl p-4 w-[140px]">
+                            <span class="text-[10px] text-tethron-tertiary font-mono uppercase mb-4 text-center">MT vs LM</span>
+                            <div class="flex-1 flex gap-3 items-end justify-center pt-4">
+                                <div class="w-6 h-[60%] bg-white/10 border border-white/5 rounded-t-sm relative group cursor-default">
+                                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] text-tethron-muted font-mono opacity-0 group-hover:opacity-100 transition-opacity">$32k</div>
+                                    <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-tethron-muted font-mono">Last</div>
+                                </div>
+                                <div class="w-6 h-[95%] bg-gradient-to-t from-tethron-cyan/50 to-tethron-cyan/80 border-t border-tethron-cyan rounded-t-sm relative shadow-[0_0_15px_rgba(0,212,170,0.2)] group cursor-default">
+                                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] text-tethron-cyan font-[600] font-mono">$47k</div>
+                                    <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-tethron-tertiary font-mono">This</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. HOW IT WORKS -->
+        <section id="how-it-works" class="max-w-7xl mx-auto w-full px-6 mt-[120px] relative">
+            <div class="text-center mb-[64px] reveal">
+                <h2 class="text-[32px] md:text-h2-desk text-tethron-primary font-[600] leading-[1.10] tracking-[-1px] mb-4">Three Steps.<br>Then It's Autonomous.</h2>
+            </div>
+            
+            <div class="hidden md:block absolute top-[60%] left-10 right-10 h-px bg-gradient-to-r from-transparent via-tethron-border to-transparent -z-10"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Step 1 -->
+                <div class="relative reveal flex flex-col">
+                    <div class="w-12 h-12 bg-tethron-card border border-tethron-cyan/30 flex items-center justify-center rounded-full text-tethron-cyan font-[600] text-[20px] shadow-[0_0_15px_rgba(0,212,170,0.1)] mb-6 mx-auto md:mx-0 box-border">1</div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-center md:text-left text-tethron-primary relative z-10">We Audit</h3>
+                    <p class="text-small text-tethron-tertiary mb-6 text-center md:text-left relative z-10">Free deep-dive into your ops. We map every workflow an AI can effectively own.</p>
+                    <div class="glass-panel p-6 h-32 flex flex-col justify-center relative group">
+                        <div class="h-2 w-3/4 bg-white/10 rounded mb-3 group-hover:bg-white/20 transition-colors"></div>
+                        <div class="h-2 w-full bg-white/10 rounded mb-3 group-hover:bg-white/20 transition-colors delay-75"></div>
+                        <div class="h-2 w-5/6 bg-white/10 rounded group-hover:bg-white/20 transition-colors delay-100"></div>
+                        <i class="ph-duotone ph-magnifying-glass absolute top-4 right-4 text-[24px] text-tethron-muted group-hover:text-tethron-cyan transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative reveal delay-100 flex flex-col">
+                    <div class="w-12 h-12 bg-tethron-card border border-tethron-cyan/30 flex items-center justify-center rounded-full text-tethron-cyan font-[600] text-[20px] shadow-[0_0_15px_rgba(0,212,170,0.1)] mb-6 mx-auto md:mx-0 box-border">2</div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-center md:text-left text-tethron-primary relative z-10">We Deploy</h3>
+                    <p class="text-small text-tethron-tertiary mb-6 text-center md:text-left relative z-10">Dedicated Mac Mini hardware, custom-configured. Ships ready to plug 'n play.</p>
+                    <div class="glass-panel p-6 h-32 flex items-center justify-center relative overflow-hidden group">
+                        <div class="w-24 h-6 bg-[#0f1118] rounded-[6px] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative z-10 transform group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-1 right-2 w-1 h-1 bg-tethron-cyan rounded-full shadow-[0_0_8px_#00d4aa] animate-pulse"></div>
+                        </div>
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,212,170,0.05)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative reveal delay-200 flex flex-col">
+                    <div class="w-12 h-12 bg-tethron-cyan border border-tethron-cyan flex items-center justify-center rounded-full text-[#07080a] font-[600] text-[20px] shadow-[0_0_20px_rgba(0,212,170,0.3)] mb-6 mx-auto md:mx-0 box-border">3</div>
+                    <h3 class="text-[20px] font-[600] tracking-[-0.02em] mb-2 text-center md:text-left text-tethron-primary relative z-10">It Runs 24/7</h3>
+                    <p class="text-small text-tethron-tertiary mb-6 text-center md:text-left relative z-10">Monitor from your dashboard. AI handles the grind, you focus on scale.</p>
+                    <div class="glass-panel p-6 h-32 flex flex-col gap-3 relative group">
+                        <div class="flex justify-between items-center text-[10px] text-tethron-muted border-b border-white/5 pb-2 uppercase tracking-wider font-[600]">
+                            <span class="text-tethron-cyan">Status: Online</span>
+                            <span>Uptime 99.9%</span>
+                        </div>
+                        <div class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-tethron-cyan rounded-full shadow-[0_0_5px_#00d4aa]"></div><div class="h-1.5 w-1/2 bg-white/10 rounded"></div></div>
+                        <div class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-tethron-cyan rounded-full shadow-[0_0_5px_#00d4aa]"></div><div class="h-1.5 w-2/3 bg-white/10 rounded"></div></div>
+                        <div class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-tethron-cyan rounded-full shadow-[0_0_5px_#00d4aa]"></div><div class="h-1.5 w-1/3 bg-white/10 rounded"></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. INDUSTRIES BENTO -->
+        <section id="industries" class="max-w-7xl mx-auto w-full px-6 mt-[120px]">
+            <div class="mb-[64px] reveal text-center md:text-left">
+                <h2 class="text-[32px] md:text-h2-desk text-tethron-primary font-[600] leading-[1.10] tracking-[-1px] mb-2">Built For Businesses That Can't Miss a Lead</h2>
+                <p class="text-body text-tethron-tertiary">Real results from local deployments.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="glass-panel hoverable spotlight-wrapper p-6 flex flex-col gap-4 reveal delay-0">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded-[8px] border border-white/10"><i class="ph-duotone ph-house-line text-[20px] text-tethron-secondary"></i></div>
+                        <h4 class="text-[16px] font-[600] tracking-[-0.02em] text-tethron-primary">Roofing & Trades</h4>
+                    </div>
+                    <div class="text-[13px] font-[600] text-tethron-cyan bg-tethron-cyan/5 border border-tethron-cyan/20 w-fit px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.2)]">$38K recovered revenue</div>
+                    <p class="text-small text-tethron-tertiary">40s avg lead response time after hours.</p>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-6 flex flex-col gap-4 reveal delay-100">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded-[8px] border border-white/10"><i class="ph-duotone ph-lotus text-[20px] text-tethron-secondary"></i></div>
+                        <h4 class="text-[16px] font-[600] tracking-[-0.02em] text-tethron-primary">Wellness Studios</h4>
+                    </div>
+                    <div class="text-[13px] font-[600] text-tethron-cyan bg-tethron-cyan/5 border border-tethron-cyan/20 w-fit px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.2)]">No-show rate 18% → 4%</div>
+                    <p class="text-small text-tethron-tertiary">Automated pre-qualification and SMS reminders.</p>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-6 flex flex-col gap-4 reveal delay-200">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded-[8px] border border-white/10"><i class="ph-duotone ph-fork-knife text-[20px] text-tethron-secondary"></i></div>
+                        <h4 class="text-[16px] font-[600] tracking-[-0.02em] text-tethron-primary">Restaurants</h4>
+                    </div>
+                    <div class="text-[13px] font-[600] text-tethron-cyan bg-tethron-cyan/5 border border-tethron-cyan/20 w-fit px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.2)]">Rating 4.1 → 4.7 (60 days)</div>
+                    <p class="text-small text-tethron-tertiary">Instant review replies and complaint escalation.</p>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-6 flex flex-col gap-4 reveal delay-0">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded-[8px] border border-white/10"><i class="ph-duotone ph-bandaids text-[20px] text-tethron-secondary"></i></div>
+                        <h4 class="text-[16px] font-[600] tracking-[-0.02em] text-tethron-primary">Physical Therapy</h4>
+                    </div>
+                    <div class="text-[13px] font-[600] text-tethron-cyan bg-tethron-cyan/5 border border-tethron-cyan/20 w-fit px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.2)]">19 reactivated patients</div>
+                    <p class="text-small text-tethron-tertiary">Value: $14K via automated 6-month check-ins.</p>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-6 flex flex-col gap-4 reveal delay-100">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded-[8px] border border-white/10"><i class="ph-duotone ph-paint-brush text-[20px] text-tethron-secondary"></i></div>
+                        <h4 class="text-[16px] font-[600] tracking-[-0.02em] text-tethron-primary">Interior Design</h4>
+                    </div>
+                    <div class="text-[13px] font-[600] text-tethron-cyan bg-tethron-cyan/5 border border-tethron-cyan/20 w-fit px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.2)]">3x Conversion Rate</div>
+                    <p class="text-small text-tethron-tertiary">Intelligent budgetary pre-qualification via chat.</p>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-6 flex flex-col gap-4 reveal delay-200">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded-[8px] border border-white/10"><i class="ph-duotone ph-chart-polar text-[20px] text-tethron-secondary"></i></div>
+                        <h4 class="text-[16px] font-[600] tracking-[-0.02em] text-tethron-primary">Financial Advisory</h4>
+                    </div>
+                    <div class="text-[13px] font-[600] text-tethron-cyan bg-tethron-cyan/5 border border-tethron-cyan/20 w-fit px-3 py-1 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.2)]">3 new referrals / week</div>
+                    <p class="text-small text-tethron-tertiary">Generated via hyper-personalized touchpoints.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. INTEGRATIONS -->
+        <section class="max-w-7xl mx-auto w-full px-6 mt-[120px] text-center">
+            <div class="text-center mb-[64px] reveal">
+                <h2 class="text-[24px] md:text-[32px] font-[600] leading-[1.10] tracking-[-1px] text-tethron-primary mb-2">Connects to Everything You Already Use</h2>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto items-center">
+                <script>
+                    const tools = ['Gmail', 'Slack', 'Google Calendar', 'Stripe', 'HubSpot', 'Instagram', 'QuickBooks', 'Google Reviews', 'SMS/Phone', 'LinkedIn', 'Mailchimp', 'Salesforce', 'Notion', 'Yelp', 'Shopify', 'Google Analytics', 'Zapier', 'Facebook', 'iMessage', 'Calendly'];
+                    let html = '';
+                    tools.forEach((tool, index) => {
+                        let delay = (index % 10) * 50; 
+                        html += `
+                            <div class="reveal glass-panel px-4 py-2.5 flex items-center gap-2 transition-all cursor-default select-none group" style="transition-delay: ${delay}ms;">
+                                <div class="w-1.5 h-1.5 rounded-full bg-tethron-muted group-hover:bg-tethron-cyan group-hover:shadow-[0_0_5px_rgba(0,212,170,0.8)] transition-colors"></div>
+                                <span class="text-small text-tethron-secondary whitespace-nowrap">${tool}</span>
+                            </div>
+                        `;
+                    });
+                    document.write(html);
+                </script>
+            </div>
+        </section>
+
+        <!-- 8. TESTIMONIALS -->
+        <section class="max-w-7xl mx-auto w-full px-6 mt-[120px]">
+            <div class="text-center mb-[64px] reveal">
+                <h2 class="text-[32px] md:text-h2-desk font-[600] tracking-[-1px] text-tethron-primary mb-2">Don't Take Our Word For It</h2>
+                <p class="text-body text-tethron-tertiary">Operational impact at scale.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel hoverable spotlight-wrapper p-8 flex flex-col reveal delay-0">
+                    <i class="ph-fill ph-quotes text-[32px] text-white/5 mb-4"></i>
+                    <p class="text-[15px] font-[500] leading-[1.6] text-tethron-secondary mb-6 flex-grow">"I haven't touched my calendar in 3 months. The AI Agent replies instantly to inquiries on IG and books them. She runs it better than I ever did."</p>
+                    <div class="flex items-center gap-3 pt-6 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Sarah - Wellness Studio Owner" class="w-10 h-10 rounded-full object-cover grayscale opacity-80">
+                        <div>
+                            <div class="text-[13px] font-[600] text-tethron-primary">Sarah M.</div>
+                            <div class="text-[12px] font-[500] text-tethron-muted">Wellness Studio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-8 flex flex-col reveal delay-100">
+                    <i class="ph-fill ph-quotes text-[32px] text-white/5 mb-4"></i>
+                    <p class="text-[15px] font-[500] leading-[1.6] text-tethron-secondary mb-6 flex-grow">"I used to lose every lead that called after 5 PM. Now I wake up to booked inspection jobs. The return on investment was literal days."</p>
+                    <div class="flex items-center gap-3 pt-6 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="James - Roofing Contractor" class="w-10 h-10 rounded-full object-cover grayscale opacity-80">
+                        <div>
+                            <div class="text-[13px] font-[600] text-tethron-primary">James T.</div>
+                            <div class="text-[12px] font-[500] text-tethron-muted">Roofing Contractor</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel hoverable spotlight-wrapper p-8 flex flex-col reveal delay-200">
+                    <i class="ph-fill ph-quotes text-[32px] text-white/5 mb-4"></i>
+                    <p class="text-[15px] font-[500] leading-[1.6] text-tethron-secondary mb-6 flex-grow">"My Google page looks like I have a full-time PR team. Every review gets a thoughtful, unique reply within minutes. It's just my AI employee."</p>
+                    <div class="flex items-center gap-3 pt-6 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" alt="Tony - Restaurant Manager" class="w-10 h-10 rounded-full object-cover grayscale opacity-80">
+                        <div>
+                            <div class="text-[13px] font-[600] text-tethron-primary">Tony R.</div>
+                            <div class="text-[12px] font-[500] text-tethron-muted">Restaurant Group</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. PRICING -->
+        <section id="pricing" class="max-w-5xl mx-auto w-full px-6 mt-[120px]">
+            <div class="text-center mb-[64px] reveal relative">
+                <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-tethron-cyan/10 blur-[50px] -z-10 rounded-full"></div>
+                <h2 class="text-[32px] md:text-h2-desk font-[600] tracking-[-1px] mb-4 text-gradient">Transparent Economics</h2>
+                <p class="text-body text-tethron-tertiary">Hire an employee that never sleeps for a fraction of minimum wage.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative items-center">
+                
+                <div class="glass-panel p-8 md:p-10 reveal delay-0">
+                    <h3 class="text-[24px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">Foundation</h3>
+                    <p class="text-small text-tethron-tertiary mb-6 h-10">Essential digital presence and workflow mapping.</p>
+                    <div class="text-[32px] font-[600] tracking-[-1px] mb-8 text-tethron-primary">$1,500 <span class="text-[14px] text-tethron-muted font-[500] tracking-[0.2px]">one-time</span></div>
+                    
+                    <ul class="space-y-4 mb-8 text-[15px] font-[500] text-tethron-secondary">
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-muted"></i> Custom Website Build</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-muted"></i> Mobile-First Optimization</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-muted"></i> Baseline Local SEO Setup</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-muted"></i> Unlimited Revisions</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-muted"></i> 14-Day Delivery Guarantee</li>
+                    </ul>
+                    
+                    <a href="https://calendly.com/cadenhillier33/30min" class="block w-full py-3 rounded-[980px] border border-white/10 text-center text-btn text-tethron-primary hover:opacity-80 transition-opacity bg-transparent shadow-[0_0_0_1px_rgba(27,28,30,1)]">Start Foundation</a>
+                </div>
+
+                <div class="glass-panel p-8 md:p-10 relative transform md:scale-105 z-10 reveal delay-100 bg-[#101111] overflow-visible no-hover-opacity">
+                    <div class="absolute inset-0 border border-tethron-cyan/20 rounded-[16px] pointer-events-none"></div>
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-tethron-card text-tethron-cyan border border-tethron-cyan/40 text-[10px] font-[600] px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_4px_10px_rgba(0,0,0,0.5)]">Most Popular</div>
+
+                    <h3 class="text-[24px] font-[600] tracking-[-0.02em] mb-2 text-tethron-primary">AI Employee <span class="text-tethron-cyan">Premium</span></h3>
+                    <p class="text-small text-tethron-tertiary mb-6 h-10">Fully autonomous agent deployed on local hardware.</p>
+                    <div class="text-[32px] font-[600] tracking-[-1px] mb-2 text-tethron-primary">$3,500 <span class="text-[14px] text-tethron-muted font-[500] tracking-[0.2px]">setup</span></div>
+                    <div class="text-[18px] text-tethron-cyan font-[600] tracking-[0px] mb-8">+ $600 <span class="text-[14px] text-tethron-muted font-[500] tracking-[0.2px]">/mo</span></div>
+                    
+                    <ul class="space-y-4 mb-8 text-[15px] font-[500] text-tethron-secondary">
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> <span class="font-[600] text-tethron-primary">Everything in Foundation</span></li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> Dedicated Mac Mini Hardware</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> 24/7 Autonomous AI Agent</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> All Platform Integrations</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> Monthly Logic Optimization</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan"></i> Priority Support Channel</li>
+                    </ul>
+                    
+                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow block w-full py-3.5 btn-pill bg-tethron-cyan text-[#07080a] text-center text-btn hover:opacity-80 transition-opacity relative z-20">Book Strategy Call</a>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-[13px] text-tethron-muted mt-12 reveal font-[500] tracking-[0.2px]">Due to hardware setup tracking, we only onboard <span class="text-tethron-cyan font-[600]">15 new businesses</span> per month.</p>
+        </section>
+
+        <!-- 10. FAQ SECTION -->
+        <section id="faq" class="max-w-3xl mx-auto w-full px-6 mt-[120px]">
+            <div class="reveal mb-[64px] text-center">
+                <h2 class="text-[24px] md:text-[32px] font-[600] tracking-[-1px] text-tethron-primary mb-2">Frequently Asked Questions</h2>
+                <p class="text-small text-tethron-tertiary">System facts & deployment details.</p>
+            </div>
+            
+            <div class="space-y-3">
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-0">
+                    <summary class="list-none flex justify-between items-center font-[500] p-6 text-tethron-primary transition-colors rounded-[16px] text-[16px]">
+                        What hardware does it run on?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-tertiary text-lg"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-small text-tethron-secondary leading-[1.6] border-t border-white/5 mt-1">
+                        A dedicated Mac Mini installed at your location or ours. It's not shared infrastructure — it's YOUR machine, running YOUR AI employee 24/7.
+                    </div>
+                </details>
+
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
+                    <summary class="list-none flex justify-between items-center font-[500] p-6 text-tethron-primary transition-colors rounded-[16px] text-[16px]">
+                        Is it really 24/7?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-tertiary text-lg"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-small text-tethron-secondary leading-[1.6] border-t border-white/5 mt-1">
+                        Yes. The hardware never turns off. Your AI employee monitors channels, responds to leads, and manages operations around the clock. If something needs your attention, it alerts you.
+                    </div>
+                </details>
+
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-200">
+                    <summary class="list-none flex justify-between items-center font-[500] p-6 text-tethron-primary transition-colors rounded-[16px] text-[16px]">
+                        How is this different from a chatbot?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-tertiary text-lg"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-small text-tethron-secondary leading-[1.6] border-t border-white/5 mt-1">
+                        Chatbots follow scripts. Your AI employee thinks. It reads context, makes decisions, coordinates across platforms, and learns your business. It's closer to a remote employee than a chat widget.
+                    </div>
+                </details>
+
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-0">
+                    <summary class="list-none flex justify-between items-center font-[500] p-6 text-tethron-primary transition-colors rounded-[16px] text-[16px]">
+                        Can I customize what it does?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-tertiary text-lg"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-small text-tethron-secondary leading-[1.6] border-t border-white/5 mt-1">
+                        Completely. We configure every workflow to your business — which channels it monitors, how it responds, what it escalates to you, how it books appointments. Nothing is one-size-fits-all.
+                    </div>
+                </details>
+
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
+                    <summary class="list-none flex justify-between items-center font-[500] p-6 text-tethron-primary transition-colors rounded-[16px] text-[16px]">
+                        What's the setup process?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-tertiary text-lg"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-small text-tethron-secondary leading-[1.6] border-t border-white/5 mt-1">
+                        We start with a free audit of your operations. Then we build your AI employee's logic, deploy the hardware, and go live. Most businesses are fully operational within 2 weeks.
+                    </div>
+                </details>
+
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-200">
+                    <summary class="list-none flex justify-between items-center font-[500] p-6 text-tethron-primary transition-colors rounded-[16px] text-[16px]">
+                        What if I want to cancel?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-tertiary text-lg"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-small text-tethron-secondary leading-[1.6] border-t border-white/5 mt-1">
+                        Month-to-month. No contracts, no cancellation fees. We earn your business every month.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 11. FINAL CTA -->
+        <section id="audit" class="max-w-4xl mx-auto w-full px-6 mt-[120px] mb-10 reveal">
+            <div class="glass-panel hoverable p-[48px] text-center relative overflow-hidden">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[200%] bg-[radial-gradient(ellipse_at_center,rgba(0,212,170,0.08)_0%,transparent_60%)] -z-10 rotate-12"></div>
+                
+                <h2 class="text-[32px] md:text-[48px] font-[600] tracking-[-1px] mb-4 text-gradient">Get Your Free AI Audit</h2>
+                <p class="text-body text-tethron-tertiary mb-8 max-w-xl mx-auto">We'll show you exactly where an AI employee saves you 40+ hours a week and recovers lost revenue.</p>
+                
+                <div class="flex justify-center z-10 relative">
+                    <a href="https://calendly.com/cadenhillier33/30min" class="btn-glow btn-pill bg-tethron-cyan text-[#07080a] font-[600] text-btn px-8 py-4 hover:opacity-80 transition-opacity whitespace-nowrap shadow-[0_0_20px_rgba(0,212,170,0.2)]">
+                        Book Your Strategy Call
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 12. FOOTER -->
+    <footer class="border-t border-white/5 bg-[#07080a] pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+            
+            <div class="lg:col-span-2 pr-8">
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="ph-duotone ph-cpu text-tethron-cyan text-[24px]"></i>
+                    <span class="text-[20px] font-[600] tracking-[-0.02em] text-tethron-primary">Tethron.ai</span>
+                </div>
+                <p class="text-small text-tethron-tertiary mb-6 max-w-sm">Deploying autonomous local agents to run operations, marketing, and scheduling for main street businesses.</p>
+                <div class="flex items-center gap-2 text-[12px] font-[500] text-tethron-muted bg-white/5 border border-white/5 w-fit px-3 py-1.5 rounded-full">
+                    <div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan animate-pulse"></div>
+                    Systems Operational
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-[600] text-[15px] text-tethron-primary mb-4 tracking-[0px]">Platform</h4>
+                <ul class="space-y-3 text-small text-tethron-muted">
+                    <li><a href="#capabilities" class="hover:text-tethron-primary transition-colors">Capabilities</a></li>
+                    <li><a href="#how-it-works" class="hover:text-tethron-primary transition-colors">Hardware Setup</a></li>
+                    <li><a href="#pricing" class="hover:text-tethron-primary transition-colors">Pricing</a></li>
+                    <li><a href="#faq" class="hover:text-tethron-primary transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-[600] text-[15px] text-tethron-primary mb-4 tracking-[0px]">Company</h4>
+                <ul class="space-y-3 text-small text-tethron-muted">
+                    <li><a href="#" class="hover:text-tethron-primary transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-tethron-primary transition-colors">Partner Program</a></li>
+                    <li><a href="#" class="hover:text-tethron-primary transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-tethron-primary transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-[600] text-[15px] text-tethron-primary mb-4 tracking-[0px]">Connect</h4>
+                <ul class="space-y-3 text-small text-tethron-muted">
+                    <li class="flex items-center gap-2"><i class="ph ph-envelope-simple text-[16px]"></i> caden@tethron.ai</li>
+                    <li class="flex items-center gap-2"><i class="ph ph-phone text-[16px]"></i> 203-671-4631</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] font-[500] text-tethron-muted">
+            <p>&copy; 2026 Tethron.ai. All rights reserved.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-tethron-secondary transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-tethron-secondary transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVITY SCRIPTS -->
+    <script>
+        // 1. Setup Canvas Custom Cursor
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.getElementById('custom-cursor');
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let cursorX = mouseX;
+                let cursorY = mouseY;
+                
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+                
+                const renderCursor = () => {
+                    cursorX += (mouseX - cursorX) * 0.15; 
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                    requestAnimationFrame(renderCursor);
+                };
+                requestAnimationFrame(renderCursor);
+            }
+        });
+
+        // 2. Spotlight Hover Effect
+        const handleMouseMove = (e) => {
+            const { currentTarget: target } = e;
+            const rect = target.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            target.style.setProperty("--mouse-x", `${x}px`);
+            target.style.setProperty("--mouse-y", `${y}px`);
+        };
+
+        for (const card of document.querySelectorAll(".spotlight-wrapper")) {
+            card.onmousemove = e => handleMouseMove(e);
+        }
+
+        // 3. Scroll Reveal Animations 
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                
+                entry.target.classList.add('active');
+                
+                const counters = entry.target.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        const inc = target / 30; 
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 40);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    counter.classList.remove('counter'); 
+                });
+
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. Terminal Typewriter
+        const phrases = [
+            "Responding to local lead in 38 seconds...",
+            "Booking roof inspection for Thursday 2PM...",
+            "Drafting Instagram post about storm damage...",
+            "Sending SMS follow-up sequence #3...",
+            "Generating daily revenue brief...",
+            "Executing autonomous workload..."
+        ];
+        
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTarget = document.getElementById('typewriter');
+        
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                charIndex--;
+            } else {
+                charIndex++;
+            }
+            
+            typeTarget.textContent = currentPhrase.substring(0, charIndex);
+            
+            let speed = isDeleting ? 30 : 80;
+            
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                speed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                speed = 500; 
+            }
+            
+            setTimeout(typeEffect, speed);
+        }
+        
+        setTimeout(typeEffect, 1000);
+
+    </script>
+</body>
+</html>
