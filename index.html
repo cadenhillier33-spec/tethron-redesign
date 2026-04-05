@@ -1482,78 +1482,83 @@
             obs.observe(document.getElementById('demo'));
         })();
 
-        // --- JS CAROUSEL ENGINE (auto-scroll + drag/swipe) ---
+        // --- JS CAROUSEL ENGINE ---
         (function() {
-            function initCarousel(el, speed) {
+            function initCarousel(el, pxPerFrame) {
                 if (!el) return;
-
-                // Get the single set of items
                 const original = el.children[0];
                 if (!original) return;
 
-                // Clone it twice for seamless infinite scroll
-                el.appendChild(original.cloneNode(true));
-                el.appendChild(original.cloneNode(true));
+                // Flatten: take all items out of their wrapper and put them directly in the track
+                const items = Array.from(original.children);
+                el.innerHTML = '';
+                items.forEach(item => el.appendChild(item));
 
-                // Wait a frame for layout to calculate
+                // Clone all items 3x for plenty of seamless buffer
+                for (let i = 0; i < 3; i++) {
+                    items.forEach(item => el.appendChild(item.cloneNode(true)));
+                }
+
+                // Measure one full set width (number of original items * item width + gaps)
                 requestAnimationFrame(() => {
-                    const gap = 24;
-                    // Width of one full set including its internal gaps
-                    const oneSetWidth = original.offsetWidth + gap;
-
-                    let pos = -oneSetWidth; // Start at the middle clone
-                    let dragging = false;
-                    let startX = 0;
-                    let dragOffset = 0;
-
-                    function animate() {
-                        if (!dragging) {
-                            pos += speed;
-                            // Seamless wrap — only during auto-scroll
-                            if (pos >= 0) pos -= oneSetWidth;
-                            if (pos <= -oneSetWidth * 2) pos += oneSetWidth;
-                        }
-                        el.style.transform = `translateX(${pos}px)`;
-                        requestAnimationFrame(animate);
+                    const itemCount = items.length;
+                    const allChildren = el.children;
+                    let oneSetWidth = 0;
+                    for (let i = 0; i < itemCount; i++) {
+                        oneSetWidth += allChildren[i].offsetWidth + 24; // 24 = gap
                     }
 
-                    // Mouse drag
-                    let thisElDragging = false;
-                    el.addEventListener('mousedown', (e) => {
-                        dragging = true;
-                        thisElDragging = true;
-                        startX = e.clientX;
-                        dragOffset = pos;
-                        e.preventDefault();
-                    });
-                    window.addEventListener('mousemove', (e) => {
-                        if (!thisElDragging) return;
-                        pos = dragOffset + (e.clientX - startX);
-                    });
-                    window.addEventListener('mouseup', () => {
-                        if (thisElDragging) {
-                            dragging = false;
-                            thisElDragging = false;
-                            // Don't wrap — just let auto-scroll continue from here
-                        }
-                    });
+                    let pos = -oneSetWidth; // start offset so we can scroll both directions
+                    let dragging = false;
+                    let startX = 0;
+                    let dragStartPos = 0;
 
-                    // Touch drag
+                    function tick() {
+                        if (!dragging) {
+                            pos += pxPerFrame;
+                        }
+
+                        // Wrap seamlessly in either direction
+                        if (pos > 0) pos -= oneSetWidth;
+                        if (pos < -oneSetWidth * 2) pos += oneSetWidth;
+
+                        el.style.transform = 'translateX(' + pos + 'px)';
+                        requestAnimationFrame(tick);
+                    }
+
+                    // Touch
                     el.addEventListener('touchstart', (e) => {
                         dragging = true;
                         startX = e.touches[0].clientX;
-                        dragOffset = pos;
-                    }, { passive: true });
+                        dragStartPos = pos;
+                    }, {passive: true});
+
                     el.addEventListener('touchmove', (e) => {
                         if (!dragging) return;
-                        pos = dragOffset + (e.touches[0].clientX - startX);
-                    }, { passive: true });
-                    el.addEventListener('touchend', () => {
-                        dragging = false;
-                        // Don't wrap — auto-scroll picks up from current pos
+                        const dx = e.touches[0].clientX - startX;
+                        pos = dragStartPos + dx;
+                    }, {passive: true});
+
+                    el.addEventListener('touchend', () => { dragging = false; });
+
+                    // Mouse
+                    let mouseActive = false;
+                    el.addEventListener('mousedown', (e) => {
+                        dragging = true;
+                        mouseActive = true;
+                        startX = e.clientX;
+                        dragStartPos = pos;
+                        e.preventDefault();
+                    });
+                    window.addEventListener('mousemove', (e) => {
+                        if (!mouseActive) return;
+                        pos = dragStartPos + (e.clientX - startX);
+                    });
+                    window.addEventListener('mouseup', () => {
+                        if (mouseActive) { dragging = false; mouseActive = false; }
                     });
 
-                    animate();
+                    tick();
                 });
             }
 
