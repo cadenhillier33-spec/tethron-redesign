@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your next employee never clocks out.</title>
+    <title>Tethron | AI Employees That Run Your Business</title>
+    <meta name="description" content="We deploy dedicated AI agents on physical hardware that run your business 24/7. Customer comms, scheduling, marketing, reporting — handled.">
+    <meta property="og:title" content="Tethron | AI Employees That Run Your Business">
+    <meta property="og:description" content="Dedicated AI agents on physical hardware. 24/7 operations for $600/mo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tethron.ai">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +17,10 @@
     
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1388,6 +1397,202 @@
             }, { threshold: 0.15 });
             obs.observe(document.getElementById('demo'));
         })();
+
+        // --- GSAP SCROLLTRIGGER ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Wait for page load
+        window.addEventListener('load', () => {
+
+            // Remove reveal class from GSAP-managed elements to avoid conflict
+            // GSAP handles their animation now
+            document.querySelectorAll('#capabilities .reveal, #industries .reveal, #pricing .reveal, #faq .reveal').forEach(el => {
+                el.classList.remove('reveal');
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+            // Also remove from glass-panels inside those sections
+            document.querySelectorAll('#capabilities .glass-panel, #industries .glass-panel, #pricing .glass-panel').forEach(el => {
+                el.classList.remove('reveal', 'delay-0', 'delay-100', 'delay-200', 'delay-300');
+                // Set initial state for GSAP
+                gsap.set(el, { opacity: 0, y: 40, scale: 0.92 });
+            });
+
+            // BENTO CARDS: Scale up with stagger
+            gsap.utils.toArray('#capabilities .glass-panel').forEach((card, i) => {
+                gsap.to(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    },
+                    scale: 1,
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.9,
+                    delay: i * 0.1,
+                    ease: 'power3.out'
+                });
+            });
+
+            // HOW IT WORKS: Staggered step reveal
+            gsap.utils.toArray('#how-it-works .glass-panel, #how-it-works .relative.group').forEach((step, i) => {
+                gsap.from(step, {
+                    scrollTrigger: {
+                        trigger: step,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    x: i % 2 === 0 ? -30 : 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: i * 0.15,
+                    ease: 'power3.out'
+                });
+            });
+
+            // INDUSTRIES: Cards slide in
+            document.querySelectorAll('#industries .glass-panel').forEach(el => {
+                gsap.set(el, { opacity: 0, y: 40, scale: 0.95 });
+            });
+            gsap.utils.toArray('#industries .glass-panel').forEach((card, i) => {
+                gsap.to(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.7,
+                    delay: i * 0.08,
+                    ease: 'power2.out'
+                });
+            });
+
+            // INTEGRATIONS: Pills stagger in
+            gsap.utils.toArray('.rounded-full.border.border-tethron-border').forEach((pill, i) => {
+                if (pill.closest('#capabilities') || pill.closest('nav')) return; // skip non-integration pills
+                gsap.from(pill, {
+                    scrollTrigger: {
+                        trigger: pill,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    },
+                    scale: 0,
+                    opacity: 0,
+                    duration: 0.4,
+                    delay: i * 0.03,
+                    ease: 'back.out(1.7)'
+                });
+            });
+
+            // TESTIMONIALS: Slide in from sides
+            const testimonials = document.querySelectorAll('#testimonials .glass-panel, [class*="testimonial"]');
+
+            // PRICING: Cards slide in from opposite sides
+            const pricingCards = document.querySelectorAll('#pricing .glass-panel');
+            if (pricingCards.length >= 2) {
+                gsap.set(pricingCards[0], { opacity: 0, x: -60 });
+                gsap.set(pricingCards[1], { opacity: 0, x: 60 });
+                gsap.to(pricingCards[0], {
+                    scrollTrigger: {
+                        trigger: pricingCards[0],
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: 'power3.out'
+                });
+                gsap.to(pricingCards[1], {
+                    scrollTrigger: {
+                        trigger: pricingCards[1],
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: 'power3.out'
+                });
+            }
+
+            // FAQ: Accordion items stagger in
+            gsap.utils.toArray('#faq details').forEach((item, i) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.6,
+                    delay: i * 0.1,
+                    ease: 'power2.out'
+                });
+            });
+
+            // SECTION HEADINGS: Reveal with clip
+            gsap.utils.toArray('h2').forEach(heading => {
+                gsap.from(heading, {
+                    scrollTrigger: {
+                        trigger: heading,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power3.out'
+                });
+            });
+
+            // PARALLAX: Background grid moves slower
+            const gridBg = document.querySelector('.kinetic-bg, [class*="bg-grid"]');
+            if (gridBg) {
+                gsap.to(gridBg, {
+                    scrollTrigger: {
+                        trigger: document.body,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1
+                    },
+                    y: -200,
+                    ease: 'none'
+                });
+            }
+
+            // RADIAL GLOW: Moves with scroll for depth
+            const radialGlow = document.querySelector('.bg-radial-glow, [class*="radial-glow"]');
+            if (radialGlow) {
+                gsap.to(radialGlow, {
+                    scrollTrigger: {
+                        trigger: document.body,
+                        start: 'top top',
+                        end: '30% top',
+                        scrub: 1
+                    },
+                    opacity: 0,
+                    y: -100,
+                    ease: 'none'
+                });
+            }
+
+            // DEMO CHAT: Pin while playing
+            const demoSection = document.getElementById('demo');
+            if (demoSection) {
+                ScrollTrigger.create({
+                    trigger: demoSection,
+                    start: 'top 10%',
+                    end: 'bottom bottom',
+                    pin: false, // just let it scroll naturally for now
+                });
+            }
+        });
 
     </script>
 </body>
