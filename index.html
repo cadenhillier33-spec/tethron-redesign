@@ -1522,9 +1522,6 @@
                 window.addEventListener('mouseup', () => {
                     if (dragging) {
                         dragging = false;
-                        // Normalize position
-                        while (pos > 0) pos -= setWidth;
-                        while (pos < -setWidth) pos += setWidth;
                     }
                 });
 
@@ -1541,8 +1538,6 @@
                 el.addEventListener('touchend', () => {
                     if (dragging) {
                         dragging = false;
-                        while (pos > 0) pos -= setWidth;
-                        while (pos < -setWidth) pos += setWidth;
                     }
                 });
 
