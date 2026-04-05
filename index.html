@@ -379,15 +379,13 @@
         <!-- 2. HERO SECTION — Centered with orb behind -->
         <section class="max-w-7xl mx-auto w-full px-6 flex flex-col items-center text-center mt-16 md:mt-28 relative min-h-[85vh]">
 
-            <!-- SPLINE 3D SCENE — Behind hero text (hidden on mobile) -->
-            <div class="absolute inset-0 w-full h-full z-[0] opacity-50 reveal delay-500 overflow-hidden hidden md:block" style="pointer-events: auto; mix-blend-mode: lighten;">
-                <iframe src='https://my.spline.design/reactiveorb-XG9jCQD2Qj2Pb8KocqjbigRy/' frameborder='0' width='100%' height='100%' style="border:none; position:absolute; top:0; left:0; right:0; bottom:0;"></iframe>
-                <!-- Heavy edge fades to blend Spline's black bg into our #07080a -->
-                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 250px 120px #07080a;"></div>
-                <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none" style="background: linear-gradient(to top, #07080a 0%, transparent 100%);"></div>
-                <div class="absolute top-0 left-0 right-0 h-[20%] pointer-events-none" style="background: linear-gradient(to bottom, #07080a 0%, transparent 100%);"></div>
-                <div class="absolute left-0 top-0 bottom-0 w-[20%] pointer-events-none" style="background: linear-gradient(to right, #07080a 0%, transparent 100%);"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-[15%] pointer-events-none" style="background: linear-gradient(to left, #07080a 0%, transparent 100%);"></div>
+            <!-- SPLINE 3D SCENE — Full viewport behind hero (hidden on mobile) -->
+            <div class="fixed inset-0 w-screen h-screen z-[0] opacity-40 overflow-hidden hidden md:block" style="pointer-events: none; mix-blend-mode: lighten;">
+                <iframe src='https://my.spline.design/reactiveorb-XG9jCQD2Qj2Pb8KocqjbigRy/' frameborder='0' width='100%' height='100%' style="border:none; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:auto;"></iframe>
+                <!-- Edge fades to blend into background -->
+                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 300px 150px #07080a;"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-[35%] pointer-events-none" style="background: linear-gradient(to top, #07080a 0%, transparent 100%);"></div>
+                <div class="absolute top-0 left-0 right-0 h-[15%] pointer-events-none" style="background: linear-gradient(to bottom, #07080a 0%, transparent 100%);"></div>
             </div>
 
             <div class="reveal relative z-20">
@@ -1079,49 +1077,51 @@
             <p class="text-zinc-500 text-sm text-center mt-6 reveal">+ dozens more. If your business uses it, we can wire into it.</p>
         </section>
 
-        <!-- 8. TESTIMONIALS -->
-        <section class="max-w-7xl mx-auto w-full px-6 mt-32">
+        <!-- 8. TESTIMONIALS — Light section (Apple alternating pattern) -->
+        <section class="w-full mt-32 py-24 relative" style="background: #f5f5f7;">
+            <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Don't Take Our Word For It</h2>
-                <p class="text-zinc-400">Operational impact at scale.</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-2" style="color: #1d1d1f;">Don't Take Our Word For It</h2>
+                <p style="color: rgba(0,0,0,0.5);">Operational impact at scale.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel hoverable spotlight-wrapper p-8 flex flex-col reveal delay-0">
-                    <i class="ph-fill ph-quotes text-3xl text-tethron-cyan/20 mb-4"></i>
-                    <p class="text-sm text-zinc-300 mb-6 leading-relaxed flex-grow">"I haven't touched my calendar in 3 months. The AI Agent replies instantly to inquiries on IG and books them. She runs it better than I ever did."</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-tethron-border">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Sarah - Wellness Studio Owner" class="w-10 h-10 rounded-full object-cover">
+                <div class="bg-white rounded-2xl p-8 flex flex-col reveal delay-0 shadow-[rgba(0,0,0,0.08)_0px_4px_24px] hover:shadow-[rgba(0,0,0,0.12)_0px_8px_32px] transition-shadow">
+                    <i class="ph-fill ph-quotes text-3xl text-tethron-cyan/40 mb-4"></i>
+                    <p class="text-sm mb-6 leading-relaxed flex-grow" style="color: #1d1d1f;">"I haven't touched my calendar in 3 months. The AI Agent replies instantly to inquiries on IG and books them. She runs it better than I ever did."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-black/5">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Sarah" class="w-10 h-10 rounded-full object-cover">
                         <div>
-                            <div class="text-sm font-semibold text-white">Sarah M.</div>
-                            <div class="text-xs text-zinc-500">Wellness Studio</div>
+                            <div class="text-sm font-semibold" style="color: #1d1d1f;">Sarah M.</div>
+                            <div class="text-xs" style="color: rgba(0,0,0,0.5);">Wellness Studio</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-panel hoverable spotlight-wrapper p-8 flex flex-col reveal delay-100">
-                    <i class="ph-fill ph-quotes text-3xl text-tethron-cyan/20 mb-4"></i>
-                    <p class="text-sm text-zinc-300 mb-6 leading-relaxed flex-grow">"I used to lose every lead that called after 5 PM. Now I wake up to booked inspection jobs. The return on investment was literal days."</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-tethron-border">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="James - Roofing Contractor" class="w-10 h-10 rounded-full object-cover grayscale opacity-80">
+                <div class="bg-white rounded-2xl p-8 flex flex-col reveal delay-100 shadow-[rgba(0,0,0,0.08)_0px_4px_24px] hover:shadow-[rgba(0,0,0,0.12)_0px_8px_32px] transition-shadow">
+                    <i class="ph-fill ph-quotes text-3xl text-tethron-cyan/40 mb-4"></i>
+                    <p class="text-sm mb-6 leading-relaxed flex-grow" style="color: #1d1d1f;">"I used to lose every lead that called after 5 PM. Now I wake up to booked inspection jobs. The return on investment was literal days."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-black/5">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="James" class="w-10 h-10 rounded-full object-cover">
                         <div>
-                            <div class="text-sm font-semibold text-white">James T.</div>
-                            <div class="text-xs text-zinc-500">Roofing Contractor</div>
+                            <div class="text-sm font-semibold" style="color: #1d1d1f;">James T.</div>
+                            <div class="text-xs" style="color: rgba(0,0,0,0.5);">Roofing Contractor</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-panel hoverable spotlight-wrapper p-8 flex flex-col reveal delay-200">
-                    <i class="ph-fill ph-quotes text-3xl text-tethron-cyan/20 mb-4"></i>
-                    <p class="text-sm text-zinc-300 mb-6 leading-relaxed flex-grow">"My Google page looks like I have a full-time PR team. Every review gets a thoughtful, unique reply within minutes. It's just my AI employee."</p>
-                    <div class="flex items-center gap-3 pt-4 border-t border-tethron-border">
-                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" alt="Tony - Restaurant Manager" class="w-10 h-10 rounded-full object-cover grayscale opacity-80">
+                <div class="bg-white rounded-2xl p-8 flex flex-col reveal delay-200 shadow-[rgba(0,0,0,0.08)_0px_4px_24px] hover:shadow-[rgba(0,0,0,0.12)_0px_8px_32px] transition-shadow">
+                    <i class="ph-fill ph-quotes text-3xl text-tethron-cyan/40 mb-4"></i>
+                    <p class="text-sm mb-6 leading-relaxed flex-grow" style="color: #1d1d1f;">"My Google page looks like I have a full-time PR team. Every review gets a thoughtful, unique reply within minutes. It's just my AI employee."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-black/5">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" alt="Tony" class="w-10 h-10 rounded-full object-cover">
                         <div>
-                            <div class="text-sm font-semibold text-white">Tony R.</div>
-                            <div class="text-xs text-zinc-500">Restaurant Group</div>
+                            <div class="text-sm font-semibold" style="color: #1d1d1f;">Tony R.</div>
+                            <div class="text-xs" style="color: rgba(0,0,0,0.5);">Restaurant Group</div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
 
