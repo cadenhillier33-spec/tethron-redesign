@@ -362,10 +362,12 @@
 
     <!-- Loading Screen -->
     <div id="loader" class="fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background: #07080a; transition: opacity 0.6s ease, visibility 0.6s ease;">
-        <img src="logo.png" alt="Tethron" class="w-16 h-16" style="animation: loaderSpin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;">
+        <div class="w-16 h-16 flex items-center justify-center" style="animation: loaderSpin 1.2s linear infinite;">
+            <img src="logo.png" alt="Tethron" class="w-16 h-16">
+        </div>
     </div>
     <style>
-        @keyframes loaderSpin { 0% { transform: rotate(0deg); opacity: 0.6; } 50% { opacity: 1; } 100% { transform: rotate(360deg); opacity: 0.6; } }
+        @keyframes loaderSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
     <script>
         window.addEventListener('load', () => {
