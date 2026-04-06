@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /outreach-hub
+Disallow: /follow-up
+
+Sitemap: https://tethron.ai/sitemap.xml
