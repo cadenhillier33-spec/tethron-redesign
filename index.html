@@ -1061,6 +1061,7 @@
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Strategic recommendations weekly</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Handles sales, ops + marketing</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Connects to every tool you use</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Automates any workflow you want</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Custom workflows for your business</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Weekly optimization + reporting</li>
                     </ul>
@@ -1081,6 +1082,7 @@
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Dedicated hardware in your office</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Texts clients from your number</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Controls your apps hands-free</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Automates any workflow you want</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Optimized daily</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Direct line to the Tethron team</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Quarterly strategy sessions</li>
@@ -1559,15 +1561,16 @@
             // TESTIMONIALS: Slide in from sides
             const testimonials = document.querySelectorAll('#testimonials .glass-panel, [class*="testimonial"]');
 
-            // PRICING: Cards slide in from opposite sides
+            // PRICING: Cards slide in from opposite sides (3-tier)
             const pricingCards = document.querySelectorAll('#pricing .glass-panel');
-            if (pricingCards.length >= 2) {
-                gsap.set(pricingCards[0], { opacity: 0, x: -60 });
-                gsap.set(pricingCards[1], { opacity: 0, x: 60 });
+            if (pricingCards.length >= 3) {
+                gsap.set(pricingCards[0], { opacity: 0, x: -60, scale: 1 });
+                gsap.set(pricingCards[1], { opacity: 0, y: 60, scale: 1 });
+                gsap.set(pricingCards[2], { opacity: 0, x: 60, scale: 1 });
                 gsap.to(pricingCards[0], {
                     scrollTrigger: {
                         trigger: pricingCards[0],
-                        start: 'top 80%',
+                        start: 'top 85%',
                         toggleActions: 'play none none none'
                     },
                     x: 0,
@@ -1578,12 +1581,25 @@
                 gsap.to(pricingCards[1], {
                     scrollTrigger: {
                         trigger: pricingCards[1],
-                        start: 'top 80%',
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.9,
+                    delay: 0.1,
+                    ease: 'power3.out'
+                });
+                gsap.to(pricingCards[2], {
+                    scrollTrigger: {
+                        trigger: pricingCards[2],
+                        start: 'top 85%',
                         toggleActions: 'play none none none'
                     },
                     x: 0,
                     opacity: 1,
                     duration: 0.9,
+                    delay: 0.2,
                     ease: 'power3.out'
                 });
             }
