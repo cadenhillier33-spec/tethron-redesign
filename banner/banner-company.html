@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tethron Company Banner</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: #000;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .banner {
+    width: 2256px;
+    height: 564px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    background: #020306;
+  }
+
+  /* Base dark gradient */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 600px 150px at 50% 100%, rgba(0, 90, 110, 0.3) 0%, transparent 70%),
+      linear-gradient(180deg, #020306 0%, #030609 100%);
+  }
+
+  /* Subtle wave SVG layer */
+  .wave-svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    width: 100%;
+    height: 70%;
+    overflow: visible;
+    z-index: 2;
+  }
+
+  /* Film grain */
+  .noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* Edge vignette */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 300px at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+  .text-wrap {
+    max-width: 1800px;
+  }
+  .tagline {
+    font-size: 92px;
+    font-weight: 700;
+    letter-spacing: -1.6px;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 44px;
+  }
+  .tagline .line2 {
+    display: block;
+  }
+  .liquid-text {
+    background: linear-gradient(115deg,
+      #ffffff 0%,
+      #ffffff 30%,
+      #00d4e8 45%,
+      #6eeaff 50%,
+      #00d4e8 55%,
+      #ffffff 70%,
+      #ffffff 100%);
+    background-size: 200% 100%;
+    background-position: 50% 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 15px rgba(0, 212, 232, 0.3));
+  }
+  .subtext {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+  .sep {
+    display: inline-block;
+    width: 36px;
+    height: 2px;
+    background: rgba(0, 212, 232, 0.5);
+    margin: 0 24px 6px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="bg"></div>
+
+  <!-- Subtle wave SVG -->
+  <svg class="wave-svg" viewBox="0 0 2256 268" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="waveGrad1" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="rgba(0, 140, 160, 0)"/>
+        <stop offset="20%" stop-color="rgba(0, 140, 160, 0.35)"/>
+        <stop offset="50%" stop-color="rgba(0, 160, 180, 0.55)"/>
+        <stop offset="80%" stop-color="rgba(0, 140, 160, 0.35)"/>
+        <stop offset="100%" stop-color="rgba(0, 140, 160, 0)"/>
+      </linearGradient>
+      <linearGradient id="waveGrad2" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="rgba(0, 120, 150, 0)"/>
+        <stop offset="30%" stop-color="rgba(0, 120, 150, 0.2)"/>
+        <stop offset="50%" stop-color="rgba(0, 140, 170, 0.3)"/>
+        <stop offset="70%" stop-color="rgba(0, 120, 150, 0.2)"/>
+        <stop offset="100%" stop-color="rgba(0, 120, 150, 0)"/>
+      </linearGradient>
+      <filter id="blur1" x="-20%" y="-50%" width="140%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12"/>
+      </filter>
+      <filter id="blur2" x="-20%" y="-50%" width="140%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+      </filter>
+    </defs>
+
+    <!-- Back wave (blurred, bigger) -->
+    <path d="M 0 160 Q 564 60 1128 150 T 2256 120 L 2256 268 L 0 268 Z"
+          fill="url(#waveGrad1)"
+          filter="url(#blur1)"
+          opacity="0.6"/>
+
+    <!-- Main wave line -->
+    <path d="M 0 150 Q 400 100 800 160 T 1600 140 T 2256 170"
+          stroke="url(#waveGrad1)"
+          stroke-width="6"
+          fill="none"
+          filter="url(#blur2)"
+          opacity="0.9"/>
+
+    <!-- Second wave line, offset -->
+    <path d="M 0 184 Q 500 136 1000 190 T 1800 164 T 2256 200"
+          stroke="url(#waveGrad2)"
+          stroke-width="4"
+          fill="none"
+          filter="url(#blur2)"
+          opacity="0.6"/>
+  </svg>
+
+  <div class="noise"></div>
+  <div class="vignette"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="text-wrap">
+      <div class="tagline">We install <span class="liquid-text">AI employees</span><span class="line2">that run your business.</span></div>
+      <div class="subtext">Thinks <span class="sep"></span> Plans <span class="sep"></span> Executes <span class="sep"></span> 24/7</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
