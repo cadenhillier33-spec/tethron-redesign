@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tethron OG Image</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #000; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .og {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    background: #05070a;
+  }
+  .bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 1400px 900px at 50% 55%, rgba(0, 200, 240, 0.14) 0%, transparent 60%),
+      linear-gradient(180deg, #080c10 0%, #04060a 100%);
+  }
+  .noise {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay; pointer-events: none;
+  }
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 2000px 1100px at 50% 50%, transparent 45%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+  }
+  .content {
+    position: relative; z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+    gap: 60px;
+    padding: 0 60px;
+  }
+  .sculpture-wrap {
+    width: 360px; height: 360px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; flex-shrink: 0;
+  }
+  .sculpture-wrap::before {
+    content: '';
+    position: absolute; inset: -50px;
+    background: radial-gradient(ellipse at center, rgba(0, 200, 240, 0.2) 0%, transparent 60%);
+    filter: blur(80px);
+    z-index: 0;
+  }
+  .sculpture {
+    width: 100%; height: 100%; object-fit: contain;
+    position: relative; z-index: 2;
+  }
+  .text {
+    flex: 1; max-width: 450px;
+  }
+  .wordmark {
+    font-size: 48px; font-weight: 800; letter-spacing: 4px;
+    line-height: 1; margin-bottom: 20px;
+    background: linear-gradient(120deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.95) 30%,
+      #00d4e8 50%,
+      rgba(255, 255, 255, 0.95) 70%,
+      rgba(255, 255, 255, 0.95) 100%);
+    background-size: 200% 100%; background-position: 50% 0;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    color: #fff;
+  }
+  .divider {
+    width: 40px; height: 1px;
+    background: rgba(0, 212, 232, 0.5);
+    margin-bottom: 16px;
+  }
+  .tagline {
+    font-size: 36px; font-weight: 700;
+    letter-spacing: -1.5px; line-height: 1.1;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .accent {
+    background: linear-gradient(115deg, #ffffff 0%, #ffffff 30%, #00d4e8 45%, #6eeaff 50%, #00d4e8 55%, #ffffff 70%, #ffffff 100%);
+    background-size: 200% 100%; background-position: 50% 0;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 0 30px rgba(0, 212, 232, 0.3));
+  }
+  .subtext {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px; font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .sep {
+    display: inline-block; width: 16px; height: 1px;
+    background: rgba(0, 212, 232, 0.5);
+    margin: 0 9px 3px; vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="bg"></div>
+  <div class="noise"></div>
+  <div class="vignette"></div>
+  <div class="content">
+    <div class="sculpture-wrap">
+      <img class="sculpture" src="sculpture-v2.png" alt="Tethron">
+    </div>
+    <div class="text">
+      <div class="wordmark">TETHRON</div>
+      <div class="divider"></div>
+      <div class="tagline">The <span class="accent">future</span><br>works for you.</div>
+      <div class="subtext">Thinks <span class="sep"></span> Plans <span class="sep"></span> Executes <span class="sep"></span> 24/7</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
