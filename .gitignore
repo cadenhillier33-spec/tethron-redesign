@@ -1,1 +1,11 @@
 .vercel
+
+# Avatar version history (local only)
+avatars/v2/
+avatars/v3/
+avatars/v4/
+avatars/new/
+avatars/old/
+
+# Local archives
+*.archived

@@ -2,6 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/about", "destination": "/about.html" }
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/team", "destination": "/division.html" },
+    { "source": "/division", "destination": "/division.html" }
   ]
 }

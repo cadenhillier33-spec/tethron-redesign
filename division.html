@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#07080a] text-white dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tethron Division | Hire an AI Operator in 24 Hours</title>
+    <meta name="description" content="Meet The Tethron Division. 14 AI operators — SDRs, assistants, support, finance, legal, strategy. Interview any of them before you hire. Live in 24 hours. $1,300 setup + $700/mo flat across all 14.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tethron.ai/division">
+
+    <meta property="og:title" content="The Tethron Division | Hire an AI Operator in 24 Hours">
+    <meta property="og:description" content="14 AI operators. Interview them. Hire them. Live in 24 hours. $1,300 setup + $700/mo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tethron.ai/division">
+    <meta property="og:image" content="https://tethron.ai/og-image.png">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        tethron: {
+                            bg: '#07080a',
+                            cyan: '#00d4e8',
+                            darkteal: '#0A9AC0',
+                            card: '#101111',
+                            primary: '#f9f9f9',
+                            secondary: '#cecece',
+                            tertiary: '#9c9c9d',
+                            muted: '#6a6b6c',
+                            border: 'rgba(255, 255, 255, 0.06)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            background-color: #07080a !important;
+            color: #f9f9f9;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background-color: #07080a;
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(0,212,232,0.15) 0%, transparent 60%);
+            filter: blur(100px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background-color: #101111;
+            position: relative;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(180deg, #f9f9f9 0%, rgba(249, 249, 249, 0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .shimmer-text {
+            background: linear-gradient(120deg, rgba(249,249,249,0.5) 20%, #00d4e8 50%, rgba(249,249,249,0.5) 80%);
+            background-size: 200% auto;
+            color: #00d4e8;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: -200% center; }
+        }
+
+        .liquid-glass {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0,212,232,0.25) 0%, rgba(0,212,232,0.1) 50%, rgba(0,212,232,0.2) 100%);
+            backdrop-filter: blur(20px) saturate(1.8);
+            -webkit-backdrop-filter: blur(20px) saturate(1.8);
+            border: 1px solid rgba(0,212,232,0.4);
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0,212,232,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+        .liquid-glass:hover {
+            background: linear-gradient(135deg, rgba(0,212,232,0.4) 0%, rgba(0,212,232,0.2) 50%, rgba(0,212,232,0.35) 100%);
+            box-shadow: 0 0 30px rgba(0,212,232,0.4), inset 0 1px 0 rgba(255,255,255,0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Employee Card */
+        .employee-card {
+            background-color: #101111;
+            border-radius: 20px;
+            box-shadow: 0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        .employee-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,212,232,0) 0%, rgba(0,212,232,0.3) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .employee-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 0 1px rgba(0,212,232,0.3), 0 20px 40px -10px rgba(0,212,232,0.15);
+        }
+        .employee-card:hover::before {
+            opacity: 1;
+        }
+        .employee-card:hover .avatar-glow {
+            opacity: 1;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at center, rgba(0,212,232,0.3) 0%, transparent 60%);
+            filter: blur(30px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00d4e8;
+            box-shadow: 0 0 8px rgba(0,212,232,0.8);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        .tier-card {
+            background-color: #101111;
+            border-radius: 20px;
+            box-shadow: 0 0 0 1px rgb(27,28,30), inset 0 0 0 1px rgb(7,8,10);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .tier-card.featured {
+            box-shadow: 0 0 0 1px rgba(0,212,232,0.4), inset 0 0 0 1px rgb(7,8,10), 0 0 40px -10px rgba(0,212,232,0.3);
+        }
+        .tier-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00d4e8;
+            color: #07080a;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Interview chat modal */
+        .chat-msg {
+            max-width: 86%;
+            padding: 11px 15px;
+            border-radius: 16px;
+            font-size: 14.5px;
+            line-height: 1.52;
+            letter-spacing: -0.003em;
+            word-wrap: break-word;
+            animation: chat-msg-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes chat-msg-in {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chat-msg.ai {
+            background: #141517;
+            color: #f0f1f3;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+        .chat-msg.ai strong { color: #00d4e8; font-weight: 700; }
+        .chat-msg.ai a { color: #00d4e8; text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }
+        .chat-msg.me {
+            background: linear-gradient(135deg, #00d4e8 0%, #0A9AC0 100%);
+            color: #051a1f;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(0, 212, 232, 0.28);
+        }
+        .chat-typing { display: inline-flex; gap: 5px; padding: 12px 16px; }
+        .chat-typing span {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #00d4e8;
+            animation: chat-blink 1.2s infinite;
+            box-shadow: 0 0 6px rgba(0, 212, 232, 0.6);
+        }
+        .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes chat-blink {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-3px); }
+        }
+        #chat-body::-webkit-scrollbar { width: 6px; }
+        #chat-body::-webkit-scrollbar-track { background: transparent; }
+        #chat-body::-webkit-scrollbar-thumb { background: rgba(0, 212, 232, 0.15); border-radius: 3px; }
+        #chat-body::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 232, 0.3); }
+        #chat-input { font-family: inherit; }
+        #chat-input:focus { box-shadow: 0 0 0 3px rgba(0, 212, 232, 0.12); }
+    </style>
+</head>
+<body class="font-sans">
+
+    <div class="bg-grid"></div>
+    <div class="ambient-glow"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/[0.06]" style="background: rgba(7,8,10,0.7); backdrop-filter: blur(20px) saturate(1.8); -webkit-backdrop-filter: blur(20px) saturate(1.8);">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 cursor-pointer no-underline">
+                <img src="logo.png" alt="Tethron" class="w-7 h-7">
+                <span class="text-lg font-semibold tracking-tight text-white">Tethron</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="/#capabilities" class="hover:text-white transition-colors">Capabilities</a>
+                <a href="/#how-it-works" class="hover:text-white transition-colors">How It Works</a>
+                <a href="/division" class="text-tethron-cyan">The Division</a>
+                <a href="/#pricing" class="hover:text-white transition-colors">Pricing</a>
+                <a href="/about" class="hover:text-white transition-colors">About</a>
+                <a href="/blog" class="hover:text-white transition-colors">Blog</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#division-grid" class="hidden md:inline-block liquid-glass text-sm font-semibold px-4 py-2 rounded-xl cursor-pointer">
+                    Meet the Division
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="ph ph-list text-tethron-cyan text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 pt-2" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(60px) saturate(2); -webkit-backdrop-filter: blur(60px) saturate(2); border-top: 1px solid rgba(255,255,255,0.06);">
+            <div class="flex flex-col gap-1">
+                <a href="/#capabilities" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Capabilities</a>
+                <a href="/#how-it-works" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">How It Works</a>
+                <a href="/division" class="px-4 py-3 rounded-xl text-[15px] font-medium text-tethron-cyan">The Division</a>
+                <a href="/#pricing" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Pricing</a>
+                <a href="/about" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">About</a>
+                <a href="/blog" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 relative z-0 flex flex-col items-center overflow-x-hidden" style="overflow-x: clip;">
+
+        <!-- HERO -->
+        <section class="max-w-6xl mx-auto w-full px-6 flex flex-col items-center text-center mt-8 md:mt-20 relative">
+            <div class="reveal inline-flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full mb-6">
+                <div class="status-dot"></div>
+                <span class="text-xs font-medium text-zinc-300 tracking-wide uppercase">Now Hiring · 8 Open Roles</span>
+            </div>
+
+            <h1 class="reveal text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.05] mb-6 max-w-5xl text-gradient">
+                Meet the division <span class="shimmer-text">you'll never have to fire.</span>
+            </h1>
+
+            <p class="reveal text-lg md:text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed">
+                14 AI operators, each built for a specific role. Interview any of them right now. Hire the ones you want. Live in 24 hours.
+            </p>
+
+            <div class="reveal flex flex-col sm:flex-row gap-3">
+                <a href="#division-grid" class="liquid-glass px-6 py-3 rounded-xl font-semibold text-base">
+                    Browse the Division
+                </a>
+                <a href="#how-it-works" class="px-6 py-3 rounded-xl font-semibold text-base text-zinc-300 border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all">
+                    How Hiring Works
+                </a>
+            </div>
+        </section>
+
+        <!-- OPERATOR GRID -->
+        <section id="division-grid" class="max-w-7xl mx-auto w-full px-6 mt-24 md:mt-36">
+            <div class="reveal flex items-end justify-between mb-10 flex-wrap gap-4">
+                <div>
+                    <p class="text-xs font-mono text-tethron-cyan tracking-widest uppercase mb-2">The Roster</p>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gradient">Your new coworkers.</h2>
+                </div>
+                <p class="text-sm text-zinc-500 max-w-xs">Every operator comes pre-trained, fully integrated, and ready to work the day you hire them.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                <!-- NOVA — SDR -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/nova.png" alt="Nova" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Nova</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Sales Development Rep</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Cold outreach, lead qualification, LinkedIn DMs, follow-ups. Sharp, direct, results-obsessed.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Apollo</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Gmail</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">HeyReach</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('nova', 'Nova', 'AI Sales Development Rep')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Nova
+                    </button>
+                </div>
+
+                <!-- KNOX — Exec Assistant -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/knox.png" alt="Knox" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Knox</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Executive Assistant</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Calendar, inbox triage, meeting prep, travel. Calm, methodical, nothing falls through the cracks.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Calendar</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Gmail</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Slack</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('knox', 'Knox', 'AI Executive Assistant')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Knox
+                    </button>
+                </div>
+
+                <!-- LUNA — Social Media -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/luna.png" alt="Luna" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Luna</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Social Media Manager</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">LinkedIn posts, Instagram, engagement, trend-spotting. Creative, bold, on-brand.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">LinkedIn</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Instagram</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Canva</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('luna', 'Luna', 'AI Social Media Manager')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Luna
+                    </button>
+                </div>
+
+                <!-- SAGE — Customer Success -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/sage.png" alt="Sage" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Sage</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Customer Success</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Support tickets, onboarding flows, retention, upsells. Warm, patient, problem-solver.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Intercom</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Zendesk</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">HubSpot</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('sage', 'Sage', 'AI Customer Success')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Sage
+                    </button>
+                </div>
+
+                <!-- IRIS — Content Writer -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/iris.png" alt="Iris" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Iris</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Content Writer</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Blogs, newsletters, landing pages, email copy. Thoughtful, witty, sharp-eyed editor.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Beehiiv</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Notion</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Webflow</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('iris', 'Iris', 'AI Content Writer')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Iris
+                    </button>
+                </div>
+
+                <!-- QUINN — Recruiter -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/quinn.png" alt="Quinn" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Quinn</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Recruiter</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Sourcing, screening, outreach to candidates, scheduling interviews. High EQ, great at reading people.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">LinkedIn</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Greenhouse</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Gmail</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('quinn', 'Quinn', 'AI Recruiter')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Quinn
+                    </button>
+                </div>
+
+                <!-- CYPHER — Data Analyst -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/cypher.png" alt="Cypher" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Cypher</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Data Analyst</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Dashboards, weekly reports, KPI tracking, SQL queries, insights. Quantitative, curious, pattern-seeker.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">SQL</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">GA4</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Sheets</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('cypher', 'Cypher', 'AI Data Analyst')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Cypher
+                    </button>
+                </div>
+
+                <!-- PEARL — Bookkeeper -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/pearl.png" alt="Pearl" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Pearl</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Bookkeeper</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Invoicing, expense tracking, cash flow, AR/AP, monthly closes. Precise, disciplined, no surprises.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">QuickBooks</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Stripe</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Xero</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('pearl', 'Pearl', 'AI Bookkeeper')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Pearl
+                    </button>
+                </div>
+
+                <!-- EMBER — Receptionist -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/ember.png" alt="Ember" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Ember</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Receptionist</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Every inbound call answered in 2 rings, 24/7. Books the job, sends the confirmation, never drops a lead. Warm, fast, never flustered.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Phone</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">SMS</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Calendar</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('ember', 'Ember', 'AI Receptionist')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Ember
+                    </button>
+                </div>
+
+                <!-- ECHO — Customer Support -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/echo.png" alt="Echo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Echo</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Customer Support</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Tier 1 ticket queue handled in under 5 minutes, 24/7. Solves 80% first-contact. Mirrors your voice, escalates with full context.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Zendesk</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Intercom</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Gorgias</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('echo', 'Echo', 'AI Customer Support')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Echo
+                    </button>
+                </div>
+
+                <!-- LEDGER — Financial Analyst -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/ledger.png" alt="Ledger" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Ledger</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Financial Analyst</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">FP&A, rolling cash flow, unit economics, scenario modeling. Your fractional CFO at 1/10 the cost. Numbers, not vibes.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">QuickBooks</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Stripe</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Looker</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('ledger', 'Ledger', 'AI Financial Analyst')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Ledger
+                    </button>
+                </div>
+
+                <!-- ATLAS — Project Manager -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/atlas.png" alt="Atlas" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Atlas</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Project Manager</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Every task has a date, an owner, a definition of done. Async standups, weekly status, zero dropped balls. Chief-of-staff energy.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Asana</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Linear</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Notion</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('atlas', 'Atlas', 'AI Project Manager')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Atlas
+                    </button>
+                </div>
+
+                <!-- REED — Legal Assistant -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/reed.png" alt="Reed" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Reed</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Legal Assistant</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Contract review, NDA drafting, redlines, renewal tracking, compliance flags. Paralegal, not attorney — but sharp enough to catch what bites.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Contracts</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">NDAs</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Compliance</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('reed', 'Reed', 'AI Legal Assistant')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Reed
+                    </button>
+                </div>
+
+                <!-- SOVEREIGN — Chief Strategist -->
+                <div class="employee-card reveal p-6 flex flex-col relative">
+                    <div class="relative mb-5">
+                        <div class="avatar-glow"></div>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
+                            <img src="avatars/sovereign.png" alt="Sovereign" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
+                            <div class="status-dot" style="width:6px;height:6px;"></div>
+                            <span class="text-[10px] font-medium text-white tracking-wide">Available</span>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-baseline justify-between mb-1">
+                            <h3 class="text-xl font-bold text-white">Sovereign</h3>
+                            <span class="text-xs font-mono text-zinc-500">$700/mo</span>
+                        </div>
+                        <p class="text-sm font-medium text-tethron-cyan mb-3">AI Chief Strategist</p>
+                        <p class="text-sm text-zinc-400 leading-relaxed mb-5">Weekly strategic brief. Market intel, competitor moves, decision pressure-tests. Fractional-CEO gravitas at SMB price — for now.</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Strategy</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Market Intel</span>
+                            <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Board Prep</span>
+                        </div>
+                    </div>
+                    <button onclick="openInterview('sovereign', 'Sovereign', 'AI Chief Strategist')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
+                        Interview Sovereign
+                    </button>
+                </div>
+
+            </div>
+
+            <p class="text-center text-sm text-zinc-500 mt-10">
+                More roles coming soon — <a href="mailto:caden@tethron.ai" class="text-tethron-cyan hover:underline">request a role</a>
+            </p>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="how-it-works" class="max-w-6xl mx-auto w-full px-6 mt-32 md:mt-48">
+            <div class="reveal text-center mb-16">
+                <p class="text-xs font-mono text-tethron-cyan tracking-widest uppercase mb-2">The Hiring Process</p>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gradient mb-4">Three steps. Twenty-four hours.</h2>
+                <p class="text-lg text-zinc-400 max-w-xl mx-auto">From browsing to a fully-deployed AI operator working for you — faster than a human interview loop.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="glass-panel reveal p-8">
+                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 border border-tethron-cyan/30 flex items-center justify-center mb-5">
+                        <i class="ph ph-users-three text-tethron-cyan text-2xl"></i>
+                    </div>
+                    <p class="text-xs font-mono text-zinc-500 mb-2">STEP 01</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Browse the roster</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Meet each AI operator. Read their bio, see what tools they use, check their rate. Like scrolling LinkedIn — except everyone's available.</p>
+                </div>
+
+                <div class="glass-panel reveal p-8">
+                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 border border-tethron-cyan/30 flex items-center justify-center mb-5">
+                        <i class="ph ph-chat-circle-dots text-tethron-cyan text-2xl"></i>
+                    </div>
+                    <p class="text-xs font-mono text-zinc-500 mb-2">STEP 02</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Interview them</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">Click "Interview" and have a real conversation. Ask about your business. See how they'd approach your workflows. They'll tell you honestly if they're not the right fit.</p>
+                </div>
+
+                <div class="glass-panel reveal p-8">
+                    <div class="w-12 h-12 rounded-xl bg-tethron-cyan/10 border border-tethron-cyan/30 flex items-center justify-center mb-5">
+                        <i class="ph ph-rocket-launch text-tethron-cyan text-2xl"></i>
+                    </div>
+                    <p class="text-xs font-mono text-zinc-500 mb-2">STEP 03</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Hire and deploy</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed">One-click hire. We integrate them with your tools overnight. They're working — on your accounts, with your brand voice — by morning.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING TIERS -->
+        <section id="pricing-tiers" class="max-w-6xl mx-auto w-full px-6 mt-32 md:mt-48">
+            <div class="reveal text-center mb-16">
+                <p class="text-xs font-mono text-tethron-cyan tracking-widest uppercase mb-2">Three Ways to Build</p>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gradient mb-4">Hire one. Or build your own.</h2>
+                <p class="text-lg text-zinc-400 max-w-xl mx-auto">Start with a pre-built operator. Scale into a custom-built division when you're ready.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="tier-card featured reveal p-8">
+                    <p class="text-xs font-mono text-tethron-cyan tracking-widest uppercase mb-3">Hire from the Division</p>
+                    <h3 class="text-3xl font-bold text-white mb-2"><span class="shimmer-text">$700</span><span class="text-base text-zinc-500 font-normal">/mo</span></h3>
+                    <p class="text-sm text-zinc-500 mb-6">$1,300 setup · 24hr deploy</p>
+                    <ul class="space-y-3 text-sm text-zinc-400 mb-8">
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-tethron-cyan mt-0.5"></i>Pick from 14 pre-built roles</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-tethron-cyan mt-0.5"></i>Interview before you hire</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-tethron-cyan mt-0.5"></i>Live in 24 hours</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-tethron-cyan mt-0.5"></i>Bundle 3+ operators, save 15%</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-tethron-cyan mt-0.5"></i>Cancel anytime</li>
+                    </ul>
+                    <a href="#division-grid" class="block text-center w-full liquid-glass py-3 rounded-xl text-sm font-semibold">Browse the Division</a>
+                </div>
+
+                <div class="tier-card reveal p-8">
+                    <p class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-3">Custom AI Operator</p>
+                    <h3 class="text-3xl font-bold text-white mb-2">$3,500<span class="text-base text-zinc-500 font-normal"> + $600/mo</span></h3>
+                    <p class="text-sm text-zinc-500 mb-6">Setup · 3-day deploy</p>
+                    <ul class="space-y-3 text-sm text-zinc-400 mb-8">
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Bespoke AI operator for your business</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Custom workflows and integrations</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Trained on your data and brand voice</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Dedicated onboarding</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Priority support</li>
+                    </ul>
+                    <a href="https://calendly.com/cadenhillier33/30min" class="block text-center w-full py-3 rounded-xl text-sm font-semibold text-zinc-300 border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all">Book a Call</a>
+                </div>
+
+                <div class="tier-card reveal p-8">
+                    <p class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-3">Enterprise / Full Division</p>
+                    <h3 class="text-3xl font-bold text-white mb-2">$5K+<span class="text-base text-zinc-500 font-normal"> + $2K+/mo</span></h3>
+                    <p class="text-sm text-zinc-500 mb-6">Multi-operator · Dedicated infra</p>
+                    <ul class="space-y-3 text-sm text-zinc-400 mb-8">
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Full division of coordinated AI operators</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Dedicated hardware option</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>White-glove management</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>SLA + uptime guarantees</li>
+                        <li class="flex items-start gap-2"><i class="ph ph-check text-zinc-400 mt-0.5"></i>Custom reporting dashboards</li>
+                    </ul>
+                    <a href="https://calendly.com/cadenhillier33/30min" class="block text-center w-full py-3 rounded-xl text-sm font-semibold text-zinc-300 border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all">Book a Call</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BOTTOM CTA -->
+        <section class="max-w-4xl mx-auto w-full px-6 mt-32 md:mt-48 text-center">
+            <div class="reveal glass-panel p-12 md:p-16 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-30" style="background: radial-gradient(circle at 50% 0%, rgba(0,212,232,0.3) 0%, transparent 60%);"></div>
+                <div class="relative">
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gradient mb-4">Your next hire is <span class="shimmer-text">one conversation away.</span></h2>
+                    <p class="text-lg text-zinc-400 max-w-xl mx-auto mb-8">Interview any operator. No call required. No commitment. Decide after you talk to them.</p>
+                    <a href="#division-grid" class="inline-block liquid-glass px-8 py-3.5 rounded-xl font-semibold text-base">Meet the Division</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- INTERVIEW MODAL — live chat with the selected operator -->
+    <div id="interview-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" style="background: rgba(7,8,10,0.85); backdrop-filter: blur(12px);">
+        <div class="glass-panel w-full max-w-2xl flex flex-col relative overflow-hidden" style="height: min(720px, calc(100dvh - 32px));">
+            <!-- HEADER -->
+            <div class="flex items-center gap-3 p-4 md:p-5 border-b border-white/5 flex-shrink-0" style="background: linear-gradient(180deg, rgba(0,212,232,0.07), transparent);">
+                <div id="modal-avatar" class="w-11 h-11 md:w-12 md:h-12 rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/20 to-transparent flex-shrink-0" style="border: 1.5px solid rgba(0,212,232,0.3); box-shadow: 0 0 18px rgba(0,212,232,0.18);"></div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <h3 id="modal-name" class="text-base md:text-lg font-bold text-white leading-tight truncate">Nova</h3>
+                        <span class="flex items-center gap-1 text-[9px] md:text-[10px] font-semibold text-tethron-cyan uppercase tracking-wider flex-shrink-0">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-400" style="box-shadow: 0 0 6px rgba(74,222,128,0.8);"></span>
+                            Live
+                        </span>
+                    </div>
+                    <p id="modal-role" class="text-[11px] md:text-xs text-zinc-400 mt-0.5 truncate">AI Sales Development Rep</p>
+                </div>
+                <button onclick="openHireSheet()" class="liquid-glass text-xs font-semibold px-2.5 md:px-3 py-2 rounded-xl flex items-center gap-1.5 whitespace-nowrap flex-shrink-0">
+                    <i class="ph ph-lightning"></i><span class="hidden sm:inline">Hire</span> <span id="modal-hire-name">Nova</span>
+                </button>
+                <button onclick="closeInterview()" class="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/5 transition-all flex-shrink-0">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+
+            <!-- CHAT BODY -->
+            <div id="chat-body" class="flex-1 overflow-y-auto p-4 md:p-5 flex flex-col gap-3"></div>
+
+            <!-- INPUT -->
+            <div class="border-t border-white/5 p-3 md:p-4 flex gap-2 items-end flex-shrink-0" style="background: rgba(7,8,10,0.5);">
+                <textarea id="chat-input" rows="1" placeholder="Ask me anything…" class="flex-1 bg-black/30 border border-white/10 focus:border-tethron-cyan/50 focus:outline-none rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 resize-none transition-all" style="min-height: 44px; max-height: 120px;"></textarea>
+                <button id="chat-send" onclick="sendChatMessage()" disabled class="liquid-glass w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 disabled:opacity-30 disabled:cursor-not-allowed">
+                    <i class="ph ph-paper-plane-tilt text-base"></i>
+                </button>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="text-center py-2 text-[9px] text-zinc-500 uppercase tracking-widest font-semibold border-t border-white/5 flex-shrink-0" style="background: rgba(7,8,10,0.8);">
+                AI Operator · Built by <span class="text-tethron-cyan">Tethron</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HIRE SHEET — overlays the chat when Hire button clicked -->
+    <div id="hire-sheet" class="hidden fixed inset-0 z-[101] flex items-center justify-center p-4" style="background: rgba(7,8,10,0.92); backdrop-filter: blur(16px);">
+        <div class="glass-panel max-w-md w-full p-7 relative">
+            <button onclick="closeHireSheet()" class="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/5 transition-all">
+                <i class="ph ph-x text-xl"></i>
+            </button>
+            <p class="text-xs font-mono text-tethron-cyan tracking-widest uppercase mb-2">Hire from the Division</p>
+            <h3 class="text-2xl font-bold text-white mb-2">Deploy <span id="hire-sheet-name" class="shimmer-text">Nova</span></h3>
+            <p class="text-sm text-zinc-400 mb-6">Tell us where to send the deploy details. Caden reaches out within 24 hours to kick off.</p>
+            <form id="hire-form" onsubmit="submitHire(event)" class="flex flex-col gap-3">
+                <input type="text" id="hire-name" required placeholder="Your name" autocomplete="name" class="w-full bg-black/30 border border-white/10 focus:border-tethron-cyan/50 focus:outline-none rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 transition-all">
+                <input type="email" id="hire-email" required placeholder="you@company.com" autocomplete="email" class="w-full bg-black/30 border border-white/10 focus:border-tethron-cyan/50 focus:outline-none rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 transition-all">
+                <input type="text" id="hire-company" placeholder="Company (optional)" autocomplete="organization" class="w-full bg-black/30 border border-white/10 focus:border-tethron-cyan/50 focus:outline-none rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 transition-all">
+                <button type="submit" id="hire-submit" class="w-full liquid-glass py-3.5 rounded-xl text-sm font-semibold mt-1">Deploy in 24 Hours →</button>
+            </form>
+            <p id="hire-result" class="hidden text-sm text-tethron-cyan text-center mt-4 leading-relaxed"></p>
+            <p class="text-[11px] text-zinc-500 text-center mt-4">$1,300 setup + $700/mo · Live within 24 hours · Flat across all 14 operators</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-tethron-border bg-[#07080a] pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+            <div class="lg:col-span-2 pr-8">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="logo.png" alt="Tethron" class="w-7 h-7">
+                    <span class="text-xl font-bold tracking-tight text-white">Tethron.ai</span>
+                </div>
+                <p class="text-sm text-zinc-500 mb-6 max-w-sm">Pre-built AI operators you can interview before you hire. Live in 24 hours.</p>
+                <div class="flex items-center gap-2 text-xs text-zinc-400 bg-white/5 border border-white/10 w-fit px-3 py-1.5 rounded-full">
+                    <div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan animate-pulse"></div>
+                    Systems Operational
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Platform</h4>
+                <ul class="space-y-3 text-sm text-zinc-500">
+                    <li><a href="/division" class="hover:text-tethron-cyan transition-colors">The Division</a></li>
+                    <li><a href="/#capabilities" class="hover:text-tethron-cyan transition-colors">Capabilities</a></li>
+                    <li><a href="/#how-it-works" class="hover:text-tethron-cyan transition-colors">How It Works</a></li>
+                    <li><a href="/#pricing" class="hover:text-tethron-cyan transition-colors">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Company</h4>
+                <ul class="space-y-3 text-sm text-zinc-500">
+                    <li><a href="/about" class="hover:text-tethron-cyan transition-colors">About</a></li>
+                    <li><a href="/blog" class="hover:text-tethron-cyan transition-colors">Blog</a></li>
+                    <li><a href="mailto:caden@tethron.ai" class="hover:text-tethron-cyan transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-white mb-4">Connect</h4>
+                <ul class="space-y-3 text-sm text-zinc-500">
+                    <li><a href="https://www.linkedin.com/in/cadenhillier/" class="flex items-center gap-2 hover:text-tethron-cyan transition-colors"><i class="ph ph-linkedin-logo"></i> LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com/tethron.ai/" class="flex items-center gap-2 hover:text-tethron-cyan transition-colors"><i class="ph ph-instagram-logo"></i> Instagram</a></li>
+                    <li class="flex items-center gap-2"><i class="ph ph-envelope-simple"></i> caden@tethron.ai</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-tethron-border flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-600">
+            <p>&copy; 2026 Tethron.ai. All rights reserved.</p>
+            <div class="flex gap-4">
+                <a href="/privacy" class="hover:text-zinc-400 transition-colors">Privacy Policy</a>
+                <a href="/terms" class="hover:text-zinc-400 transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // ========== Interview chat modal ==========
+        const INTERVIEW_API = 'https://tethron-onboard.vercel.app/api/interview';
+        const HIRE_API = 'https://tethron-onboard.vercel.app/api/hire';
+
+        const chatState = {
+            slug: null,
+            name: null,
+            role: null,
+            messages: [],
+            awaiting: false
+        };
+
+        function openInterview(slug, name, role) {
+            chatState.slug = slug;
+            chatState.name = name;
+            chatState.role = role;
+            chatState.messages = [];
+            chatState.awaiting = false;
+
+            document.getElementById('modal-avatar').innerHTML =
+                `<img src="avatars/${slug}.png" alt="${name}" class="w-full h-full object-cover">`;
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-role').textContent = role;
+            document.getElementById('modal-hire-name').textContent = name;
+
+            const body = document.getElementById('chat-body');
+            body.innerHTML = '';
+            document.getElementById('chat-input').value = '';
+            document.getElementById('chat-input').style.height = 'auto';
+            document.getElementById('chat-send').disabled = true;
+
+            document.getElementById('interview-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => document.getElementById('chat-input').focus(), 120);
+            fetchReply();
+        }
+
+        function closeInterview() {
+            document.getElementById('interview-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function escapeAndFormat(text) {
+            return String(text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^\s*](?:[^*]*[^\s*])?)\*/g, '<em>$1</em>')
+                .replace(/(\bhttps?:\/\/[^\s<]+)/g, (match) => {
+                    let url = match, trailing = '';
+                    while (/[.,!?;:)\]]$/.test(url)) {
+                        trailing = url.slice(-1) + trailing;
+                        url = url.slice(0, -1);
+                    }
+                    return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trailing}`;
+                })
+                .replace(/\n/g, '<br>');
+        }
+
+        function renderMsg(role, text) {
+            const body = document.getElementById('chat-body');
+            const el = document.createElement('div');
+            el.className = 'chat-msg ' + (role === 'assistant' ? 'ai' : 'me');
+            el.innerHTML = escapeAndFormat(text);
+            body.appendChild(el);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function showTyping() {
+            const body = document.getElementById('chat-body');
+            const el = document.createElement('div');
+            el.className = 'chat-msg ai';
+            el.id = 'chat-typing-el';
+            el.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>';
+            body.appendChild(el);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function hideTyping() {
+            const el = document.getElementById('chat-typing-el');
+            if (el) el.remove();
+        }
+
+        async function fetchReply() {
+            if (chatState.awaiting) return;
+            chatState.awaiting = true;
+            document.getElementById('chat-send').disabled = true;
+            showTyping();
+            try {
+                const res = await fetch(INTERVIEW_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        operator: chatState.slug,
+                        messages: chatState.messages
+                    })
+                });
+                const data = await res.json();
+                hideTyping();
+                const reply = data.reply || '...';
+                chatState.messages.push({ role: 'assistant', content: reply });
+                renderMsg('assistant', reply);
+            } catch (e) {
+                hideTyping();
+                renderMsg('assistant', "Sorry — hit a snag connecting. Try that again in a sec?");
+            } finally {
+                chatState.awaiting = false;
+                const input = document.getElementById('chat-input');
+                document.getElementById('chat-send').disabled = input.value.trim().length === 0;
+            }
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text || chatState.awaiting) return;
+            chatState.messages.push({ role: 'user', content: text });
+            renderMsg('user', text);
+            input.value = '';
+            input.style.height = 'auto';
+            document.getElementById('chat-send').disabled = true;
+            await fetchReply();
+        }
+
+        // Textarea wiring
+        (function () {
+            const input = document.getElementById('chat-input');
+            input.addEventListener('input', () => {
+                document.getElementById('chat-send').disabled = input.value.trim().length === 0 || chatState.awaiting;
+                input.style.height = 'auto';
+                input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendChatMessage();
+                }
+            });
+        })();
+
+        // ========== Hire sheet ==========
+        function openHireSheet() {
+            if (!chatState.name) return;
+            document.getElementById('hire-sheet-name').textContent = chatState.name;
+            document.getElementById('hire-form').reset();
+            document.getElementById('hire-result').classList.add('hidden');
+            document.getElementById('hire-submit').disabled = false;
+            document.getElementById('hire-submit').textContent = 'Deploy in 24 Hours →';
+            document.getElementById('hire-sheet').classList.remove('hidden');
+            setTimeout(() => document.getElementById('hire-name').focus(), 120);
+        }
+
+        function closeHireSheet() {
+            document.getElementById('hire-sheet').classList.add('hidden');
+        }
+
+        async function submitHire(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('hire-submit');
+            const name = document.getElementById('hire-name').value.trim();
+            const email = document.getElementById('hire-email').value.trim();
+            const company = document.getElementById('hire-company').value.trim();
+
+            if (!name || !email || !chatState.slug) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+
+            try {
+                const res = await fetch(HIRE_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        operator: chatState.slug,
+                        name, email, company
+                    })
+                });
+                const data = await res.json();
+                const result = document.getElementById('hire-result');
+                if (data.ok) {
+                    result.textContent = `Locked in. ${chatState.name} is on the way — Caden reaches out within 24 hours to kick off the deploy.`;
+                    result.classList.remove('hidden');
+                    document.getElementById('hire-form').classList.add('hidden');
+                    setTimeout(() => {
+                        closeHireSheet();
+                        document.getElementById('hire-form').classList.remove('hidden');
+                    }, 3600);
+                } else {
+                    result.textContent = data.error || 'Something went wrong. Try again or email caden@tethron.ai.';
+                    result.classList.remove('hidden');
+                    result.style.color = '#f87171';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Deploy in 24 Hours →';
+                }
+            } catch (err) {
+                const result = document.getElementById('hire-result');
+                result.textContent = "Couldn't reach the server. Try again or email caden@tethron.ai.";
+                result.classList.remove('hidden');
+                result.style.color = '#f87171';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Deploy in 24 Hours →';
+            }
+        }
+
+        // Close modals on ESC or backdrop click
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            if (!document.getElementById('hire-sheet').classList.contains('hidden')) {
+                closeHireSheet();
+            } else {
+                closeInterview();
+            }
+        });
+        document.getElementById('interview-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'interview-modal') closeInterview();
+        });
+        document.getElementById('hire-sheet').addEventListener('click', (e) => {
+            if (e.target.id === 'hire-sheet') closeHireSheet();
+        });
+    </script>
+</body>
+</html>

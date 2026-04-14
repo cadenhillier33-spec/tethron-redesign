@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Tethron</title>
+<meta name="description" content="Terms of Service, refund policy, and agreements for Tethron AI employee services.">
+<link rel="canonical" href="https://tethron.ai/terms">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Terms of Service — Tethron" />
+<meta property="og:description" content="Terms of Service and refund policy for Tethron AI employee services." />
+<meta property="og:url" content="https://tethron.ai/terms" />
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; overflow-x: hidden; }
+body {
+  background: rgb(7, 8, 10);
+  color: rgb(255, 255, 255);
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== NAV ===== */
+.nav-wrap {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0 16px;
+  width: 100%;
+  max-width: 1240px;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(137deg, rgba(17,18,20,0.75) 4.87%, rgba(12,13,15,0.9) 75.88%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 16px 32px;
+  height: 76px;
+  box-shadow: rgba(255,255,255,0.15) 0 1px 1px 0 inset;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
+.logo-mark {
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 7px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+}
+.logo-mark svg { width: 13px; height: 13px; }
+.nav-back {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.15s;
+}
+.nav-back:hover { color: rgba(255,255,255,0.9); }
+
+/* ===== LAYOUT ===== */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 160px 32px 120px;
+  position: relative;
+}
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; height: 600px;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,212,170,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 24px;
+}
+.pill .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(0,212,170,0.8);
+  box-shadow: 0 0 10px rgba(0,212,170,0.6);
+}
+
+h1 {
+  font-size: 52px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.lede {
+  font-size: 18px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  margin-bottom: 48px;
+  max-width: 640px;
+}
+.last-updated {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 64px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-top: 64px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+h2::before {
+  content: attr(data-num);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: rgba(0,212,170,0.6);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: rgba(255,255,255,0.95);
+}
+
+p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+}
+
+ul {
+  margin-bottom: 20px;
+  padding-left: 0;
+  list-style: none;
+}
+ul li {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 10px;
+}
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(0,212,170,0.5);
+}
+
+strong { color: rgba(255,255,255,0.95); font-weight: 600; }
+
+/* ===== LEGALLY-CONSPICUOUS CLAUSE (UCC §2-316 compliant) ===== */
+.caps-clause {
+  display: block;
+  margin: 18px 0 18px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.02);
+  border-left: 2px solid rgba(0,212,170,0.35);
+  border-radius: 4px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ===== REFUND BOX (the critical section) ===== */
+.refund-box {
+  margin-top: 24px;
+  padding: 28px 32px;
+  background: linear-gradient(180deg, rgba(0,212,170,0.04), rgba(0,212,170,0.01));
+  border: 1px solid rgba(0,212,170,0.15);
+  border-radius: 16px;
+}
+.refund-box h3 {
+  margin-top: 0;
+  color: rgba(0,212,170,0.95);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.refund-box p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 10px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px;
+  max-width: 1100px;
+  margin: 80px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { transition: color 0.15s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 760px) {
+  .page { padding: 130px 20px 80px; }
+  h1 { font-size: 36px; letter-spacing: -1px; }
+  .lede { font-size: 16px; }
+  h2 { font-size: 22px; }
+  .refund-box { padding: 22px 20px; }
+  .nav { padding: 12px 20px; height: 64px; }
+  .footer { flex-direction: column; gap: 16px; padding: 24px 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <a href="/" class="nav-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color: #fff;">
+          <path d="M12 2 L22 20 L2 20 Z"/>
+        </svg>
+      </div>
+      TETHRON
+    </a>
+    <a href="/" class="nav-back">← Back to home</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="pill"><span class="dot"></span>Legal</div>
+  <h1>Terms of Service</h1>
+  <p class="lede">The agreement between you and Tethron when you purchase an AI employee build. Short, direct, and written in plain English — no fine print games.</p>
+  <div class="last-updated">Last updated · April 14, 2026</div>
+
+  <h2 data-num="01">The Agreement</h2>
+  <p>These Terms of Service ("<strong>Terms</strong>") govern your purchase and use of services provided by Tethron ("<strong>Tethron</strong>," "<strong>we</strong>," or "<strong>us</strong>"). By paying a setup fee, completing intake, or using any Tethron service, you ("<strong>Client</strong>") agree to these Terms.</p>
+  <p>Tethron is a service of Caden Hillier, a sole proprietor operating in Connecticut, United States. Contact: <a href="mailto:caden@tethron.ai" style="color: rgba(0,212,170,0.9);">caden@tethron.ai</a>.</p>
+
+  <h2 data-num="02">What We Provide</h2>
+  <p>Tethron builds and deploys custom AI employees for businesses. An AI employee is a configured system that runs automations across platforms you authorize — lead response, CRM management, social media posting, appointment scheduling, reporting, and other business functions agreed to in your intake.</p>
+  <p>Our service includes:</p>
+  <ul>
+    <li>Custom build and configuration of your AI employee (the "<strong>Setup</strong>")</li>
+    <li>Ongoing management, monitoring, and optimization (the "<strong>Monthly Service</strong>")</li>
+    <li>Integration with third-party tools and platforms you provide access to</li>
+  </ul>
+
+  <h2 data-num="03">Pricing &amp; Payment</h2>
+  <h3>Setup Fee</h3>
+  <p>A one-time setup fee is due before build begins. The exact amount depends on the tier you select and is disclosed at checkout.</p>
+  <h3>Monthly Service Fee</h3>
+  <p>A recurring monthly fee is billed automatically starting the day your AI employee is delivered. The amount is disclosed at checkout and continues until you cancel.</p>
+  <h3>Client-Side Tool Subscriptions</h3>
+  <p>Some AI employee configurations require third-party tools (LinkedIn Sales Navigator, HeyReach, Apollo.io, and similar). These are billed directly to you by those providers and are separate from Tethron's fees. We will tell you which tools are needed during intake.</p>
+
+  <h2 data-num="04">Refund Policy</h2>
+  <p>We build to spec on custom work. Because of that, refunds are limited and we want to be explicit about what's refundable and what isn't.</p>
+
+  <div class="refund-box">
+    <h3>SETUP FEE · 24-HOUR CHANGE-OF-MIND WINDOW</h3>
+    <p><strong>You may request a full refund of your setup fee within 24 hours of payment</strong>, provided that build work has not yet begun. Email <a href="mailto:caden@tethron.ai" style="color: rgba(0,212,170,0.9);">caden@tethron.ai</a> within 24 hours with your refund request and we will process it immediately.</p>
+    <p><strong>After 24 hours, the setup fee is non-refundable.</strong> This is because custom build work begins within that window — research, configuration, integration setup, and prompt development — and that labor cannot be recovered.</p>
+  </div>
+
+  <div class="refund-box">
+    <h3>MONTHLY SERVICE · CANCEL ANYTIME</h3>
+    <p><strong>You can cancel monthly service at any time with 30 days' written notice</strong> by emailing <a href="mailto:caden@tethron.ai" style="color: rgba(0,212,170,0.9);">caden@tethron.ai</a>.</p>
+    <p>Your AI employee will continue running for the 30-day notice period, and we will assist with any data or configuration handoff. <strong>Monthly fees already paid are not refundable or prorated</strong> — if you cancel mid-cycle, service continues through the end of the paid period.</p>
+  </div>
+
+  <h3>What Isn't Eligible for Refund</h3>
+  <ul>
+    <li>Setup fees more than 24 hours after payment</li>
+    <li>Monthly fees already billed</li>
+    <li>Third-party tool subscriptions you purchased directly (contact those providers)</li>
+    <li>Custom development or feature work completed at your request</li>
+  </ul>
+
+  <h3>Our Commitment If Things Aren't Working</h3>
+  <p>If you're not seeing results or something isn't working, <strong>email us before requesting a refund</strong>. We'd rather fix what's broken or adjust your AI employee's configuration than have you walk away. We take this seriously — most issues are solvable in a single optimization pass.</p>
+
+  <h2 data-num="05">Your Responsibilities</h2>
+  <p>To build your AI employee, we need:</p>
+  <ul>
+    <li>Honest, accurate information during intake — this directly shapes what we build</li>
+    <li>Timely access to platforms and tools (OAuth, logins, API keys) when we request them</li>
+    <li>Active subscriptions to any required third-party tools</li>
+    <li>Reasonable responsiveness when we need clarification during build</li>
+  </ul>
+  <p>Delays or incomplete information on your side may extend build time beyond our stated delivery window.</p>
+
+  <h2 data-num="06">Our Responsibilities</h2>
+  <ul>
+    <li>Deliver your AI employee within the stated build window (typically 3–5 business days) provided we have everything we need from you</li>
+    <li>Maintain, monitor, and optimize your AI employee during active service</li>
+    <li>Respond to support requests within one business day</li>
+    <li>Handle credentials and data with care — we never share your access with third parties outside of what's required to operate your AI employee</li>
+  </ul>
+
+  <h2 data-num="07">Platform &amp; Third-Party Compliance</h2>
+  <p>Your AI employee operates on platforms owned by third parties (LinkedIn, Meta, Google, etc.). We configure automations to respect each platform's terms of service and rate limits. If a platform changes its rules or suspends accounts, we will adapt quickly but cannot guarantee uninterrupted operation on platforms we don't control.</p>
+
+  <h2 data-num="08">Data &amp; Privacy</h2>
+  <p>We only collect the data required to build and operate your AI employee. We do not sell, share, or use your data for any purpose beyond operating the service. Credentials are stored securely and are revocable by you at any time.</p>
+
+  <h2 data-num="09">Service Provided "As-Is" — No Warranties</h2>
+  <p>The service is provided on an "as-is" and "as-available" basis. AI systems are probabilistic and depend on third-party platforms, models, and APIs we don't control — no provider can guarantee specific outcomes, uninterrupted operation, or error-free behavior in every scenario.</p>
+  <span class="caps-clause">TO THE MAXIMUM EXTENT PERMITTED BY LAW, TETHRON DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE — INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ACCURACY, RELIABILITY, TITLE, AND UNINTERRUPTED OR ERROR-FREE OPERATION. TETHRON DOES NOT WARRANT THAT THE AI EMPLOYEE WILL PRODUCE ANY SPECIFIC BUSINESS OUTCOME, GENERATE LEADS OR REVENUE, PERFORM WITHOUT ERROR, OPERATE CONTINUOUSLY, OR BEHAVE IDENTICALLY IN EVERY SCENARIO. YOU ACKNOWLEDGE AND AGREE THAT YOUR USE OF THE SERVICE IS AT YOUR OWN RISK.</span>
+
+  <h2 data-num="10">Limitation of Liability</h2>
+  <p>This section caps Tethron's financial exposure for any claim arising from the service. Please read carefully — this materially affects your legal rights.</p>
+  <span class="caps-clause">TO THE MAXIMUM EXTENT PERMITTED BY LAW, TETHRON'S TOTAL AGGREGATE LIABILITY TO YOU FOR ANY AND ALL CLAIMS ARISING OUT OF OR RELATING TO THIS SERVICE — WHETHER IN CONTRACT, TORT, WARRANTY, STRICT LIABILITY, OR ANY OTHER LEGAL THEORY — SHALL NOT EXCEED THE TOTAL AMOUNT OF FEES YOU HAVE ACTUALLY PAID TO TETHRON IN THE THREE (3) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM. IN NO EVENT SHALL TETHRON BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, BUSINESS, DATA, GOODWILL, OR ANTICIPATED SAVINGS — EVEN IF TETHRON HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span>
+  <p>Nothing in these Terms limits liability that cannot be excluded or limited under applicable law.</p>
+
+  <h2 data-num="11">Termination</h2>
+  <p>Either party may terminate service with 30 days' written notice. We may terminate immediately if you: fail to pay, breach these Terms materially, or use the service for unlawful purposes. On termination, we will provide a reasonable handoff of your data and configuration.</p>
+
+  <h2 data-num="12">Governing Law</h2>
+  <p>These Terms are governed by the laws of the State of Connecticut, United States, without regard to conflict-of-laws rules. Any dispute will be resolved in the state or federal courts of Connecticut.</p>
+
+  <h2 data-num="13">Changes to These Terms</h2>
+  <p>We may update these Terms from time to time. If we make a material change, we will notify active clients by email at least 14 days before it takes effect. Continued use of the service after that constitutes acceptance.</p>
+
+  <h2 data-num="14">Contact</h2>
+  <p>Questions about these Terms, refund requests, or anything else: <a href="mailto:caden@tethron.ai" style="color: rgba(0,212,170,0.9);">caden@tethron.ai</a> · (203) 671-4631.</p>
+
+</div>
+
+<footer class="footer">
+  <div>&copy; 2026 Tethron. All rights reserved.</div>
+  <div class="footer-legal">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
