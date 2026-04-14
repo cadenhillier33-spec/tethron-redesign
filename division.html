@@ -1496,7 +1496,7 @@
             if (count === 0) {
                 checkoutLabel.textContent = 'Add operators to continue';
             } else {
-                checkoutLabel.innerHTML = `Hire ${count === 1 ? 'Operator' : 'Squad'} — ${fmtMoney(setup)} today <i class="ph-bold ph-arrow-right"></i>`;
+                checkoutLabel.innerHTML = `Hire ${count === 1 ? 'Operator' : 'Squad'} — ${fmtMoney(setup)} + ${fmtMoney(monthly)}/mo <i class="ph-bold ph-arrow-right"></i>`;
             }
         }
 
