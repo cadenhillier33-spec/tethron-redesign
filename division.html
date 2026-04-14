@@ -1057,13 +1057,9 @@
                     <span class="text-tethron-cyan flex items-center gap-1.5"><i class="ph-fill ph-gift"></i> Bundle discount</span>
                     <span id="cart-discount" class="font-mono text-tethron-cyan">−$0</span>
                 </div>
-                <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center justify-between text-sm pb-1">
                     <span class="text-zinc-400">Monthly</span>
                     <span id="cart-monthly" class="font-mono text-white">$0/mo</span>
-                </div>
-                <div class="pt-3 border-t border-white/10 flex items-baseline justify-between">
-                    <span class="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">Year-1 total</span>
-                    <span id="cart-year-total" class="font-bold text-xl text-white">$0</span>
                 </div>
                 <button id="cart-checkout" onclick="startCheckout()" class="w-full bg-tethron-cyan text-[#07080a] py-3.5 rounded-xl text-sm font-bold hover:bg-[#5be5f5] transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2" disabled>
                     <span id="cart-checkout-label">Add operators to continue</span>
@@ -1493,8 +1489,6 @@
                 discountRow.classList.add('hidden');
                 discountRow.classList.remove('flex');
             }
-
-            document.getElementById('cart-year-total').textContent = fmtMoney(setup + monthly * 12);
 
             const checkoutBtn = document.getElementById('cart-checkout');
             const checkoutLabel = document.getElementById('cart-checkout-label');
