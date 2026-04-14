@@ -284,6 +284,67 @@
         #chat-body::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 232, 0.3); }
         #chat-input { font-family: inherit; }
         #chat-input:focus { box-shadow: 0 0 0 3px rgba(0, 212, 232, 0.12); }
+
+        /* ========== Cart ========== */
+        .cart-btn {
+            background: rgba(0, 212, 232, 0.08);
+            border: 1px solid rgba(0, 212, 232, 0.28);
+            color: #8ff2ff;
+            transition: all 0.18s ease;
+        }
+        .cart-btn:hover {
+            background: rgba(0, 212, 232, 0.16);
+            border-color: rgba(0, 212, 232, 0.55);
+            color: #00d4e8;
+        }
+        .cart-btn.in-cart {
+            background: rgba(0, 212, 232, 0.22);
+            border-color: #00d4e8;
+            color: #ffffff;
+        }
+        .cart-btn.in-cart:hover {
+            background: rgba(239, 68, 68, 0.18);
+            border-color: rgba(239, 68, 68, 0.6);
+            color: #fca5a5;
+        }
+        .cart-btn .cart-btn-add-label { display: inline-flex; align-items: center; gap: 4px; }
+        .cart-btn .cart-btn-added-label,
+        .cart-btn .cart-btn-remove-label { display: none; }
+        .cart-btn.in-cart .cart-btn-add-label { display: none; }
+        .cart-btn.in-cart .cart-btn-added-label { display: inline-flex; align-items: center; gap: 4px; }
+        .cart-btn.in-cart:hover .cart-btn-added-label { display: none; }
+        .cart-btn.in-cart:hover .cart-btn-remove-label { display: inline-flex; align-items: center; gap: 4px; }
+
+        #cart-pill {
+            box-shadow: 0 10px 40px rgba(0, 212, 232, 0.15), 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+        #cart-pill.pulse {
+            animation: cartPulse 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.07); box-shadow: 0 12px 50px rgba(0, 212, 232, 0.55), 0 0 0 8px rgba(0, 212, 232, 0.15); }
+            100% { transform: scale(1); box-shadow: 0 10px 40px rgba(0, 212, 232, 0.15), 0 2px 8px rgba(0, 0, 0, 0.4); }
+        }
+
+        #cart-drawer-panel {
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #cart-drawer:not(.hidden) #cart-drawer-panel {
+            transform: translateX(0);
+        }
+        #cart-drawer-panel::-webkit-scrollbar { width: 6px; }
+        #cart-drawer-panel::-webkit-scrollbar-track { background: transparent; }
+        #cart-drawer-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        .cart-item-enter {
+            animation: cartItemIn 0.3s ease;
+        }
+        @keyframes cartItemIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -395,9 +456,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">HeyReach</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('nova', 'Nova', 'AI Sales Development Rep')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Nova
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('nova', 'Nova', 'AI Sales Development Rep')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="nova" onclick="toggleCart('nova')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- KNOX — Exec Assistant -->
@@ -425,9 +487,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Slack</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('knox', 'Knox', 'AI Executive Assistant')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Knox
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('knox', 'Knox', 'AI Executive Assistant')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="knox" onclick="toggleCart('knox')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- LUNA — Social Media -->
@@ -455,9 +518,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Canva</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('luna', 'Luna', 'AI Social Media Manager')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Luna
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('luna', 'Luna', 'AI Social Media Manager')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="luna" onclick="toggleCart('luna')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- SAGE — Customer Success -->
@@ -485,9 +549,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">HubSpot</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('sage', 'Sage', 'AI Customer Success')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Sage
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('sage', 'Sage', 'AI Customer Success')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="sage" onclick="toggleCart('sage')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- IRIS — Content Writer -->
@@ -515,9 +580,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Webflow</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('iris', 'Iris', 'AI Content Writer')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Iris
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('iris', 'Iris', 'AI Content Writer')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="iris" onclick="toggleCart('iris')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- QUINN — Recruiter -->
@@ -545,9 +611,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Gmail</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('quinn', 'Quinn', 'AI Recruiter')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Quinn
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('quinn', 'Quinn', 'AI Recruiter')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="quinn" onclick="toggleCart('quinn')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- CYPHER — Data Analyst -->
@@ -575,9 +642,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Sheets</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('cypher', 'Cypher', 'AI Data Analyst')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Cypher
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('cypher', 'Cypher', 'AI Data Analyst')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="cypher" onclick="toggleCart('cypher')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- PEARL — Bookkeeper -->
@@ -605,9 +673,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Xero</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('pearl', 'Pearl', 'AI Bookkeeper')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Pearl
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('pearl', 'Pearl', 'AI Bookkeeper')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="pearl" onclick="toggleCart('pearl')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- EMBER — Receptionist -->
@@ -635,9 +704,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Calendar</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('ember', 'Ember', 'AI Receptionist')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Ember
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('ember', 'Ember', 'AI Receptionist')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="ember" onclick="toggleCart('ember')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- ECHO — Customer Support -->
@@ -665,9 +735,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Gorgias</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('echo', 'Echo', 'AI Customer Support')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Echo
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('echo', 'Echo', 'AI Customer Support')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="echo" onclick="toggleCart('echo')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- LEDGER — Financial Analyst -->
@@ -695,9 +766,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Looker</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('ledger', 'Ledger', 'AI Financial Analyst')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Ledger
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('ledger', 'Ledger', 'AI Financial Analyst')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="ledger" onclick="toggleCart('ledger')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- ATLAS — Project Manager -->
@@ -725,9 +797,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Notion</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('atlas', 'Atlas', 'AI Project Manager')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Atlas
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('atlas', 'Atlas', 'AI Project Manager')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="atlas" onclick="toggleCart('atlas')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- REED — Legal Assistant -->
@@ -755,9 +828,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Compliance</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('reed', 'Reed', 'AI Legal Assistant')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Reed
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('reed', 'Reed', 'AI Legal Assistant')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="reed" onclick="toggleCart('reed')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
                 <!-- SOVEREIGN — Chief Strategist -->
@@ -785,9 +859,10 @@
                             <span class="text-[10px] font-mono text-zinc-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">Board Prep</span>
                         </div>
                     </div>
-                    <button onclick="openInterview('sovereign', 'Sovereign', 'AI Chief Strategist')" class="w-full liquid-glass py-2.5 rounded-xl text-sm font-semibold">
-                        Interview Sovereign
-                    </button>
+                    <div class="flex gap-2">
+                        <button onclick="openInterview('sovereign', 'Sovereign', 'AI Chief Strategist')" class="flex-1 liquid-glass py-2.5 rounded-xl text-sm font-semibold">Interview</button>
+                        <button data-cart-btn="sovereign" onclick="toggleCart('sovereign')" class="cart-btn flex-1 py-2.5 rounded-xl text-sm font-semibold"><span class="cart-btn-add-label"><i class="ph-bold ph-plus"></i>Hire</span><span class="cart-btn-added-label"><i class="ph-bold ph-check"></i>Added</span><span class="cart-btn-remove-label"><i class="ph-bold ph-minus"></i>Remove</span></button>
+                    </div>
                 </div>
 
             </div>
@@ -942,6 +1017,60 @@
             <!-- FOOTER -->
             <div class="text-center py-2 text-[9px] text-zinc-500 uppercase tracking-widest font-semibold border-t border-white/5 flex-shrink-0" style="background: rgba(7,8,10,0.8);">
                 AI Operator · Built by <span class="text-tethron-cyan">Tethron</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART PILL — floating bottom-right when cart has items -->
+    <button id="cart-pill" onclick="openCart()" class="hidden fixed bottom-6 right-6 z-[60] glass-panel pl-4 pr-5 py-3 rounded-full flex items-center gap-3 hover:border-tethron-cyan/60 transition-all" style="border: 1px solid rgba(0, 212, 232, 0.3);">
+        <div class="w-9 h-9 rounded-full bg-tethron-cyan/15 flex items-center justify-center">
+            <i class="ph-fill ph-shopping-bag text-tethron-cyan text-lg"></i>
+        </div>
+        <div class="text-left">
+            <div id="cart-pill-count" class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">0 operators</div>
+            <div id="cart-pill-total" class="text-sm font-bold text-white">$0</div>
+        </div>
+        <i class="ph-bold ph-arrow-right text-white text-sm ml-1"></i>
+    </button>
+
+    <!-- CART DRAWER — slide-out from right with cart contents + checkout -->
+    <div id="cart-drawer" class="hidden fixed inset-0 z-[102]" style="background: rgba(7,8,10,0.7); backdrop-filter: blur(10px);">
+        <div id="cart-drawer-panel" class="absolute top-0 right-0 bottom-0 w-full max-w-md flex flex-col overflow-hidden" style="background: linear-gradient(180deg, #0b0d10 0%, #07080a 100%); border-left: 1px solid rgba(255,255,255,0.08);">
+            <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between flex-shrink-0">
+                <div>
+                    <p class="text-[10px] font-mono text-tethron-cyan uppercase tracking-widest">Your Squad</p>
+                    <h3 class="text-2xl font-bold text-white mt-1" id="cart-drawer-title">0 Operators</h3>
+                </div>
+                <button onclick="closeCart()" class="w-9 h-9 rounded-lg flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/5 transition-all">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-5 space-y-3">
+                <!-- rendered dynamically -->
+            </div>
+            <div class="border-t border-white/10 px-6 py-5 space-y-3 flex-shrink-0" style="background: rgba(0,0,0,0.3);">
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-zinc-400">Setup</span>
+                    <span id="cart-setup" class="font-mono text-white">$0</span>
+                </div>
+                <div id="cart-discount-row" class="hidden items-center justify-between text-sm">
+                    <span class="text-tethron-cyan flex items-center gap-1.5"><i class="ph-fill ph-gift"></i> Bundle discount</span>
+                    <span id="cart-discount" class="font-mono text-tethron-cyan">−$0</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-zinc-400">Monthly</span>
+                    <span id="cart-monthly" class="font-mono text-white">$0/mo</span>
+                </div>
+                <div class="pt-3 border-t border-white/10 flex items-baseline justify-between">
+                    <span class="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">Year-1 total</span>
+                    <span id="cart-year-total" class="font-bold text-xl text-white">$0</span>
+                </div>
+                <button id="cart-checkout" onclick="startCheckout()" class="w-full bg-tethron-cyan text-[#07080a] py-3.5 rounded-xl text-sm font-bold hover:bg-[#5be5f5] transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2" disabled>
+                    <span id="cart-checkout-label">Add operators to continue</span>
+                </button>
+                <p class="text-[10px] text-zinc-500 text-center flex items-center justify-center gap-1.5">
+                    <i class="ph ph-lock-simple"></i> Secure checkout via Stripe · Live in 24 hours
+                </p>
             </div>
         </div>
     </div>
@@ -1249,6 +1378,213 @@
         document.getElementById('hire-sheet').addEventListener('click', (e) => {
             if (e.target.id === 'hire-sheet') closeHireSheet();
         });
+
+        // ========== Cart ==========
+        const CART_KEY = 'tethron_division_cart_v1';
+        const CHECKOUT_API = 'https://tethron-onboard.vercel.app/api/create-checkout';
+
+        const OPERATOR_META = {
+            nova:      { name: 'Nova',      role: 'AI Sales Development Rep', avatar: 'avatars/nova.png' },
+            knox:      { name: 'Knox',      role: 'AI Executive Assistant',   avatar: 'avatars/knox.png' },
+            luna:      { name: 'Luna',      role: 'AI Social Media Manager',  avatar: 'avatars/luna.png' },
+            sage:      { name: 'Sage',      role: 'AI Customer Success',      avatar: 'avatars/sage.png' },
+            iris:      { name: 'Iris',      role: 'AI Content Writer',        avatar: 'avatars/iris.png' },
+            quinn:     { name: 'Quinn',     role: 'AI Recruiter',             avatar: 'avatars/quinn.png' },
+            cypher:    { name: 'Cypher',    role: 'AI Data Analyst',          avatar: 'avatars/cypher.png' },
+            pearl:     { name: 'Pearl',     role: 'AI Bookkeeper',            avatar: 'avatars/pearl.png' },
+            ember:     { name: 'Ember',     role: 'AI Receptionist',          avatar: 'avatars/ember.png' },
+            echo:      { name: 'Echo',      role: 'AI Customer Support',      avatar: 'avatars/echo.png' },
+            ledger:    { name: 'Ledger',    role: 'AI Financial Analyst',     avatar: 'avatars/ledger.png' },
+            atlas:     { name: 'Atlas',     role: 'AI Project Manager',       avatar: 'avatars/atlas.png' },
+            reed:      { name: 'Reed',      role: 'AI Legal Assistant',       avatar: 'avatars/reed.png' },
+            sovereign: { name: 'Sovereign', role: 'AI Chief Strategist',      avatar: 'avatars/sovereign.png' }
+        };
+
+        function cartLoad() {
+            try {
+                const raw = localStorage.getItem(CART_KEY);
+                const parsed = raw ? JSON.parse(raw) : [];
+                return Array.isArray(parsed) ? parsed.filter(s => OPERATOR_META[s]) : [];
+            } catch (_) { return []; }
+        }
+        function cartSave(cart) {
+            try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (_) {}
+        }
+
+        function cartPricing(count) {
+            const MONTHLY = 700, SETUP = 1300;
+            let setupDiscount = 0;
+            if (count === 2) setupDiscount = 200;
+            else if (count === 3) setupDiscount = 500;
+            else if (count >= 4) setupDiscount = 1000;
+            return {
+                setup: Math.max(0, SETUP * count - setupDiscount),
+                monthly: MONTHLY * count,
+                setupDiscount
+            };
+        }
+
+        function fmtMoney(n) {
+            return '$' + n.toLocaleString('en-US');
+        }
+
+        function cartRender() {
+            const cart = cartLoad();
+            const count = cart.length;
+
+            document.querySelectorAll('[data-cart-btn]').forEach(btn => {
+                const slug = btn.dataset.cartBtn;
+                btn.classList.toggle('in-cart', cart.includes(slug));
+            });
+
+            const pill = document.getElementById('cart-pill');
+            if (count === 0) {
+                pill.classList.add('hidden');
+            } else {
+                pill.classList.remove('hidden');
+                const { setup, monthly } = cartPricing(count);
+                document.getElementById('cart-pill-count').textContent = `${count} operator${count > 1 ? 's' : ''}`;
+                document.getElementById('cart-pill-total').textContent = `${fmtMoney(setup)} + ${fmtMoney(monthly)}/mo`;
+            }
+
+            const { setup, monthly, setupDiscount } = cartPricing(count);
+            document.getElementById('cart-drawer-title').textContent =
+                count === 0 ? '0 Operators' : `${count} Operator${count !== 1 ? 's' : ''}`;
+
+            const itemsEl = document.getElementById('cart-items');
+            if (count === 0) {
+                itemsEl.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-16 text-center">
+                        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+                            <i class="ph ph-shopping-bag text-3xl text-zinc-600"></i>
+                        </div>
+                        <p class="text-sm text-zinc-300 font-semibold mb-1">Your squad is empty</p>
+                        <p class="text-xs text-zinc-500 max-w-[240px] leading-relaxed">Add operators from the roster to build your team. Bundle 2+ for setup discounts.</p>
+                    </div>`;
+            } else {
+                itemsEl.innerHTML = cart.map((slug) => {
+                    const op = OPERATOR_META[slug];
+                    return `
+                        <div class="cart-item-enter flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl hover:border-tethron-cyan/30 transition-all">
+                            <img src="${op.avatar}" alt="${op.name}" class="w-12 h-12 rounded-lg object-cover border border-white/10 flex-shrink-0">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-semibold text-white truncate text-sm">${op.name}</p>
+                                <p class="text-[11px] text-zinc-400 truncate">${op.role}</p>
+                            </div>
+                            <div class="text-right flex-shrink-0 flex flex-col items-end gap-1">
+                                <span class="text-xs font-mono text-zinc-300">$700/mo</span>
+                                <button onclick="cartRemove('${slug}')" class="text-[10px] text-zinc-500 hover:text-red-400 transition-colors font-mono uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-x-circle"></i>Remove
+                                </button>
+                            </div>
+                        </div>`;
+                }).join('');
+            }
+
+            document.getElementById('cart-setup').textContent = fmtMoney(setup);
+            document.getElementById('cart-monthly').textContent = `${fmtMoney(monthly)}/mo`;
+
+            const discountRow = document.getElementById('cart-discount-row');
+            if (setupDiscount > 0) {
+                discountRow.classList.remove('hidden');
+                discountRow.classList.add('flex');
+                document.getElementById('cart-discount').textContent = `−${fmtMoney(setupDiscount)}`;
+            } else {
+                discountRow.classList.add('hidden');
+                discountRow.classList.remove('flex');
+            }
+
+            document.getElementById('cart-year-total').textContent = fmtMoney(setup + monthly * 12);
+
+            const checkoutBtn = document.getElementById('cart-checkout');
+            const checkoutLabel = document.getElementById('cart-checkout-label');
+            checkoutBtn.disabled = count === 0;
+            if (count === 0) {
+                checkoutLabel.textContent = 'Add operators to continue';
+            } else {
+                checkoutLabel.innerHTML = `Hire ${count === 1 ? 'Operator' : 'Squad'} — ${fmtMoney(setup)} today <i class="ph-bold ph-arrow-right"></i>`;
+            }
+        }
+
+        function toggleCart(slug) {
+            if (!OPERATOR_META[slug]) return;
+            const cart = cartLoad();
+            const idx = cart.indexOf(slug);
+            if (idx === -1) {
+                cart.push(slug);
+                cartSave(cart);
+                cartRender();
+                cartPulsePill();
+            } else {
+                cart.splice(idx, 1);
+                cartSave(cart);
+                cartRender();
+            }
+        }
+
+        function cartRemove(slug) {
+            const cart = cartLoad().filter(s => s !== slug);
+            cartSave(cart);
+            cartRender();
+        }
+
+        function cartPulsePill() {
+            const pill = document.getElementById('cart-pill');
+            if (!pill) return;
+            pill.classList.remove('pulse');
+            void pill.offsetWidth;
+            pill.classList.add('pulse');
+        }
+
+        function openCart() {
+            cartRender();
+            document.getElementById('cart-drawer').classList.remove('hidden');
+        }
+
+        function closeCart() {
+            document.getElementById('cart-drawer').classList.add('hidden');
+        }
+
+        async function startCheckout() {
+            const cart = cartLoad();
+            if (cart.length === 0) return;
+            const btn = document.getElementById('cart-checkout');
+            const label = document.getElementById('cart-checkout-label');
+            btn.disabled = true;
+            label.innerHTML = '<i class="ph ph-circle-notch animate-spin"></i> Redirecting to Stripe…';
+
+            try {
+                const res = await fetch(CHECKOUT_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ operators: cart })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok && data.url) {
+                    window.location.href = data.url;
+                    return;
+                }
+                label.innerHTML = `<span class="text-red-300">${(data && data.error) ? data.error : 'Checkout failed'} — retry?</span>`;
+                btn.disabled = false;
+                setTimeout(cartRender, 3500);
+            } catch (e) {
+                label.innerHTML = '<span class="text-red-300">Network error — retry?</span>';
+                btn.disabled = false;
+                setTimeout(cartRender, 3500);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('cart-drawer').classList.contains('hidden')) {
+                closeCart();
+            }
+        });
+        document.getElementById('cart-drawer').addEventListener('click', (e) => {
+            if (e.target.id === 'cart-drawer') closeCart();
+        });
+
+        // Initial render so button states reflect any saved cart on load
+        cartRender();
     </script>
 </body>
 </html>
