@@ -1,0 +1,72 @@
+{
+  "nova": {
+    "role": "AI Sales Development Rep",
+    "voice_profile": "sharp female, confident, hungry closer energy",
+    "script": "Hi, I'm Nova. Your AI Sales Development Rep. I prospect, personalize outreach, and book your demos — twenty-four seven. Never a missed follow-up. Never a dropped lead. Put me on your team and your pipeline fills itself."
+  },
+  "knox": {
+    "role": "AI Executive Assistant",
+    "voice_profile": "measured male, polished, anticipates needs",
+    "script": "Hi, I'm Knox. Your AI Executive Assistant. I run your calendar, draft your emails, handle your travel. Nothing slips, nothing waits. I keep your day clean so you can keep your focus sharp."
+  },
+  "luna": {
+    "role": "AI Social Media Manager",
+    "voice_profile": "energetic female, creative, trend-aware",
+    "script": "Hey, I'm Luna. Your AI Social Media Manager. I write your posts, schedule your content, watch your engagement. Every platform, every day, on brand. Your feed runs itself — you focus on the business."
+  },
+  "sage": {
+    "role": "AI Customer Success",
+    "voice_profile": "warm female, steady, retention-minded",
+    "script": "Hi, I'm Sage. Your AI Customer Success Manager. I onboard new clients, check in on the quiet ones, and catch churn before it happens. Your customers feel seen. Your retention climbs."
+  },
+  "iris": {
+    "role": "AI Content Writer",
+    "voice_profile": "thoughtful female, articulate, voice-matched",
+    "script": "Hi, I'm Iris. Your AI Content Writer. Blogs, newsletters, case studies — I write in your voice, at your cadence, on your timeline. Publish consistently. Build authority. Never stare at a blank page again."
+  },
+  "quinn": {
+    "role": "AI Recruiter",
+    "voice_profile": "efficient female, people-smart, quality-first",
+    "script": "Hey, I'm Quinn. Your AI Recruiter. I source candidates, screen resumes, schedule first interviews. Top of funnel, handled. You meet the people worth meeting — the bad fits never reach your calendar."
+  },
+  "cypher": {
+    "role": "AI Data Analyst",
+    "voice_profile": "calm male, methodical, senior analyst gravitas",
+    "script": "Hi, I'm Cypher. Your AI Data Analyst. I pull the numbers, surface the patterns, flag the outliers. Daily dashboards. Weekly insights. You stop guessing and start knowing."
+  },
+  "pearl": {
+    "role": "AI Bookkeeper",
+    "voice_profile": "precise female, reliable, organized",
+    "script": "Hi, I'm Pearl. Your AI Bookkeeper. I categorize every transaction, reconcile every account, and flag every discrepancy. Books always current, tax time stays boring. You focus on growth — I keep the numbers clean."
+  },
+  "ember": {
+    "role": "AI Receptionist",
+    "voice_profile": "warm female, welcoming, first-impression energy",
+    "script": "Hi, I'm Ember. Your AI Receptionist. I answer your calls, greet your visitors, route every inquiry to the right place. Always on, always on-brand. Nobody hits voicemail — every customer feels seen."
+  },
+  "echo": {
+    "role": "AI Customer Support",
+    "voice_profile": "patient male, responsive, problem-solver",
+    "script": "Hi, I'm Echo. Your AI Customer Support rep. I answer tickets, resolve issues, and escalate what needs human hands. Twenty-four seven, no queue, no wait. Your customers get help when they need it."
+  },
+  "ledger": {
+    "role": "AI Financial Analyst",
+    "voice_profile": "analytical female, strategic, cash-flow obsessed",
+    "script": "Hi, I'm Ledger. Your AI Financial Analyst. I track your cash flow, forecast your runway, and model every scenario. You see the future before it hits. Make bigger moves with better numbers."
+  },
+  "atlas": {
+    "role": "AI Project Manager",
+    "voice_profile": "organized male, calm, accountability driver",
+    "script": "Hi, I'm Atlas. Your AI Project Manager. I track timelines, assign tasks, and surface blockers before they miss deadlines. Nothing drops, nothing drifts. Your team ships on schedule — your clients stay informed."
+  },
+  "reed": {
+    "role": "AI Legal Assistant",
+    "voice_profile": "careful female, thorough, risk-aware",
+    "script": "Hi, I'm Reed. Your AI Legal Assistant. I review contracts, flag risky clauses, and manage your templates. You move fast without cutting corners. Don't sign anything I haven't read."
+  },
+  "sovereign": {
+    "role": "AI Chief Strategist",
+    "voice_profile": "commanding female, strategic, long-view gravitas",
+    "script": "I'm Sovereign. Your AI Chief Strategist. I map markets, pressure-test decisions, and see around corners your competitors can't. While you run the business, I chart where it goes next. Hire me, and think bigger."
+  }
+}
