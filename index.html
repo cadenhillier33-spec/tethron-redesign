@@ -441,6 +441,157 @@
             transition: opacity 0.3s ease;
         }
         .btn-glow:hover::before { opacity: 0.3; }
+
+        /* === DIVISION CAROUSEL === */
+        .division-stage {
+            position: relative;
+            height: 520px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1400px;
+            overflow: hidden;
+            touch-action: pan-y;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        @media (max-width: 767px) {
+            .division-stage { height: 460px; }
+        }
+        .division-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 320px;
+            height: 420px;
+            margin-left: -160px;
+            margin-top: -210px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #0f1115 0%, #0a0b0d 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+            transition:
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s ease;
+            will-change: transform, opacity, filter;
+            cursor: grab;
+        }
+        .division-card:active { cursor: grabbing; }
+        @media (max-width: 767px) {
+            .division-card { width: 270px; height: 370px; margin-left: -135px; margin-top: -185px; }
+        }
+        .division-card .poster,
+        .division-card video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .division-card video {
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+        .division-card.active video { opacity: 1; }
+        .division-card .vignette {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 38%, rgba(7,8,10,0.92) 100%);
+            pointer-events: none;
+        }
+        .division-card .meta {
+            position: absolute;
+            bottom: 22px;
+            left: 22px;
+            right: 22px;
+            z-index: 2;
+            transform: translateY(8px);
+            opacity: 0;
+            transition: transform 0.55s ease 0.12s, opacity 0.55s ease 0.12s;
+        }
+        .division-card.active .meta { transform: translateY(0); opacity: 1; }
+        .division-card .status-pill {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(10,11,13,0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            font-size: 10px;
+            color: #ffffff;
+            letter-spacing: 0.06em;
+            font-weight: 500;
+        }
+        .division-card .status-pill::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #00d4e8;
+            box-shadow: 0 0 8px rgba(0,212,232,0.8);
+            animation: divisionPulse 2s ease-in-out infinite;
+        }
+        @keyframes divisionPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .division-card.active {
+            box-shadow:
+                0 0 0 1px rgba(0,212,232,0.35),
+                0 28px 80px rgba(0,0,0,0.65),
+                0 0 120px rgba(0,212,232,0.18);
+        }
+        .division-card .spotlight-ring {
+            position: absolute;
+            inset: -40px;
+            border-radius: 34px;
+            background: radial-gradient(ellipse at center, rgba(0,212,232,0.25) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .division-card.active .spotlight-ring { opacity: 1; }
+
+        .division-arrow {
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #9ca3af;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+        .division-arrow:hover {
+            background: rgba(0,212,232,0.1);
+            border-color: rgba(0,212,232,0.3);
+            color: #00d4e8;
+            transform: translateY(-1px);
+        }
+        .division-counter {
+            font-family: ui-monospace, 'SF Mono', monospace;
+            color: #9ca3af;
+            font-size: 14px;
+            letter-spacing: 0.14em;
+            min-width: 70px;
+            text-align: center;
+        }
+        .division-counter b { color: #ffffff; font-weight: 600; }
     </style>
 </head>
 <body class="bg-[#07080a] text-white antialiased selection:bg-tethron-cyan selection:text-[#07080a]">
@@ -481,7 +632,7 @@
             </a>
 
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                <a href="#capabilities" class="hover:text-white transition-colors">Capabilities</a>
+                <a href="#division" class="hover:text-white transition-colors">The Division</a>
                 <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
                 <a href="#demo" class="hover:text-white transition-colors">See It Live</a>
                 <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
@@ -505,7 +656,7 @@
         <!-- Mobile menu — frosted clear glass -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 pt-2" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(60px) saturate(2); -webkit-backdrop-filter: blur(60px) saturate(2); border-top: 1px solid rgba(255,255,255,0.06);">
             <div class="flex flex-col gap-1">
-                <a href="#capabilities" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Capabilities</a>
+                <a href="#division" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">The Division</a>
                 <a href="#how-it-works" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">How It Works</a>
                 <a href="#demo" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">See It Live</a>
                 <a href="#pricing" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Pricing</a>
@@ -639,6 +790,37 @@
                     <div class="text-sm font-medium text-zinc-400 tracking-wide">CLIENT SATISFACTION</div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- 3.5 THE DIVISION — Cinematic 360° Carousel -->
+        <section id="division" class="relative mt-28 md:mt-36 px-4 md:px-6 max-w-7xl mx-auto w-full">
+            <div class="text-center mb-10 md:mb-14 reveal">
+                <p class="text-xs font-mono text-tethron-cyan tracking-[0.28em] uppercase mb-3">✦ The Tethron Division ✦</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">
+                    Meet the <span class="shimmer-text">14 Operators</span>.
+                </h2>
+                <p class="text-zinc-400 mt-4 text-base md:text-lg max-w-xl mx-auto px-4">
+                    Pre-built AI employees. Pick one. Live in 3 days.
+                </p>
+            </div>
+
+            <div class="division-stage reveal" id="division-stage"></div>
+
+            <div class="flex items-center justify-center gap-5 md:gap-7 mt-4 md:mt-6 reveal">
+                <button class="division-arrow" id="division-prev" aria-label="Previous operator">
+                    <i class="ph-bold ph-arrow-left text-base"></i>
+                </button>
+                <div class="division-counter"><b id="division-current">01</b> / 14</div>
+                <button class="division-arrow" id="division-next" aria-label="Next operator">
+                    <i class="ph-bold ph-arrow-right text-base"></i>
+                </button>
+            </div>
+
+            <div class="text-center mt-10 md:mt-14 reveal">
+                <a href="/division" class="liquid-glass inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm md:text-base font-semibold">
+                    Meet the Full Team <i class="ph-bold ph-arrow-right"></i>
+                </a>
             </div>
         </section>
 
@@ -1731,6 +1913,190 @@
             }
         });
 
+        // === DIVISION CAROUSEL — cinematic 360° ===
+        (function() {
+            const OPERATORS = [
+                { slug: 'nova',      name: 'Nova',      role: 'AI Sales Development Rep' },
+                { slug: 'knox',      name: 'Knox',      role: 'AI Executive Assistant' },
+                { slug: 'luna',      name: 'Luna',      role: 'AI Social Media Manager' },
+                { slug: 'sage',      name: 'Sage',      role: 'AI Customer Success' },
+                { slug: 'iris',      name: 'Iris',      role: 'AI Content Writer' },
+                { slug: 'quinn',     name: 'Quinn',     role: 'AI Recruiter' },
+                { slug: 'cypher',    name: 'Cypher',    role: 'AI Data Analyst' },
+                { slug: 'pearl',     name: 'Pearl',     role: 'AI Bookkeeper' },
+                { slug: 'ember',     name: 'Ember',     role: 'AI Receptionist' },
+                { slug: 'echo',      name: 'Echo',      role: 'AI Customer Support' },
+                { slug: 'ledger',    name: 'Ledger',    role: 'AI Financial Analyst' },
+                { slug: 'atlas',     name: 'Atlas',     role: 'AI Project Manager' },
+                { slug: 'reed',      name: 'Reed',      role: 'AI Legal Assistant' },
+                { slug: 'sovereign', name: 'Sovereign', role: 'AI Chief Strategist' },
+            ];
+
+            const stage = document.getElementById('division-stage');
+            if (!stage) return;
+
+            const N = OPERATORS.length;
+            const counterEl = document.getElementById('division-current');
+            const prevBtn = document.getElementById('division-prev');
+            const nextBtn = document.getElementById('division-next');
+
+            stage.innerHTML = OPERATORS.map((op, i) => `
+                <div class="division-card" data-idx="${i}" aria-hidden="true">
+                    <div class="spotlight-ring"></div>
+                    <img class="poster" src="avatars/${op.slug}.png" alt="${op.name}" loading="lazy" decoding="async">
+                    <video muted loop playsinline preload="none" data-src="videos/${op.slug}.mp4"></video>
+                    <div class="vignette"></div>
+                    <div class="status-pill">Available</div>
+                    <div class="meta">
+                        <h3 class="text-white text-2xl font-bold mb-0.5 tracking-tight">${op.name}</h3>
+                        <p class="text-tethron-cyan text-xs font-medium tracking-wide uppercase">${op.role}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            const cards = Array.from(stage.querySelectorAll('.division-card'));
+
+            let active = 0;          // virtual index, unbounded
+            let autoTimer = null;
+            let isVisible = false;
+            const AUTO_MS = 6500;
+            const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function mod(x, n) { return ((x % n) + n) % n; }
+
+            function signedOffset(cardIdx, act) {
+                let d = cardIdx - mod(act, N);
+                if (d >  N / 2) d -= N;
+                if (d < -N / 2) d += N;
+                return d;
+            }
+
+            function positionCards() {
+                const isMobile = window.innerWidth < 768;
+                const offsetStep = isMobile ? 170 : 290;
+                const maxVisible = isMobile ? 2 : 3;
+
+                cards.forEach((card, i) => {
+                    const d = signedOffset(i, active);
+                    const absD = Math.abs(d);
+                    const x = d * offsetStep;
+                    const scale = absD === 0
+                        ? 1
+                        : Math.max(0.58, 0.86 - absD * 0.13);
+                    const opacity = absD > maxVisible ? 0 : (absD === 0 ? 1 : 0.4);
+                    const blur = absD === 0 ? 0 : Math.min(8, 2 + absD * 2.5);
+                    const z = 20 - absD;
+
+                    card.style.transform = `translate(-50%, -50%) translateX(${x}px) scale(${scale})`;
+                    card.style.opacity = opacity;
+                    card.style.filter = `blur(${blur}px)`;
+                    card.style.zIndex = z;
+                    card.classList.toggle('active', absD === 0);
+                    card.style.pointerEvents = absD > maxVisible ? 'none' : 'auto';
+                    card.setAttribute('aria-hidden', absD === 0 ? 'false' : 'true');
+                });
+
+                counterEl.textContent = String(mod(active, N) + 1).padStart(2, '0');
+                syncVideos();
+            }
+
+            function syncVideos() {
+                cards.forEach((card, i) => {
+                    const v = card.querySelector('video');
+                    const d = signedOffset(i, active);
+                    const absD = Math.abs(d);
+
+                    if (absD === 0) {
+                        if (!v.src) v.src = v.dataset.src;
+                        if (isVisible) v.play().catch(() => {});
+                        else v.pause();
+                    } else if (absD === 1) {
+                        // Warm neighbors — metadata only
+                        if (!v.src) {
+                            v.preload = 'metadata';
+                            v.src = v.dataset.src;
+                        }
+                        v.pause();
+                    } else {
+                        v.pause();
+                    }
+                });
+            }
+
+            function advance(dir) {
+                active += dir;
+                positionCards();
+                resetAuto();
+            }
+
+            function resetAuto() {
+                clearTimeout(autoTimer);
+                if (isVisible && !reduceMotion) {
+                    autoTimer = setTimeout(() => advance(1), AUTO_MS);
+                }
+            }
+
+            prevBtn.addEventListener('click', () => advance(-1));
+            nextBtn.addEventListener('click', () => advance(1));
+
+            document.addEventListener('keydown', (e) => {
+                if (!isVisible) return;
+                if (e.target.matches('input, textarea')) return;
+                if (e.key === 'ArrowLeft')  advance(-1);
+                if (e.key === 'ArrowRight') advance(1);
+            });
+
+            // Drag / swipe
+            let startX = 0, startY = 0, dragging = false, committed = false;
+            function onStart(e) {
+                dragging = true;
+                committed = false;
+                const p = e.touches ? e.touches[0] : e;
+                startX = p.clientX;
+                startY = p.clientY;
+            }
+            function onMove(e) {
+                if (!dragging || committed) return;
+                const p = e.touches ? e.touches[0] : e;
+                const dx = p.clientX - startX;
+                const dy = p.clientY - startY;
+                if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+                    committed = true;
+                    advance(dx < 0 ? 1 : -1);
+                }
+            }
+            function onEnd() { dragging = false; committed = false; }
+            stage.addEventListener('touchstart', onStart, {passive: true});
+            stage.addEventListener('touchmove',  onMove,  {passive: true});
+            stage.addEventListener('touchend',   onEnd);
+            stage.addEventListener('mousedown',  onStart);
+            stage.addEventListener('mousemove',  onMove);
+            stage.addEventListener('mouseup',    onEnd);
+            stage.addEventListener('mouseleave', onEnd);
+
+            // Pause auto-advance on hover
+            stage.addEventListener('mouseenter', () => clearTimeout(autoTimer));
+            stage.addEventListener('mouseleave', () => resetAuto());
+
+            // Only run when visible
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((e) => {
+                    isVisible = e.isIntersecting;
+                    if (isVisible) {
+                        syncVideos();
+                        resetAuto();
+                    } else {
+                        clearTimeout(autoTimer);
+                        cards.forEach(c => c.querySelector('video')?.pause());
+                    }
+                });
+            }, { threshold: 0.25 });
+            io.observe(stage);
+
+            window.addEventListener('resize', positionCards);
+
+            positionCards();
+        })();
     </script>
 
     <!-- Audit Form Modal -->
