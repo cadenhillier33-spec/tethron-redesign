@@ -590,6 +590,34 @@
             text-align: center;
         }
         .division-counter b { color: #ffffff; font-weight: 600; }
+
+        /* Audio hint — shown on active card while muted */
+        .division-audio-hint {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(0,212,232,0.22);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,212,232,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d4e8;
+            font-size: 15px;
+            z-index: 3;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            animation: audioHintPulse 1.6s ease-in-out infinite;
+        }
+        .division-audio-hint.showing { opacity: 1; }
+        @keyframes audioHintPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,212,232,0.35); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(0,212,232,0); }
+        }
     </style>
 </head>
 <body class="bg-[#07080a] text-white antialiased selection:bg-tethron-cyan selection:text-[#07080a]">
@@ -1945,6 +1973,7 @@
                     <video muted loop playsinline preload="none" data-src="videos/${op.slug}.mp4"></video>
                     <div class="vignette"></div>
                     <div class="status-pill">Available</div>
+                    <div class="division-audio-hint" aria-hidden="true"><i class="ph-fill ph-speaker-simple-high"></i></div>
                     <div class="meta">
                         <h3 class="text-white text-2xl font-bold mb-0.5 tracking-tight">${op.name}</h3>
                         <p class="text-tethron-cyan text-xs font-medium tracking-wide uppercase">${op.role}</p>
@@ -1957,6 +1986,7 @@
             let active = 0;          // virtual index, unbounded
             let autoTimer = null;
             let isVisible = false;
+            let audioUnlocked = false;
             const AUTO_MS = 6500;
             const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1998,6 +2028,31 @@
                 syncVideos();
             }
 
+            function showHint(card)  { card.querySelector('.division-audio-hint')?.classList.add('showing'); }
+            function hideHint(card)  { card.querySelector('.division-audio-hint')?.classList.remove('showing'); }
+            function hideAllHints()  { cards.forEach(c => hideHint(c)); }
+
+            async function playWithSound(v, card) {
+                // Try unmuted first if we've unlocked audio
+                if (audioUnlocked) {
+                    v.muted = false;
+                    try {
+                        await v.play();
+                        hideHint(card);
+                        return;
+                    } catch (err) {
+                        // Browser rejected — fall back to muted
+                        v.muted = true;
+                    }
+                }
+                // Muted playback (always allowed)
+                v.muted = true;
+                try {
+                    await v.play();
+                    if (!audioUnlocked) showHint(card);
+                } catch (e) {}
+            }
+
             function syncVideos() {
                 cards.forEach((card, i) => {
                     const v = card.querySelector('video');
@@ -2006,20 +2061,44 @@
 
                     if (absD === 0) {
                         if (!v.src) v.src = v.dataset.src;
-                        if (isVisible) v.play().catch(() => {});
+                        if (isVisible) playWithSound(v, card);
                         else v.pause();
                     } else if (absD === 1) {
-                        // Warm neighbors — metadata only
                         if (!v.src) {
                             v.preload = 'metadata';
                             v.src = v.dataset.src;
                         }
                         v.pause();
+                        v.muted = true;
+                        hideHint(card);
                     } else {
                         v.pause();
+                        hideHint(card);
                     }
                 });
             }
+
+            // First-gesture audio unlock. Fires once on any tap/click/keypress
+            // anywhere on the document, then flips the active card's video unmuted.
+            function unlockAudio() {
+                if (audioUnlocked) return;
+                audioUnlocked = true;
+                hideAllHints();
+                // Unmute whichever video is currently active
+                cards.forEach((card, i) => {
+                    const d = signedOffset(i, active);
+                    if (Math.abs(d) === 0) {
+                        const v = card.querySelector('video');
+                        if (v) {
+                            v.muted = false;
+                            v.play().catch(() => {});
+                        }
+                    }
+                });
+            }
+            ['touchstart', 'pointerdown', 'click', 'keydown'].forEach(ev => {
+                document.addEventListener(ev, unlockAudio, { once: true, passive: true, capture: true });
+            });
 
             function advance(dir) {
                 active += dir;
