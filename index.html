@@ -2060,14 +2060,15 @@
                     const absD = Math.abs(d);
 
                     if (absD === 0) {
+                        // Active: ensure fully loaded so audio can start instantly
+                        if (v.preload !== 'auto') v.preload = 'auto';
                         if (!v.src) v.src = v.dataset.src;
                         if (isVisible) playWithSound(v, card);
                         else v.pause();
                     } else if (absD === 1) {
-                        if (!v.src) {
-                            v.preload = 'metadata';
-                            v.src = v.dataset.src;
-                        }
+                        // Warm neighbors — full video data so next swipe plays with audio immediately
+                        if (v.preload !== 'auto') v.preload = 'auto';
+                        if (!v.src) v.src = v.dataset.src;
                         v.pause();
                         v.muted = true;
                         hideHint(card);
