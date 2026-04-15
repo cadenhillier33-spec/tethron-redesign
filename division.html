@@ -189,6 +189,38 @@
         .operator-media.is-playing .operator-poster { opacity: 0; }
         .operator-media.is-playing .operator-video  { opacity: 1; }
 
+        /* "tap for sound" hint — only appears on the one card that started
+           playing muted, then fades out the instant the user taps. Replaces
+           the clunky global audio-primer toast. */
+        .operator-audio-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 15px;
+            z-index: 3;
+            pointer-events: none;
+            border: 1px solid rgba(0,212,232,0.45);
+            animation: operatorAudioHintPulse 1.8s ease-in-out infinite;
+            opacity: 0;
+            transition: opacity 260ms ease;
+        }
+        .operator-media.show-audio-hint .operator-audio-hint { display: flex; opacity: 1; }
+
+        @keyframes operatorAudioHintPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,232,0.55); }
+            50%      { box-shadow: 0 0 0 14px rgba(0,212,232,0); }
+        }
+
         body.div-lock-scroll { position: fixed; width: 100%; left: 0; right: 0; overflow: hidden; }
 
         @media (max-width: 768px) {
@@ -1700,13 +1732,52 @@
         (function initOperatorPlayback() {
             const HOVER_DELAY = 200;
             const PRIMER_TIMEOUT = 2800;
-            const TOUCH_PLAY_THRESHOLD = 0.5;    // % of card visible before scroll-play kicks in
+            // Hysteresis: start a card once it's ≥ 0.5 visible, but keep playing
+            // until it drops below 0.3. Prevents on/off flicker when the user
+            // hovers right at the handoff point between two adjacent cards.
+            const TOUCH_PLAY_THRESHOLD = 0.5;
+            const TOUCH_STOP_THRESHOLD = 0.3;
             const primer = document.getElementById('audio-primer');
             const mediaEls = document.querySelectorAll('.operator-media');
             const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
             let currentPlaying = null;
             let audioUnlocked = false;
             let primerTimer = null;
+
+            // Inject the "tap for sound" hint icon into every card once.
+            // CSS controls visibility via `.show-audio-hint` on the parent.
+            mediaEls.forEach(el => {
+                if (el.querySelector('.operator-audio-hint')) return;
+                const hint = document.createElement('div');
+                hint.className = 'operator-audio-hint';
+                hint.innerHTML = '<i class="ph-bold ph-speaker-high"></i>';
+                el.appendChild(hint);
+            });
+            function showAudioHint(mediaEl) {
+                if (!mediaEl) return;
+                mediaEl.classList.add('show-audio-hint');
+            }
+            function clearAllAudioHints() {
+                mediaEls.forEach(el => el.classList.remove('show-audio-hint'));
+            }
+
+            // Adjacent-card prefetch: once a card starts playing, nudge its
+            // immediate neighbors from preload="none" → "metadata" so the next
+            // scroll-triggered play() kicks off with the first frame ready.
+            // Only hydrates each video once per session.
+            const mediaList = Array.from(mediaEls);
+            function preloadNeighbors(mediaEl) {
+                const idx = mediaList.indexOf(mediaEl);
+                if (idx < 0) return;
+                [mediaList[idx - 1], mediaList[idx + 1]].forEach(el => {
+                    if (!el) return;
+                    const v = el.querySelector('video.operator-video');
+                    if (!v || v.dataset.hydrated === '1') return;
+                    v.setAttribute('preload', 'metadata');
+                    try { v.load(); } catch (_) {}
+                    v.dataset.hydrated = '1';
+                });
+            }
 
             function stopPlayback(mediaEl) {
                 if (!mediaEl) return;
@@ -1716,6 +1787,7 @@
                 video.muted = true;
                 video.currentTime = 0;
                 mediaEl.classList.remove('is-playing');
+                mediaEl.classList.remove('show-audio-hint');
             }
 
             function showPrimer() {
@@ -1762,19 +1834,28 @@
 
                 try {
                     await video.play();
-                    if (!video.muted) audioUnlocked = true;
+                    if (!video.muted) {
+                        audioUnlocked = true;
+                        mediaEl.classList.remove('show-audio-hint');
+                    }
                     hidePrimer();
                 } catch (err) {
                     // Autoplay refused — retry muted, show primer only if we wanted sound.
                     video.muted = true;
                     try {
                         await video.play();
-                        if (!forceMuted) showPrimer();
+                        if (!forceMuted) {
+                            if (isTouchDevice) showAudioHint(mediaEl);
+                            else showPrimer();
+                        }
                     } catch (_) {
                         mediaEl.classList.remove('is-playing');
                         currentPlaying = null;
                     }
                 }
+
+                // Warm the neighbors so the next scroll has zero first-frame lag.
+                preloadNeighbors(mediaEl);
             }
 
             const ratioMap = new Map();
@@ -1793,6 +1874,7 @@
                     if (primed) return;
                     primed = true;
                     audioUnlocked = true;
+                    clearAllAudioHints();
                     const curVid = currentPlaying?.querySelector('video.operator-video') || null;
                     mediaEls.forEach(el => {
                         const v = el.querySelector('video.operator-video');
@@ -1815,6 +1897,13 @@
                 const scrollPlayObserver = new IntersectionObserver((entries) => {
                     entries.forEach(e => ratioMap.set(e.target, e.intersectionRatio));
 
+                    // Hysteresis: if the current card is still comfortably on screen
+                    // (> 0.3 visible), don't swap — prevents flicker when the user
+                    // lingers right at the boundary between two cards.
+                    if (currentPlaying && (ratioMap.get(currentPlaying) || 0) > TOUCH_STOP_THRESHOLD) {
+                        return;
+                    }
+
                     let best = null;
                     let bestRatio = TOUCH_PLAY_THRESHOLD;
                     for (const [el, ratio] of ratioMap) {
@@ -1829,7 +1918,7 @@
                         stopPlayback(currentPlaying);
                         currentPlaying = null;
                     }
-                }, { threshold: [0, 0.25, 0.5, 0.6, 0.75, 1.0] });
+                }, { threshold: [0, 0.15, 0.3, 0.4, 0.5, 0.6, 0.75, 1.0] });
 
                 mediaEls.forEach(el => scrollPlayObserver.observe(el));
 
