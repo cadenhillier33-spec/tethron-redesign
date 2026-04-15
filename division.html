@@ -189,6 +189,16 @@
         .operator-media.is-playing .operator-poster { opacity: 0; }
         .operator-media.is-playing .operator-video  { opacity: 1; }
 
+        body.div-lock-scroll { position: fixed; width: 100%; left: 0; right: 0; overflow: hidden; }
+
+        @media (max-width: 768px) {
+            #chat-input { font-size: 16px !important; line-height: 1.35; }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .audio-primer { display: none !important; }
+        }
+
         .audio-primer {
             position: fixed;
             bottom: 24px;
@@ -1211,6 +1221,20 @@
             awaiting: false
         };
 
+        // Scroll lock that actually works on iOS Safari — mirrors khaleesi-widget.js
+        let savedModalScrollY = 0;
+        function lockBodyScroll() {
+            savedModalScrollY = window.scrollY || window.pageYOffset || 0;
+            document.body.style.top = `-${savedModalScrollY}px`;
+            document.body.classList.add('div-lock-scroll');
+        }
+        function unlockBodyScroll() {
+            if (!document.body.classList.contains('div-lock-scroll')) return;
+            document.body.classList.remove('div-lock-scroll');
+            document.body.style.top = '';
+            window.scrollTo(0, savedModalScrollY);
+        }
+
         function openInterview(slug, name, role) {
             chatState.slug = slug;
             chatState.name = name;
@@ -1231,15 +1255,17 @@
             document.getElementById('chat-send').disabled = true;
 
             document.getElementById('interview-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+            lockBodyScroll();
 
-            setTimeout(() => document.getElementById('chat-input').focus(), 120);
+            // Defer focus a touch longer on mobile so the scroll-lock layout settles
+            // before the keyboard animates in — prevents jumpy positioning on iOS.
+            setTimeout(() => document.getElementById('chat-input').focus(), 180);
             fetchReply();
         }
 
         function closeInterview() {
             document.getElementById('interview-modal').classList.add('hidden');
-            document.body.style.overflow = '';
+            unlockBodyScroll();
         }
 
         function escapeAndFormat(text) {
@@ -1627,13 +1653,19 @@
         cartRender();
 
         // ═══════════════════════════════════════════════════════════════
-        // Operator hover-to-play with audio (one at a time)
+        // Operator playback
+        //   Desktop (hover-capable): hover card → plays with audio
+        //   Touch (mobile/tablet):   scroll card into view → plays muted
+        //                            tap card               → unmutes this card
+        // Only one card ever plays at a time.
         // ═══════════════════════════════════════════════════════════════
-        (function initOperatorHover() {
-            const HOVER_DELAY = 200;          // ms before a hover triggers playback
-            const PRIMER_TIMEOUT = 2800;      // ms to show "click to enable audio" chip
+        (function initOperatorPlayback() {
+            const HOVER_DELAY = 200;
+            const PRIMER_TIMEOUT = 2800;
+            const TOUCH_PLAY_THRESHOLD = 0.6;    // % of card visible before scroll-play kicks in
             const primer = document.getElementById('audio-primer');
             const mediaEls = document.querySelectorAll('.operator-media');
+            const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
             let currentPlaying = null;
             let audioUnlocked = false;
             let primerTimer = null;
@@ -1649,7 +1681,7 @@
             }
 
             function showPrimer() {
-                if (!primer || audioUnlocked) return;
+                if (!primer || audioUnlocked || isTouchDevice) return;
                 primer.classList.add('show');
                 clearTimeout(primerTimer);
                 primerTimer = setTimeout(() => primer.classList.remove('show'), PRIMER_TIMEOUT);
@@ -1661,72 +1693,115 @@
                 clearTimeout(primerTimer);
             }
 
-            async function startPlayback(mediaEl) {
+            async function startPlayback(mediaEl, opts = {}) {
+                const forceMuted = opts.forceMuted === true;
                 const video = mediaEl.querySelector('video.operator-video');
                 if (!video) return;
 
-                // Tear down anything else that was playing
+                // Already playing this card? Just swap mute state if we're upgrading
+                // a silent scroll-play into an unmuted tap-to-hear.
+                if (currentPlaying === mediaEl && !video.paused) {
+                    if (!forceMuted && video.muted) {
+                        video.muted = false;
+                        video.volume = 1.0;
+                        audioUnlocked = true;
+                        hidePrimer();
+                    } else if (forceMuted && !video.muted) {
+                        video.muted = true;
+                    }
+                    return;
+                }
+
                 if (currentPlaying && currentPlaying !== mediaEl) {
                     stopPlayback(currentPlaying);
                 }
                 currentPlaying = mediaEl;
 
                 video.currentTime = 0;
-                video.muted = false;
+                video.muted = forceMuted ? true : !audioUnlocked;
                 video.volume = 1.0;
-                // Reveal the video layer immediately — the browser can swap from
-                // poster to a buffering video frame without the cross-fade waiting
-                // on play() to resolve.
                 mediaEl.classList.add('is-playing');
 
                 try {
                     await video.play();
-                    audioUnlocked = true;
+                    if (!video.muted) audioUnlocked = true;
                     hidePrimer();
                 } catch (err) {
-                    // Autoplay policy refused unmuted playback — retry muted, show primer.
+                    // Autoplay refused — retry muted, show primer only if we wanted sound.
                     video.muted = true;
                     try {
                         await video.play();
-                        showPrimer();
+                        if (!forceMuted) showPrimer();
                     } catch (_) {
-                        // Hard failure — hide video layer, keep poster visible.
                         mediaEl.classList.remove('is-playing');
                         currentPlaying = null;
                     }
                 }
             }
 
-            mediaEls.forEach(mediaEl => {
-                let hoverTimer = null;
+            if (isTouchDevice) {
+                // Mobile / tablet: scroll-based autoplay. Whichever card is most
+                // visible (≥ TOUCH_PLAY_THRESHOLD) is the one that plays, muted.
+                const ratioMap = new Map();
+                mediaEls.forEach(el => ratioMap.set(el, 0));
 
-                // Desktop pointer hover
-                mediaEl.addEventListener('mouseenter', () => {
-                    clearTimeout(hoverTimer);
-                    hoverTimer = setTimeout(() => startPlayback(mediaEl), HOVER_DELAY);
-                });
-                mediaEl.addEventListener('mouseleave', () => {
-                    clearTimeout(hoverTimer);
-                    if (currentPlaying === mediaEl) {
-                        stopPlayback(mediaEl);
+                const scrollPlayObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(e => ratioMap.set(e.target, e.intersectionRatio));
+
+                    let best = null;
+                    let bestRatio = TOUCH_PLAY_THRESHOLD;
+                    for (const [el, ratio] of ratioMap) {
+                        if (ratio > bestRatio) { best = el; bestRatio = ratio; }
+                    }
+
+                    if (best) {
+                        if (currentPlaying !== best) {
+                            startPlayback(best, { forceMuted: true });
+                        }
+                    } else if (currentPlaying) {
+                        stopPlayback(currentPlaying);
                         currentPlaying = null;
                     }
-                });
+                }, { threshold: [0, 0.25, 0.5, 0.6, 0.75, 1.0] });
 
-                // Touch — tap to play the card, tap again (or anywhere off) to stop.
-                mediaEl.addEventListener('click', (ev) => {
-                    // If the user is heading for the Interview / Hire buttons, let those handle it.
-                    if (ev.target.closest('button')) return;
-                    if (currentPlaying === mediaEl) {
-                        stopPlayback(mediaEl);
-                        currentPlaying = null;
-                    } else {
-                        startPlayback(mediaEl);
-                    }
-                });
-            });
+                mediaEls.forEach(el => scrollPlayObserver.observe(el));
 
-            // Any document interaction unlocks audio for future hovers.
+                // Tap the card to unmute it — ignore button clicks.
+                mediaEls.forEach(mediaEl => {
+                    mediaEl.addEventListener('click', (ev) => {
+                        if (ev.target.closest('button')) return;
+                        startPlayback(mediaEl, { forceMuted: false });
+                    });
+                });
+            } else {
+                // Desktop: hover to play with audio (existing behavior).
+                mediaEls.forEach(mediaEl => {
+                    let hoverTimer = null;
+
+                    mediaEl.addEventListener('mouseenter', () => {
+                        clearTimeout(hoverTimer);
+                        hoverTimer = setTimeout(() => startPlayback(mediaEl), HOVER_DELAY);
+                    });
+                    mediaEl.addEventListener('mouseleave', () => {
+                        clearTimeout(hoverTimer);
+                        if (currentPlaying === mediaEl) {
+                            stopPlayback(mediaEl);
+                            currentPlaying = null;
+                        }
+                    });
+                    mediaEl.addEventListener('click', (ev) => {
+                        if (ev.target.closest('button')) return;
+                        if (currentPlaying === mediaEl) {
+                            stopPlayback(mediaEl);
+                            currentPlaying = null;
+                        } else {
+                            startPlayback(mediaEl);
+                        }
+                    });
+                });
+            }
+
+            // Any interaction unlocks future audio plays (desktop path).
             function markAudioUnlocked() {
                 audioUnlocked = true;
                 hidePrimer();
@@ -1736,7 +1811,7 @@
             document.addEventListener('pointerdown', markAudioUnlocked);
             document.addEventListener('keydown', markAudioUnlocked);
 
-            // Pause whatever's playing once its card scrolls off-screen.
+            // Safety net: once a playing card leaves the viewport entirely, stop it.
             const offscreenObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (!entry.isIntersecting && entry.target === currentPlaying) {
