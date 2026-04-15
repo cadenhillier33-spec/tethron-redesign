@@ -2010,5 +2010,31 @@
         <i class="ph-bold ph-speaker-high"></i>
         <span>Click anywhere to enable audio</span>
     </div>
+
+    <script>
+        // Deep-link handler for /division?operator=X&interview=1 coming from the
+        // homepage carousel. Scrolls to the operator's card and, if interview=1,
+        // auto-opens the interview modal by clicking their existing Interview button.
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('operator');
+            const wantsInterview = params.get('interview') === '1';
+            if (!slug) return;
+
+            const mediaEl = document.querySelector(`[data-operator="${slug}"]`);
+            const card = mediaEl?.closest('.employee-card');
+
+            if (card) {
+                setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 250);
+            }
+
+            if (wantsInterview) {
+                const btn = document.querySelector(`button[onclick*="openInterview('${slug}'"]`);
+                if (btn) {
+                    setTimeout(() => btn.click(), 650);
+                }
+            }
+        })();
+    </script>
 </body>
 </html>

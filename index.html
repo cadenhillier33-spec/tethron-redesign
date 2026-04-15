@@ -843,9 +843,14 @@
                 </button>
             </div>
 
-            <div class="text-center mt-10 md:mt-14 reveal">
-                <a href="/division" class="liquid-glass inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm md:text-base font-semibold">
-                    Meet the Full Team <i class="ph-bold ph-arrow-right"></i>
+            <div class="text-center mt-10 md:mt-14 reveal flex flex-col items-center gap-3">
+                <a id="division-interview-cta" href="/division?operator=nova&interview=1" class="liquid-glass inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm md:text-base font-semibold group">
+                    <i class="ph-fill ph-chat-circle-dots text-tethron-cyan"></i>
+                    <span id="division-interview-label">Interview Nova</span>
+                    <i class="ph-bold ph-arrow-right transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+                <a href="/division" class="text-xs md:text-sm text-gray-500 hover:text-gray-300 transition-colors tracking-wide">
+                    or meet the full team <i class="ph-bold ph-arrow-right text-[10px]"></i>
                 </a>
             </div>
         </section>
@@ -2038,6 +2043,14 @@
                 });
 
                 counterEl.textContent = String(mod(active, N) + 1).padStart(2, '0');
+
+                // Keep the Interview CTA in sync with whichever operator is active
+                const op = OPERATORS[mod(active, N)];
+                const ctaLabel = document.getElementById('division-interview-label');
+                const ctaLink = document.getElementById('division-interview-cta');
+                if (ctaLabel) ctaLabel.textContent = `Interview ${op.name}`;
+                if (ctaLink) ctaLink.setAttribute('href', `/division?operator=${op.slug}&interview=1`);
+
                 syncVideos();
             }
 
