@@ -1970,7 +1970,7 @@
                 <div class="division-card" data-idx="${i}" aria-hidden="true">
                     <div class="spotlight-ring"></div>
                     <img class="poster" src="avatars/${op.slug}.png" alt="${op.name}" loading="lazy" decoding="async">
-                    <video muted loop playsinline preload="none" data-src="videos/${op.slug}.mp4"></video>
+                    <video muted playsinline preload="none" data-src="videos/${op.slug}.mp4"></video>
                     <div class="vignette"></div>
                     <div class="status-pill">Available</div>
                     <div class="division-audio-hint" aria-hidden="true"><i class="ph-fill ph-speaker-simple-high"></i></div>
@@ -1987,8 +1987,21 @@
             let autoTimer = null;
             let isVisible = false;
             let audioUnlocked = false;
-            const AUTO_MS = 6500;
+            const AUTO_FALLBACK_MS = 22000; // safety net if ended doesn't fire
             const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // When the active video finishes its pitch, advance to the next operator.
+            // Non-active videos are paused, so their ended events are suppressed by design.
+            cards.forEach((card) => {
+                const v = card.querySelector('video');
+                if (!v) return;
+                v.addEventListener('ended', () => {
+                    if (!isVisible) return;
+                    if (reduceMotion) return;
+                    if (!card.classList.contains('active')) return;
+                    advance(1);
+                });
+            });
 
             function mod(x, n) { return ((x % n) + n) % n; }
 
@@ -2063,6 +2076,8 @@
                         // Active: ensure fully loaded so audio can start instantly
                         if (v.preload !== 'auto') v.preload = 'auto';
                         if (!v.src) v.src = v.dataset.src;
+                        // Restart from zero so each operator plays their full pitch
+                        try { v.currentTime = 0; } catch (e) {}
                         if (isVisible) playWithSound(v, card);
                         else v.pause();
                     } else if (absD === 1) {
@@ -2109,9 +2124,9 @@
 
             function resetAuto() {
                 clearTimeout(autoTimer);
-                if (isVisible && !reduceMotion) {
-                    autoTimer = setTimeout(() => advance(1), AUTO_MS);
-                }
+                // ended handler is the primary advance trigger; this is just a safety
+                if (!isVisible || reduceMotion) return;
+                autoTimer = setTimeout(() => advance(1), AUTO_FALLBACK_MS);
             }
 
             prevBtn.addEventListener('click', () => advance(-1));
