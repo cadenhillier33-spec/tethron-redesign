@@ -1840,18 +1840,23 @@
                     }
                     hidePrimer();
                 } catch (err) {
-                    // Autoplay refused — retry muted, show primer only if we wanted sound.
+                    // Autoplay refused — retry muted.
                     video.muted = true;
                     try {
                         await video.play();
-                        if (!forceMuted) {
-                            if (isTouchDevice) showAudioHint(mediaEl);
-                            else showPrimer();
-                        }
                     } catch (_) {
                         mediaEl.classList.remove('is-playing');
                         currentPlaying = null;
+                        return;
                     }
+                }
+
+                // Any time we end up playing muted and audio isn't yet unlocked,
+                // surface the speaker-icon hint so the user knows a tap unlocks
+                // sound. On desktop we fall back to the global primer toast.
+                if (!video.paused && video.muted && !audioUnlocked && !forceMuted) {
+                    if (isTouchDevice) showAudioHint(mediaEl);
+                    else showPrimer();
                 }
 
                 // Warm the neighbors so the next scroll has zero first-frame lag.
