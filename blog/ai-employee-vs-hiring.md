@@ -18,10 +18,10 @@ Let's start with what most business owners already know but rarely calculate:
 
 **The cost of an AI employee:**
 - Setup and deployment: **$3,500** (one-time)
-- Monthly operation: **$600/month ($7,200/year)**
+- Monthly operation: **$750/month ($9,000/year)**
 - Time to deploy: **1 week**, fully operational
 - Training period: **None** — it arrives configured for your business
-- Total first-year cost: **$10,700**
+- Total first-year cost: **$12,500**
 
 That's not a marginal savings. That's an **80% cost reduction** while getting something that works 24 hours a day instead of 8.
 
@@ -104,10 +104,10 @@ Let's make this concrete. Take a typical home service company doing $500K in ann
 - Owner admin time reclaimed: **500+ hours/year**
 - Additional revenue from captured leads: **$50,000-$100,000/year** conservatively
 
-**Investment:** $10,700 first year.
+**Investment:** $12,500 first year.
 **Return:** $50,000+ in recovered revenue, plus 500 hours of the owner's time back.
 
-That's a **5-10x ROI** in year one. By year two, with no setup fee and only the $7,200 annual cost, the math gets even better.
+That's a **5-10x ROI** in year one. By year two, with no setup fee and only the $9,000 annual cost, the math gets even better.
 
 ## The Decision
 

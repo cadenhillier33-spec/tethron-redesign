@@ -194,22 +194,48 @@
     }
 
     function escapeAndFormat(text) {
-        return String(text)
+        let out = String(text)
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
+            .replace(/>/g, '&gt;');
+
+        const stash = [];
+        const park = (html) => `\u0001K${stash.push(html) - 1}\u0001`;
+
+        const trimPunct = (u) => {
+            let t = '';
+            while (/[.,!?;:)\]]$/.test(u)) { t = u.slice(-1) + t; u = u.slice(0, -1); }
+            return [u, t];
+        };
+
+        out = out.replace(/\[([^\]]+)\]\(([^\s)]+)\)/g, (_, label, url) => {
+            const href = /^https?:\/\//i.test(url)
+                ? url
+                : (url.startsWith('/') || url.startsWith('#') ? url : 'https://' + url);
+            return park(`<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+        });
+
+        out = out.replace(/(\bhttps?:\/\/[^\s<]+)/g, (match) => {
+            const [url, trailing] = trimPunct(match);
+            return park(`<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`) + trailing;
+        });
+
+        const TLDS = /^(ai|com|org|net|io|co|app|dev|gg|so|sh|me|us|uk|ca|tv|fm|xyz|tech|agency|studio|design|page|site|online|biz|info)$/i;
+        out = out.replace(/\b([a-z0-9][a-z0-9-]*(?:\.[a-z0-9][a-z0-9-]*)+)(\/[^\s<]*)?/gi, (match, domain, path) => {
+            const tld = domain.split('.').pop();
+            if (!TLDS.test(tld)) return match;
+            const [clean, trailing] = trimPunct(match);
+            return park(`<a href="https://${clean}" target="_blank" rel="noopener noreferrer">${clean}</a>`) + trailing;
+        });
+
+        out = out
             .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*([^\s*](?:[^*]*[^\s*])?)\*/g, '<em>$1</em>')
-            .replace(/(\bhttps?:\/\/[^\s<]+)/g, (match) => {
-                let url = match;
-                let trailing = '';
-                while (/[.,!?;:)\]]$/.test(url)) {
-                    trailing = url.slice(-1) + trailing;
-                    url = url.slice(0, -1);
-                }
-                return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${trailing}`;
-            })
             .replace(/\n/g, '<br>');
+
+        out = out.replace(/\u0001K(\d+)\u0001/g, (_, i) => stash[+i]);
+
+        return out;
     }
 
     function showTyping() {
