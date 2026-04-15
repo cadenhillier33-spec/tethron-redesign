@@ -9,3 +9,7 @@ avatars/old/
 
 # Local archives
 *.archived
+
+# HeyGen raw 4K masters (local only)
+videos/raw-4k/
+videos/nova-pilot.mp4
