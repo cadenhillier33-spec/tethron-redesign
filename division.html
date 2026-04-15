@@ -1672,26 +1672,26 @@
                 currentPlaying = mediaEl;
 
                 video.currentTime = 0;
-                // Try unmuted first — if browser blocks it (no prior user gesture),
-                // fall back to muted playback and surface the audio primer.
-                video.muted = !audioUnlocked ? false : false;
                 video.muted = false;
                 video.volume = 1.0;
+                // Reveal the video layer immediately — the browser can swap from
+                // poster to a buffering video frame without the cross-fade waiting
+                // on play() to resolve.
+                mediaEl.classList.add('is-playing');
 
                 try {
                     await video.play();
                     audioUnlocked = true;
                     hidePrimer();
-                    mediaEl.classList.add('is-playing');
                 } catch (err) {
                     // Autoplay policy refused unmuted playback — retry muted, show primer.
                     video.muted = true;
                     try {
                         await video.play();
-                        mediaEl.classList.add('is-playing');
                         showPrimer();
                     } catch (_) {
-                        // Hard failure — give up quietly, keep poster visible.
+                        // Hard failure — hide video layer, keep poster visible.
+                        mediaEl.classList.remove('is-playing');
                         currentPlaying = null;
                     }
                 }
