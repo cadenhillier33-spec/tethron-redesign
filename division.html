@@ -1036,8 +1036,11 @@
     </main>
 
     <!-- INTERVIEW MODAL — live chat with the selected operator -->
-    <div id="interview-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" style="background: rgba(7,8,10,0.85); backdrop-filter: blur(12px);">
-        <div class="glass-panel w-full max-w-2xl flex flex-col relative overflow-hidden" style="height: min(720px, calc(100dvh - 32px));">
+    <!-- Overlay uses 100dvh (dynamic viewport height) so it shrinks when the iOS keyboard opens.
+         With plain 100vh / inset-0, iOS auto-scrolls the layout viewport up to reveal the focused
+         input, pushing the modal header off-screen. 100dvh keeps everything above the keyboard. -->
+    <div id="interview-modal" class="hidden fixed top-0 left-0 right-0 z-[100] flex items-center justify-center p-4" style="height: 100dvh; background: rgba(7,8,10,0.85); backdrop-filter: blur(12px);">
+        <div class="glass-panel w-full max-w-2xl flex flex-col relative overflow-hidden" style="height: 100%; max-height: min(720px, calc(100dvh - 32px));">
             <!-- HEADER -->
             <div class="flex items-center gap-3 p-4 md:p-5 border-b border-white/5 flex-shrink-0" style="background: linear-gradient(180deg, rgba(0,212,232,0.07), transparent);">
                 <div id="modal-avatar" class="w-11 h-11 md:w-12 md:h-12 rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/20 to-transparent flex-shrink-0" style="border: 1.5px solid rgba(0,212,232,0.3); box-shadow: 0 0 18px rgba(0,212,232,0.18);"></div>
@@ -1235,6 +1238,30 @@
             window.scrollTo(0, savedModalScrollY);
         }
 
+        // iOS Safari doesn't always shrink `100dvh` reliably when the virtual
+        // keyboard opens inside a fixed full-screen modal, which leaves the
+        // chat input stranded below the keyboard. visualViewport gives us the
+        // ACTUAL visible area — we re-pin the modal height to it so the input
+        // always lands on top of whatever row of keys iOS just slid in.
+        function syncInterviewModalToVisualViewport() {
+            const modal = document.getElementById('interview-modal');
+            if (!modal || modal.classList.contains('hidden')) return;
+            const vv = window.visualViewport;
+            if (!vv) return;
+            modal.style.height = `${vv.height}px`;
+            modal.style.top = `${vv.offsetTop}px`;
+        }
+        function resetInterviewModalViewport() {
+            const modal = document.getElementById('interview-modal');
+            if (!modal) return;
+            modal.style.height = '100dvh';
+            modal.style.top = '';
+        }
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', syncInterviewModalToVisualViewport);
+            window.visualViewport.addEventListener('scroll', syncInterviewModalToVisualViewport);
+        }
+
         function openInterview(slug, name, role) {
             chatState.slug = slug;
             chatState.name = name;
@@ -1254,18 +1281,29 @@
             document.getElementById('chat-input').style.height = 'auto';
             document.getElementById('chat-send').disabled = true;
 
+            // Freeze the grid video before the modal paints so nothing keeps
+            // looping (with audio on mobile) behind the blurred overlay.
+            window.__tethronOperatorPlayback?.stopAll();
+
             document.getElementById('interview-modal').classList.remove('hidden');
             lockBodyScroll();
 
             // Defer focus a touch longer on mobile so the scroll-lock layout settles
             // before the keyboard animates in — prevents jumpy positioning on iOS.
-            setTimeout(() => document.getElementById('chat-input').focus(), 180);
+            setTimeout(() => {
+                document.getElementById('chat-input').focus();
+                syncInterviewModalToVisualViewport();
+            }, 180);
+            // Re-sync after the keyboard animation actually starts shrinking the viewport
+            setTimeout(syncInterviewModalToVisualViewport, 450);
             fetchReply();
         }
 
         function closeInterview() {
             document.getElementById('interview-modal').classList.add('hidden');
+            resetInterviewModalViewport();
             unlockBodyScroll();
+            window.__tethronOperatorPlayback?.resume();
         }
 
         function escapeAndFormat(text) {
@@ -1662,7 +1700,7 @@
         (function initOperatorPlayback() {
             const HOVER_DELAY = 200;
             const PRIMER_TIMEOUT = 2800;
-            const TOUCH_PLAY_THRESHOLD = 0.6;    // % of card visible before scroll-play kicks in
+            const TOUCH_PLAY_THRESHOLD = 0.5;    // % of card visible before scroll-play kicks in
             const primer = document.getElementById('audio-primer');
             const mediaEls = document.querySelectorAll('.operator-media');
             const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -1739,11 +1777,40 @@
                 }
             }
 
+            const ratioMap = new Map();
+
             if (isTouchDevice) {
                 // Mobile / tablet: scroll-based autoplay. Whichever card is most
-                // visible (≥ TOUCH_PLAY_THRESHOLD) is the one that plays, muted.
-                const ratioMap = new Map();
+                // visible (≥ TOUCH_PLAY_THRESHOLD) is the one that plays with audio.
                 mediaEls.forEach(el => ratioMap.set(el, 0));
+
+                // iOS rule: for a <video> to play with audio programmatically, its FIRST
+                // play() must happen inside a user-gesture handler. We prime every video
+                // with a muted play→pause on the first touch, which flips iOS's internal
+                // "activated" bit so subsequent scroll-triggered plays can carry audio.
+                let primed = false;
+                const primeVideosOnGesture = () => {
+                    if (primed) return;
+                    primed = true;
+                    audioUnlocked = true;
+                    const curVid = currentPlaying?.querySelector('video.operator-video') || null;
+                    mediaEls.forEach(el => {
+                        const v = el.querySelector('video.operator-video');
+                        if (!v || v === curVid) return;
+                        v.muted = true;
+                        const p = v.play();
+                        if (p && typeof p.then === 'function') {
+                            p.then(() => { v.pause(); v.currentTime = 0; }).catch(() => {});
+                        }
+                    });
+                    // Unmute whatever's already playing so the user hears it immediately.
+                    if (curVid && !curVid.paused) {
+                        curVid.muted = false;
+                        curVid.volume = 1.0;
+                    }
+                };
+                document.addEventListener('touchstart', primeVideosOnGesture, { passive: true });
+                document.addEventListener('click', primeVideosOnGesture, { passive: true });
 
                 const scrollPlayObserver = new IntersectionObserver((entries) => {
                     entries.forEach(e => ratioMap.set(e.target, e.intersectionRatio));
@@ -1756,7 +1823,7 @@
 
                     if (best) {
                         if (currentPlaying !== best) {
-                            startPlayback(best, { forceMuted: true });
+                            startPlayback(best);
                         }
                     } else if (currentPlaying) {
                         stopPlayback(currentPlaying);
@@ -1766,11 +1833,11 @@
 
                 mediaEls.forEach(el => scrollPlayObserver.observe(el));
 
-                // Tap the card to unmute it — ignore button clicks.
+                // Tap the card (not a button) = unmute / force play this one.
                 mediaEls.forEach(mediaEl => {
                     mediaEl.addEventListener('click', (ev) => {
                         if (ev.target.closest('button')) return;
-                        startPlayback(mediaEl, { forceMuted: false });
+                        startPlayback(mediaEl);
                     });
                 });
             } else {
@@ -1810,6 +1877,27 @@
             }
             document.addEventListener('pointerdown', markAudioUnlocked);
             document.addEventListener('keydown', markAudioUnlocked);
+
+            // Exposed so the interview modal can freeze playback while it's open.
+            // Without this, whichever card was live before opening would keep looping
+            // (with audio on mobile) behind the blurred overlay.
+            window.__tethronOperatorPlayback = {
+                stopAll() {
+                    if (currentPlaying) {
+                        stopPlayback(currentPlaying);
+                        currentPlaying = null;
+                    }
+                },
+                resume() {
+                    if (!isTouchDevice) return;
+                    let best = null;
+                    let bestRatio = TOUCH_PLAY_THRESHOLD;
+                    for (const [el, ratio] of ratioMap) {
+                        if (ratio > bestRatio) { best = el; bestRatio = ratio; }
+                    }
+                    if (best) startPlayback(best);
+                }
+            };
 
             // Safety net: once a playing card leaves the viewport entirely, stop it.
             const offscreenObserver = new IntersectionObserver((entries) => {
