@@ -184,6 +184,38 @@
             z-index: 0;
         }
 
+        .operator-media .operator-poster { transition: opacity 280ms ease; opacity: 1; }
+        .operator-media .operator-video  { transition: opacity 280ms ease; opacity: 0; pointer-events: none; }
+        .operator-media.is-playing .operator-poster { opacity: 0; }
+        .operator-media.is-playing .operator-video  { opacity: 1; }
+
+        .audio-primer {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(7,8,10,0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,212,232,0.25);
+            color: #e7e9ee;
+            font-size: 12px;
+            letter-spacing: 0.02em;
+            padding: 10px 16px;
+            border-radius: 999px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 300ms ease, transform 300ms ease;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .audio-primer.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .audio-primer i { color: #00d4e8; }
+
         .status-dot {
             width: 8px;
             height: 8px;
@@ -435,8 +467,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/nova.mp4" poster="avatars/nova.png" aria-label="Nova" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="nova">
+                            <img src="avatars/nova.png" alt="Nova" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/nova.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -466,8 +499,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/knox.mp4" poster="avatars/knox.png" aria-label="Knox" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="knox">
+                            <img src="avatars/knox.png" alt="Knox" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/knox.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -497,8 +531,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/luna.mp4" poster="avatars/luna.png" aria-label="Luna" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="luna">
+                            <img src="avatars/luna.png" alt="Luna" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/luna.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -528,8 +563,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/sage.mp4" poster="avatars/sage.png" aria-label="Sage" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="sage">
+                            <img src="avatars/sage.png" alt="Sage" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/sage.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -559,8 +595,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/iris.mp4" poster="avatars/iris.png" aria-label="Iris" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="iris">
+                            <img src="avatars/iris.png" alt="Iris" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/iris.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -590,8 +627,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/quinn.mp4" poster="avatars/quinn.png" aria-label="Quinn" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="quinn">
+                            <img src="avatars/quinn.png" alt="Quinn" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/quinn.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -621,8 +659,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/cypher.mp4" poster="avatars/cypher.png" aria-label="Cypher" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="cypher">
+                            <img src="avatars/cypher.png" alt="Cypher" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/cypher.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -652,8 +691,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/pearl.mp4" poster="avatars/pearl.png" aria-label="Pearl" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="pearl">
+                            <img src="avatars/pearl.png" alt="Pearl" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/pearl.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -683,8 +723,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/ember.mp4" poster="avatars/ember.png" aria-label="Ember" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="ember">
+                            <img src="avatars/ember.png" alt="Ember" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/ember.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -714,8 +755,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/echo.mp4" poster="avatars/echo.png" aria-label="Echo" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="echo">
+                            <img src="avatars/echo.png" alt="Echo" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/echo.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -745,8 +787,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/ledger.mp4" poster="avatars/ledger.png" aria-label="Ledger" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="ledger">
+                            <img src="avatars/ledger.png" alt="Ledger" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/ledger.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -776,8 +819,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/atlas.mp4" poster="avatars/atlas.png" aria-label="Atlas" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="atlas">
+                            <img src="avatars/atlas.png" alt="Atlas" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/atlas.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -807,8 +851,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/reed.mp4" poster="avatars/reed.png" aria-label="Reed" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="reed">
+                            <img src="avatars/reed.png" alt="Reed" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/reed.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -838,8 +883,9 @@
                 <div class="employee-card reveal p-6 flex flex-col relative">
                     <div class="relative mb-5">
                         <div class="avatar-glow"></div>
-                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent">
-                            <video src="videos/sovereign.mp4" poster="avatars/sovereign.png" aria-label="Sovereign" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover"></video>
+                        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-tethron-cyan/10 to-transparent operator-media" data-operator="sovereign">
+                            <img src="avatars/sovereign.png" alt="Sovereign" class="w-full h-full object-cover operator-poster">
+                            <video src="videos/sovereign.mp4" muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover operator-video"></video>
                         </div>
                         <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur border border-white/10 px-2.5 py-1 rounded-full">
                             <div class="status-dot" style="width:6px;height:6px;"></div>
@@ -1580,18 +1626,132 @@
         // Initial render so button states reflect any saved cart on load
         cartRender();
 
-        // Pause operator videos when off-screen to save CPU/battery
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const v = entry.target;
-                if (entry.isIntersecting) {
-                    if (v.paused) v.play().catch(() => {});
-                } else {
-                    v.pause();
+        // ═══════════════════════════════════════════════════════════════
+        // Operator hover-to-play with audio (one at a time)
+        // ═══════════════════════════════════════════════════════════════
+        (function initOperatorHover() {
+            const HOVER_DELAY = 200;          // ms before a hover triggers playback
+            const PRIMER_TIMEOUT = 2800;      // ms to show "click to enable audio" chip
+            const primer = document.getElementById('audio-primer');
+            const mediaEls = document.querySelectorAll('.operator-media');
+            let currentPlaying = null;
+            let audioUnlocked = false;
+            let primerTimer = null;
+
+            function stopPlayback(mediaEl) {
+                if (!mediaEl) return;
+                const video = mediaEl.querySelector('video.operator-video');
+                if (!video) return;
+                video.pause();
+                video.muted = true;
+                video.currentTime = 0;
+                mediaEl.classList.remove('is-playing');
+            }
+
+            function showPrimer() {
+                if (!primer || audioUnlocked) return;
+                primer.classList.add('show');
+                clearTimeout(primerTimer);
+                primerTimer = setTimeout(() => primer.classList.remove('show'), PRIMER_TIMEOUT);
+            }
+
+            function hidePrimer() {
+                if (!primer) return;
+                primer.classList.remove('show');
+                clearTimeout(primerTimer);
+            }
+
+            async function startPlayback(mediaEl) {
+                const video = mediaEl.querySelector('video.operator-video');
+                if (!video) return;
+
+                // Tear down anything else that was playing
+                if (currentPlaying && currentPlaying !== mediaEl) {
+                    stopPlayback(currentPlaying);
                 }
+                currentPlaying = mediaEl;
+
+                video.currentTime = 0;
+                // Try unmuted first — if browser blocks it (no prior user gesture),
+                // fall back to muted playback and surface the audio primer.
+                video.muted = !audioUnlocked ? false : false;
+                video.muted = false;
+                video.volume = 1.0;
+
+                try {
+                    await video.play();
+                    audioUnlocked = true;
+                    hidePrimer();
+                    mediaEl.classList.add('is-playing');
+                } catch (err) {
+                    // Autoplay policy refused unmuted playback — retry muted, show primer.
+                    video.muted = true;
+                    try {
+                        await video.play();
+                        mediaEl.classList.add('is-playing');
+                        showPrimer();
+                    } catch (_) {
+                        // Hard failure — give up quietly, keep poster visible.
+                        currentPlaying = null;
+                    }
+                }
+            }
+
+            mediaEls.forEach(mediaEl => {
+                let hoverTimer = null;
+
+                // Desktop pointer hover
+                mediaEl.addEventListener('mouseenter', () => {
+                    clearTimeout(hoverTimer);
+                    hoverTimer = setTimeout(() => startPlayback(mediaEl), HOVER_DELAY);
+                });
+                mediaEl.addEventListener('mouseleave', () => {
+                    clearTimeout(hoverTimer);
+                    if (currentPlaying === mediaEl) {
+                        stopPlayback(mediaEl);
+                        currentPlaying = null;
+                    }
+                });
+
+                // Touch — tap to play the card, tap again (or anywhere off) to stop.
+                mediaEl.addEventListener('click', (ev) => {
+                    // If the user is heading for the Interview / Hire buttons, let those handle it.
+                    if (ev.target.closest('button')) return;
+                    if (currentPlaying === mediaEl) {
+                        stopPlayback(mediaEl);
+                        currentPlaying = null;
+                    } else {
+                        startPlayback(mediaEl);
+                    }
+                });
             });
-        }, { rootMargin: '200px', threshold: 0.1 });
-        document.querySelectorAll('.employee-card video').forEach(v => videoObserver.observe(v));
+
+            // Any document interaction unlocks audio for future hovers.
+            function markAudioUnlocked() {
+                audioUnlocked = true;
+                hidePrimer();
+                document.removeEventListener('pointerdown', markAudioUnlocked);
+                document.removeEventListener('keydown', markAudioUnlocked);
+            }
+            document.addEventListener('pointerdown', markAudioUnlocked);
+            document.addEventListener('keydown', markAudioUnlocked);
+
+            // Pause whatever's playing once its card scrolls off-screen.
+            const offscreenObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting && entry.target === currentPlaying) {
+                        stopPlayback(entry.target);
+                        currentPlaying = null;
+                    }
+                });
+            }, { threshold: 0.01 });
+            mediaEls.forEach(el => offscreenObserver.observe(el));
+        })();
     </script>
+
+    <div id="audio-primer" class="audio-primer">
+        <i class="ph-bold ph-speaker-high"></i>
+        <span>Click anywhere to enable audio</span>
+    </div>
 </body>
 </html>
