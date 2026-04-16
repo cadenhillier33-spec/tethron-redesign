@@ -311,6 +311,135 @@
         .typing-dot:nth-child(1) { animation-delay: -0.32s; }
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
+        /* Pricing compare table */
+        .pricing-compare-head { padding: 0.9rem 0.85rem; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; text-align: center; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .pricing-compare-head-division { color: #00d4e8; }
+        .pricing-compare-head-pro { background: rgba(0,212,232,0.05); color: #00d4e8; }
+        .pricing-compare-head-ent { color: #a0c0ff; }
+        .pricing-compare-cell { padding: 0.75rem 0.85rem; font-size: 13px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); text-align: center; }
+        .pricing-compare-cell:last-child, .pricing-compare-cell:nth-last-child(-n+4) { border-bottom: none; }
+        .pricing-compare-label { text-align: left; color: rgba(255,255,255,0.5); font-weight: 500; padding-left: 1.25rem; }
+        .pricing-compare-yes { color: #00d4e8; font-weight: 600; }
+        .pricing-compare-no { color: rgba(255,255,255,0.25); }
+
+        /* Comparison (Why hire another human?) */
+        .compare-col { position: relative; border-radius: 20px; padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1.5rem; overflow: hidden; }
+        .compare-col-human {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.05);
+            filter: saturate(0.4);
+            opacity: 0.78;
+        }
+        .compare-col-ai {
+            background: linear-gradient(180deg, rgba(0,212,232,0.07) 0%, rgba(0,212,232,0.02) 50%, rgba(0,212,232,0.05) 100%);
+            border: 1px solid rgba(0,212,232,0.25);
+            box-shadow: 0 0 48px rgba(0,212,232,0.08), inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+        .compare-glow { position: absolute; top: -40%; right: -20%; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(0,212,232,0.18) 0%, transparent 70%); filter: blur(60px); pointer-events: none; }
+        .compare-header { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.6rem; }
+        .compare-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; width: max-content; }
+        .compare-badge-human { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.06); }
+        .compare-badge-ai { background: rgba(0,212,232,0.12); color: #00d4e8; border: 1px solid rgba(0,212,232,0.3); }
+        .compare-header h3 { color: #fff; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+        .compare-col-human .compare-header h3 { color: rgba(255,255,255,0.55); }
+        .compare-rows { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1rem; }
+        .compare-row { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .compare-row:last-child { border-bottom: none; }
+        .compare-v { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; color: rgba(255,255,255,0.55); line-height: 1.1; }
+        .compare-l { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 0.35rem; }
+        .compare-row-ai .compare-v { color: #fff; }
+        .compare-row-ai .compare-l { color: rgba(255,255,255,0.6); }
+
+        /* How It Works scenes */
+        .hiw-step { display: flex; flex-direction: column; gap: 1.25rem; }
+        .hiw-scene {
+            position: relative;
+            height: 220px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 1.25rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hiw-scene-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; height: 280px; background: radial-gradient(ellipse at center, rgba(0,212,232,0.12) 0%, transparent 65%); pointer-events: none; }
+        .hiw-step-body { padding: 0 0.25rem; }
+        .hiw-num { font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.75rem; letter-spacing: 0.25em; color: #00d4e8; margin-bottom: 0.6rem; }
+
+        /* Step 1: pricing picker card */
+        .hiw-price-card { position: relative; z-index: 1; width: 100%; max-width: 260px; background: rgba(10,11,13,0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+        .hiw-price-card-row { display: flex; align-items: center; gap: 0.6rem; font-size: 12.5px; color: rgba(255,255,255,0.7); padding: 0.55rem 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid transparent; transition: all 0.3s; }
+        .hiw-price-card-row .hiw-price { margin-left: auto; font-family: ui-monospace, monospace; color: #fff; }
+        .hiw-price-card-row.hiw-row-active { background: rgba(0,212,232,0.08); border-color: rgba(0,212,232,0.22); color: #fff; }
+        .hiw-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+        .hiw-dot.active { background: #00d4e8; box-shadow: 0 0 8px rgba(0,212,232,0.8); animation: divisionPulse 2s ease-in-out infinite; }
+        .hiw-deploy-pill { position: absolute; bottom: -10px; right: -8px; background: #00d4e8; color: #07080a; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 999px; letter-spacing: 0.04em; box-shadow: 0 4px 20px rgba(0,212,232,0.4); }
+
+        /* Step 2: build lines */
+        .hiw-build-lines { position: relative; z-index: 1; width: 100%; max-width: 260px; display: flex; flex-direction: column; gap: 0.45rem; }
+        .hiw-build-line { display: flex; align-items: center; gap: 0.65rem; font-size: 12.5px; color: rgba(255,255,255,0.7); padding: 0.55rem 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; }
+        .hiw-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,212,232,0.2); border: 1px solid rgba(0,212,232,0.35); color: #00d4e8; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .hiw-check-live { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: #fff; animation: divisionPulse 1.4s ease-in-out infinite; }
+
+        /* Step 3: live feed */
+        .hiw-live-feed { position: relative; z-index: 1; width: 100%; max-width: 260px; display: flex; flex-direction: column; gap: 0.4rem; }
+        .hiw-feed-item { display: flex; align-items: center; gap: 0.55rem; font-size: 12.5px; color: rgba(255,255,255,0.85); padding: 0.5rem 0.7rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; }
+        .hiw-feed-item i { color: #00d4e8; font-size: 14px; }
+        .hiw-feed-time { margin-left: auto; font-family: ui-monospace, monospace; font-size: 10px; color: rgba(255,255,255,0.4); }
+
+        /* Capability cards */
+        .capability-tile {
+            display: flex; flex-direction: column; align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1.25rem;
+            border-radius: 20px;
+            min-height: 168px;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, background 0.3s ease;
+            text-decoration: none;
+        }
+        .capability-tile:hover { transform: translateY(-3px); border-color: rgba(0,212,232,0.25); }
+        .capability-tile h3 { color: #fff; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+        .capability-tile p { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.55; }
+        .cap-icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.15);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+            font-size: 22px; color: #00d4e8;
+        }
+        .capability-tile:hover .cap-icon { transform: scale(1.08) rotate(-3deg); background: rgba(0,212,232,0.14); }
+        .cap-icon-hero {
+            width: 88px; height: 88px; border-radius: 24px;
+            font-size: 42px; color: #00d4e8;
+            background: linear-gradient(135deg, rgba(0,212,232,0.22) 0%, rgba(0,212,232,0.06) 100%);
+            border: 1px solid rgba(0,212,232,0.28);
+            box-shadow: 0 0 40px rgba(0,212,232,0.2);
+        }
+        .capability-hero:hover .cap-icon-hero { transform: scale(1.05); }
+        .capability-cta { justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, rgba(0,212,232,0.07) 0%, rgba(0,212,232,0.02) 100%); }
+        .cap-icon-cta { background: rgba(0,212,232,0.16); border-color: rgba(0,212,232,0.3); }
+
+        /* Scenario chips above demo chat */
+        .scenario-chip {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.55rem 1rem; border-radius: 9999px;
+            font-size: 0.8rem; font-weight: 500; letter-spacing: 0.01em;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.6);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .scenario-chip:not(:disabled):hover { color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.14); }
+        .scenario-chip.active {
+            background: rgba(0,212,232,0.1);
+            border-color: rgba(0,212,232,0.3);
+            color: #00d4e8;
+            box-shadow: 0 0 24px rgba(0,212,232,0.12);
+        }
+        .scenario-chip:disabled { opacity: 0.4; cursor: not-allowed; }
+        .scenario-soon { font-size: 0.65rem; opacity: 0.7; margin-left: 0.15rem; letter-spacing: 0.1em; }
+
         /* Liquid Glass Button */
         .liquid-glass {
             position: relative;
@@ -370,8 +499,23 @@
             width: max-content;
             will-change: transform;
         }
-        .logo-carousel-track.scroll-left { animation: logoScrollLeft 25s linear infinite; }
-        .logo-carousel-track.scroll-right { animation: logoScrollRight 30s linear infinite; }
+        .logo-carousel-track.scroll-left { animation: logoScrollLeft 60s linear infinite; }
+        .logo-carousel-track.scroll-right { animation: logoScrollRight 65s linear infinite; }
+        /* Integration pill tooltips (lightweight, hover-only, desktop) */
+        .logo-carousel-item[data-tip] { position: relative; }
+        .logo-carousel-item[data-tip]:hover::after {
+            content: attr(data-tip);
+            position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+            white-space: nowrap;
+            background: rgba(10,11,13,0.95); color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(0,212,232,0.25);
+            padding: 6px 12px; border-radius: 8px;
+            font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+            pointer-events: none; z-index: 10;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        .logo-carousel-item { transition: transform 0.3s ease, border-color 0.3s ease; }
+        .logo-carousel-item:hover { transform: translateY(-2px); border-color: rgba(0,212,232,0.3) !important; }
         @keyframes logoScrollLeft {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -549,6 +693,23 @@
                 0 28px 80px rgba(0,0,0,0.65),
                 0 0 120px rgba(0,212,232,0.18);
         }
+
+        /* Role-based tonal accent on the active card only (subtle — keeps brand cohesion) */
+        .division-card.active.tone-sales     { box-shadow: 0 0 0 1px rgba(0,212,232,0.40), 0 28px 80px rgba(0,0,0,0.65), 0 0 140px rgba(0,212,232,0.22); }
+        .division-card.active.tone-ops       { box-shadow: 0 0 0 1px rgba(120,180,255,0.40), 0 28px 80px rgba(0,0,0,0.65), 0 0 140px rgba(100,160,255,0.18); }
+        .division-card.active.tone-creative  { box-shadow: 0 0 0 1px rgba(220,120,200,0.38), 0 28px 80px rgba(0,0,0,0.65), 0 0 140px rgba(220,120,200,0.18); }
+        .division-card.active.tone-finance   { box-shadow: 0 0 0 1px rgba(240,190,120,0.40), 0 28px 80px rgba(0,0,0,0.65), 0 0 140px rgba(240,190,120,0.18); }
+        .division-card.active.tone-support   { box-shadow: 0 0 0 1px rgba(120,230,200,0.38), 0 28px 80px rgba(0,0,0,0.65), 0 0 140px rgba(120,230,200,0.18); }
+        .division-card.active.tone-strategy  { box-shadow: 0 0 0 1px rgba(180,160,240,0.40), 0 28px 80px rgba(0,0,0,0.65), 0 0 140px rgba(180,160,240,0.18); }
+
+        /* Personality quote shown only on active card */
+        .division-card .division-quote {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s, opacity 0.4s ease 0.28s;
+        }
+        .division-card.active .division-quote { max-height: 80px; opacity: 0.9; }
         .division-card .spotlight-ring {
             position: absolute;
             inset: -40px;
@@ -668,7 +829,9 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <a href="https://calendly.com/cadenhillier33/30min" class="hidden md:block text-sm font-medium text-zinc-300 hover:text-white transition-colors">Book a Call</a>
+                <!-- Secondary: quieter Calendly link for warm leads who want to talk first -->
+                <a href="https://calendly.com/cadenhillier33/30min" class="hidden lg:block text-xs font-medium text-zinc-500 hover:text-zinc-300 transition-colors">Book a call</a>
+                <!-- Primary CTA across entire site -->
                 <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="hidden md:inline-block liquid-glass text-sm font-semibold px-4 py-2 rounded-xl cursor-pointer">
                     Get Free Audit
                 </button>
@@ -833,22 +996,25 @@
 
             <div class="division-stage reveal" id="division-stage"></div>
 
-            <div class="flex items-center justify-center gap-5 md:gap-7 mt-4 md:mt-6 reveal">
+            <!-- Carousel action row: CTA anchored close to active card, nav arrows flanking -->
+            <div class="flex items-center justify-center gap-4 md:gap-5 -mt-2 md:mt-2 reveal flex-wrap">
                 <button class="division-arrow" id="division-prev" aria-label="Previous operator">
                     <i class="ph-bold ph-arrow-left text-base"></i>
                 </button>
-                <div class="division-counter"><b id="division-current">01</b> / 14</div>
+
+                <a id="division-interview-cta" href="/division?operator=nova&interview=1" class="liquid-glass inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm md:text-base font-semibold group">
+                    <i class="ph-fill ph-chat-circle-dots text-tethron-cyan"></i>
+                    <span id="division-interview-label">Interview Nova</span>
+                    <i class="ph-bold ph-arrow-right transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+
                 <button class="division-arrow" id="division-next" aria-label="Next operator">
                     <i class="ph-bold ph-arrow-right text-base"></i>
                 </button>
             </div>
 
-            <div class="text-center mt-10 md:mt-14 reveal flex flex-col items-center gap-3">
-                <a id="division-interview-cta" href="/division?operator=nova&interview=1" class="liquid-glass inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm md:text-base font-semibold group">
-                    <i class="ph-fill ph-chat-circle-dots text-tethron-cyan"></i>
-                    <span id="division-interview-label">Interview Nova</span>
-                    <i class="ph-bold ph-arrow-right transition-transform group-hover:translate-x-0.5"></i>
-                </a>
+            <div class="text-center mt-4 reveal flex flex-col items-center gap-1.5">
+                <div class="division-counter"><b id="division-current">01</b> / 14</div>
                 <a href="/division" class="text-xs md:text-sm text-gray-500 hover:text-gray-300 transition-colors tracking-wide">
                     or meet the full team <i class="ph-bold ph-arrow-right text-[10px]"></i>
                 </a>
@@ -856,166 +1022,142 @@
         </section>
 
         <!-- 4. CAPABILITIES -->
-        <section id="capabilities" class="max-w-4xl mx-auto w-full px-6 mt-[120px] py-12">
-            <div class="text-center mb-16 reveal">
+        <section id="capabilities" class="max-w-6xl mx-auto w-full px-6 mt-[120px] py-12">
+            <div class="text-center mb-14 reveal">
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">What Your AI Employee Does</h2>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 reveal">
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatA 4s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-chat-circle-text text-tethron-cyan text-xl"></i>
+            <!-- Featured tile (Instant Response) — hero treatment, full-width banner -->
+            <a href="#demo" class="capability-hero glass-panel reveal group relative block mb-6 p-8 md:p-10 rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, rgba(0,212,232,0.09) 0%, rgba(0,212,232,0.02) 50%, rgba(0,212,232,0.06) 100%); border: 1px solid rgba(0,212,232,0.18);">
+                <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full pointer-events-none" style="background: rgba(0,212,232,0.15); filter: blur(80px);"></div>
+                <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
+                    <div class="cap-icon cap-icon-hero shrink-0">
+                        <i class="ph-duotone ph-chat-circle-text"></i>
                     </div>
-                    <h3 class="text-white font-semibold text-[15px]">Instant Response</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Every lead, under 60 seconds. Phone, email, text, DMs.</p>
+                    <div class="flex-1">
+                        <p class="text-[10px] font-mono text-tethron-cyan tracking-[0.2em] uppercase mb-2">The default mode</p>
+                        <h3 class="text-white font-semibold text-2xl md:text-3xl tracking-tight mb-2">Instant Response — every lead, every channel.</h3>
+                        <p class="text-zinc-400 text-[15px] leading-relaxed max-w-2xl">Phone, email, text, DMs — under 60 seconds, 24/7. No lead ever goes cold again.</p>
+                    </div>
+                    <i class="ph-bold ph-arrow-right text-tethron-cyan text-xl transition-transform group-hover:translate-x-1 hidden md:block"></i>
                 </div>
+            </a>
 
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatB 5s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-instagram-logo text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Social Media</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Drafts, schedules, and posts across platforms. 24/7.</p>
+            <!-- 7 secondary tiles -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 reveal">
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-instagram-logo"></i></div>
+                    <h3>Social Media</h3>
+                    <p>Drafts, schedules, posts across platforms. 24/7.</p>
                 </div>
-
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatC 4.5s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-calendar-check text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Scheduling</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Books, confirms, reschedules. No-shows drop to near zero.</p>
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-calendar-check"></i></div>
+                    <h3>Scheduling</h3>
+                    <p>Books, confirms, reschedules. Near-zero no-shows.</p>
                 </div>
-
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatB 5.5s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-star text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Reviews</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Responds to every review in minutes. Flags anything under 4 stars.</p>
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-star"></i></div>
+                    <h3>Reviews</h3>
+                    <p>Responds in minutes. Flags anything under 4 stars.</p>
                 </div>
-
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatA 4.2s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-paper-plane-tilt text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Follow-Ups</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Re-engages cold leads with perfectly timed sequences.</p>
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-paper-plane-tilt"></i></div>
+                    <h3>Follow-Ups</h3>
+                    <p>Re-engages cold leads with timed sequences.</p>
                 </div>
-
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatC 5.2s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-chart-line-up text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Business Intel</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Morning briefs, revenue tracking, competitor monitoring.</p>
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-chart-line-up"></i></div>
+                    <h3>Business Intel</h3>
+                    <p>Morning briefs, revenue tracking, competitor watch.</p>
                 </div>
-
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatA 4.8s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-clipboard-text text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Task Handling</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Invoices, vendor follow-ups, onboarding. The busywork, handled.</p>
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-clipboard-text"></i></div>
+                    <h3>Task Handling</h3>
+                    <p>Invoices, vendor follow-ups, onboarding. Handled.</p>
                 </div>
-
-                <div class="flex flex-col items-center text-center gap-3" style="animation: floatB 4.6s ease-in-out infinite;">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
-                        <i class="ph ph-users-three text-tethron-cyan text-xl"></i>
-                    </div>
-                    <h3 class="text-white font-semibold text-[15px]">Client Retention</h3>
-                    <p class="text-zinc-500 text-[13px] leading-relaxed">Check-ins, referral asks, reactivation. Keeps clients coming back.</p>
+                <div class="capability-tile glass-panel group">
+                    <div class="cap-icon"><i class="ph ph-users-three"></i></div>
+                    <h3>Client Retention</h3>
+                    <p>Check-ins, referrals, reactivation. On repeat.</p>
                 </div>
+                <!-- 8th tile: CTA — turns the grid into a balanced 4x2 while inviting action -->
+                <a href="#demo" class="capability-tile capability-cta glass-panel group">
+                    <div class="cap-icon cap-icon-cta"><i class="ph-fill ph-sparkle"></i></div>
+                    <h3>+ anything else you describe</h3>
+                    <p class="text-tethron-cyan">Watch it work →</p>
+                </a>
             </div>
 
-            <div class="text-center mt-16 reveal">
+            <div class="text-center mt-12 reveal">
                 <p class="text-xl md:text-2xl font-bold tracking-tight"><span class="text-gradient shimmer-text">If you can describe it, your AI employee can do it.</span></p>
             </div>
         </section>
 
         <!-- 5. HOW IT WORKS — Apple style -->
-        <section id="how-it-works" class="max-w-7xl mx-auto w-full px-6 mt-[120px] py-24">
-            <div class="text-center mb-24 reveal">
+        <section id="how-it-works" class="max-w-7xl mx-auto w-full px-6 mt-[120px] py-20">
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.07]">How It Works</h2>
+                <p class="text-zinc-400 text-lg mt-4 max-w-xl mx-auto">Pick. Build. Run. Three days from payment to operating business.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
                 <!-- Step 1 -->
-                <div class="text-center md:text-left reveal">
-                    <div class="text-7xl md:text-8xl font-bold mb-6 leading-none text-gradient shimmer-text">1</div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">You pick a plan.</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">Choose the tier that fits your business. Pay online, answer a few questions about how you operate, and we handle the rest.</p>
+                <div class="hiw-step reveal">
+                    <div class="hiw-scene hiw-scene-1">
+                        <div class="hiw-scene-glow"></div>
+                        <div class="hiw-price-card">
+                            <div class="hiw-price-card-row"><span class="hiw-dot"></span><span>Division</span><span class="hiw-price">$1,300</span></div>
+                            <div class="hiw-price-card-row hiw-row-active"><span class="hiw-dot active"></span><span>Professional</span><span class="hiw-price">$3,500</span></div>
+                            <div class="hiw-price-card-row"><span class="hiw-dot"></span><span>Enterprise</span><span class="hiw-price">$7,500</span></div>
+                            <div class="hiw-deploy-pill">✓ Deployed</div>
+                        </div>
+                    </div>
+                    <div class="hiw-step-body">
+                        <div class="hiw-num">01</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">You pick your operator.</h3>
+                        <p class="text-zinc-400 text-[15px] leading-relaxed">One-click tier selection. A 3-minute intake on how your business actually runs. That's the hardest thing you'll do.</p>
+                    </div>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="text-center md:text-left reveal delay-100">
-                    <div class="text-7xl md:text-8xl font-bold mb-6 leading-none text-gradient shimmer-text">2</div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">We build.</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">Your AI employee deploys within 3 days. Custom-configured for your business, connected to your tools, ready to work.</p>
+                <div class="hiw-step reveal delay-100">
+                    <div class="hiw-scene hiw-scene-2">
+                        <div class="hiw-scene-glow"></div>
+                        <div class="hiw-build-lines">
+                            <div class="hiw-build-line"><span class="hiw-check">✓</span> Voice + brand trained</div>
+                            <div class="hiw-build-line"><span class="hiw-check">✓</span> Tools connected</div>
+                            <div class="hiw-build-line"><span class="hiw-check">✓</span> Workflows wired</div>
+                            <div class="hiw-build-line"><span class="hiw-check hiw-check-live">●</span> QA pass · 72h</div>
+                        </div>
+                    </div>
+                    <div class="hiw-step-body">
+                        <div class="hiw-num">02</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">We build the machine.</h3>
+                        <p class="text-zinc-400 text-[15px] leading-relaxed">Trained on your business. Wired to your stack. QA'd against real scenarios. Shipping in 72 hours, not 72 days.</p>
+                    </div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="text-center md:text-left reveal delay-200">
-                    <div class="text-7xl md:text-8xl font-bold mb-6 leading-none text-gradient shimmer-text">3</div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">It runs.</h3>
-                    <p class="text-zinc-400 text-lg leading-relaxed">Your business runs without you. Customers, reviews, scheduling, marketing, operations. Every moving piece, managed. 24/7. No days off. Ever.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5.5 THE INFRASTRUCTURE — Full-width showcase -->
-        <section class="w-full mt-32 py-24 relative overflow-visible">
-            <!-- Subtle teal glow behind -->
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-tethron-cyan/5 rounded-full blur-[150px] pointer-events-none"></div>
-
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Left: Text -->
-                <div class="reveal relative z-10">
-                    <p class="text-tethron-cyan text-sm font-semibold tracking-widest uppercase mb-4">The Infrastructure</p>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.07] mb-6 text-white">Your employee<br>never clocks out.</h2>
-                    <p class="text-zinc-400 text-lg leading-relaxed mb-8 max-w-lg">Your AI employee runs on dedicated infrastructure — not a shared tool, not a SaaS subscription. It's trained on your business, connected to your tools, and operates around the clock. Always on, always working, always learning.</p>
-
-                    <div class="flex flex-col gap-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-tethron-cyan/10 border border-tethron-cyan/20 flex items-center justify-center">
-                                <i class="ph ph-power text-tethron-cyan text-sm"></i>
-                            </div>
-                            <div>
-                                <span class="text-white text-sm font-medium">24/7 Uptime</span>
-                                <span class="text-zinc-500 text-sm ml-2">— Never sleeps, never crashes</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-tethron-cyan/10 border border-tethron-cyan/20 flex items-center justify-center">
-                                <i class="ph ph-shield-check text-tethron-cyan text-sm"></i>
-                            </div>
-                            <div>
-                                <span class="text-white text-sm font-medium">Dedicated to You</span>
-                                <span class="text-zinc-500 text-sm ml-2">— Your employee, your data, your business</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-tethron-cyan/10 border border-tethron-cyan/20 flex items-center justify-center">
-                                <i class="ph ph-rocket text-tethron-cyan text-sm"></i>
-                            </div>
-                            <div>
-                                <span class="text-white text-sm font-medium">Deploy in Days</span>
-                                <span class="text-zinc-500 text-sm ml-2">— Custom-configured, ready to work</span>
-                            </div>
+                <div class="hiw-step reveal delay-200">
+                    <div class="hiw-scene hiw-scene-3">
+                        <div class="hiw-scene-glow"></div>
+                        <div class="hiw-live-feed">
+                            <div class="hiw-feed-item"><i class="ph ph-chat-circle-text"></i><span>Replied to 3 leads</span><span class="hiw-feed-time">1s</span></div>
+                            <div class="hiw-feed-item"><i class="ph ph-calendar-check"></i><span>Booked 2 consults</span><span class="hiw-feed-time">12s</span></div>
+                            <div class="hiw-feed-item"><i class="ph ph-star"></i><span>Review replied 5★</span><span class="hiw-feed-time">34s</span></div>
+                            <div class="hiw-feed-item"><i class="ph ph-instagram-logo"></i><span>Post scheduled</span><span class="hiw-feed-time">1m</span></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Right: 3D Mac Mini (spline-viewer, transparent bg) -->
-                <!-- 3D Mac Mini — responsive height -->
-                <div id="mac-mini-container" class="reveal delay-200 relative h-[280px] md:h-[600px] md:-mr-24 w-full" style="pointer-events: none; overflow: visible;">
-                    <div class="w-full h-full transform scale-[0.5] md:scale-100 origin-center -translate-x-[10%] md:translate-x-0">
-                        <spline-viewer url="https://prod.spline.design/ekptR0pvH75Woc2X/scene.splinecode" style="width:100%; height:100%; pointer-events:none;" background="transparent"></spline-viewer>
+                    <div class="hiw-step-body">
+                        <div class="hiw-num">03</div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">It runs. You stop drowning.</h3>
+                        <p class="text-zinc-400 text-[15px] leading-relaxed">Every lead, review, invoice, post — handled. 24/7. No days off. You check in. It reports back. That's the whole job.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5.6 INTERACTIVE DEMO CHAT -->
+        <!-- INTERACTIVE DEMO CHAT -->
         <section id="demo" class="max-w-[1200px] mx-auto w-full px-6 mt-32 flex flex-col gap-8 relative">
             <!-- Subtle gradient mesh behind glass panel -->
             <div class="absolute top-[150px] -left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none" style="background: rgba(0,212,232,0.08); filter: blur(120px);"></div>
@@ -1023,23 +1165,32 @@
             <div class="absolute bottom-[150px] left-[25%] w-[300px] h-[300px] rounded-full pointer-events-none" style="background: rgba(0,180,212,0.06); filter: blur(100px);"></div>
 
             <div class="text-center md:text-left reveal relative z-10">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-2 text-white">See It In Action</h2>
-                <p class="text-zinc-400 text-lg max-w-xl">A real conversation between a business owner and their AI employee.</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-2 text-white">Morning brief with Nova.</h2>
+                <p class="text-zinc-400 text-lg max-w-xl">60 seconds. 11 tasks done. Every morning, before you finish your coffee.</p>
+            </div>
+
+            <!-- Scenario chip row (teases multi-industry) -->
+            <div class="flex flex-wrap gap-2 reveal delay-100 relative z-10">
+                <button class="scenario-chip active" aria-current="true">📊 Wealth Advisor · Tuesday 6:02 AM</button>
+                <button class="scenario-chip" disabled>🔧 HVAC Contractor <span class="scenario-soon">SOON</span></button>
+                <button class="scenario-chip" disabled>🦷 Dental Practice <span class="scenario-soon">SOON</span></button>
+                <button class="scenario-chip" disabled>🏠 Real Estate <span class="scenario-soon">SOON</span></button>
+                <button class="scenario-chip" disabled>💇 Salon / Med Spa <span class="scenario-soon">SOON</span></button>
             </div>
 
             <!-- Frosted Glass Chat Panel -->
             <div class="rounded-[24px] overflow-hidden flex flex-col md:flex-row h-[750px] w-full relative reveal delay-200 z-10" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(40px) saturate(2); -webkit-backdrop-filter: blur(40px) saturate(2); border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 0 80px rgba(0,212,232,0.06), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.1);">
 
-                <!-- LEFT SIDEBAR — Frosted glass -->
+                <!-- LEFT SIDEBAR — Nova profile + activity -->
                 <div class="w-full md:w-[280px] border-b md:border-b-0 md:border-r border-white/[0.08] flex-col shrink-0 z-10 hidden md:flex" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);">
                     <div class="p-6 border-b border-white/[0.04] flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center relative" style="background: rgba(0,212,232,0.1); border: 1px solid rgba(0,212,232,0.15);">
-                            <img src="logo.png" alt="Tethron" class="w-5 h-5">
-                            <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-tethron-cyan rounded-full border-2 border-[#07080a]"></div>
+                        <div class="w-11 h-11 rounded-full overflow-hidden relative shrink-0" style="background: rgba(0,212,232,0.1); border: 1.5px solid rgba(0,212,232,0.25); box-shadow: 0 0 16px rgba(0,212,232,0.18);">
+                            <img src="avatars/nova.png" alt="Nova" style="width:100%; height:100%; object-fit:cover; object-position:center 20%;">
+                            <div class="absolute bottom-0 right-0 w-3 h-3 bg-tethron-cyan rounded-full border-2 border-[#07080a] animate-pulse"></div>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-sm text-white">Tethron</h3>
-                            <p class="text-[10px] text-zinc-500 uppercase tracking-[0.15em] font-medium">AI Employee</p>
+                            <h3 class="font-semibold text-sm text-white">Nova</h3>
+                            <p class="text-[10px] text-zinc-500 uppercase tracking-[0.15em] font-medium">AI Sales Rep</p>
                         </div>
                     </div>
 
@@ -1053,29 +1204,36 @@
 
                     <!-- Activity Log — Full sidebar -->
                     <div class="flex-1 overflow-hidden p-5 flex flex-col">
-                        <div class="text-[11px] font-medium text-zinc-500 uppercase tracking-wider mb-4">Live Activity</div>
+                        <div class="text-[11px] font-medium text-zinc-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan animate-pulse"></span>
+                            Live Activity
+                        </div>
                         <ul id="activity-log" class="flex flex-col gap-3 text-[13px] text-zinc-400 overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;"></ul>
                     </div>
 
                     <div class="p-5 border-t border-white/[0.04]">
+                        <div class="flex items-center justify-between text-[12px] mb-2">
+                            <span class="text-zinc-500">This week</span>
+                            <span class="text-tethron-cyan font-mono">237 actions</span>
+                        </div>
                         <div class="flex items-center justify-between text-[12px]">
-                            <span class="text-zinc-500">Uptime</span>
-                            <span class="text-tethron-cyan font-mono">100%</span>
+                            <span class="text-zinc-500">Missed</span>
+                            <span class="text-white font-mono">0</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- RIGHT MAIN PANEL -->
                 <div class="flex-1 flex flex-col relative overflow-hidden">
-                    <!-- Header — Frosted -->
-                    <div class="px-7 py-6 border-b border-white/[0.06] flex items-center justify-between shrink-0 z-20" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);">
+                    <!-- Header — simplified, Nova-forward -->
+                    <div class="px-7 py-5 border-b border-white/[0.06] flex items-center justify-between shrink-0 z-20" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);">
                         <div>
-                            <h3 class="font-semibold text-[16px] text-white">Summit Wealth Advisory</h3>
-                            <p class="text-[12px] text-zinc-500 mt-0.5">A Day With Your AI Employee</p>
+                            <h3 class="font-semibold text-[15px] text-white">Summit Wealth Advisory</h3>
+                            <p class="text-[11px] text-zinc-500 mt-0.5">Tuesday · 6:02 AM · Nova is on it</p>
                         </div>
                         <div class="flex items-center gap-2 px-3 py-1.5 rounded-full" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
                             <div class="w-2 h-2 rounded-full bg-tethron-cyan animate-pulse"></div>
-                            <span class="text-[11px] font-medium text-tethron-cyan">Online</span>
+                            <span class="text-[11px] font-medium text-tethron-cyan">Live</span>
                         </div>
                     </div>
 
@@ -1113,44 +1271,46 @@
         </section>
 
         <!-- 6. THE COMPARISON -->
-        <section class="max-w-4xl mx-auto w-full px-6 mt-[120px]">
-            <div class="text-center mb-16 reveal">
+        <section class="max-w-5xl mx-auto w-full px-6 mt-[120px]">
+            <div class="text-center mb-14 reveal">
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">Why hire another human?</h2>
+                <p class="text-zinc-400 text-lg mt-4 max-w-xl mx-auto">Same job. 1/8th the cost. None of the HR.</p>
             </div>
 
-            <div class="grid grid-cols-2 gap-8 md:gap-16 reveal delay-100">
-                <!-- Left: Traditional -->
-                <div class="relative">
-                    <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-red-500/20 rounded-full"></div>
-                    <div class="pl-6">
-                        <h3 class="text-lg md:text-xl font-semibold text-zinc-500 mb-8">Traditional Employee</h3>
-                        <div class="flex flex-col gap-6">
-                            <div><div class="text-2xl md:text-3xl font-bold text-zinc-500">$4,500</div><div class="text-sm text-zinc-600">/month salary</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-zinc-500">40 hrs</div><div class="text-sm text-zinc-600">/week availability</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-zinc-500">3 months</div><div class="text-sm text-zinc-600">to fully train</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-zinc-500">Sick days</div><div class="text-sm text-zinc-600">vacations, turnover</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-zinc-500">~6 months</div><div class="text-sm text-zinc-600">before they quit</div></div>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 reveal delay-100 items-stretch">
+                <!-- Left: Traditional — desaturated -->
+                <div class="compare-col compare-col-human">
+                    <div class="compare-header">
+                        <span class="compare-badge compare-badge-human">THE OLD WAY</span>
+                        <h3>A traditional hire</h3>
+                    </div>
+                    <div class="compare-rows">
+                        <div class="compare-row"><div class="compare-v">$4,500 – $8,000</div><div class="compare-l">/month salary (plus benefits)</div></div>
+                        <div class="compare-row"><div class="compare-v">40 hrs</div><div class="compare-l">/week availability, weekdays only</div></div>
+                        <div class="compare-row"><div class="compare-v">3 months</div><div class="compare-l">to get them fully up to speed</div></div>
+                        <div class="compare-row"><div class="compare-v">Takes time off</div><div class="compare-l">vacations, PTO, sick days</div></div>
+                        <div class="compare-row"><div class="compare-v">~18 months</div><div class="compare-l">typical tenure before replacement</div></div>
                     </div>
                 </div>
 
-                <!-- Right: AI Employee -->
-                <div class="relative">
-                    <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-tethron-cyan/40 rounded-full shadow-[0_0_10px_rgba(0,212,232,0.3)]"></div>
-                    <div class="pl-6">
-                        <h3 class="text-lg md:text-xl font-semibold text-tethron-cyan mb-8">AI Employee</h3>
-                        <div class="flex flex-col gap-6">
-                            <div><div class="text-2xl md:text-3xl font-bold text-white">$700</div><div class="text-sm text-zinc-400">/month flat</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-white">168 hrs</div><div class="text-sm text-zinc-400">/week availability</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-white">3 days</div><div class="text-sm text-zinc-400">to deploy. Ready to go.</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-white">100%</div><div class="text-sm text-zinc-400">uptime. No sick days. Ever.</div></div>
-                            <div><div class="text-2xl md:text-3xl font-bold text-white">Forever</div><div class="text-sm text-zinc-400">keeps getting smarter</div></div>
-                        </div>
+                <!-- Right: AI Employee — glowing -->
+                <div class="compare-col compare-col-ai">
+                    <div class="compare-glow"></div>
+                    <div class="compare-header">
+                        <span class="compare-badge compare-badge-ai"><span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan animate-pulse inline-block mr-1.5 align-middle"></span>THE TETHRON WAY</span>
+                        <h3>A Tethron operator</h3>
+                    </div>
+                    <div class="compare-rows">
+                        <div class="compare-row compare-row-ai"><div class="compare-v">$700</div><div class="compare-l">/month flat — no benefits, no overhead</div></div>
+                        <div class="compare-row compare-row-ai"><div class="compare-v">168 hrs</div><div class="compare-l">/week — every hour of every day</div></div>
+                        <div class="compare-row compare-row-ai"><div class="compare-v">3 days</div><div class="compare-l">to deploy. Ready Monday.</div></div>
+                        <div class="compare-row compare-row-ai"><div class="compare-v">100% uptime</div><div class="compare-l">No sick days. No PTO. No turnover.</div></div>
+                        <div class="compare-row compare-row-ai"><div class="compare-v">Forever</div><div class="compare-l">Keeps getting smarter every week</div></div>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center mt-16 reveal delay-200">
+            <div class="text-center mt-14 reveal delay-200">
                 <p class="text-xl md:text-2xl font-semibold"><span class="text-zinc-500">Better results.</span> <span class="text-tethron-cyan">87% less cost.</span></p>
                 <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="inline-block mt-8 liquid-glass px-8 py-4 rounded-2xl font-bold text-lg cursor-pointer">Get Your Free Audit</button>
             </div>
@@ -1164,61 +1324,45 @@
                 <p class="text-zinc-400 text-lg max-w-xl mx-auto reveal">No rip-and-replace. Your AI employee wires directly into your existing stack from day one.</p>
             </div>
 
-            <!-- Row 1 — scrolls left -->
-            <div class="logo-carousel-wrap mb-4">
-                <div class="logo-carousel-track scroll-left">
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
-                    <!-- Duplicate for seamless loop -->
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
-                </div>
-            </div>
-
-            <!-- Row 2 — scrolls right -->
+            <!-- Single unified integrations marquee — slower, with tooltips -->
             <div class="logo-carousel-wrap">
-                <div class="logo-carousel-track scroll-right">
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope-simple text-xl text-cyan-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-cloud text-xl text-blue-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-note text-xl text-zinc-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-star text-xl text-red-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-shopping-bag text-xl text-green-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chart-bar text-xl text-yellow-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-lightning text-xl text-orange-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-facebook-logo text-xl text-blue-600 mr-2"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chat-circle text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar-check text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
+                <div class="logo-carousel-track scroll-left">
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends, drafts, replies to email 24/7"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Posts updates, answers questions, pings your team"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Books, confirms, reschedules appointments"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends invoices, tracks payments, flags overdue"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Logs every interaction, updates your pipeline"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Drafts, schedules, publishes posts + DM replies"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Reconciles, categorizes, closes the books"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Replies to every review in minutes. Flags < 4★"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Texts clients, confirms, follows up"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Outbound, lead qualification, connection requests"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Drafts + sends your newsletter, tracks opens"><i class="ph ph-envelope-simple text-xl text-cyan-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Updates records, logs calls, moves deals"><i class="ph ph-cloud text-xl text-blue-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Maintains your knowledge base + docs"><i class="ph ph-note text-xl text-zinc-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Monitors and responds to Yelp reviews"><i class="ph ph-star text-xl text-red-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Answers product questions, handles abandoned carts"><i class="ph ph-shopping-bag text-xl text-green-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Morning reports on traffic + conversions"><i class="ph ph-chart-bar text-xl text-yellow-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Triggers workflows across 6,000+ tools"><i class="ph ph-lightning text-xl text-orange-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Posts, responds to comments + DMs"><i class="ph ph-facebook-logo text-xl text-blue-600 mr-2"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Texts warm leads + clients from your number"><i class="ph ph-chat-circle text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Books meetings based on your real availability"><i class="ph ph-calendar-check text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
+
                     <!-- Duplicate for seamless loop -->
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-envelope-simple text-xl text-cyan-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-cloud text-xl text-blue-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-note text-xl text-zinc-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-star text-xl text-red-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-shopping-bag text-xl text-green-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chart-bar text-xl text-yellow-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-lightning text-xl text-orange-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-facebook-logo text-xl text-blue-600 mr-2"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-chat-circle text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2"><i class="ph ph-calendar-check text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends, drafts, replies to email 24/7"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Posts updates, answers questions, pings your team"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Books, confirms, reschedules appointments"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends invoices, tracks payments, flags overdue"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Logs every interaction, updates your pipeline"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Drafts, schedules, publishes posts + DM replies"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Reconciles, categorizes, closes the books"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Replies to every review in minutes. Flags < 4★"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Texts clients, confirms, follows up"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
+                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Outbound, lead qualification, connection requests"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
                 </div>
             </div>
 
-            <p class="text-zinc-500 text-sm text-center mt-6 reveal">+ dozens more. If your business uses it, we can wire into it.</p>
+            <p class="text-zinc-500 text-sm text-center mt-6 reveal">+ dozens more. Hover for what each one does. If your business uses it, we can wire into it.</p>
         </section>
 
         <!-- 8. TESTIMONIALS — Rotating carousel -->
@@ -1273,7 +1417,7 @@
 
         <!-- 9. PRICING -->
         <section id="pricing" class="max-w-6xl mx-auto w-full px-6 mt-40">
-            <div class="text-center mb-16 reveal relative">
+            <div class="text-center mb-10 reveal relative">
                 <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-tethron-cyan/10 blur-[50px] -z-10 rounded-full"></div>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-gradient">Transparent Economics</h2>
                 <p class="text-zinc-400">Hire an employee that never sleeps for a fraction of minimum wage.</p>
@@ -1283,16 +1427,54 @@
                 </div>
             </div>
 
+            <!-- Quick comparison row — 4 rows, scans fast -->
+            <div class="reveal mb-10 max-w-4xl mx-auto glass-panel rounded-2xl overflow-hidden">
+                <div class="grid grid-cols-4 text-xs md:text-sm">
+                    <div class="pricing-compare-head"></div>
+                    <div class="pricing-compare-head pricing-compare-head-division">Division</div>
+                    <div class="pricing-compare-head pricing-compare-head-pro">Professional</div>
+                    <div class="pricing-compare-head pricing-compare-head-ent">Enterprise</div>
+
+                    <div class="pricing-compare-cell pricing-compare-label">Monthly</div>
+                    <div class="pricing-compare-cell">$700/mo</div>
+                    <div class="pricing-compare-cell">$750/mo</div>
+                    <div class="pricing-compare-cell">$1,200/mo</div>
+
+                    <div class="pricing-compare-cell pricing-compare-label">Setup</div>
+                    <div class="pricing-compare-cell">$1,300</div>
+                    <div class="pricing-compare-cell">$3,500</div>
+                    <div class="pricing-compare-cell">$7,500</div>
+
+                    <div class="pricing-compare-cell pricing-compare-label">Operator(s)</div>
+                    <div class="pricing-compare-cell">1 pre-built</div>
+                    <div class="pricing-compare-cell">1 custom-built</div>
+                    <div class="pricing-compare-cell">Full department</div>
+
+                    <div class="pricing-compare-cell pricing-compare-label">Phone answering</div>
+                    <div class="pricing-compare-cell pricing-compare-no">—</div>
+                    <div class="pricing-compare-cell pricing-compare-no">—</div>
+                    <div class="pricing-compare-cell pricing-compare-yes">✓</div>
+
+                    <div class="pricing-compare-cell pricing-compare-label">On-site hardware</div>
+                    <div class="pricing-compare-cell pricing-compare-no">—</div>
+                    <div class="pricing-compare-cell pricing-compare-no">—</div>
+                    <div class="pricing-compare-cell pricing-compare-yes">✓ Mac Mini</div>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-20 md:gap-6 relative items-stretch">
 
-                <!-- DIVISION -->
-                <div class="glass-panel p-8 reveal delay-0 relative bg-[#07080a]/80 shadow-[0_0_30px_rgba(192,192,192,0.05)] overflow-visible flex flex-col">
-                    <div class="absolute inset-0 border border-[#c0c0c0]/20 rounded-[20px] pointer-events-none"></div>
-                    <div class="absolute -inset-0.5 bg-gradient-to-b from-[#c0c0c0]/10 to-transparent rounded-[20px] pointer-events-none blur-sm -z-10"></div>
+                <!-- DIVISION — tiered up: filled bg, filled CTA, premium framing -->
+                <div class="glass-panel p-8 reveal delay-0 relative shadow-[0_0_50px_rgba(0,212,232,0.06)] overflow-visible flex flex-col" style="background: linear-gradient(180deg, rgba(0,212,232,0.04) 0%, rgba(7,8,10,0.85) 100%);">
+                    <div class="absolute inset-0 border border-tethron-cyan/20 rounded-[20px] pointer-events-none"></div>
+
                     <h3 class="text-xl font-bold mb-1 text-white">The Division</h3>
-                    <p class="text-xs uppercase tracking-wider font-semibold mb-4" style="color: rgba(192, 192, 192, 0.6);">Pre-Built AI Operator</p>
-                    <div class="text-3xl font-bold mb-1 text-white">$1,300 <span class="text-sm text-zinc-500 font-normal">setup</span></div>
-                    <div class="text-lg text-tethron-cyan font-bold mb-6">+ $700 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
+                    <p class="text-xs uppercase tracking-wider font-semibold mb-1 text-tethron-cyan/75">A teammate in 3 days</p>
+                    <p class="text-[11px] text-zinc-500 mb-4">Best for solos &amp; 1–5 person teams</p>
+
+                    <!-- Lead with monthly, setup secondary -->
+                    <div class="text-3xl font-bold mb-1 text-white">$700 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
+                    <div class="text-sm text-zinc-400 mb-6">+ <span class="text-tethron-cyan font-semibold">$1,300</span> one-time setup</div>
 
                     <ul class="space-y-3 mb-8 text-sm text-zinc-300 flex-1">
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Pick from 14 trained operators</li>
@@ -1301,10 +1483,14 @@
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Deploy in 3 days</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Talk via Telegram 24/7</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Connects to your core tools</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Bundle discounts on extra operators</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Monthly performance report</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Cancel anytime — no lock-in</li>
                     </ul>
 
-                    <a href="/division" class="block w-full py-3 rounded-full border border-[#c0c0c0]/25 text-center text-sm font-semibold hover:bg-[#c0c0c0]/5 transition-colors text-white relative z-20">Browse Operators</a>
+                    <!-- TODO: Swap /intake?plan=division for a real Stripe payment link once Caden creates the Division Stripe product ($1,300 setup + $700/mo) -->
+                    <a href="/intake?plan=division" class="btn-glow block w-full py-3.5 rounded-full bg-tethron-cyan/90 text-[#07080a] text-center text-sm font-bold hover:bg-tethron-cyan transition-colors relative z-20">Hire an Operator</a>
+                    <a href="/division" class="block w-full text-center text-xs text-zinc-500 hover:text-zinc-300 transition-colors mt-3">or browse all 14 →</a>
                 </div>
 
                 <!-- PROFESSIONAL -->
@@ -1314,9 +1500,11 @@
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-tethron-cyan text-[#07080a] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(0,212,232,0.5)]">Most Popular</div>
 
                     <h3 class="text-xl font-bold mb-1 text-white">Professional</h3>
-                    <p class="text-xs text-zinc-500 uppercase tracking-wider font-semibold mb-4">Custom AI Employee</p>
-                    <div class="text-3xl font-bold mb-1 text-white">$3,500 <span class="text-sm text-zinc-500 font-normal">setup</span></div>
-                    <div class="text-lg text-tethron-cyan font-bold mb-6">+ $750 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
+                    <p class="text-xs text-tethron-cyan uppercase tracking-wider font-semibold mb-1">Built around YOUR business</p>
+                    <p class="text-[11px] text-zinc-500 mb-4">Best for growing 5–15 person teams</p>
+
+                    <div class="text-3xl font-bold mb-1 text-white">$750 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
+                    <div class="text-sm text-zinc-400 mb-6">+ <span class="text-tethron-cyan font-semibold">$3,500</span> one-time setup</div>
 
                     <ul class="space-y-3 mb-8 text-sm text-zinc-300 flex-1">
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Built + trained on YOUR business</li>
@@ -1326,22 +1514,23 @@
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Strategic recommendations weekly</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Handles sales, ops + marketing</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Connects to every tool you use</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Automates any workflow you want</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Custom workflows for your business</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Weekly optimization + reporting</li>
                     </ul>
 
-                    <a href="https://buy.stripe.com/bJe00j8LY3RObuu4Nh2B206" class="btn-glow block w-full py-3.5 rounded-full bg-tethron-cyan text-[#07080a] text-center text-sm font-bold hover:bg-[#00e3b6] transition-colors relative z-20">Deploy Now</a>
+                    <a href="https://buy.stripe.com/fZu6oH7HU3RO8ii1B52B20b" class="btn-glow block w-full py-3.5 rounded-full bg-tethron-cyan text-[#07080a] text-center text-sm font-bold hover:bg-[#00e3b6] transition-colors relative z-20">Deploy Now</a>
                 </div>
 
-                <!-- ENTERPRISE -->
-                <div class="glass-panel p-8 reveal delay-200 relative bg-[#07080a]/80 shadow-[0_0_40px_rgba(212,175,55,0.08)] overflow-visible flex flex-col">
-                    <div class="absolute inset-0 border border-[#d4af37]/30 rounded-[20px] pointer-events-none"></div>
-                    <div class="absolute -inset-0.5 bg-gradient-to-b from-[#d4af37]/15 to-transparent rounded-[20px] pointer-events-none blur-sm -z-10"></div>
+                <!-- ENTERPRISE — swapped amber for deep royal cyan -->
+                <div class="glass-panel p-8 reveal delay-200 relative shadow-[0_0_50px_rgba(90,160,240,0.08)] overflow-visible flex flex-col" style="background: linear-gradient(180deg, rgba(90,160,240,0.04) 0%, rgba(7,8,10,0.85) 100%);">
+                    <div class="absolute inset-0 border rounded-[20px] pointer-events-none" style="border-color: rgba(120,180,255,0.35);"></div>
+                    <div class="absolute -inset-0.5 rounded-[20px] pointer-events-none blur-sm -z-10" style="background: linear-gradient(to bottom, rgba(120,180,255,0.15), transparent);"></div>
                     <h3 class="text-xl font-bold mb-1 text-white">Enterprise</h3>
-                    <p class="text-xs uppercase tracking-wider font-semibold mb-4" style="color: rgba(212, 175, 55, 0.7);">Your AI Department</p>
-                    <div class="text-3xl font-bold mb-1 text-white">$7,500 <span class="text-sm text-zinc-500 font-normal">setup</span></div>
-                    <div class="text-lg text-tethron-cyan font-bold mb-6">+ $1,500 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
+                    <p class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: rgba(160, 200, 255, 0.85);">A full AI department</p>
+                    <p class="text-[11px] text-zinc-500 mb-4">Best for 10+ person or multi-location orgs</p>
+
+                    <div class="text-3xl font-bold mb-1 text-white">$1,200 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
+                    <div class="text-sm text-zinc-400 mb-6">+ <span class="font-semibold" style="color:#a0c0ff;">$7,500</span> one-time setup</div>
 
                     <ul class="space-y-3 mb-8 text-sm text-zinc-300 flex-1">
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Everything in Professional</li>
@@ -1349,29 +1538,71 @@
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Dedicated hardware in your office</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Texts clients from your number</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Controls your apps hands-free</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Automates any workflow you want</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Optimized daily</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Direct line to the Tethron team</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Quarterly strategy sessions</li>
                     </ul>
 
-                    <a href="https://buy.stripe.com/3cI4gzfam2NKfKK0x12B208" class="block w-full py-3 rounded-full border border-[#d4af37]/40 text-center text-sm font-semibold hover:bg-[#d4af37]/5 transition-colors text-white relative z-20">Deploy Now</a>
+                    <a href="https://buy.stripe.com/dRm4gze6igEA5663Jd2B20c" class="block w-full py-3.5 rounded-full text-center text-sm font-bold transition-colors relative z-20" style="background: rgba(120,180,255,0.15); border: 1px solid rgba(120,180,255,0.4); color: #a0c0ff;">Deploy Now</a>
                 </div>
 
             </div>
-
-            <p class="text-center text-xs text-zinc-500 mt-12 reveal">We only onboard <span class="text-tethron-cyan font-semibold">15 new businesses</span> per month to maintain quality.</p>
         </section>
 
-        <!-- 10. FAQ SECTION -->
+        <!-- 10. FAQ SECTION — reordered: pain → commitment → flexibility → tier clarity → money safety -->
         <section id="faq" class="max-w-3xl mx-auto w-full px-6 mt-32">
             <div class="reveal mb-12 text-center">
                 <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">Frequently Asked Questions</h2>
-                <p class="text-zinc-400 text-sm">System facts & deployment details.</p>
+                <p class="text-zinc-400 text-sm">Straight answers to the questions we get every week.</p>
             </div>
-            
+
             <div class="space-y-3">
+                <!-- 1. Pain relief — chatbot differentiation -->
                 <details class="glass-panel hoverable group cursor-pointer reveal delay-0">
+                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
+                        How is this different from a chatbot?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
+                    </summary>
+                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
+                        Chatbots follow scripts. A Tethron AI employee reads context, makes judgment calls, coordinates across Gmail / CRM / calendar / content / ops, and learns your business over time. Chatbot = vending machine. AI employee = real team member.
+                    </div>
+                </details>
+
+                <!-- 2. Commitment signal — how fast -->
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
+                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
+                        How fast until it's live?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
+                    </summary>
+                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
+                        3 days. Day 1: environment setup, tool connections, voice training. Day 2: workflow build, logic, soft testing. Day 3: handoff, go live, first-week monitoring. No 6-week onboarding. No "kickoff call" theater.
+                    </div>
+                </details>
+
+                <!-- 3. Coverage — really 24/7 -->
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-200">
+                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
+                        Is it really 24/7?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
+                    </summary>
+                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
+                        Yes. Your AI employee never clocks out. Leads answered in 60 seconds at any hour, follow-ups run for months, content drafted while you sleep. Anything urgent gets escalated to you directly.
+                    </div>
+                </details>
+
+                <!-- 4. Flexibility — customization -->
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-0">
+                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
+                        Can I customize what it does?
+                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
+                    </summary>
+                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
+                        Completely. Every workflow is configured to your business — channels monitored, response tone, what it escalates, what it handles autonomously. Draft-and-flag mode if you want approval on every send. Autonomous mode once you trust it. Changeable anytime.
+                    </div>
+                </details>
+
+                <!-- 5. Tier clarity — Division vs Pro -->
+                <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
                     <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
                         What's the difference between Division and Professional?
                         <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
@@ -1383,17 +1614,7 @@
                     </div>
                 </details>
 
-                <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
-                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
-                        Do I need the Enterprise Mac Mini?
-                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
-                    </summary>
-                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
-                        Probably not. Enterprise is the only tier with physical on-site hardware — dedicated Mac Mini, real-time voice agent, direct iMessage from your number, quarterly strategy sessions. It's built for data-sensitive industries (legal, healthcare, finance), compliance-heavy operations, or owners who want full hardware sovereignty.<br><br>
-                        Division and Pro both run in the cloud — that's more than enough for 90% of businesses.
-                    </div>
-                </details>
-
+                <!-- 6. Tier flex — upgrade path -->
                 <details class="glass-panel hoverable group cursor-pointer reveal delay-200">
                     <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
                         Can I upgrade from Division to Pro later?
@@ -1404,46 +1625,19 @@
                     </div>
                 </details>
 
+                <!-- 7. Enterprise — do I need hardware -->
                 <details class="glass-panel hoverable group cursor-pointer reveal delay-0">
                     <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
-                        How fast until it's live?
+                        Do I need the Enterprise Mac Mini?
                         <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
                     </summary>
                     <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
-                        3 days. Day 1: environment setup, tool connections, voice training. Day 2: workflow build, logic, soft testing. Day 3: handoff, go live, first-week monitoring. No 6-week onboarding. No "kickoff call" theater.
+                        Probably not. Enterprise is the only tier with physical on-site hardware — dedicated Mac Mini, real-time voice agent, direct iMessage from your number, quarterly strategy sessions. It's built for data-sensitive industries (legal, healthcare, finance), compliance-heavy operations, or owners who want full hardware sovereignty.<br><br>
+                        Division and Pro both run in the cloud — that's more than enough for 90% of businesses.
                     </div>
                 </details>
 
-                <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
-                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
-                        How is this different from a chatbot?
-                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
-                    </summary>
-                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
-                        Chatbots follow scripts. A Tethron AI employee reads context, makes judgment calls, coordinates across Gmail / CRM / calendar / content / ops, and learns your business over time. Chatbot = vending machine. AI employee = real team member.
-                    </div>
-                </details>
-
-                <details class="glass-panel hoverable group cursor-pointer reveal delay-200">
-                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
-                        Is it really 24/7?
-                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
-                    </summary>
-                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
-                        Yes. Your AI employee never clocks out. Leads answered in 60 seconds at any hour, follow-ups run for months, content drafted while you sleep. Anything urgent gets escalated to you directly.
-                    </div>
-                </details>
-
-                <details class="glass-panel hoverable group cursor-pointer reveal delay-0">
-                    <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
-                        Can I customize what it does?
-                        <i class="ph ph-plus transition-transform group-open:rotate-45 text-tethron-cyan text-lg"></i>
-                    </summary>
-                    <div class="p-5 pt-0 text-sm text-zinc-400 leading-relaxed border-t border-white/5 mt-1">
-                        Completely. Every workflow is configured to your business — channels monitored, response tone, what it escalates, what it handles autonomously. Draft-and-flag mode if you want approval on every send. Autonomous mode once you trust it. Changeable anytime.
-                    </div>
-                </details>
-
+                <!-- 8. Money safety — cancel -->
                 <details class="glass-panel hoverable group cursor-pointer reveal delay-100">
                     <summary class="list-none flex justify-between items-center font-medium p-5 text-white bg-white/0 hover:bg-white/5 transition-colors rounded-xl">
                         What if I want to cancel?
@@ -1461,14 +1655,15 @@
         <section id="audit" class="max-w-4xl mx-auto w-full px-6 mt-40 mb-10 reveal">
             <div class="glass-panel hoverable p-12 text-center relative overflow-hidden">
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[200%] bg-[radial-gradient(ellipse_at_center,rgba(0,212,232,0.15)_0%,transparent_60%)] -z-10 rotate-12"></div>
-                
+
                 <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gradient">What would you do with 80% of your time back?</h2>
                 <p class="text-zinc-400 mb-8 max-w-xl mx-auto">Find out exactly where an AI employee fits into your business.</p>
-                
-                <div class="flex justify-center z-10 relative">
+
+                <div class="flex flex-col items-center z-10 relative gap-3">
                     <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="bg-tethron-cyan text-[#07080a] font-bold px-10 py-4 rounded-full hover:bg-[#00e3b6] transition-colors whitespace-nowrap text-lg cursor-pointer">
                         Get Your Free Audit
-                    </a>
+                    </button>
+                    <a href="/division" class="text-sm text-zinc-500 hover:text-zinc-300 transition-colors">or just browse the operators <i class="ph-bold ph-arrow-right text-[10px]"></i></a>
                 </div>
             </div>
         </section>
@@ -1658,18 +1853,18 @@
 
             const scriptData = [
                 { role: 'ai', text: "Good morning. Overnight report:\n\n• 4 inquiries responded to (28s avg)\n• 2 consultations booked this week\n• 1 Google review replied to\n• Instagram post scheduled for 9 AM\n• David Park replied — wants to move forward\n\nToday:\n📋 10 AM — Henderson portfolio review\n📋 2:30 PM — Maria Santos (new client)", time: "6:02 AM", metric: "📊 Report", logText: "Overnight report delivered", delayBefore: 1200, stats: {tasks: 5, leads: 4, reviews: 1, revenue: '$0'} },
-                { role: 'owner', text: "Push Henderson to Thursday. Send Maria a confirmation with the office address.", time: "6:31 AM", delayBefore: 3000 },
-                { role: 'ai', text: "Done.\n\n✓ Henderson moved to Thursday 10 AM\n✓ Maria confirmed for 2:30 — sent address + parking info\n\nDavid Park wants to start a financial plan. Send him onboarding docs and book his strategy session?", time: "6:31 AM", metric: "⚡ 4s", logText: "Calendar updated + Client confirmed", delayBefore: 2000, stats: {tasks: 7, revenue: '$0'} },
-                { role: 'owner', text: "Do it. What did that Google review say?", time: "6:32 AM", delayBefore: 2500 },
-                { role: 'ai', text: "David onboarded ✓ — session booked Tuesday 11 AM.\n\nKaren Mitchell left 5 stars:\n\"Best decision I ever made. They actually listen.\"\n\nReplied thanking her.\n\nAlso — 2-star review from Brian Walsh about communication during the dip. Drafted a response, flagged for you. Want to see it?", time: "6:32 AM", metric: "⚡ 3s", logText: "Client onboarded + Review replied", delayBefore: 2000, stats: {tasks: 9, leads: 5, reviews: 2} },
-                { role: 'owner', text: "Show me.", time: "6:33 AM", delayBefore: 2000 },
-                { role: 'ai', text: "Brian Walsh (2 stars):\n\n\"Brian, you're right — during volatile periods you deserve more updates, not less. I've adjusted our protocol. Would love to connect this week to walk through your positioning.\"\n\nSend, edit, or discard?", time: "6:33 AM", metric: "⚡ 2s", logText: "Flagged review for approval", delayBefore: 2000 },
-                { role: 'owner', text: "Send it.", time: "6:34 AM", delayBefore: 2000 },
-                { role: 'ai', text: "Sent ✓. 48-hour follow-up set.\n\nYour Instagram post for 9 AM:" + igPostCard + "\n\nAlso — quarterly newsletter is due Friday. Draft ready. Send to your email?", time: "6:34 AM", metric: "⚡ 2s", logText: "Review sent + IG post queued", delayBefore: 2000, stats: {tasks: 11} },
-                { role: 'owner', text: "Yeah send it. Anything else?", time: "6:35 AM", delayBefore: 2500 },
-                { role: 'ai', text: "Newsletter sent ✓\n\nTwo things:\n\n1. Patterson quarterly fee — 14 days overdue. Send reminder?\n\n2. Pinnacle Wealth lost 2 advisors. Three unhappy clients in your area. Reach out?", time: "6:35 AM", metric: "⚡ 3s", logText: "Newsletter drafted", delayBefore: 2000, stats: {tasks: 12, revenue: '$50K+'} },
-                { role: 'owner', text: "Yes to both.", time: "6:36 AM", delayBefore: 2000 },
-                { role: 'ai', text: "Done ✓\n• Payment reminder sent\n• Outreach sent to 3 Pinnacle clients\n\nYour day:\n📋 9 AM — IG post live\n📋 2:30 PM — Maria Santos\n📋 Tuesday — David Park\n\n11 tasks. 5 minutes. ☕", time: "6:36 AM", metric: "⚡ 2s", logText: "Invoice + Competitor outreach sent", delayBefore: 2000, stats: {tasks: 14, leads: 7, reviews: 2, revenue: '$50K+'} }
+                { role: 'owner', text: "Push Henderson to Thursday. Send Maria a confirmation with the office address.", time: "6:02 AM", delayBefore: 3000 },
+                { role: 'ai', text: "Done.\n\n✓ Henderson moved to Thursday 10 AM\n✓ Maria confirmed for 2:30 — sent address + parking info\n\nDavid Park wants to start a financial plan. Send him onboarding docs and book his strategy session?", time: "6:02 AM", metric: "⚡ 4s", logText: "Calendar updated + Client confirmed", delayBefore: 2000, stats: {tasks: 7, revenue: '$0'} },
+                { role: 'owner', text: "Do it. What did that Google review say?", time: "6:02 AM", delayBefore: 2500 },
+                { role: 'ai', text: "David onboarded ✓ — session booked Tuesday 11 AM.\n\nKaren Mitchell left 5 stars:\n\"Best decision I ever made. They actually listen.\"\n\nReplied thanking her.\n\nAlso — 2-star review from Brian Walsh about communication during the dip. Drafted a response, flagged for you. Want to see it?", time: "6:02 AM", metric: "⚡ 3s", logText: "Client onboarded + Review replied", delayBefore: 2000, stats: {tasks: 9, leads: 5, reviews: 2} },
+                { role: 'owner', text: "Show me.", time: "6:02 AM", delayBefore: 2000 },
+                { role: 'ai', text: "Brian Walsh (2 stars):\n\n\"Brian, you're right — during volatile periods you deserve more updates, not less. I've adjusted our protocol. Would love to connect this week to walk through your positioning.\"\n\nSend, edit, or discard?", time: "6:03 AM", metric: "⚡ 2s", logText: "Flagged review for approval", delayBefore: 2000 },
+                { role: 'owner', text: "Send it.", time: "6:03 AM", delayBefore: 2000 },
+                { role: 'ai', text: "Sent ✓. 48-hour follow-up set.\n\nYour Instagram post for 9 AM:" + igPostCard + "\n\nAlso — quarterly newsletter is due Friday. Draft ready. Send to your email?", time: "6:03 AM", metric: "⚡ 2s", logText: "Review sent + IG post queued", delayBefore: 2000, stats: {tasks: 11} },
+                { role: 'owner', text: "Yeah send it. Anything else?", time: "6:03 AM", delayBefore: 2500 },
+                { role: 'ai', text: "Newsletter sent ✓\n\nTwo things:\n\n1. Patterson quarterly fee — 14 days overdue. Send reminder?\n\n2. Pinnacle Wealth lost 2 advisors. Three unhappy clients in your area. Reach out?", time: "6:03 AM", metric: "⚡ 3s", logText: "Newsletter drafted", delayBefore: 2000, stats: {tasks: 12, revenue: '$50K+'} },
+                { role: 'owner', text: "Yes to both.", time: "6:03 AM", delayBefore: 2000 },
+                { role: 'ai', text: "Done ✓\n• Payment reminder sent\n• Outreach sent to 3 Pinnacle clients\n\nYour day:\n📋 9 AM — IG post live\n📋 2:30 PM — Maria Santos\n📋 Tuesday — David Park\n\n11 tasks. 60 seconds. ☕", time: "6:03 AM", metric: "⚡ 2s", logText: "Invoice + Competitor outreach sent", delayBefore: 2000, stats: {tasks: 14, leads: 7, reviews: 2, revenue: '$50K+'} }
             ];
 
             const chatContainer = document.getElementById('chat-container');
@@ -1684,11 +1879,16 @@
 
             const nl2br = (t) => t.replace(/\n/g, '<br>');
 
-            const mkOwner = (d) => `<div class="flex w-full justify-start max-w-[80%]" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="flex flex-col gap-2"><div class="rounded-2xl rounded-bl-md px-5 py-4 text-[16px] leading-relaxed text-white" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(10px);">${nl2br(d.text)}</div><span class="text-[11px] font-mono text-zinc-600 ml-2">${d.time}</span></div></div>`;
+            // Owner (business owner) avatar — neutral initial circle
+            const ownerAvatar = `<div class="w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-[11px] font-semibold text-white self-end mb-6" style="background: linear-gradient(135deg, #3a3f4a 0%, #1f232b 100%); border: 1px solid rgba(255,255,255,0.08);">Y</div>`;
+            // Nova avatar — photo circle
+            const novaAvatar = `<div class="w-8 h-8 rounded-full shrink-0 overflow-hidden self-end mb-6 relative" style="background: rgba(0,212,232,0.1); border: 1.5px solid rgba(0,212,232,0.3); box-shadow: 0 0 12px rgba(0,212,232,0.2);"><img src="avatars/nova.png" alt="Nova" style="width:100%; height:100%; object-fit:cover; object-position:center 20%;"></div>`;
 
-            const mkAI = (d) => `<div class="flex w-full justify-end max-w-[80%] ml-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="flex flex-col gap-2 items-end"><div class="rounded-2xl rounded-br-md px-5 py-4 text-[16px] leading-relaxed text-white relative" style="background: rgba(0,212,232,0.06); border: 1px solid rgba(0,212,232,0.1); backdrop-filter: blur(10px);">${nl2br(d.text)}</div><div class="flex items-center gap-2 mr-2"><span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan inline-block"></span><span class="text-[11px] font-mono text-zinc-500">${d.time}</span></div></div></div>`;
+            const mkOwner = (d) => `<div class="flex w-full justify-start items-end gap-2.5 max-w-[80%]" style="animation: fadeSlideUp 0.6s ease forwards;">${ownerAvatar}<div class="flex flex-col gap-2"><div class="rounded-2xl rounded-bl-md px-5 py-4 text-[16px] leading-relaxed text-white" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(10px);">${nl2br(d.text)}</div><span class="text-[11px] font-mono text-zinc-600 ml-2">You · ${d.time}</span></div></div>`;
 
-            const mkResults = () => `<div class="w-full mt-4 mb-8 text-center max-w-lg mx-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="w-full bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden" style="box-shadow: 0 24px 64px -12px rgba(0,0,0,0.5);"><div class="absolute -top-10 -right-10 w-32 h-32 bg-tethron-cyan/20 rounded-full blur-3xl"></div><div class="flex items-center justify-center gap-2 mb-4"><i class="ph ph-check-circle-fill text-tethron-cyan text-xl"></i><h4 class="text-white font-medium">60 Seconds. 11 Tasks. Zero Stress.</h4></div><div class="flex flex-col gap-2.5 text-left mb-6"><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Owner's Time Spent:</span><span class="font-mono text-tethron-cyan">60 seconds</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Tasks Completed:</span><span class="font-medium text-white">11</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Capabilities Used:</span><span class="font-medium text-white text-right text-xs">Leads, Scheduling, Reviews, Social Media, Newsletters, Invoicing, Client Retention, Competitor Intel</span></div><div class="flex items-center justify-between text-sm"><span class="text-zinc-400">Cost:</span><span class="font-mono text-tethron-cyan">$700/mo</span></div></div><p class="text-zinc-500 text-xs text-center mb-4 italic">And this is just a Tuesday morning. Imagine what it does all week.</p><button onclick="document.getElementById(&apos;audit-modal&apos;).classList.remove(&apos;hidden&apos;)" class="block w-full bg-tethron-cyan text-[#07080a] font-semibold py-3 rounded-full hover:bg-[#00e3b6] transition-colors text-center text-sm cursor-pointer">See What It'd Do For YOUR Business →</button></div></div>`;
+            const mkAI = (d) => `<div class="flex w-full justify-end items-end gap-2.5 max-w-[80%] ml-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="flex flex-col gap-2 items-end"><div class="rounded-2xl rounded-br-md px-5 py-4 text-[16px] leading-relaxed text-white relative" style="background: linear-gradient(135deg, rgba(0,212,232,0.12) 0%, rgba(0,212,232,0.06) 100%); border: 1px solid rgba(0,212,232,0.22); backdrop-filter: blur(10px); box-shadow: 0 4px 32px rgba(0,212,232,0.06);">${nl2br(d.text)}</div><div class="flex items-center gap-2 mr-2"><span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan inline-block"></span><span class="text-[11px] font-mono text-zinc-500">Nova · ${d.time}</span></div></div>${novaAvatar}</div>`;
+
+            const mkResults = () => `<div class="w-full mt-4 mb-8 text-center max-w-lg mx-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="w-full bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden" style="box-shadow: 0 24px 64px -12px rgba(0,0,0,0.5);"><div class="absolute -top-10 -right-10 w-32 h-32 bg-tethron-cyan/20 rounded-full blur-3xl"></div><div class="flex items-center justify-center gap-2 mb-4"><i class="ph ph-check-circle-fill text-tethron-cyan text-xl"></i><h4 class="text-white font-medium">60 Seconds. 11 Tasks. Zero Stress.</h4></div><div class="flex flex-col gap-2.5 text-left mb-6"><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Owner's Time Spent:</span><span class="font-mono text-tethron-cyan">60 seconds</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Tasks Completed:</span><span class="font-medium text-white">11</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Capabilities Used:</span><span class="font-medium text-white text-right text-xs">Leads, Scheduling, Reviews, Social Media, Newsletters, Invoicing, Client Retention, Competitor Intel</span></div><div class="flex items-center justify-between text-sm"><span class="text-zinc-400">Cost:</span><span class="font-mono text-tethron-cyan">$700/mo</span></div></div><p class="text-zinc-500 text-xs text-center mb-4 italic">And this is just a Tuesday morning. Imagine what it does all week.</p><button onclick="document.getElementById(&apos;audit-modal&apos;).classList.remove(&apos;hidden&apos;)" class="block w-full bg-tethron-cyan text-[#07080a] font-semibold py-3 rounded-full hover:bg-[#00e3b6] transition-colors text-center text-sm cursor-pointer mb-3">See What It'd Do For YOUR Business →</button><button onclick="window.__tethronReplayDemo && window.__tethronReplayDemo()" class="inline-flex items-center gap-1.5 text-zinc-400 hover:text-tethron-cyan text-xs transition-colors cursor-pointer"><i class="ph ph-arrow-counter-clockwise"></i>Replay the morning</button></div></div>`;
 
             const updateStats = (s) => {
                 if (s.tasks) document.getElementById('stat-tasks').textContent = s.tasks;
@@ -1706,6 +1906,16 @@
                 li.style.animation = 'fadeSlideUp 0.4s ease forwards';
                 li.innerHTML = `<div class="mt-0.5 w-3 h-3 rounded-full bg-tethron-cyan/20 flex items-center justify-center shrink-0 border border-tethron-cyan/30"><div class="w-1 h-1 bg-tethron-cyan rounded-full"></div></div><div class="flex flex-col gap-0.5"><span class="text-zinc-300 leading-tight">${text}</span><span class="text-zinc-600 text-[9px]">${t}</span></div>`;
                 if (activityLog) activityLog.prepend(li);
+            };
+
+            // Expose replay handler on window so the results-card button can trigger it.
+            window.__tethronReplayDemo = () => {
+                // Preserve the date divider (first child); wipe the rest of the chat + activity log.
+                while (chatContainer.children.length > 1) chatContainer.removeChild(chatContainer.lastChild);
+                if (activityLog) activityLog.innerHTML = '';
+                logCount = 0;
+                hasRun = false;
+                runDemo();
             };
 
             const runDemo = async () => {
@@ -1970,21 +2180,23 @@
 
         // === DIVISION CAROUSEL — cinematic 360° ===
         (function() {
+            // tone: 'sales' | 'ops' | 'creative' | 'finance' | 'support' | 'strategy'
+            // maps to subtle accent color on the active card (see CSS .division-card.tone-*)
             const OPERATORS = [
-                { slug: 'nova',      name: 'Nova',      role: 'AI Sales Development Rep' },
-                { slug: 'knox',      name: 'Knox',      role: 'AI Executive Assistant' },
-                { slug: 'luna',      name: 'Luna',      role: 'AI Social Media Manager' },
-                { slug: 'sage',      name: 'Sage',      role: 'AI Customer Success' },
-                { slug: 'iris',      name: 'Iris',      role: 'AI Content Writer' },
-                { slug: 'quinn',     name: 'Quinn',     role: 'AI Recruiter' },
-                { slug: 'cypher',    name: 'Cypher',    role: 'AI Data Analyst' },
-                { slug: 'pearl',     name: 'Pearl',     role: 'AI Bookkeeper' },
-                { slug: 'ember',     name: 'Ember',     role: 'AI Receptionist' },
-                { slug: 'echo',      name: 'Echo',      role: 'AI Customer Support' },
-                { slug: 'ledger',    name: 'Ledger',    role: 'AI Financial Analyst' },
-                { slug: 'atlas',     name: 'Atlas',     role: 'AI Project Manager' },
-                { slug: 'reed',      name: 'Reed',      role: 'AI Legal Assistant' },
-                { slug: 'sovereign', name: 'Sovereign', role: 'AI Chief Strategist' },
+                { slug: 'nova',      name: 'Nova',      role: 'AI Sales Development Rep', tone: 'sales',    quote: "I book demos at 3 AM so you don't have to." },
+                { slug: 'knox',      name: 'Knox',      role: 'AI Executive Assistant',   tone: 'ops',      quote: "Nothing falls through the cracks. Ever." },
+                { slug: 'luna',      name: 'Luna',      role: 'AI Social Media Manager',  tone: 'creative', quote: "Your brand voice, posting while you sleep." },
+                { slug: 'sage',      name: 'Sage',      role: 'AI Customer Success',      tone: 'support',  quote: "I turn support tickets into renewals." },
+                { slug: 'iris',      name: 'Iris',      role: 'AI Content Writer',        tone: 'creative', quote: "Newsletters, landing pages, copy — done, on-brand." },
+                { slug: 'quinn',     name: 'Quinn',     role: 'AI Recruiter',             tone: 'ops',      quote: "I find candidates while you run the company." },
+                { slug: 'cypher',    name: 'Cypher',    role: 'AI Data Analyst',          tone: 'strategy', quote: "The dashboard you never have to build." },
+                { slug: 'pearl',     name: 'Pearl',     role: 'AI Bookkeeper',            tone: 'finance',  quote: "Books closed by the 3rd. Every month." },
+                { slug: 'ember',     name: 'Ember',     role: 'AI Receptionist',          tone: 'support',  quote: "Every inbound call answered. 2 rings. 24/7." },
+                { slug: 'echo',      name: 'Echo',      role: 'AI Customer Support',      tone: 'support',  quote: "Tier-1 tickets resolved in under 5 minutes." },
+                { slug: 'ledger',    name: 'Ledger',    role: 'AI Financial Analyst',     tone: 'finance',  quote: "Fractional CFO work at 1/10 the cost." },
+                { slug: 'atlas',     name: 'Atlas',     role: 'AI Project Manager',       tone: 'ops',      quote: "Every task has a date, an owner, a done state." },
+                { slug: 'reed',      name: 'Reed',      role: 'AI Legal Assistant',       tone: 'finance',  quote: "I flag what bites before you sign." },
+                { slug: 'sovereign', name: 'Sovereign', role: 'AI Chief Strategist',      tone: 'strategy', quote: "Weekly brief. Competitor moves. Your next play." },
             ];
 
             const stage = document.getElementById('division-stage');
@@ -1996,7 +2208,7 @@
             const nextBtn = document.getElementById('division-next');
 
             stage.innerHTML = OPERATORS.map((op, i) => `
-                <div class="division-card" data-idx="${i}" aria-hidden="true">
+                <div class="division-card tone-${op.tone}" data-idx="${i}" aria-hidden="true">
                     <div class="spotlight-ring"></div>
                     <img class="poster" src="avatars/${op.slug}.png" alt="${op.name}" loading="lazy" decoding="async">
                     <video muted playsinline preload="none" data-src="videos/${op.slug}.mp4"></video>
@@ -2005,7 +2217,8 @@
                     <div class="division-audio-hint" aria-hidden="true"><i class="ph-fill ph-speaker-simple-high"></i></div>
                     <div class="meta">
                         <h3 class="text-white text-2xl font-bold mb-0.5 tracking-tight">${op.name}</h3>
-                        <p class="text-tethron-cyan text-xs font-medium tracking-wide uppercase">${op.role}</p>
+                        <p class="text-tethron-cyan text-xs font-medium tracking-wide uppercase mb-1.5">${op.role}</p>
+                        <p class="division-quote text-zinc-300 text-[13px] leading-snug italic">“${op.quote}”</p>
                     </div>
                 </div>
             `).join('');
@@ -2053,9 +2266,9 @@
                     const x = d * offsetStep;
                     const scale = absD === 0
                         ? 1
-                        : Math.max(0.58, 0.86 - absD * 0.13);
-                    const opacity = absD > maxVisible ? 0 : (absD === 0 ? 1 : 0.4);
-                    const blur = absD === 0 ? 0 : Math.min(8, 2 + absD * 2.5);
+                        : Math.max(0.64, 0.88 - absD * 0.11);
+                    const opacity = absD > maxVisible ? 0 : (absD === 0 ? 1 : absD === 1 ? 0.7 : 0.45);
+                    const blur = absD === 0 ? 0 : Math.min(3, 0.6 + absD * 0.9);
                     const z = 20 - absD;
 
                     card.style.transform = `translate(-50%, -50%) translateX(${x}px) scale(${scale})`;

@@ -64,7 +64,9 @@
     .kh-send:disabled{opacity:.3;cursor:not-allowed;transform:none;box-shadow:none;}
     .kh-footer{text-align:center;padding:8px 0 12px;font-size:10px;color:rgba(245,246,247,.3);letter-spacing:.08em;text-transform:uppercase;font-weight:600;background:#0b0c0e;}
     .kh-footer span{color:#00d4e8;}
-    @media (max-width:480px){.kh-panel{width:auto;max-width:none;left:10px;right:10px;top:auto;bottom:max(14px,env(safe-area-inset-bottom));height:70vh;max-height:calc(100dvh - 80px);border-radius:20px;}.kh-header{padding:14px 16px;}.kh-header .kh-avatar{width:40px;height:40px;}.kh-header .kh-title{font-size:15px;}.kh-header .kh-sub{font-size:10px;}.kh-body{padding:16px;gap:12px;}.kh-input{padding:12px 14px;}.kh-footer{padding:6px 0 10px;font-size:9px;}.kh-root{bottom:16px;right:16px;}.kh-label{display:none;}}
+    @media (max-width:480px){.kh-panel{width:auto;max-width:none;left:10px;right:10px;top:auto;bottom:max(14px,env(safe-area-inset-bottom));height:70vh;max-height:calc(100dvh - 80px);border-radius:20px;}.kh-header{padding:14px 16px;}.kh-header .kh-avatar{width:40px;height:40px;}.kh-header .kh-title{font-size:15px;}.kh-header .kh-sub{font-size:10px;}.kh-body{padding:16px;gap:12px;}.kh-input{padding:12px 14px;}.kh-footer{padding:6px 0 10px;font-size:9px;}.kh-root{bottom:16px;right:16px;}.kh-label{display:none;}.kh-bubble{width:52px;height:52px;}.kh-bubble-inner{width:46px;height:46px;}}
+    /* Floating widget hides while hero Khaleesi chip is on-screen — dedupes overlapping CTAs on mobile */
+    .kh-root.kh-hidden{opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease;}
     `;
 
     const style = document.createElement('style');
@@ -183,6 +185,22 @@
     // Re-wire if content changes
     const mo = new MutationObserver(wireTriggers);
     mo.observe(document.body, { childList: true, subtree: true });
+
+    // MOBILE DEDUPE: hide floating widget while the hero Khaleesi chip is on screen.
+    // Only applies to mobile (<=768px) — on desktop the widget stays persistent.
+    try {
+        const heroChip = document.querySelector('[data-khaleesi-open]');
+        const mq = window.matchMedia('(max-width: 768px)');
+        if (heroChip && mq.matches) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) root.classList.add('kh-hidden');
+                    else root.classList.remove('kh-hidden');
+                });
+            }, { threshold: 0.25 });
+            io.observe(heroChip);
+        }
+    } catch (err) { /* observer unavailable — widget simply stays visible */ }
 
     function renderMsg(role, text) {
         const el = document.createElement('div');
