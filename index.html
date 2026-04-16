@@ -312,19 +312,20 @@
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
         /* Pricing compare table */
-        .pricing-compare-grid { display: grid; grid-template-columns: minmax(86px, 1.15fr) 1fr 1fr 1fr; }
-        .pricing-compare-head { padding: 0.9rem 0.5rem; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; text-align: center; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .pricing-compare-grid { display: grid; grid-template-columns: minmax(72px, 0.95fr) 1fr 1fr 1fr; }
+        .pricing-compare-head { padding: 0.85rem 0.35rem; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; text-align: center; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.06); }
         .pricing-compare-head-division { color: #00d4e8; }
-        .pricing-compare-head-pro { color: #00d4e8; position: relative; }
-        /* Subtle column highlight for the Most Popular tier — spans header only */
-        .pricing-compare-head-pro::after { content: ''; position: absolute; inset: 8px 4px; border-radius: 8px; background: rgba(0,212,232,0.08); z-index: -1; }
+        .pricing-compare-head-pro { color: #00d4e8; position: relative; z-index: 0; }
+        /* Subtle column highlight for the Most Popular tier — header only */
+        .pricing-compare-head-pro::after { content: ''; position: absolute; inset: 6px 3px; border-radius: 8px; background: rgba(0,212,232,0.08); z-index: -1; }
         .pricing-compare-head-ent { color: #a0c0ff; }
-        .pricing-compare-cell { padding: 0.75rem 0.5rem; font-size: 12.5px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); text-align: center; white-space: nowrap; }
+        .pricing-compare-cell { padding: 0.7rem 0.35rem; font-size: 12px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); text-align: center; word-break: break-word; hyphens: auto; }
         .pricing-compare-cell:last-child, .pricing-compare-cell:nth-last-child(-n+4) { border-bottom: none; }
-        .pricing-compare-label { text-align: left; color: rgba(255,255,255,0.55); font-weight: 500; padding-left: 1rem; white-space: normal; }
+        .pricing-compare-label { text-align: left; color: rgba(255,255,255,0.55); font-weight: 500; padding-left: 0.9rem; }
         .pricing-compare-yes { color: #00d4e8; font-weight: 600; }
         .pricing-compare-no { color: rgba(255,255,255,0.25); }
         @media (min-width: 768px) {
+            .pricing-compare-grid { grid-template-columns: minmax(120px, 1.15fr) 1fr 1fr 1fr; }
             .pricing-compare-head { font-size: 11px; letter-spacing: 0.18em; padding: 0.95rem 0.85rem; }
             .pricing-compare-cell { font-size: 13px; padding: 0.8rem 0.85rem; }
             .pricing-compare-label { padding-left: 1.5rem; }
@@ -1453,17 +1454,17 @@
                     <div class="pricing-compare-cell">$3,500</div>
                     <div class="pricing-compare-cell">$7,500</div>
 
-                    <div class="pricing-compare-cell pricing-compare-label">Operator(s)</div>
+                    <div class="pricing-compare-cell pricing-compare-label">Operators</div>
                     <div class="pricing-compare-cell">1 pre-built</div>
-                    <div class="pricing-compare-cell">1 custom-built</div>
-                    <div class="pricing-compare-cell">Full department</div>
+                    <div class="pricing-compare-cell">1 custom</div>
+                    <div class="pricing-compare-cell">Full dept.</div>
 
-                    <div class="pricing-compare-cell pricing-compare-label">Phone answering</div>
+                    <div class="pricing-compare-cell pricing-compare-label">Phone</div>
                     <div class="pricing-compare-cell pricing-compare-no">—</div>
                     <div class="pricing-compare-cell pricing-compare-no">—</div>
                     <div class="pricing-compare-cell pricing-compare-yes">✓</div>
 
-                    <div class="pricing-compare-cell pricing-compare-label">On-site hardware</div>
+                    <div class="pricing-compare-cell pricing-compare-label">Hardware</div>
                     <div class="pricing-compare-cell pricing-compare-no">—</div>
                     <div class="pricing-compare-cell pricing-compare-no">—</div>
                     <div class="pricing-compare-cell pricing-compare-yes">✓ Mac Mini</div>
