@@ -1331,11 +1331,11 @@
 
             <!-- Scenario chip row — click to switch industries -->
             <div class="flex flex-wrap gap-2 reveal delay-100 relative z-10">
-                <button class="scenario-chip active" data-scenario="wealth" aria-current="true">📊 Wealth Advisor · Tuesday 6:02 AM</button>
-                <button class="scenario-chip" data-scenario="hvac">🔧 HVAC Contractor · Tuesday 6:15 AM</button>
-                <button class="scenario-chip" disabled>🦷 Dental Practice <span class="scenario-soon">SOON</span></button>
-                <button class="scenario-chip" disabled>🏠 Real Estate <span class="scenario-soon">SOON</span></button>
-                <button class="scenario-chip" disabled>💇 Salon / Med Spa <span class="scenario-soon">SOON</span></button>
+                <button class="scenario-chip active" data-scenario="wealth" aria-current="true">📊 Wealth Advisor · Tue 6:02 AM</button>
+                <button class="scenario-chip" data-scenario="hvac">🔧 HVAC Contractor · Tue 6:15 AM</button>
+                <button class="scenario-chip" data-scenario="dental">🦷 Dental Practice · Tue 6:45 AM</button>
+                <button class="scenario-chip" data-scenario="realestate">🏠 Real Estate · Tue 7:00 AM</button>
+                <button class="scenario-chip" data-scenario="salon">💇 Salon / Med Spa · Tue 7:30 AM</button>
             </div>
 
             <!-- Frosted Glass Chat Panel -->
@@ -2044,6 +2044,85 @@
                         { role: 'ai', text: "Sent ✓. Follow-up call scheduled with Dave at 2 PM today.\n\nThree more things:\n1. 3 new Google reviews overnight — all 5★. Already replied thanking them.\n2. Weekly crew schedule for Mon-Fri is drafted based on booked jobs + PTO. Approve?\n3. Competitor watch — Patel HVAC raised rates ($159 → $175). Sterling also ($145 → $165). You're still at $149.", time: "6:17 AM", logText: "Review recovery · crew schedule drafted", delayBefore: 2200, stats: {tasks: 14, reviews: 4} },
                         { role: 'owner', text: "Approve the schedule. Thanks.", time: "6:17 AM", delayBefore: 2000 },
                         { role: 'ai', text: "Schedule sent to Jim, Mike, Sam, and Pedro ✓\n\nYour day:\n🔧 8 AM — Chen follow-up (Jim)\n🔧 10 AM — 3 installs (Mike + Sam)\n🔧 2 PM — Dave Mitchell call (you)\n🔧 2 PM — Oak Hill boiler (Pedro)\n\n11 actions. 90 seconds. ☕", time: "6:17 AM", logText: "Crew schedule dispatched", delayBefore: 2000, stats: {tasks: 11, leads: 7, reviews: 4, revenue: '$6,040'} }
+                    ]
+                },
+
+                dental: {
+                    business: 'Oakwood Family Dental',
+                    subline: 'Tuesday · 6:45 AM · Nova is on it',
+                    dateDivider: 'Today, 6:45 AM',
+                    receipt: {
+                        headline: '75 Seconds. 12 Actions. Zero No-Shows.',
+                        timeSpent: '75 seconds',
+                        tasksCompleted: '12',
+                        capabilities: 'Reminders, Insurance, Recall, Emergencies, Reviews, Treatment Plans, Follow-ups, Referrals',
+                        cost: '$700/mo',
+                        flavor: "And that's a Tuesday morning. Imagine your whole week."
+                    },
+                    script: [
+                        { role: 'ai', text: "Good morning, Dr. Chen. Overnight report:\n\n• 14 appointment confirmations sent (all confirmed)\n• 2 emergency calls — Mrs. Kowalski (broken crown) booked 9 AM, Tyler Reed (tooth pain) booked 10:30 AM\n• 6 insurance claims auto-filed (Delta, Aetna, Cigna)\n• 3 recall patients re-engaged — 2 booked cleanings\n• Patel referral accepted — endo consult scheduled\n\nToday's chair:\n🦷 9 AM — Kowalski emergency (Dr. Chen)\n🦷 10:30 AM — Reed (you)\n🦷 11 AM — 2 cleanings (Maria)\n🦷 2 PM — Davis whitening consult", time: "6:45 AM", logText: "Overnight · 14 confirms + 2 emergencies", delayBefore: 1200, stats: {tasks: 8, leads: 2, reviews: 0, revenue: '$0'} },
+                        { role: 'owner', text: "Kowalski — is this insurance or cash? And is the crown in lab?", time: "6:46 AM", delayBefore: 3000 },
+                        { role: 'ai', text: "Delta PPO — verified eligible. Patient share ~$280 after coverage.\n\nCrown from her 2023 visit: ceramic, shade A2. Lab delivery scheduled Thursday. For today I prepped a temporary plan — impression + temp crown + pain management.\n\nShe's in pain. Want me to tell her we'll expedite the lab rush ($85 extra) or wait till Thursday?", time: "6:46 AM", logText: "Insurance verified · Delta PPO", delayBefore: 2500, stats: {tasks: 10} },
+                        { role: 'owner', text: "Expedite it. She's been a patient 12 years.", time: "6:46 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Done ✓\n\n✓ Rush lab ordered — crown arrives tomorrow 2 PM\n✓ Mrs. Kowalski texted: \"Crown fast-tracked, no charge. Final fit tomorrow afternoon.\"\n✓ She replied: \"You guys are the best 🙏\"\n\nAlso — treatment plan for Jason Reed (yesterday's exam): 2 fillings + crown + scaling. Estimated $2,400 with Aetna coverage. Drafted proposal. Send?", time: "6:47 AM", logText: "Kowalski crown expedited + comms sent", delayBefore: 2500, stats: {tasks: 12, revenue: '$2,400'} },
+                        { role: 'owner', text: "Send it. What reviews came in?", time: "6:47 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Treatment plan sent ✓\n\n3 new reviews overnight:\n• Maria G. (5★): \"Dr. Chen saved my tooth 🦷❤️\" — replied thanking\n• Brandon T. (5★): \"Kids love coming here\" — replied\n• Karen Weiss (3★): \"Long wait time Wednesday\"\n\nKaren Weiss — I pulled her visit log. She waited 38 min due to Mr. Patterson's root canal running long. Drafted response acknowledging + offering free cleaning. Show you?", time: "6:47 AM", logText: "3 reviews replied · 1 flagged", delayBefore: 2500, stats: {tasks: 15, reviews: 3} },
+                        { role: 'owner', text: "Yes show me.", time: "6:48 AM", delayBefore: 2000 },
+                        { role: 'ai', text: "Karen Weiss draft:\n\n\"Karen, you're right — 38 minutes is too long, even when our schedule gets hit by emergencies. That's on us. Your next cleaning is on the house as a thank-you for your patience. Does Friday at 2 work? Dr. Chen will see you personally.\"\n\nSend or edit?", time: "6:48 AM", logText: "Review recovery drafted", delayBefore: 2200 },
+                        { role: 'owner', text: "Send. Also — did the reactivation campaign pull anyone back?", time: "6:48 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Sent ✓\n\nReactivation campaign (patients dormant 12+ months): 47 reached yesterday.\n• 9 replied\n• 6 booked cleanings this month\n• 2 booked treatment plans (fillings + crown)\n• Estimated ~$8,400 in recovered revenue\n\nRest are in the re-engage queue. Running again next week.", time: "6:49 AM", logText: "Reactivation · 6 booked · $8.4K", delayBefore: 2500, stats: {tasks: 12, leads: 9, reviews: 4, revenue: '$10,800'} }
+                    ]
+                },
+
+                realestate: {
+                    business: 'Meridian Realty Group',
+                    subline: 'Tuesday · 7:00 AM · Nova is on it',
+                    dateDivider: 'Today, 7:00 AM',
+                    receipt: {
+                        headline: '80 Seconds. 11 Actions. 2 Offers Moved.',
+                        timeSpent: '80 seconds',
+                        tasksCompleted: '11',
+                        capabilities: 'Listings, Showings, Contracts, Lead Qualification, Reviews, Open Houses, Milestones, Referrals',
+                        cost: '$700/mo',
+                        flavor: "And that's a Tuesday morning. Imagine your whole week."
+                    },
+                    script: [
+                        { role: 'ai', text: "Good morning. Overnight report:\n\n• 412 Oak Ridge listing went live at 11 PM — already 37 saves, 4 showing requests\n• 2 buyer leads qualified overnight (both pre-approved $650K+)\n• Henderson inspection contingency cleared — deal on track to close Friday\n• Sullivan offer accepted at ask — counter on Taylor property declined\n• 1 review request sent, 1 replied (5★)\n\nToday:\n🏠 9:30 AM — 412 Oak showing (Tanaka family)\n🏠 12 PM — Listing prep, 88 Hillside\n🏠 3 PM — Henderson final walkthrough\n🏠 5 PM — Open house prep, Oakmont", time: "7:00 AM", logText: "412 Oak · 37 saves · 4 showings", delayBefore: 1200, stats: {tasks: 7, leads: 6, reviews: 1, revenue: '$0'} },
+                        { role: 'owner', text: "4 showing requests on Oak already? Qualify them — I want serious buyers only.", time: "7:01 AM", delayBefore: 3000 },
+                        { role: 'ai', text: "Pulled financial + motivation on all 4:\n\n✓ Tanaka family (9:30 AM) — pre-approved $850K, relocating Q1, 2nd showing. HOT.\n✓ Morrison couple — pre-approved $720K, downsize, interested but not urgent. WARM.\n✗ Ben Ruiz — no pre-approval, first-time buyer browsing. Referred him to Chen @ First National for pre-qual first.\n✗ Kendra Liu — investor, all-cash, flip history. Off-market preferred. Sent her the pocket listing instead.\n\nShowing schedule cleaned up — Tanaka 9:30, Morrison 11. Booked.", time: "7:01 AM", logText: "4 leads qualified · 2 booked", delayBefore: 2800, stats: {tasks: 11, leads: 8} },
+                        { role: 'owner', text: "Nice. What's the Henderson status — anything still open before Friday?", time: "7:02 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Henderson closing Friday — tracking:\n\n✓ Inspection cleared (3 minor items, credit $2,400 to buyers)\n✓ Appraisal: $715K (purchase $710K — clean)\n✓ Title insurance ordered\n✓ Final walkthrough scheduled today 3 PM\n⚠ Mortgage commitment letter — still pending from Wells Fargo. I emailed Priya at 6 AM, she confirms it's locked for release today.\n\nClear-to-close expected Wednesday. Ready.", time: "7:02 AM", logText: "Henderson deal · 4/5 cleared", delayBefore: 2800, stats: {tasks: 14} },
+                        { role: 'owner', text: "Good. Anything weird in the market?", time: "7:03 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Market intel from overnight scans:\n\n📈 Your zip (78704):\n• 88 Hillside — comp at $625/sqft (your listing prep meeting at 12 — I updated comps)\n• 2 new listings under $500K — both with dated kitchens. Good buyer fodder.\n• Inventory down 14% month-over-month — seller's market tightening\n\n📉 Competitor watch:\n• Radcliff Realty cut their Oak Terrace listing 3% overnight (your Oak Ridge is now competitively priced)\n• Westlake Prime had 2 price reductions — their luxury segment softening", time: "7:03 AM", logText: "Market intel · comps updated", delayBefore: 2800, stats: {tasks: 14, revenue: '$710,000'} },
+                        { role: 'owner', text: "Did anything close last night I should call to congratulate?", time: "7:04 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "The Cavanaughs closed on 47 Ridgewood at 11:42 PM ✓\n\nI sent their closing gift (charcuterie board + wine) overnight via Shipt — delivered 7 AM.\n\nDraft text for you:\n\"Congrats on closing 47 Ridgewood! Huge move for your family. Enjoy the housewarming tonight — little surprise should be at your door already 🥂\"\n\nSend as is?", time: "7:04 AM", logText: "Cavanaugh closing gift delivered", delayBefore: 2500 },
+                        { role: 'owner', text: "Send. And queue up the referral ask for next week.", time: "7:04 AM", delayBefore: 2000 },
+                        { role: 'ai', text: "Sent ✓\n\n✓ Congrats text out\n✓ 10-day referral ask queued (\"Know anyone else thinking of moving? Coffee's on me.\")\n✓ 90-day annual-check added to CRM\n\n11 actions. 80 seconds. Open houses prep next.", time: "7:05 AM", logText: "Congrats sent + referral queued", delayBefore: 2000, stats: {tasks: 11, leads: 8, reviews: 1, revenue: '$710,000'} }
+                    ]
+                },
+
+                salon: {
+                    business: 'Luxe Beauty Studio',
+                    subline: 'Tuesday · 7:30 AM · Nova is on it',
+                    dateDivider: 'Today, 7:30 AM',
+                    receipt: {
+                        headline: '70 Seconds. 11 Actions. Chair Full.',
+                        timeSpent: '70 seconds',
+                        tasksCompleted: '11',
+                        capabilities: 'Bookings, Memberships, Reviews, Bridal Parties, Inventory, Reminders, Upsells, Social',
+                        cost: '$700/mo',
+                        flavor: "And that's a Tuesday morning. Imagine your whole week."
+                    },
+                    script: [
+                        { role: 'ai', text: "Good morning ✨ Overnight report:\n\n• 23 appointment confirmations — 22 confirmed, 1 reschedule (Tasha moved to Thurs)\n• 4 new bookings after hours (3 cuts, 1 color)\n• Membership auto-renewed: 11 monthly members processed ($1,320 MRR)\n• Inventory alert: Olaplex No.3 — 2 bottles left. Reordered overnight.\n• Bridal party inquiry — Rachel Navarro, Sep 14 wedding, 6 people\n\nToday's chair:\n💇 9 AM — Keira (balayage, Sam)\n💇 10:30 AM — Mrs. Delgado (cut + color, you)\n💇 1 PM — Maya (consultation + brow, Priya)\n💇 3 PM — Blake (bridal trial, you)", time: "7:30 AM", logText: "23 confirmations · 4 new bookings", delayBefore: 1200, stats: {tasks: 6, leads: 5, reviews: 0, revenue: '$1,320'} },
+                        { role: 'owner', text: "Bridal party for Rachel Navarro — tell me more. 6 people Sep 14?", time: "7:30 AM", delayBefore: 3000 },
+                        { role: 'ai', text: "Rachel Navarro — got engaged 3 weeks ago, found us on Instagram (your August reel — 140K views).\n\nParty: bride + 5 bridesmaids. Wedding Sep 14 (Saturday), ceremony 4 PM.\nService need: hair + makeup for all 6, starting 10 AM.\nEstimated ticket: $2,850 + $350 tip avg.\n\nShe's asking if we can offer a package. Drafted the bridal package proposal — includes trial run for bride + 10% party discount + champagne service. Shall I send?", time: "7:31 AM", logText: "Bridal inquiry qualified · $2,850 est", delayBefore: 2800, stats: {tasks: 8, revenue: '$4,170'} },
+                        { role: 'owner', text: "Send it. And book the trial for June before she shops around.", time: "7:31 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Sent ✓\n\n✓ Proposal to Rachel + trial slots offered (June 7, 14, or 21)\n✓ Auto-followup in 48 hrs if no reply\n✓ Blocked stylist schedule Sep 14 for the full party\n\nRachel replied already: \"Love this! June 14 works. Venmoing deposit now 💍\"\n\nAlso — Maya's 1 PM consult is for her 25th birthday makeover. Flagging as high-value upsell opportunity — package: color + cut + brow + lash ($485).", time: "7:32 AM", logText: "Bridal booked · Jun 14 · $285 deposit", delayBefore: 2500, stats: {tasks: 10, leads: 6, revenue: '$4,455'} },
+                        { role: 'owner', text: "Perfect. What reviews came in?", time: "7:32 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "5 new reviews overnight:\n\n• Jessie R. (5★): \"Sam saved my color from a disaster\" — replied ❤️\n• Monika V. (5★): \"Best balayage in the city\" — replied + tagged Sam\n• Devon T. (5★): \"Priya did my brows and I'm OBSESSED\" — replied\n• Tashi L. (4★): \"Loved the cut but waited 15 min\" — response drafted, show you?\n• Alex R. (5★): \"Feel like a new person\" — replied", time: "7:33 AM", logText: "5 reviews replied · 1 flagged", delayBefore: 2500, stats: {tasks: 14, reviews: 5} },
+                        { role: 'owner', text: "Send the Tashi one too. Anything else I need to know?", time: "7:33 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Sent ✓ (Tashi) — offered free brow wax on her next visit.\n\nThree more things:\n1. Your Instagram reel (\"3 ways to hide bangs growing out\") — 89K views, 2,400 saves overnight. Another post queued for 11 AM.\n2. Gift card sales: 7 sold overnight ($725) — Mother's Day push working.\n3. Gemma P.'s $79 color is overdue — 9 days. Sent friendly reminder with \"pay in 3\" link. She paid 10 mins ago ✓\n\n11 actions. 70 seconds. Your 10:30 is on her way. ☕", time: "7:34 AM", logText: "Social queue + collections cleared", delayBefore: 2500, stats: {tasks: 11, leads: 6, reviews: 5, revenue: '$5,259'} }
                     ]
                 }
             };
