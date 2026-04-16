@@ -2060,6 +2060,8 @@
 
             let hasRun = false;
             let logCount = 0;
+            // Monotonically increasing "run id" — lets a fresh runDemo abort any in-flight async loop from a prior scenario.
+            let currentRunId = 0;
             const sleep = (ms) => new Promise(r => setTimeout(r, ms));
             const scrollChat = () => chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
 
@@ -2107,40 +2109,40 @@
             const runDemo = async () => {
                 if (hasRun) return;
                 hasRun = true;
-
-                // Owner typing indicator (gray dots)
-                const ownerTyping = document.createElement('div');
-                ownerTyping.className = 'hidden flex w-full justify-start max-w-[80%]';
-                ownerTyping.innerHTML = '<div class="rounded-2xl rounded-bl-md px-5 py-4 flex items-center gap-2" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06);"><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div></div>';
+                // Claim a fresh run id — any lingering older runDemo() loop will notice currentRunId moved on and bail.
+                currentRunId += 1;
+                const runId = currentRunId;
 
                 for (const step of scriptData) {
                     await sleep(step.delayBefore);
+                    if (runId !== currentRunId) return; // scenario switched out from under us — abort
                     if (step.role === 'ai') {
-                        // AI typing indicator (teal dots) — fresh each time
                         const at = document.createElement('div');
                         at.className = 'flex w-full justify-end max-w-[80%] ml-auto';
                         at.innerHTML = '<div class="rounded-2xl rounded-br-md px-5 py-4 flex items-center gap-2" style="background: rgba(0,212,232,0.06); border: 1px solid rgba(0,212,232,0.1);"><div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan typing-dot"></div></div>';
                         chatContainer.appendChild(at);
                         scrollChat();
                         await sleep(1200 + Math.min(step.text.length * 5, 3000));
+                        if (runId !== currentRunId) { at.remove(); return; }
                         at.remove();
                         chatContainer.insertAdjacentHTML('beforeend', mkAI(step));
                         if (step.logText) addLog(step.logText);
                         if (step.stats) updateStats(step.stats);
                     } else {
-                        // Owner typing indicator (gray dots) — clone fresh each time
                         const ot = document.createElement('div');
                         ot.className = 'flex w-full justify-start max-w-[80%]';
                         ot.innerHTML = '<div class="rounded-2xl rounded-bl-md px-5 py-4 flex items-center gap-2" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06);"><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div><div class="w-1.5 h-1.5 rounded-full bg-zinc-400 typing-dot"></div></div>';
                         chatContainer.appendChild(ot);
                         scrollChat();
                         await sleep(800 + Math.min(step.text.length * 6, 2000));
+                        if (runId !== currentRunId) { ot.remove(); return; }
                         ot.remove();
                         chatContainer.insertAdjacentHTML('beforeend', mkOwner(step));
                     }
                     scrollChat();
                 }
                 await sleep(1500);
+                if (runId !== currentRunId) return;
                 chatContainer.insertAdjacentHTML('beforeend', mkResults());
                 addLog("Day briefing complete");
                 scrollChat();
