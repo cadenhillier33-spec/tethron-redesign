@@ -312,15 +312,23 @@
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
         /* Pricing compare table */
-        .pricing-compare-head { padding: 0.9rem 0.85rem; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; text-align: center; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .pricing-compare-grid { display: grid; grid-template-columns: minmax(86px, 1.15fr) 1fr 1fr 1fr; }
+        .pricing-compare-head { padding: 0.9rem 0.5rem; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; text-align: center; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.06); }
         .pricing-compare-head-division { color: #00d4e8; }
-        .pricing-compare-head-pro { background: rgba(0,212,232,0.05); color: #00d4e8; }
+        .pricing-compare-head-pro { color: #00d4e8; position: relative; }
+        /* Subtle column highlight for the Most Popular tier — spans header only */
+        .pricing-compare-head-pro::after { content: ''; position: absolute; inset: 8px 4px; border-radius: 8px; background: rgba(0,212,232,0.08); z-index: -1; }
         .pricing-compare-head-ent { color: #a0c0ff; }
-        .pricing-compare-cell { padding: 0.75rem 0.85rem; font-size: 13px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); text-align: center; }
+        .pricing-compare-cell { padding: 0.75rem 0.5rem; font-size: 12.5px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.04); text-align: center; white-space: nowrap; }
         .pricing-compare-cell:last-child, .pricing-compare-cell:nth-last-child(-n+4) { border-bottom: none; }
-        .pricing-compare-label { text-align: left; color: rgba(255,255,255,0.5); font-weight: 500; padding-left: 1.25rem; }
+        .pricing-compare-label { text-align: left; color: rgba(255,255,255,0.55); font-weight: 500; padding-left: 1rem; white-space: normal; }
         .pricing-compare-yes { color: #00d4e8; font-weight: 600; }
         .pricing-compare-no { color: rgba(255,255,255,0.25); }
+        @media (min-width: 768px) {
+            .pricing-compare-head { font-size: 11px; letter-spacing: 0.18em; padding: 0.95rem 0.85rem; }
+            .pricing-compare-cell { font-size: 13px; padding: 0.8rem 0.85rem; }
+            .pricing-compare-label { padding-left: 1.5rem; }
+        }
 
         /* Comparison (Why hire another human?) */
         .compare-col { position: relative; border-radius: 20px; padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1.5rem; overflow: hidden; }
@@ -1429,10 +1437,10 @@
 
             <!-- Quick comparison row — 4 rows, scans fast -->
             <div class="reveal mb-10 max-w-4xl mx-auto glass-panel rounded-2xl overflow-hidden">
-                <div class="grid grid-cols-4 text-xs md:text-sm">
+                <div class="pricing-compare-grid">
                     <div class="pricing-compare-head"></div>
                     <div class="pricing-compare-head pricing-compare-head-division">Division</div>
-                    <div class="pricing-compare-head pricing-compare-head-pro">Professional</div>
+                    <div class="pricing-compare-head pricing-compare-head-pro">Pro</div>
                     <div class="pricing-compare-head pricing-compare-head-ent">Enterprise</div>
 
                     <div class="pricing-compare-cell pricing-compare-label">Monthly</div>
