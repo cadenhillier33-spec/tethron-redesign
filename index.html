@@ -901,7 +901,8 @@
         });
 
         // Integrations marquee — render from data with real brand SVG logos (Simple Icons, CC0)
-        (function() {
+        // Defer until DOM is parsed — script is inline in <head>, so the track element doesn't exist yet.
+        document.addEventListener('DOMContentLoaded', function renderIntegrations() {
             const track = document.getElementById('integrations-track');
             if (!track) return;
             // Each entry: [name, tip, brandColor, svgPathD (from simpleicons.org 24x24 viewBox)]
@@ -931,10 +932,10 @@
             };
             // Render integrations + duplicate for seamless infinite loop
             track.innerHTML = [...INTEGRATIONS, ...INTEGRATIONS].map(makePill).join('');
-        })();
+        });
 
         // Mobile menu controller — open/close with backdrop, icon swap, escape key, tap-outside, link auto-close
-        (function() {
+        document.addEventListener('DOMContentLoaded', function initMobileMenu() {
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('mobile-menu-backdrop');
@@ -953,7 +954,7 @@
             menu.querySelectorAll('[data-mm-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
             // Close on escape
             document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) setOpen(false); });
-        })();
+        });
     </script>
 
     <!-- Environmental Textures -->
