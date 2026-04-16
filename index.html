@@ -1982,7 +1982,7 @@
                 el.style.transform = 'none';
             });
             // Also remove from glass-panels inside those sections
-            document.querySelectorAll('#capabilities .glass-panel, #industries .glass-panel, #pricing .glass-panel').forEach(el => {
+            document.querySelectorAll('#capabilities .glass-panel, #industries .glass-panel, #pricing .grid .glass-panel').forEach(el => {
                 el.classList.remove('reveal', 'delay-0', 'delay-100', 'delay-200', 'delay-300');
                 // Set initial state for GSAP
                 gsap.set(el, { opacity: 0, y: 40, scale: 0.92 });
@@ -2062,7 +2062,8 @@
             const testimonials = document.querySelectorAll('#testimonials .glass-panel, [class*="testimonial"]');
 
             // PRICING: Cards slide in from opposite sides (3-tier)
-            const pricingCards = document.querySelectorAll('#pricing .glass-panel');
+            // Scope to cards inside the pricing grid — the comparison table above is ALSO a .glass-panel but shouldn't animate as a tier card
+            const pricingCards = document.querySelectorAll('#pricing .grid > .glass-panel');
             if (pricingCards.length >= 3) {
                 gsap.set(pricingCards[0], { opacity: 0, x: -60, scale: 1 });
                 gsap.set(pricingCards[1], { opacity: 0, y: 60, scale: 1 });
