@@ -311,6 +311,94 @@
         .typing-dot:nth-child(1) { animation-delay: -0.32s; }
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
+        /* Mobile menu — animated reveal with backdrop + icon swap */
+        .mobile-menu {
+            position: fixed;
+            top: 64px; left: 0; right: 0;
+            max-height: calc(100vh - 64px);
+            overflow-y: auto;
+            z-index: 49;
+            opacity: 0;
+            transform: translateY(-12px);
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.mobile-menu-open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .mobile-menu-backdrop {
+            position: fixed; inset: 0;
+            background: rgba(7,8,10,0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 48;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu-backdrop.mobile-menu-open { opacity: 1; pointer-events: auto; }
+        .mobile-menu-icon { transition: opacity 0.2s, transform 0.25s; }
+        .mobile-menu-icon-close { opacity: 0; transform: rotate(-90deg); }
+        #mobile-menu-btn.menu-is-open .mobile-menu-icon-open { opacity: 0; transform: rotate(90deg); }
+        #mobile-menu-btn.menu-is-open .mobile-menu-icon-close { opacity: 1; transform: rotate(0); }
+        body.mobile-menu-is-open { overflow: hidden; }
+
+        /* Cinematic section dividers — subtle gradient fade between major sections */
+        .section-divider {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            pointer-events: none;
+            margin: 0;
+        }
+        .section-divider::before {
+            content: '';
+            position: absolute; left: 50%; top: 50%;
+            width: min(800px, 80%); height: 1px;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(90deg, transparent 0%, rgba(0,212,232,0.15) 50%, transparent 100%);
+        }
+        .section-divider::after {
+            content: '';
+            position: absolute; left: 50%; top: 50%;
+            width: min(280px, 35%); height: 1px;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(90deg, transparent 0%, rgba(0,212,232,0.5) 50%, transparent 100%);
+            box-shadow: 0 0 30px rgba(0,212,232,0.3);
+        }
+
+        /* Display-weight punchline typography — big moments between sections */
+        .punchline {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.25rem, 7vw, 4.75rem);
+            line-height: 1;
+            letter-spacing: -0.035em;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.95);
+        }
+        .punchline-accent {
+            background: linear-gradient(135deg, #00d4e8 0%, #0A9AC0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+        .punchline-sub {
+            font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+            font-weight: 500;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0;
+            margin-top: 1.25rem;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* Pricing compare table */
         .pricing-compare-grid { display: grid; grid-template-columns: minmax(72px, 0.95fr) 1fr 1fr 1fr; }
         .pricing-compare-head { padding: 0.85rem 0.35rem; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; text-align: center; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.06); }
@@ -811,6 +899,61 @@
                 setTimeout(() => loader.remove(), 600);
             }, 1200);
         });
+
+        // Integrations marquee — render from data with real brand SVG logos (Simple Icons, CC0)
+        (function() {
+            const track = document.getElementById('integrations-track');
+            if (!track) return;
+            // Each entry: [name, tip, brandColor, svgPathD (from simpleicons.org 24x24 viewBox)]
+            // svg path-only lets us style color via `fill`; we wrap in 20px svg.
+            const INTEGRATIONS = [
+                ['Gmail', 'Sends, drafts, replies to email 24/7', '#EA4335', 'M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z'],
+                ['Slack', 'Posts updates, answers questions, pings your team', '#4A154B', 'M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z'],
+                ['Google Calendar', 'Books, confirms, reschedules appointments', '#4285F4', 'M22.316 0H1.684A1.686 1.686 0 0 0 0 1.684v20.632C0 23.248.752 24 1.684 24h20.632A1.686 1.686 0 0 0 24 22.316V1.684A1.686 1.686 0 0 0 22.316 0zM5.1 19.024c-.56 0-1.04-.12-1.42-.364a2.05 2.05 0 0 1-.844-.984l.728-.3c.084.248.232.448.444.596.212.148.464.22.744.22.324 0 .596-.08.816-.24.22-.16.328-.372.328-.64 0-.28-.116-.496-.348-.656-.232-.16-.528-.24-.888-.24h-.432v-.752h.384c.316 0 .576-.084.784-.248.208-.164.312-.388.312-.672 0-.232-.092-.428-.276-.592a1.07 1.07 0 0 0-.736-.244c-.3 0-.532.08-.696.244a1.35 1.35 0 0 0-.372.556l-.724-.3a1.93 1.93 0 0 1 .576-.832c.3-.26.696-.388 1.188-.388.356 0 .676.068.96.208.284.14.508.332.668.58.16.244.244.52.244.824 0 .296-.072.556-.216.776a1.43 1.43 0 0 1-.544.508v.04c.284.116.528.304.716.548.188.248.284.548.284.904 0 .356-.088.676-.264.956a1.76 1.76 0 0 1-.744.656c-.32.156-.688.236-1.084.236zM9.82 19.024c-.316 0-.616-.06-.9-.184a1.58 1.58 0 0 1-.648-.52l.572-.56c.232.332.56.496.976.496.236 0 .436-.072.592-.212a.77.77 0 0 0 .228-.572v-3.96l-.868-.884.708-.708.996 1.016v4.536c0 .392-.112.716-.336.972-.224.256-.54.388-.948.388zM18.3 19.024c-.532 0-.992-.132-1.38-.396a1.95 1.95 0 0 1-.772-1.064l.712-.3c.108.296.272.524.492.68.22.156.488.236.808.236.328 0 .592-.088.796-.264.204-.176.304-.4.304-.672 0-.276-.104-.5-.308-.672-.204-.172-.46-.26-.768-.26h-.56v-.732h.496c.276 0 .508-.08.7-.24.192-.16.288-.38.288-.66 0-.252-.088-.448-.272-.596a1.04 1.04 0 0 0-.68-.22c-.284 0-.504.076-.66.22a1.3 1.3 0 0 0-.344.548l-.712-.3c.12-.288.308-.548.56-.78.252-.232.588-.348 1.012-.348.312 0 .596.06.852.18.256.12.456.284.6.492.144.208.216.448.216.72 0 .276-.068.52-.204.732-.136.212-.308.376-.516.492v.04c.256.112.48.288.672.528.192.24.288.528.288.864 0 .336-.084.636-.252.9-.168.264-.4.472-.696.624-.296.152-.632.228-1.008.228z'],
+                ['Stripe', 'Sends invoices, tracks payments, flags overdue', '#635BFF', 'M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305z'],
+                ['HubSpot', 'Logs every interaction, updates your pipeline', '#FF7A59', 'M18.164 7.93V5.084a2.198 2.198 0 0 0 1.267-1.978v-.067A2.2 2.2 0 0 0 17.238.845h-.067a2.2 2.2 0 0 0-2.193 2.194v.067a2.196 2.196 0 0 0 1.252 1.973l.013.005v2.852a6.22 6.22 0 0 0-2.969 1.31l.015-.011-7.869-6.127a2.499 2.499 0 1 0-1.174 1.5l-.009.004 7.74 6.021a6.235 6.235 0 0 0-1.05 3.477c0 1.355.431 2.61 1.164 3.635l-.013-.019-2.355 2.354a2.03 2.03 0 0 0-.585-.089h-.002a2.023 2.023 0 0 0-1.867 1.241h-.003a2.022 2.022 0 0 0 1.872 2.8h.001a2.02 2.02 0 0 0 1.831-2.88l.006.014a2.029 2.029 0 0 0-.09-.588l.004.015 2.33-2.331a6.263 6.263 0 1 0 4.72-11.244l-.03-.007zm-1.009 9.377a3.211 3.211 0 1 1 .002-6.423 3.211 3.211 0 0 1-.002 6.423z'],
+                ['Instagram', 'Drafts, schedules, publishes posts + DM replies', '#E4405F', 'M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.846-10.405a1.441 1.441 0 0 1-2.88 0 1.44 1.44 0 0 1 2.88 0z'],
+                ['QuickBooks', 'Reconciles, categorizes, closes the books', '#2CA01C', 'M12 0C5.375 0 0 5.375 0 12c0 6.627 5.375 12 12 12 6.626 0 12-5.373 12-12 0-6.625-5.374-12-12-12zM8 4c3.314 0 6 2.686 6 6h-2c0-2.206-1.794-4-4-4-2.205 0-4 1.794-4 4s1.795 4 4 4h1v2H8c-3.314 0-6-2.686-6-6s2.686-6 6-6zm3 14c-3.313 0-6-2.686-6-6h2c0 2.205 1.794 4 4 4 2.206 0 4-1.795 4-4s-1.794-4-4-4h-1v-2h1c3.314 0 6 2.686 6 6s-2.686 6-6 6z'],
+                ['Google Reviews', 'Replies to every review in minutes. Flags < 4★', '#FFBA00', 'M12 .288l2.833 8.718h9.167l-7.417 5.389 2.833 8.718L12 17.725l-7.417 5.388 2.833-8.718L0 9.006h9.167z'],
+                ['SMS / Phone', 'Texts clients, confirms, follows up', '#00d4e8', 'M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 0 0-1.02.24l-2.2 2.2a15.07 15.07 0 0 1-6.59-6.58l2.2-2.21c.27-.27.35-.67.24-1.02A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z'],
+                ['LinkedIn', 'Outbound, lead qualification, connection requests', '#0A66C2', 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'],
+                ['Mailchimp', 'Drafts + sends your newsletter, tracks opens', '#FFE01B', 'M13.21 12.057c.274-.004.546-.01.82-.03a2.94 2.94 0 0 1 .832.067c.128-.34.132-.797.027-1.395-.16-.89-.418-1.423-.942-1.337-.525.085-.542.779-.38 1.668.09.502.248.868.43 1.024l-.787.003zm-2.59 5.072c-.066-.08-.17-.055-.272-.03a1.43 1.43 0 0 1-.351.047c-.375 0-.693-.159-.872-.435-.232-.357-.219-.889.037-1.497l.118-.256.256-.529a3.74 3.74 0 0 0 .39-1.547c-.002-.22-.042-.435-.12-.629.28-.418.842-.646 1.341-.525.126.03.246.073.36.127.115-.64.376-1.197.747-1.526.204-.182.443-.295.71-.27.238.022.43.196.511.448.088.272.038.61-.08.907-.183.46-.569.782-1.076.91-.137.033-.284.053-.436.053a1.57 1.57 0 0 1-.28-.024c.007.16-.035.372-.125.568-.2.432-.557.772-1.004.956a.97.97 0 0 1-.123.044c.02.265-.039.558-.16.785-.145.27-.4.498-.712.628a1.65 1.65 0 0 1-.66.138c-.04 0-.083 0-.124-.004-.031-.002-.064-.008-.095-.015-.18.246-.413.416-.678.503-.35.115-.716.117-.996.04-.018-.006-.034-.016-.048-.031a.146.146 0 0 1-.037-.094c-.004-.075.034-.136.088-.179.32-.25.675-.372 1.033-.44.082-.016.163-.032.245-.047a.853.853 0 0 0 .15-.113c.116-.107.194-.236.229-.38.025-.104.02-.212-.013-.314-.05-.158-.162-.295-.309-.39a.73.73 0 0 0-.324-.117.53.53 0 0 0-.128.001c-.34.04-.55.323-.649.47.05-.273-.013-.55-.167-.752-.34-.45-.897-.513-1.32-.46-.085.01-.168.03-.247.055l-.039-.103c-.185-.498-.178-.88-.076-1.177.062-.18.18-.32.35-.41.345-.18.886-.072 1.387.225.078-.227.199-.452.418-.536.137-.054.319-.07.468-.001.33.151.503.507.558.879.007.048.013.097.016.146.164-.027.338-.023.51.012.48.099.803.444.896.878.018.082.026.167.026.251a2.3 2.3 0 0 0 .068-.006c.57-.052 1.173.116 1.455.668.11.215.147.476.093.752a3.17 3.17 0 0 1 .147-.026c.34-.061.7-.083 1.043-.062.257.016.497.062.706.152z'],
+                ['Salesforce', 'Updates records, logs calls, moves deals', '#00A1E0', 'M10.006 5.415a4.195 4.195 0 0 1 3.045-1.306c1.56 0 2.954.9 3.65 2.205.63-.3 1.33-.465 2.05-.465 2.795 0 5.05 2.28 5.05 5.08 0 2.79-2.255 5.08-5.05 5.08-.345 0-.68-.036-1-.1a3.68 3.68 0 0 1-3.22 1.87c-.51 0-1-.115-1.43-.32a4.206 4.206 0 0 1-3.74 2.37c-1.6 0-3.04-.9-3.76-2.3a3.81 3.81 0 0 1-.79.08c-2.27 0-4.1-1.856-4.1-4.15 0-1.544.826-2.886 2.053-3.597a4.76 4.76 0 0 1-.394-1.88c0-2.623 2.128-4.75 4.752-4.75 1.544 0 2.91.738 3.775 1.88'],
+                ['Notion', 'Maintains your knowledge base + docs', '#FFFFFF', 'M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.263c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933z'],
+                ['Yelp', 'Monitors and responds to Yelp reviews', '#FF1A1A', 'M20.16 12.594l-1.89-.612c-1.832-.579-1.382-3.455.498-3.268.24.022.464.03.7.14.94.376 3.45 3.187 3.585 4.013.01.065.015.132.015.2-.006.135-.047.264-.122.376a1.11 1.11 0 0 1-.73.484c-.22.042-2.12-1.35-2.056-1.33zM13.273 10.79V1.733c0-.66-.45-1.237-1.124-1.43a8.66 8.66 0 0 0-.83-.174C10.01-.043 6.16.72 5.61 1.45c-.23.277-.333.625-.27.95.08.32 4.907 7.28 4.907 7.28s.775 1.2 1.48 1.1c1.055-.12 1.545-.59 1.545-.59zm-1.525 4.79l-.46-.944c-.78-1.6 1.65-3.278 2.77-1.762.14.185.27.378.373.58.41.896.93 4.557.57 5.31a1.104 1.104 0 0 1-.55.555c-.14.063-.298.093-.46.093-.07-.003-.14-.01-.21-.022-.9-.16-1.95-2.79-2.033-3.81zm-6.3 2.582l1.898-.593c1.83-.59 2.88 2.09 1.125 3.116a3.19 3.19 0 0 1-.616.344c-.937.38-4.694.875-5.398.46a1.117 1.117 0 0 1-.47-.582c-.03-.098-.046-.2-.05-.304 0-.063.003-.126.012-.188.17-.85 3.4-2.37 3.5-2.253zm-1.79-3.57l.925-.365c1.88-.694 3.236 2.13 1.31 3.13-.21.104-.43.19-.66.26-.96.295-4.855.387-5.55-.162-.167-.133-.29-.315-.35-.514-.018-.063-.028-.127-.032-.192-.004-.168.06-.333.16-.47.424-.586 4.097-1.776 4.197-1.687z'],
+                ['Shopify', 'Answers product questions, handles abandoned carts', '#7AB55C', 'M15.337 23.98l6.406-1.368s-2.326-15.732-2.342-15.838c-.015-.106-.11-.166-.187-.172-.077-.007-1.586-.118-1.586-.118s-1.052-1.045-1.168-1.161c-.04-.04-.093-.06-.146-.067l-.977 22.724zM18.403 5.42c-.024-.01-.373-.02-.945-.024-.43-.486-1.15-1.282-2.237-1.282-.039 0-.079.002-.118.005l-.012-.013c-.234-.314-.54-.47-.914-.47-2.94 0-4.347 3.683-4.796 5.583-1.12.345-1.91.59-1.999.618C6.63 10.03 6.61 10.05 6.53 10.712l-.59 5.1 14.59 2.726s2.34-.89 2.46-.93c.116-.04.125-.123.11-.195-.02-.075-2.68-12.03-2.7-12.12-.02-.09-.062-.183-.157-.238-.094-.057-.21-.066-.313-.02-.05.025-.935.38-1.527.614zM13.9 4.865c-.2.063-.413.13-.642.2-.012-.72-.125-1.54-.4-2.346.887.17 1.328.965 1.494 1.428-.15.237-.298.474-.452.718zm-1.75-2.31a4.12 4.12 0 0 0-.186-.04 4.44 4.44 0 0 1 .452 2.75c-.65.2-1.356.42-2.082.64.41-1.574 1.132-2.8 1.816-3.35zm-1.1-.32c-.05 0-.103.01-.157.033.013 0 .028.01.04.02-.12.05-.243.137-.362.25-.758.725-1.426 2.02-1.83 3.4l-2.18.67c.436-1.493 1.73-4.374 4.49-4.374z']
+            ];
+            const DEFAULT_COLOR = 'rgba(255,255,255,0.75)';
+            // Build a single pill with inline brand SVG + label + tooltip
+            const makePill = ([name, tip, color, pathD]) => {
+                const safeName = name.replace(/"/g, '&quot;');
+                return `<div class="logo-carousel-item glass-panel px-4 py-3 rounded-xl mx-2 flex items-center gap-2.5" data-tip="${tip}"><svg width="18" height="18" viewBox="0 0 24 24" style="flex:none" aria-hidden="true"><path fill="${color}" d="${pathD}"/></svg><span class="text-sm font-medium text-zinc-200">${safeName}</span></div>`;
+            };
+            // Render integrations + duplicate for seamless infinite loop
+            track.innerHTML = [...INTEGRATIONS, ...INTEGRATIONS].map(makePill).join('');
+        })();
+
+        // Mobile menu controller — open/close with backdrop, icon swap, escape key, tap-outside, link auto-close
+        (function() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('mobile-menu-backdrop');
+            if (!btn || !menu || !backdrop) return;
+            let isOpen = false;
+            function setOpen(open) {
+                isOpen = open;
+                menu.classList.toggle('mobile-menu-open', open);
+                backdrop.classList.toggle('mobile-menu-open', open);
+                btn.classList.toggle('menu-is-open', open);
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                document.body.classList.toggle('mobile-menu-is-open', open);
+            }
+            window.__toggleMobileMenu = (force) => setOpen(typeof force === 'boolean' ? force : !isOpen);
+            // Close on nav link tap
+            menu.querySelectorAll('[data-mm-close]').forEach(a => a.addEventListener('click', () => setOpen(false)));
+            // Close on escape
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) setOpen(false); });
+        })();
     </script>
 
     <!-- Environmental Textures -->
@@ -844,28 +987,32 @@
                 <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="hidden md:inline-block liquid-glass text-sm font-semibold px-4 py-2 rounded-xl cursor-pointer">
                     Get Free Audit
                 </button>
-                <!-- Mobile hamburger -->
-                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                    <i class="ph ph-list text-tethron-cyan text-xl"></i>
+                <!-- Mobile hamburger — smooth toggle with icon transition -->
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center relative" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" onclick="window.__toggleMobileMenu && window.__toggleMobileMenu()">
+                    <i class="ph ph-list text-tethron-cyan text-xl mobile-menu-icon mobile-menu-icon-open"></i>
+                    <i class="ph ph-x text-tethron-cyan text-xl mobile-menu-icon mobile-menu-icon-close" style="position:absolute;"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile menu — frosted clear glass -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 pt-2" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(60px) saturate(2); -webkit-backdrop-filter: blur(60px) saturate(2); border-top: 1px solid rgba(255,255,255,0.06);">
+        <!-- Mobile menu backdrop — tap to close -->
+        <div id="mobile-menu-backdrop" class="mobile-menu-backdrop md:hidden" onclick="window.__toggleMobileMenu && window.__toggleMobileMenu(false)"></div>
+
+        <!-- Mobile menu — frosted clear glass with slide animation -->
+        <div id="mobile-menu" class="mobile-menu md:hidden px-6 pb-6 pt-2" style="background: rgba(7,8,10,0.88); backdrop-filter: blur(60px) saturate(2); -webkit-backdrop-filter: blur(60px) saturate(2); border-top: 1px solid rgba(255,255,255,0.06);">
             <div class="flex flex-col gap-1">
-                <a href="#division" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">The Division</a>
-                <a href="#how-it-works" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">How It Works</a>
-                <a href="#demo" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">See It Live</a>
-                <a href="#pricing" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Pricing</a>
-                <a href="#faq" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">FAQ</a>
-                <a href="/about" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">About</a>
-                <a href="/blog" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Blog</a>
+                <a href="#division" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">The Division</a>
+                <a href="#how-it-works" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">How It Works</a>
+                <a href="#demo" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">See It Live</a>
+                <a href="#pricing" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Pricing</a>
+                <a href="#faq" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">FAQ</a>
+                <a href="/about" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">About</a>
+                <a href="/blog" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Blog</a>
                 <div class="mt-3 pt-3 border-t border-white/[0.06] flex flex-col gap-2">
-                    <a href="https://calendly.com/cadenhillier33/30min" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block w-full text-center px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">
+                    <a href="https://calendly.com/cadenhillier33/30min" data-mm-close class="block w-full text-center px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">
                         <i class="ph ph-phone text-tethron-cyan mr-2"></i>Book a Call
                     </a>
-                    <button onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('audit-modal').classList.remove('hidden');" class="block w-full text-center liquid-glass text-sm font-semibold px-4 py-3 rounded-xl">
+                    <button onclick="window.__toggleMobileMenu(false); document.getElementById('audit-modal').classList.remove('hidden');" class="block w-full text-center liquid-glass text-sm font-semibold px-4 py-3 rounded-xl">
                         Get Free Audit
                     </button>
                 </div>
@@ -1030,8 +1177,11 @@
             </div>
         </section>
 
+        <!-- Cinematic divider -->
+        <div class="section-divider"></div>
+
         <!-- 4. CAPABILITIES -->
-        <section id="capabilities" class="max-w-6xl mx-auto w-full px-6 mt-[120px] py-12">
+        <section id="capabilities" class="max-w-6xl mx-auto w-full px-6 mt-[60px] py-12">
             <div class="text-center mb-14 reveal">
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">What Your AI Employee Does</h2>
             </div>
@@ -1178,10 +1328,10 @@
                 <p class="text-zinc-400 text-lg max-w-xl">60 seconds. 11 tasks done. Every morning, before you finish your coffee.</p>
             </div>
 
-            <!-- Scenario chip row (teases multi-industry) -->
+            <!-- Scenario chip row — click to switch industries -->
             <div class="flex flex-wrap gap-2 reveal delay-100 relative z-10">
-                <button class="scenario-chip active" aria-current="true">📊 Wealth Advisor · Tuesday 6:02 AM</button>
-                <button class="scenario-chip" disabled>🔧 HVAC Contractor <span class="scenario-soon">SOON</span></button>
+                <button class="scenario-chip active" data-scenario="wealth" aria-current="true">📊 Wealth Advisor · Tuesday 6:02 AM</button>
+                <button class="scenario-chip" data-scenario="hvac">🔧 HVAC Contractor · Tuesday 6:15 AM</button>
                 <button class="scenario-chip" disabled>🦷 Dental Practice <span class="scenario-soon">SOON</span></button>
                 <button class="scenario-chip" disabled>🏠 Real Estate <span class="scenario-soon">SOON</span></button>
                 <button class="scenario-chip" disabled>💇 Salon / Med Spa <span class="scenario-soon">SOON</span></button>
@@ -1234,11 +1384,11 @@
 
                 <!-- RIGHT MAIN PANEL -->
                 <div class="flex-1 flex flex-col relative overflow-hidden">
-                    <!-- Header — simplified, Nova-forward -->
+                    <!-- Header — simplified, Nova-forward, scenario-aware -->
                     <div class="px-7 py-5 border-b border-white/[0.06] flex items-center justify-between shrink-0 z-20" style="background: rgba(255,255,255,0.03); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);">
                         <div>
-                            <h3 class="font-semibold text-[15px] text-white">Summit Wealth Advisory</h3>
-                            <p class="text-[11px] text-zinc-500 mt-0.5">Tuesday · 6:02 AM · Nova is on it</p>
+                            <h3 id="demo-header-business" class="font-semibold text-[15px] text-white">Summit Wealth Advisory</h3>
+                            <p id="demo-header-subline" class="text-[11px] text-zinc-500 mt-0.5">Tuesday · 6:02 AM · Nova is on it</p>
                         </div>
                         <div class="flex items-center gap-2 px-3 py-1.5 rounded-full" style="background: rgba(0,212,232,0.08); border: 1px solid rgba(0,212,232,0.12);">
                             <div class="w-2 h-2 rounded-full bg-tethron-cyan animate-pulse"></div>
@@ -1249,7 +1399,7 @@
                     <!-- Chat Area -->
                     <div id="chat-container" class="flex-1 overflow-y-auto px-7 py-8 flex flex-col gap-8 relative z-10 pb-32" style="scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;">
                         <div class="w-full text-center">
-                            <span class="text-[11px] font-mono text-zinc-600">Today, 6:02 AM</span>
+                            <span id="demo-date-divider" class="text-[11px] font-mono text-zinc-600">Today, 6:02 AM</span>
                         </div>
                         <div id="typing-indicator" class="hidden flex w-full justify-end max-w-[80%] ml-auto">
                             <div class="rounded-2xl rounded-tr-md px-5 py-4 flex items-center gap-2" style="background: rgba(0,212,232,0.06); border: 1px solid rgba(0,212,232,0.1);">
@@ -1279,8 +1429,17 @@
             </div>
         </section>
 
+        <!-- PUNCHLINE MOMENT — big typographic beat between demo and comparison -->
+        <section class="w-full px-6 mt-[120px] mb-[60px] reveal">
+            <h2 class="punchline">Your business, running<br class="hidden md:block"><span class="punchline-accent">while you sleep.</span></h2>
+            <p class="punchline-sub">Every lead. Every review. Every invoice. Every post. Handled, while the house is dark.</p>
+        </section>
+
+        <!-- Cinematic divider -->
+        <div class="section-divider"></div>
+
         <!-- 6. THE COMPARISON -->
-        <section class="max-w-5xl mx-auto w-full px-6 mt-[120px]">
+        <section class="max-w-5xl mx-auto w-full px-6 mt-[80px]">
             <div class="text-center mb-14 reveal">
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.07]">Why hire another human?</h2>
                 <p class="text-zinc-400 text-lg mt-4 max-w-xl mx-auto">Same job. 1/8th the cost. None of the HR.</p>
@@ -1333,42 +1492,9 @@
                 <p class="text-zinc-400 text-lg max-w-xl mx-auto reveal">No rip-and-replace. Your AI employee wires directly into your existing stack from day one.</p>
             </div>
 
-            <!-- Single unified integrations marquee — slower, with tooltips -->
+            <!-- Single unified integrations marquee — rendered from JS for cleaner maintenance + real brand SVGs -->
             <div class="logo-carousel-wrap">
-                <div class="logo-carousel-track scroll-left">
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends, drafts, replies to email 24/7"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Posts updates, answers questions, pings your team"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Books, confirms, reschedules appointments"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends invoices, tracks payments, flags overdue"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Logs every interaction, updates your pipeline"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Drafts, schedules, publishes posts + DM replies"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Reconciles, categorizes, closes the books"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Replies to every review in minutes. Flags < 4★"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Texts clients, confirms, follows up"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Outbound, lead qualification, connection requests"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Drafts + sends your newsletter, tracks opens"><i class="ph ph-envelope-simple text-xl text-cyan-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Mailchimp</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Updates records, logs calls, moves deals"><i class="ph ph-cloud text-xl text-blue-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Salesforce</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Maintains your knowledge base + docs"><i class="ph ph-note text-xl text-zinc-300 mr-2"></i><span class="text-sm font-medium text-zinc-200">Notion</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Monitors and responds to Yelp reviews"><i class="ph ph-star text-xl text-red-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Yelp</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Answers product questions, handles abandoned carts"><i class="ph ph-shopping-bag text-xl text-green-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Shopify</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Morning reports on traffic + conversions"><i class="ph ph-chart-bar text-xl text-yellow-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Analytics</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Triggers workflows across 6,000+ tools"><i class="ph ph-lightning text-xl text-orange-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">Zapier</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Posts, responds to comments + DMs"><i class="ph ph-facebook-logo text-xl text-blue-600 mr-2"></i><span class="text-sm font-medium text-zinc-200">Facebook</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Texts warm leads + clients from your number"><i class="ph ph-chat-circle text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">iMessage</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Books meetings based on your real availability"><i class="ph ph-calendar-check text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">Calendly</span></div>
-
-                    <!-- Duplicate for seamless loop -->
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends, drafts, replies to email 24/7"><i class="ph ph-envelope text-xl text-red-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Gmail</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Posts updates, answers questions, pings your team"><i class="ph ph-slack-logo text-xl text-purple-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Slack</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Books, confirms, reschedules appointments"><i class="ph ph-calendar text-xl text-blue-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Calendar</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Sends invoices, tracks payments, flags overdue"><i class="ph ph-stripe-logo text-xl text-indigo-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Stripe</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Logs every interaction, updates your pipeline"><i class="ph ph-database text-xl text-orange-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">HubSpot</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Drafts, schedules, publishes posts + DM replies"><i class="ph ph-instagram-logo text-xl text-pink-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Instagram</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Reconciles, categorizes, closes the books"><i class="ph ph-book-open text-xl text-green-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">QuickBooks</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Replies to every review in minutes. Flags < 4★"><i class="ph ph-google-logo text-xl text-yellow-400 mr-2"></i><span class="text-sm font-medium text-zinc-200">Google Reviews</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Texts clients, confirms, follows up"><i class="ph ph-phone text-xl text-tethron-cyan mr-2"></i><span class="text-sm font-medium text-zinc-200">SMS/Phone</span></div>
-                    <div class="logo-carousel-item glass-panel px-5 py-3 rounded-xl mx-2" data-tip="Outbound, lead qualification, connection requests"><i class="ph ph-linkedin-logo text-xl text-blue-500 mr-2"></i><span class="text-sm font-medium text-zinc-200">LinkedIn</span></div>
-                </div>
+                <div class="logo-carousel-track scroll-left" id="integrations-track"></div>
             </div>
 
             <p class="text-zinc-500 text-sm text-center mt-6 reveal">+ dozens more. Hover for what each one does. If your business uses it, we can wire into it.</p>
@@ -1424,8 +1550,11 @@
             </div>
         </section>
 
+        <!-- Cinematic divider -->
+        <div class="section-divider"></div>
+
         <!-- 9. PRICING -->
-        <section id="pricing" class="max-w-6xl mx-auto w-full px-6 mt-40">
+        <section id="pricing" class="max-w-6xl mx-auto w-full px-6 mt-20">
             <div class="text-center mb-10 reveal relative">
                 <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-tethron-cyan/10 blur-[50px] -z-10 rounded-full"></div>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-gradient">Transparent Economics</h2>
@@ -1856,25 +1985,72 @@
         
         setTimeout(typeEffect, 1000);
 
-        // --- CINEMATIC DEMO: A Day With Your AI Employee ---
+        // --- CINEMATIC DEMO: A Day With Your AI Employee (multi-scenario) ---
         (function() {
             const igPostCard = '<div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:12px; margin-top:12px; max-width:280px;"><div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;"><div style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg, #00d4e8, #0A9AC0);"></div><span style="font-size:12px; font-weight:600; color:white;">summitwealthadvisory</span><span style="font-size:10px; color:rgba(255,255,255,0.4); margin-left:auto;">Scheduled 9 AM</span></div><img src="ig-post.jpg" style="width:100%; border-radius:10px; margin-bottom:10px;" alt="Instagram post preview"><div style="display:flex; gap:12px; margin-bottom:8px;"><span style="font-size:16px;">♡</span><span style="font-size:16px;">💬</span><span style="font-size:16px;">↗</span></div><div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.5;">Markets don\'t wait. Neither should your retirement plan. 🏦<br><span style="color:#00d4e8;">#WealthManagement #FinancialFreedom #RetirementPlanning</span></div></div>';
 
-            const scriptData = [
-                { role: 'ai', text: "Good morning. Overnight report:\n\n• 4 inquiries responded to (28s avg)\n• 2 consultations booked this week\n• 1 Google review replied to\n• Instagram post scheduled for 9 AM\n• David Park replied — wants to move forward\n\nToday:\n📋 10 AM — Henderson portfolio review\n📋 2:30 PM — Maria Santos (new client)", time: "6:02 AM", metric: "📊 Report", logText: "Overnight report delivered", delayBefore: 1200, stats: {tasks: 5, leads: 4, reviews: 1, revenue: '$0'} },
-                { role: 'owner', text: "Push Henderson to Thursday. Send Maria a confirmation with the office address.", time: "6:02 AM", delayBefore: 3000 },
-                { role: 'ai', text: "Done.\n\n✓ Henderson moved to Thursday 10 AM\n✓ Maria confirmed for 2:30 — sent address + parking info\n\nDavid Park wants to start a financial plan. Send him onboarding docs and book his strategy session?", time: "6:02 AM", metric: "⚡ 4s", logText: "Calendar updated + Client confirmed", delayBefore: 2000, stats: {tasks: 7, revenue: '$0'} },
-                { role: 'owner', text: "Do it. What did that Google review say?", time: "6:02 AM", delayBefore: 2500 },
-                { role: 'ai', text: "David onboarded ✓ — session booked Tuesday 11 AM.\n\nKaren Mitchell left 5 stars:\n\"Best decision I ever made. They actually listen.\"\n\nReplied thanking her.\n\nAlso — 2-star review from Brian Walsh about communication during the dip. Drafted a response, flagged for you. Want to see it?", time: "6:02 AM", metric: "⚡ 3s", logText: "Client onboarded + Review replied", delayBefore: 2000, stats: {tasks: 9, leads: 5, reviews: 2} },
-                { role: 'owner', text: "Show me.", time: "6:02 AM", delayBefore: 2000 },
-                { role: 'ai', text: "Brian Walsh (2 stars):\n\n\"Brian, you're right — during volatile periods you deserve more updates, not less. I've adjusted our protocol. Would love to connect this week to walk through your positioning.\"\n\nSend, edit, or discard?", time: "6:03 AM", metric: "⚡ 2s", logText: "Flagged review for approval", delayBefore: 2000 },
-                { role: 'owner', text: "Send it.", time: "6:03 AM", delayBefore: 2000 },
-                { role: 'ai', text: "Sent ✓. 48-hour follow-up set.\n\nYour Instagram post for 9 AM:" + igPostCard + "\n\nAlso — quarterly newsletter is due Friday. Draft ready. Send to your email?", time: "6:03 AM", metric: "⚡ 2s", logText: "Review sent + IG post queued", delayBefore: 2000, stats: {tasks: 11} },
-                { role: 'owner', text: "Yeah send it. Anything else?", time: "6:03 AM", delayBefore: 2500 },
-                { role: 'ai', text: "Newsletter sent ✓\n\nTwo things:\n\n1. Patterson quarterly fee — 14 days overdue. Send reminder?\n\n2. Pinnacle Wealth lost 2 advisors. Three unhappy clients in your area. Reach out?", time: "6:03 AM", metric: "⚡ 3s", logText: "Newsletter drafted", delayBefore: 2000, stats: {tasks: 12, revenue: '$50K+'} },
-                { role: 'owner', text: "Yes to both.", time: "6:03 AM", delayBefore: 2000 },
-                { role: 'ai', text: "Done ✓\n• Payment reminder sent\n• Outreach sent to 3 Pinnacle clients\n\nYour day:\n📋 9 AM — IG post live\n📋 2:30 PM — Maria Santos\n📋 Tuesday — David Park\n\n11 tasks. 60 seconds. ☕", time: "6:03 AM", metric: "⚡ 2s", logText: "Invoice + Competitor outreach sent", delayBefore: 2000, stats: {tasks: 14, leads: 7, reviews: 2, revenue: '$50K+'} }
-            ];
+            const SCENARIOS = {
+                wealth: {
+                    business: 'Summit Wealth Advisory',
+                    subline: 'Tuesday · 6:02 AM · Nova is on it',
+                    dateDivider: 'Today, 6:02 AM',
+                    receipt: {
+                        headline: '60 Seconds. 11 Tasks. Zero Stress.',
+                        timeSpent: '60 seconds',
+                        tasksCompleted: '11',
+                        capabilities: 'Leads, Scheduling, Reviews, Social Media, Newsletters, Invoicing, Client Retention, Competitor Intel',
+                        cost: '$700/mo',
+                        flavor: 'And this is just a Tuesday morning. Imagine what it does all week.'
+                    },
+                    script: [
+                        { role: 'ai', text: "Good morning. Overnight report:\n\n• 4 inquiries responded to (28s avg)\n• 2 consultations booked this week\n• 1 Google review replied to\n• Instagram post scheduled for 9 AM\n• David Park replied — wants to move forward\n\nToday:\n📋 10 AM — Henderson portfolio review\n📋 2:30 PM — Maria Santos (new client)", time: "6:02 AM", logText: "Overnight report delivered", delayBefore: 1200, stats: {tasks: 5, leads: 4, reviews: 1, revenue: '$0'} },
+                        { role: 'owner', text: "Push Henderson to Thursday. Send Maria a confirmation with the office address.", time: "6:02 AM", delayBefore: 3000 },
+                        { role: 'ai', text: "Done.\n\n✓ Henderson moved to Thursday 10 AM\n✓ Maria confirmed for 2:30 — sent address + parking info\n\nDavid Park wants to start a financial plan. Send him onboarding docs and book his strategy session?", time: "6:02 AM", logText: "Calendar updated + Client confirmed", delayBefore: 2000, stats: {tasks: 7, revenue: '$0'} },
+                        { role: 'owner', text: "Do it. What did that Google review say?", time: "6:02 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "David onboarded ✓ — session booked Tuesday 11 AM.\n\nKaren Mitchell left 5 stars:\n\"Best decision I ever made. They actually listen.\"\n\nReplied thanking her.\n\nAlso — 2-star review from Brian Walsh about communication during the dip. Drafted a response, flagged for you. Want to see it?", time: "6:02 AM", logText: "Client onboarded + Review replied", delayBefore: 2000, stats: {tasks: 9, leads: 5, reviews: 2} },
+                        { role: 'owner', text: "Show me.", time: "6:02 AM", delayBefore: 2000 },
+                        { role: 'ai', text: "Brian Walsh (2 stars):\n\n\"Brian, you're right — during volatile periods you deserve more updates, not less. I've adjusted our protocol. Would love to connect this week to walk through your positioning.\"\n\nSend, edit, or discard?", time: "6:03 AM", logText: "Flagged review for approval", delayBefore: 2000 },
+                        { role: 'owner', text: "Send it.", time: "6:03 AM", delayBefore: 2000 },
+                        { role: 'ai', text: "Sent ✓. 48-hour follow-up set.\n\nYour Instagram post for 9 AM:" + igPostCard + "\n\nAlso — quarterly newsletter is due Friday. Draft ready. Send to your email?", time: "6:03 AM", logText: "Review sent + IG post queued", delayBefore: 2000, stats: {tasks: 11} },
+                        { role: 'owner', text: "Yeah send it. Anything else?", time: "6:03 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Newsletter sent ✓\n\nTwo things:\n\n1. Patterson quarterly fee — 14 days overdue. Send reminder?\n\n2. Pinnacle Wealth lost 2 advisors. Three unhappy clients in your area. Reach out?", time: "6:03 AM", logText: "Newsletter drafted", delayBefore: 2000, stats: {tasks: 12, revenue: '$50K+'} },
+                        { role: 'owner', text: "Yes to both.", time: "6:03 AM", delayBefore: 2000 },
+                        { role: 'ai', text: "Done ✓\n• Payment reminder sent\n• Outreach sent to 3 Pinnacle clients\n\nYour day:\n📋 9 AM — IG post live\n📋 2:30 PM — Maria Santos\n📋 Tuesday — David Park\n\n11 tasks. 60 seconds. ☕", time: "6:03 AM", logText: "Invoice + Competitor outreach sent", delayBefore: 2000, stats: {tasks: 14, leads: 7, reviews: 2, revenue: '$50K+'} }
+                    ]
+                },
+
+                hvac: {
+                    business: 'Peak Heating & Cooling',
+                    subline: 'Tuesday · 6:15 AM · Nova is on it',
+                    dateDivider: 'Today, 6:15 AM',
+                    receipt: {
+                        headline: '90 Seconds. 11 Actions. No Chaos.',
+                        timeSpent: '90 seconds',
+                        tasksCompleted: '11',
+                        capabilities: 'Calls, Dispatch, Warranty, Invoicing, Reviews, Crew Scheduling, Competitor Intel, Follow-ups',
+                        cost: '$700/mo',
+                        flavor: "And that's a Tuesday morning. Imagine your whole week."
+                    },
+                    script: [
+                        { role: 'ai', text: "Good morning. Overnight report:\n\n• 7 calls after hours — 4 urgent (no heat), 3 scheduling\n• All 7 booked into today's schedule\n• 1 warranty claim flagged for your review\n• Crews dispatched: Jim → Mrs. Chen 6 AM, Mike → Summit Office 7 AM\n• Invoice #4721 paid — $1,840\n\nToday:\n🔧 8 AM — Chen install follow-up\n🔧 10 AM — 3 installs scheduled\n🔧 2 PM — Boiler service, Oak Hill", time: "6:15 AM", logText: "Overnight report · 7 calls booked", delayBefore: 1200, stats: {tasks: 7, leads: 7, reviews: 0, revenue: '$1,840'} },
+                        { role: 'owner', text: "Chen install yesterday — what happened with the warranty claim?", time: "6:15 AM", delayBefore: 3000 },
+                        { role: 'ai', text: "Mrs. Chen's 2-year-old Trane furnace — ignition module failed. Under warranty through 2027.\n\n✓ Filed the claim\n✓ Got Trane approval #TR-88221\n✓ Part ships today, Jim installs tomorrow 8 AM\n\nWant me to call Mrs. Chen or send her an update?", time: "6:15 AM", logText: "Warranty claim approved · Trane #TR-88221", delayBefore: 2500, stats: {tasks: 9} },
+                        { role: 'owner', text: "You send it. Make sure she knows no cost.", time: "6:16 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Sent ✓\n\n\"Mrs. Chen — your furnace warranty claim was approved overnight. Part ships today, Jim installs tomorrow 8 AM. No charge. Sorry for the inconvenience.\"\n\nWhile you're up:\n• Invoice #4728 to Summit Office — $4,200 — ready to send\n• 2-star review from Dave Mitchell about a missed service window. Drafted response. Show you?", time: "6:16 AM", logText: "Client comms sent + review flagged", delayBefore: 2000, stats: {tasks: 11, reviews: 1} },
+                        { role: 'owner', text: "Send the invoice. Yes show me the review.", time: "6:16 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Invoice #4728 sent ✓ — $4,200 expected in 30 days.\n\nDave Mitchell (2★):\n\"Guy was supposed to come between 1-3, didn't show till almost 5. Waited all day.\"\n\nDrafted reply:\n\"Dave, you're right — we missed the window. That's on us. I'd like to make it right: no charge on the service you just got, plus 10% off your next tune-up. Can I call you today?\"\n\nSend, edit, or discard?", time: "6:16 AM", logText: "Invoice sent · $4,200", delayBefore: 2200, stats: {tasks: 12, revenue: '$6,040'} },
+                        { role: 'owner', text: "Send it. Then book me a call with him.", time: "6:17 AM", delayBefore: 2500 },
+                        { role: 'ai', text: "Sent ✓. Follow-up call scheduled with Dave at 2 PM today.\n\nThree more things:\n1. 3 new Google reviews overnight — all 5★. Already replied thanking them.\n2. Weekly crew schedule for Mon-Fri is drafted based on booked jobs + PTO. Approve?\n3. Competitor watch — Patel HVAC raised rates ($159 → $175). Sterling also ($145 → $165). You're still at $149.", time: "6:17 AM", logText: "Review recovery · crew schedule drafted", delayBefore: 2200, stats: {tasks: 14, reviews: 4} },
+                        { role: 'owner', text: "Approve the schedule. Thanks.", time: "6:17 AM", delayBefore: 2000 },
+                        { role: 'ai', text: "Schedule sent to Jim, Mike, Sam, and Pedro ✓\n\nYour day:\n🔧 8 AM — Chen follow-up (Jim)\n🔧 10 AM — 3 installs (Mike + Sam)\n🔧 2 PM — Dave Mitchell call (you)\n🔧 2 PM — Oak Hill boiler (Pedro)\n\n11 actions. 90 seconds. ☕", time: "6:17 AM", logText: "Crew schedule dispatched", delayBefore: 2000, stats: {tasks: 11, leads: 7, reviews: 4, revenue: '$6,040'} }
+                    ]
+                }
+            };
+
+            // Currently-active scenario (mutable — swap via chip click)
+            let currentScenario = 'wealth';
+            let scriptData = SCENARIOS.wealth.script;
+            let currentReceipt = SCENARIOS.wealth.receipt;
 
             const chatContainer = document.getElementById('chat-container');
             const typingIndicator = document.getElementById('typing-indicator');
@@ -1897,7 +2073,7 @@
 
             const mkAI = (d) => `<div class="flex w-full justify-end items-end gap-2.5 max-w-[80%] ml-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="flex flex-col gap-2 items-end"><div class="rounded-2xl rounded-br-md px-5 py-4 text-[16px] leading-relaxed text-white relative" style="background: linear-gradient(135deg, rgba(0,212,232,0.12) 0%, rgba(0,212,232,0.06) 100%); border: 1px solid rgba(0,212,232,0.22); backdrop-filter: blur(10px); box-shadow: 0 4px 32px rgba(0,212,232,0.06);">${nl2br(d.text)}</div><div class="flex items-center gap-2 mr-2"><span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan inline-block"></span><span class="text-[11px] font-mono text-zinc-500">Nova · ${d.time}</span></div></div>${novaAvatar}</div>`;
 
-            const mkResults = () => `<div class="w-full mt-4 mb-8 text-center max-w-lg mx-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="w-full bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden" style="box-shadow: 0 24px 64px -12px rgba(0,0,0,0.5);"><div class="absolute -top-10 -right-10 w-32 h-32 bg-tethron-cyan/20 rounded-full blur-3xl"></div><div class="flex items-center justify-center gap-2 mb-4"><i class="ph ph-check-circle-fill text-tethron-cyan text-xl"></i><h4 class="text-white font-medium">60 Seconds. 11 Tasks. Zero Stress.</h4></div><div class="flex flex-col gap-2.5 text-left mb-6"><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Owner's Time Spent:</span><span class="font-mono text-tethron-cyan">60 seconds</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Tasks Completed:</span><span class="font-medium text-white">11</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Capabilities Used:</span><span class="font-medium text-white text-right text-xs">Leads, Scheduling, Reviews, Social Media, Newsletters, Invoicing, Client Retention, Competitor Intel</span></div><div class="flex items-center justify-between text-sm"><span class="text-zinc-400">Cost:</span><span class="font-mono text-tethron-cyan">$700/mo</span></div></div><p class="text-zinc-500 text-xs text-center mb-4 italic">And this is just a Tuesday morning. Imagine what it does all week.</p><button onclick="document.getElementById(&apos;audit-modal&apos;).classList.remove(&apos;hidden&apos;)" class="block w-full bg-tethron-cyan text-[#07080a] font-semibold py-3 rounded-full hover:bg-[#00e3b6] transition-colors text-center text-sm cursor-pointer mb-3">See What It'd Do For YOUR Business →</button><button onclick="window.__tethronReplayDemo && window.__tethronReplayDemo()" class="inline-flex items-center gap-1.5 text-zinc-400 hover:text-tethron-cyan text-xs transition-colors cursor-pointer"><i class="ph ph-arrow-counter-clockwise"></i>Replay the morning</button></div></div>`;
+            const mkResults = () => { const r = currentReceipt; return `<div class="w-full mt-4 mb-8 text-center max-w-lg mx-auto" style="animation: fadeSlideUp 0.6s ease forwards;"><div class="w-full bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 rounded-2xl p-5 backdrop-blur-md relative overflow-hidden" style="box-shadow: 0 24px 64px -12px rgba(0,0,0,0.5);"><div class="absolute -top-10 -right-10 w-32 h-32 bg-tethron-cyan/20 rounded-full blur-3xl"></div><div class="flex items-center justify-center gap-2 mb-4"><i class="ph ph-check-circle-fill text-tethron-cyan text-xl"></i><h4 class="text-white font-medium">${r.headline}</h4></div><div class="flex flex-col gap-2.5 text-left mb-6"><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Owner's Time Spent:</span><span class="font-mono text-tethron-cyan">${r.timeSpent}</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Tasks Completed:</span><span class="font-medium text-white">${r.tasksCompleted}</span></div><div class="flex items-center justify-between text-sm border-b border-white/5 pb-2"><span class="text-zinc-400">Capabilities Used:</span><span class="font-medium text-white text-right text-xs">${r.capabilities}</span></div><div class="flex items-center justify-between text-sm"><span class="text-zinc-400">Cost:</span><span class="font-mono text-tethron-cyan">${r.cost}</span></div></div><p class="text-zinc-500 text-xs text-center mb-4 italic">${r.flavor}</p><button onclick="document.getElementById(&apos;audit-modal&apos;).classList.remove(&apos;hidden&apos;)" class="block w-full bg-tethron-cyan text-[#07080a] font-semibold py-3 rounded-full hover:bg-[#00e3b6] transition-colors text-center text-sm cursor-pointer mb-3">See What It'd Do For YOUR Business →</button><button onclick="window.__tethronReplayDemo && window.__tethronReplayDemo()" class="inline-flex items-center gap-1.5 text-zinc-400 hover:text-tethron-cyan text-xs transition-colors cursor-pointer"><i class="ph ph-arrow-counter-clockwise"></i>Replay the morning</button></div></div>`; };
 
             const updateStats = (s) => {
                 if (s.tasks) document.getElementById('stat-tasks').textContent = s.tasks;
@@ -1973,6 +2149,37 @@
                 entries.forEach(e => { if (e.isIntersecting) { runDemo(); obs.unobserve(e.target); } });
             }, { threshold: 0.15 });
             obs.observe(document.getElementById('demo'));
+
+            // Scenario switcher — click a chip to swap the conversation
+            const headerBusiness = document.getElementById('demo-header-business');
+            const headerSubline = document.getElementById('demo-header-subline');
+            const dateDivider = document.getElementById('demo-date-divider');
+            function switchScenario(id) {
+                if (!SCENARIOS[id] || id === currentScenario) return;
+                currentScenario = id;
+                const s = SCENARIOS[id];
+                scriptData = s.script;
+                currentReceipt = s.receipt;
+                if (headerBusiness) headerBusiness.textContent = s.business;
+                if (headerSubline) headerSubline.textContent = s.subline;
+                if (dateDivider) dateDivider.textContent = s.dateDivider;
+                // Wipe chat + log, re-run from scratch
+                while (chatContainer.children.length > 1) chatContainer.removeChild(chatContainer.lastChild);
+                if (activityLog) activityLog.innerHTML = '';
+                logCount = 0;
+                hasRun = false;
+                runDemo();
+            }
+            document.querySelectorAll('.scenario-chip[data-scenario]').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const id = chip.getAttribute('data-scenario');
+                    document.querySelectorAll('.scenario-chip').forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    switchScenario(id);
+                    // Scroll chip into view on mobile so active state is obvious
+                    chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                });
+            });
         })();
 
         // (Mac Mini uses spline-viewer component directly — no lazy load needed)
