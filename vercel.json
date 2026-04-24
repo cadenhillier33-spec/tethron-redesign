@@ -3,7 +3,41 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/about", "destination": "/about.html" },
-    { "source": "/team", "destination": "/division.html" },
-    { "source": "/division", "destination": "/division.html" }
+
+    { "source": "/team",      "destination": "https://tethron-division.vercel.app/" },
+    { "source": "/division",  "destination": "https://tethron-division.vercel.app/" },
+    { "source": "/nova",      "destination": "https://tethron-division.vercel.app/nova" },
+    { "source": "/knox",      "destination": "https://tethron-division.vercel.app/knox" },
+    { "source": "/luna",      "destination": "https://tethron-division.vercel.app/luna" },
+    { "source": "/sage",      "destination": "https://tethron-division.vercel.app/sage" },
+    { "source": "/iris",      "destination": "https://tethron-division.vercel.app/iris" },
+    { "source": "/quinn",     "destination": "https://tethron-division.vercel.app/quinn" },
+    { "source": "/cypher",    "destination": "https://tethron-division.vercel.app/cypher" },
+    { "source": "/pearl",     "destination": "https://tethron-division.vercel.app/pearl" },
+    { "source": "/ember",     "destination": "https://tethron-division.vercel.app/ember" },
+    { "source": "/echo",      "destination": "https://tethron-division.vercel.app/echo" },
+    { "source": "/ledger",    "destination": "https://tethron-division.vercel.app/ledger" },
+    { "source": "/atlas",     "destination": "https://tethron-division.vercel.app/atlas" },
+    { "source": "/reed",      "destination": "https://tethron-division.vercel.app/reed" },
+    { "source": "/sovereign", "destination": "https://tethron-division.vercel.app/sovereign" },
+    { "source": "/assets/division.css",  "destination": "https://tethron-division.vercel.app/assets/division.css" },
+    { "source": "/assets/division.js",   "destination": "https://tethron-division.vercel.app/assets/division.js" },
+    { "source": "/assets/operators.js",  "destination": "https://tethron-division.vercel.app/assets/operators.js" },
+
+    { "source": "/onboard", "destination": "https://tethron-onboard.vercel.app/onboard" },
+    { "source": "/onboard/:path*", "destination": "https://tethron-onboard.vercel.app/onboard/:path*" },
+    { "source": "/khaleesi.jpg", "destination": "https://tethron-onboard.vercel.app/khaleesi.jpg" },
+
+    { "source": "/intake", "destination": "https://tethron-onboard.vercel.app/intake" },
+    { "source": "/intake/:path*", "destination": "https://tethron-onboard.vercel.app/intake/:path*" },
+    { "source": "/api/intake-chat", "destination": "https://tethron-onboard.vercel.app/api/intake-chat" },
+    { "source": "/api/verify-session", "destination": "https://tethron-onboard.vercel.app/api/verify-session" },
+    { "source": "/api/tos-accept", "destination": "https://tethron-onboard.vercel.app/api/tos-accept" },
+    { "source": "/api/ask-khaleesi", "destination": "https://tethron-onboard.vercel.app/api/ask-khaleesi" },
+    { "source": "/api/interview", "destination": "https://tethron-onboard.vercel.app/api/interview" },
+    { "source": "/api/hire", "destination": "https://tethron-onboard.vercel.app/api/hire" },
+    { "source": "/api/create-checkout", "destination": "https://tethron-onboard.vercel.app/api/create-checkout" },
+    { "source": "/api/stripe-webhook", "destination": "https://tethron-onboard.vercel.app/api/stripe-webhook" },
+    { "source": "/api/oauth/:path*", "destination": "https://tethron-onboard.vercel.app/api/oauth/:path*" }
   ]
 }

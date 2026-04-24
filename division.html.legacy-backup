@@ -1680,6 +1680,17 @@
             document.getElementById('cart-drawer').classList.add('hidden');
         }
 
+        // Test mode: sticky via localStorage so it survives nav/refresh/cart-drawer-clicks.
+        // Enabled when ?test=1 is in the URL. Disabled when ?test=0 is in the URL.
+        (function hydrateTestMode() {
+            const q = new URLSearchParams(window.location.search).get('test');
+            if (q === '1') localStorage.setItem('tethron_test_mode', '1');
+            else if (q === '0') localStorage.removeItem('tethron_test_mode');
+        })();
+        function isTestMode() {
+            return localStorage.getItem('tethron_test_mode') === '1';
+        }
+
         async function startCheckout() {
             const cart = cartLoad();
             if (cart.length === 0) return;
@@ -1688,11 +1699,13 @@
             btn.disabled = true;
             label.innerHTML = '<i class="ph ph-circle-notch animate-spin"></i> Redirecting to Stripe…';
 
+            const isTest = isTestMode();
+
             try {
                 const res = await fetch(CHECKOUT_API, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ operators: cart })
+                    body: JSON.stringify({ operators: cart, test: isTest })
                 });
                 const data = await res.json().catch(() => ({}));
                 if (res.ok && data.url) {
@@ -1720,6 +1733,23 @@
 
         // Initial render so button states reflect any saved cart on load
         cartRender();
+
+        // Visible test-mode banner so the operator knows simulation is armed.
+        if (isTestMode()) {
+            const banner = document.createElement('div');
+            banner.innerHTML =
+                '<span style="margin-right:8px;">🧪 TEST MODE — checkouts charge <strong style="color:#fff;">$1</strong>.</span>' +
+                '<a href="?test=0" style="color:#fff;text-decoration:underline;font-weight:600;">Exit test mode</a>';
+            banner.style.cssText =
+                'position:fixed;top:0;left:0;right:0;z-index:200;' +
+                'padding:10px 20px;' +
+                'background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;' +
+                'text-align:center;font-size:13px;font-weight:500;' +
+                'letter-spacing:0.02em;box-shadow:0 2px 8px rgba(0,0,0,0.3);';
+            document.body.appendChild(banner);
+            document.body.style.paddingTop =
+                (document.body.style.paddingTop || '0').replace('px','') * 1 + 42 + 'px';
+        }
 
         // ═══════════════════════════════════════════════════════════════
         // Operator playback
@@ -1881,73 +1911,17 @@
             const ratioMap = new Map();
 
             if (isTouchDevice) {
-                // Mobile / tablet: scroll-based autoplay. Whichever card is most
-                // visible (≥ TOUCH_PLAY_THRESHOLD) is the one that plays with audio.
-                mediaEls.forEach(el => ratioMap.set(el, 0));
-
-                // iOS rule: for a <video> to play with audio programmatically, its FIRST
-                // play() must happen inside a user-gesture handler. We prime every video
-                // with a muted play→pause on the first touch, which flips iOS's internal
-                // "activated" bit so subsequent scroll-triggered plays can carry audio.
-                let primed = false;
-                const primeVideosOnGesture = () => {
-                    if (primed) return;
-                    primed = true;
-                    audioUnlocked = true;
-                    clearAllAudioHints();
-                    const curVid = currentPlaying?.querySelector('video.operator-video') || null;
-                    mediaEls.forEach(el => {
-                        const v = el.querySelector('video.operator-video');
-                        if (!v || v === curVid) return;
-                        v.muted = true;
-                        const p = v.play();
-                        if (p && typeof p.then === 'function') {
-                            p.then(() => { v.pause(); v.currentTime = 0; }).catch(() => {});
-                        }
-                    });
-                    // Unmute whatever's already playing so the user hears it immediately.
-                    if (curVid && !curVid.paused) {
-                        curVid.muted = false;
-                        curVid.volume = 1.0;
-                    }
-                };
-                document.addEventListener('touchstart', primeVideosOnGesture, { passive: true });
-                document.addEventListener('click', primeVideosOnGesture, { passive: true });
-
-                const scrollPlayObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(e => ratioMap.set(e.target, e.intersectionRatio));
-
-                    // Hysteresis: if the current card is still comfortably on screen
-                    // (> 0.3 visible), don't swap — prevents flicker when the user
-                    // lingers right at the boundary between two cards.
-                    if (currentPlaying && (ratioMap.get(currentPlaying) || 0) > TOUCH_STOP_THRESHOLD) {
-                        return;
-                    }
-
-                    let best = null;
-                    let bestRatio = TOUCH_PLAY_THRESHOLD;
-                    for (const [el, ratio] of ratioMap) {
-                        if (ratio > bestRatio) { best = el; bestRatio = ratio; }
-                    }
-
-                    if (best) {
-                        if (currentPlaying !== best) {
-                            startPlayback(best);
-                        }
-                    } else if (currentPlaying) {
-                        stopPlayback(currentPlaying);
-                        currentPlaying = null;
-                    }
-                }, { threshold: [0, 0.15, 0.3, 0.4, 0.5, 0.6, 0.75, 1.0] });
-
-                mediaEls.forEach(el => scrollPlayObserver.observe(el));
-
-                // Tap the card (not a button) = unmute / force play this one.
-                mediaEls.forEach(mediaEl => {
-                    mediaEl.addEventListener('click', (ev) => {
-                        if (ev.target.closest('button')) return;
-                        startPlayback(mediaEl);
-                    });
+                // Mobile / tablet: show static poster images only.
+                // Operators already introduce themselves on the homepage carousel,
+                // so re-playing those intros on every division-page scroll is redundant
+                // and annoying. Posters stay visible; videos never autoplay.
+                // Also strip preload and src so mobile doesn't download the .mp4s.
+                mediaEls.forEach(el => {
+                    const v = el.querySelector('video.operator-video');
+                    if (!v) return;
+                    v.setAttribute('preload', 'none');
+                    v.removeAttribute('src');
+                    try { v.load(); } catch (_) {}
                 });
             } else {
                 // Desktop: hover to play with audio (existing behavior).
