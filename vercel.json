@@ -31,6 +31,7 @@
     { "source": "/intake", "destination": "https://tethron-onboard.vercel.app/intake" },
     { "source": "/intake/:path*", "destination": "https://tethron-onboard.vercel.app/intake/:path*" },
     { "source": "/api/intake-chat", "destination": "https://tethron-onboard.vercel.app/api/intake-chat" },
+    { "source": "/api/intake-submit", "destination": "https://tethron-onboard.vercel.app/api/intake-submit" },
     { "source": "/api/verify-session", "destination": "https://tethron-onboard.vercel.app/api/verify-session" },
     { "source": "/api/tos-accept", "destination": "https://tethron-onboard.vercel.app/api/tos-accept" },
     { "source": "/api/ask-khaleesi", "destination": "https://tethron-onboard.vercel.app/api/ask-khaleesi" },
