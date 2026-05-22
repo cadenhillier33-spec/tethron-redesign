@@ -1594,7 +1594,7 @@
         </section>
 
         <!-- 3.4 TALK TO YOUR TETHRON — iPhone-in-hand video w/ Tethron header swap + streaming chat -->
-        <section class="max-w-7xl mx-auto w-full px-4 md:px-6 mt-28 md:mt-36">
+        <section class="max-w-7xl mx-auto w-full px-4 md:px-6 mt-28 md:mt-36 scroll-mt-28">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div class="reveal">
                     <p class="text-xs font-mono text-tethron-cyan tracking-[0.28em] uppercase mb-3">✦ Hands-free ops ✦</p>
@@ -1614,8 +1614,8 @@
                     <div class="tg2-demo-stage" aria-label="Animated Tethron employee chat demo">
                         <div class="tg2-glow tg2-glow-a"></div>
                         <div class="tg2-glow tg2-glow-b"></div>
-                        <div class="tg2-proof tg2-proof-a"><i class="ph-fill ph-check-circle"></i><span>Inbox handled</span></div>
-                        <div class="tg2-proof tg2-proof-b"><i class="ph-fill ph-calendar-check"></i><span>Calendar updated</span></div>
+                        <div class="tg2-proof tg2-proof-a"><i class="ph-fill ph-check-circle"></i><span>New leads found</span></div>
+                        <div class="tg2-proof tg2-proof-b"><i class="ph-fill ph-calendar-check"></i><span>Back office handled</span></div>
 
                         <div class="tg2-phone">
                             <div class="tg2-side-button tg2-side-button-left"></div>
@@ -1649,41 +1649,27 @@
                                     <div class="tg2-date">Today 9:41 AM</div>
 
                                     <div class="tg2-cycle tg2-cycle-1">
-                                        <div class="tg2-bubble tg2-out">Catch me up on overnight.</div>
-                                        <div class="tg2-working">
-                                            <div class="tg2-working-top">
-                                                <span class="tg2-spinner"></span>
-                                                <span>Checking inbox, CRM, and calendar…</span>
-                                            </div>
-                                            <div class="tg2-steps">
-                                                <span><i class="ph-fill ph-check-circle"></i> 23 emails triaged</span>
-                                                <span><i class="ph-fill ph-warning-circle"></i> 2 need approval</span>
-                                                <span><i class="ph-fill ph-pencil-simple"></i> 4 drafts ready</span>
-                                            </div>
+                                        <div class="tg2-bubble tg2-out">find 10 Tampa roofing companies and draft warm owner intros</div>
+                                        <div class="tg2-working" aria-label="Tethron is typing">
+                                            <span></span><span></span><span></span>
                                         </div>
-                                        <div class="tg2-bubble tg2-in tg2-done">
-                                            <div class="tg2-done-head"><i class="ph-fill ph-check-circle"></i> Done</div>
-                                            <div>Handled 23. Flagged 2. Drafts are ready in your voice.</div>
-                                        </div>
+                                        <div class="tg2-bubble tg2-in tg2-done">Found 14. I drafted each owner a personal intro and queued them for your OK before anything sends.</div>
                                     </div>
 
                                     <div class="tg2-cycle tg2-cycle-2">
-                                        <div class="tg2-bubble tg2-out">Book lunch with Mark next Tuesday.</div>
-                                        <div class="tg2-working">
-                                            <div class="tg2-working-top">
-                                                <span class="tg2-spinner"></span>
-                                                <span>Finding availability and sending invite…</span>
-                                            </div>
-                                            <div class="tg2-steps">
-                                                <span><i class="ph-fill ph-calendar-check"></i> Slot found</span>
-                                                <span><i class="ph-fill ph-map-pin"></i> Bellini’s reserved</span>
-                                                <span><i class="ph-fill ph-file-text"></i> Brief attached</span>
-                                            </div>
+                                        <div class="tg2-bubble tg2-out">go through my pipeline and chase anything cold this week</div>
+                                        <div class="tg2-working" aria-label="Tethron is typing">
+                                            <span></span><span></span><span></span>
                                         </div>
-                                        <div class="tg2-bubble tg2-in tg2-done">
-                                            <div class="tg2-done-head"><i class="ph-fill ph-check-circle"></i> Confirmed</div>
-                                            <div>Tue 12:30 at Bellini’s. Invite sent with a short brief.</div>
+                                        <div class="tg2-bubble tg2-in tg2-done">Found 3 slipping: Mercer, Tuesday's lead, and Riggs. Followed up friendly. I'll flag anyone still dark Friday.</div>
+                                    </div>
+
+                                    <div class="tg2-cycle tg2-cycle-3">
+                                        <div class="tg2-bubble tg2-out">clean up next week — need blocks for sales calls</div>
+                                        <div class="tg2-working" aria-label="Tethron is typing">
+                                            <span></span><span></span><span></span>
                                         </div>
+                                        <div class="tg2-bubble tg2-in tg2-done">Done — supplier call moved async, check-ins bumped. Tue–Thu now have clean sales blocks.</div>
                                     </div>
                                 </div>
 
@@ -1691,8 +1677,9 @@
                                     <i class="ph-fill ph-plus-circle"></i>
                                     <div class="tg2-input">
                                         <span class="tg2-placeholder">iMessage</span>
-                                        <span class="tg2-type tg2-type-1">Catch me up on overnight.</span>
-                                        <span class="tg2-type tg2-type-2">Book lunch with Mark next Tuesday.</span>
+                                        <span class="tg2-type tg2-type-1">find 10 roofing companies in Tampa</span>
+                                        <span class="tg2-type tg2-type-2">chase anything cold this week</span>
+                                        <span class="tg2-type tg2-type-3">clean up next week</span>
                                         <span class="tg2-cursor"></span>
                                     </div>
                                     <i class="ph-fill ph-arrow-circle-up tg2-send"></i>
@@ -1713,109 +1700,166 @@
         </section>
 
         <style>
-        /* ===== Realistic iMessage autonomous workflow demo ===== */
+        /* ===== Apple-clean iMessage autonomous workflow demo ===== */
         .tg2-demo-stage {
             position: relative;
-            width: min(100%, 540px);
-            min-height: 720px;
+            width: min(100%, 548px);
+            min-height: 690px;
             display: grid;
             place-items: center;
             isolation: isolate;
-            perspective: 1200px;
+            perspective: 1600px;
+        }
+        .tg2-demo-stage::before {
+            content: '';
+            position: absolute;
+            width: 440px;
+            height: 440px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(0,122,255,.16) 0%, rgba(0,212,232,.08) 36%, transparent 68%);
+            filter: blur(38px);
+            opacity: .72;
+            transform: translate3d(18px, 12px, -1px);
+            z-index: -3;
+            animation: tg2Aura 11s ease-in-out infinite;
+        }
+        .tg2-demo-stage::after {
+            content: '';
+            position: absolute;
+            bottom: 44px;
+            width: 330px;
+            height: 42px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(0,0,0,.58), transparent 70%);
+            filter: blur(18px);
+            opacity: .72;
+            z-index: -2;
+            animation: tg2Shadow 8s ease-in-out infinite;
         }
         .tg2-glow {
             position: absolute;
             border-radius: 999px;
-            filter: blur(34px);
             pointer-events: none;
             z-index: -2;
+            filter: blur(42px);
+            opacity: .48;
         }
         .tg2-glow-a {
             width: 420px;
             height: 520px;
-            background: radial-gradient(circle at 60% 40%, rgba(0,212,232,.26), transparent 56%);
-            animation: tg2Aura 8s ease-in-out infinite;
+            background: radial-gradient(circle at 56% 40%, rgba(0,212,232,.16), transparent 62%);
+            animation: tg2Aura 12s ease-in-out -2s infinite reverse;
         }
         .tg2-glow-b {
-            width: 280px;
-            height: 280px;
-            right: 12px;
-            bottom: 90px;
-            background: rgba(10,154,192,.13);
-            animation: tg2Aura 9s ease-in-out -2s infinite reverse;
+            width: 220px;
+            height: 220px;
+            right: 34px;
+            bottom: 118px;
+            background: rgba(41,151,255,.12);
+            animation: tg2Aura 14s ease-in-out infinite;
         }
         .tg2-proof {
             position: absolute;
-            z-index: 4;
+            z-index: 5;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 13px;
+            gap: 7px;
+            padding: 8px 11px;
             border-radius: 999px;
-            background: rgba(7,8,10,.78);
-            border: 1px solid rgba(0,212,232,.22);
-            color: #e9fdff;
-            font-size: 12px;
-            font-weight: 750;
-            letter-spacing: -.01em;
-            box-shadow: 0 18px 48px rgba(0,0,0,.44), 0 0 28px rgba(0,212,232,.12);
-            backdrop-filter: blur(18px) saturate(1.25);
-            -webkit-backdrop-filter: blur(18px) saturate(1.25);
+            background: rgba(255,255,255,.72);
+            border: 1px solid rgba(255,255,255,.55);
+            color: rgba(29,29,31,.86);
+            font-size: 11.5px;
+            font-weight: 650;
+            letter-spacing: -.018em;
+            box-shadow: 0 22px 54px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.9);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
         }
-        .tg2-proof i { color: #35d56f; font-size: 15px; filter: drop-shadow(0 0 8px rgba(53,213,111,.55)); }
-        .tg2-proof-a { left: 8px; top: 26%; animation: tg2ProofA 14s ease-in-out infinite; }
-        .tg2-proof-b { right: 0; top: 49%; animation: tg2ProofB 14s ease-in-out infinite; }
+        .tg2-proof i { color: #30d158; font-size: 14px; filter: none; }
+        .tg2-proof-a { left: 24px; top: 28%; animation: tg2ProofA 30s cubic-bezier(.22,1,.36,1) infinite; }
+        .tg2-proof-b { right: 18px; top: 52%; animation: tg2ProofB 30s cubic-bezier(.22,1,.36,1) infinite; }
 
         .tg2-phone {
             position: relative;
-            width: min(100%, 374px);
-            aspect-ratio: 9 / 19.35;
-            padding: 12px;
-            border-radius: 52px;
-            background: linear-gradient(145deg, #3a3a3f 0%, #17181c 42%, #090a0d 100%);
+            width: min(100%, 352px);
+            aspect-ratio: 9 / 19.45;
+            padding: 10px;
+            border-radius: 54px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.20) 0%, transparent 24%),
+                linear-gradient(145deg, #3b3c41 0%, #17181d 42%, #050608 100%);
             box-shadow:
-                0 55px 115px -28px rgba(0,0,0,.78),
-                0 26px 70px -36px rgba(0,212,232,.42),
-                inset 0 0 0 1px rgba(255,255,255,.11),
-                inset 0 2px 0 rgba(255,255,255,.12);
-            animation: tg2PhoneFloat 8s ease-in-out infinite;
-            transform-origin: 50% 55%;
+                0 70px 130px -34px rgba(0,0,0,.86),
+                0 28px 78px -42px rgba(0,122,255,.46),
+                inset 0 0 0 1px rgba(255,255,255,.13),
+                inset 0 2px 0 rgba(255,255,255,.16),
+                inset 0 -2px 0 rgba(0,0,0,.7);
+            animation: tg2PhoneFloat 8s cubic-bezier(.45,0,.55,1) infinite;
+            transform-origin: 50% 56%;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Inter, sans-serif;
+            container-type: inline-size;
             z-index: 2;
         }
-        .tg2-side-button { position: absolute; width: 3px; border-radius: 3px; background: #2b2c31; opacity: .9; }
-        .tg2-side-button-left { left: -2px; top: 118px; height: 74px; }
-        .tg2-side-button-right { right: -2px; top: 156px; height: 92px; }
+        .tg2-phone::before {
+            content: '';
+            position: absolute;
+            inset: 11px;
+            border-radius: 43px;
+            pointer-events: none;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+            z-index: 30;
+        }
+        .tg2-side-button { position: absolute; width: 3px; border-radius: 3px; background: linear-gradient(#3d3f46,#15161a); opacity: .92; }
+        .tg2-side-button-left { left: -2px; top: 118px; height: 72px; }
+        .tg2-side-button-right { right: -2px; top: 158px; height: 90px; }
         .tg2-notch {
             position: absolute;
-            top: 22px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 102px;
-            height: 29px;
+            width: 100px;
+            height: 30px;
             border-radius: 999px;
-            background: #050507;
-            z-index: 20;
-            box-shadow: inset 0 -1px 0 rgba(255,255,255,.06);
+            background: #030304;
+            z-index: 31;
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,.07), 0 1px 2px rgba(255,255,255,.04);
+        }
+        .tg2-notch::after {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 10px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #263247, #05060a 68%);
+            opacity: .68;
         }
         .tg2-screen {
             position: relative;
             height: 100%;
             overflow: hidden;
-            border-radius: 40px;
-            background: #f5f7fb;
+            border-radius: 43px;
+            background: #f5f5f7;
             display: flex;
             flex-direction: column;
-            box-shadow: inset 0 0 0 1px rgba(0,0,0,.55);
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,.72);
         }
         .tg2-wallpaper {
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at 18% 8%, rgba(0,122,255,.18), transparent 38%),
-                radial-gradient(circle at 88% 28%, rgba(0,212,232,.14), transparent 36%),
-                linear-gradient(180deg, #fbfcff 0%, #edf2f8 58%, #e4e9f1 100%);
+                radial-gradient(circle at 16% 4%, rgba(41,151,255,.16), transparent 34%),
+                radial-gradient(circle at 92% 24%, rgba(0,212,232,.10), transparent 32%),
+                linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 46%, #e7ebf2 100%);
             z-index: 0;
+        }
+        .tg2-wallpaper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,.56), transparent 18%, rgba(229,233,240,.45) 100%);
         }
         .tg2-statusbar,
         .tg2-header,
@@ -1827,111 +1871,121 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 26px 6px;
-            color: #111318;
+            padding: 15px 26px 5px;
+            color: #1d1d1f;
             font-size: 13px;
             font-weight: 700;
-            letter-spacing: -.02em;
+            letter-spacing: -.025em;
         }
         .tg2-status-icons { display: flex; gap: 5px; font-size: 12px; align-items: center; }
         .tg2-header {
             display: grid;
             grid-template-columns: 28px 1fr 28px;
             align-items: center;
-            padding: 5px 13px 10px;
+            padding: 5px 13px 9px;
             color: #007aff;
-            background: rgba(250,251,253,.78);
-            border-bottom: 1px solid rgba(60,60,67,.12);
-            backdrop-filter: blur(22px) saturate(1.45);
-            -webkit-backdrop-filter: blur(22px) saturate(1.45);
+            background: rgba(251,251,253,.74);
+            border-bottom: 1px solid rgba(60,60,67,.10);
+            box-shadow: 0 1px 0 rgba(255,255,255,.66) inset;
+            backdrop-filter: saturate(180%) blur(26px);
+            -webkit-backdrop-filter: saturate(180%) blur(26px);
         }
-        .tg2-header > i { font-size: 22px; }
-        .tg2-contact { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #111318; gap: 3px; }
+        .tg2-header > i { font-size: 21px; }
+        .tg2-contact { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #1d1d1f; gap: 3px; }
         .tg2-avatar {
-            width: 34px;
-            height: 34px;
+            width: 33px;
+            height: 33px;
             border-radius: 50%;
             display: grid;
             place-items: center;
-            background: linear-gradient(135deg, #06b6d4, #047b9a);
+            background: linear-gradient(145deg, #22d3ee, #007aff 72%);
             color: #fff;
             font-size: 14px;
-            font-weight: 850;
-            box-shadow: 0 0 0 3px rgba(0,122,255,.08), 0 8px 20px rgba(0,122,255,.20);
+            font-weight: 800;
+            box-shadow: 0 0 0 3px rgba(0,122,255,.08), 0 8px 22px rgba(0,122,255,.22);
         }
-        .tg2-name { font-size: 11px; line-height: 1; font-weight: 650; letter-spacing: -.02em; text-align: center; }
-        .tg2-sub { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 2px; font-size: 8.5px; color: #6b7280; line-height: 1; }
-        .tg2-sub span { width: 5px; height: 5px; border-radius: 50%; background: #35d56f; box-shadow: 0 0 8px rgba(53,213,111,.75); }
+        .tg2-name { font-size: 11px; line-height: 1; font-weight: 650; letter-spacing: -.025em; text-align: center; }
+        .tg2-sub { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 2px; font-size: 8.5px; color: #6e6e73; line-height: 1; }
+        .tg2-sub span { width: 5px; height: 5px; border-radius: 50%; background: #30d158; box-shadow: 0 0 8px rgba(48,209,88,.7); }
         .tg2-chat {
             flex: 1;
             overflow: hidden;
-            padding: 11px 11px 8px;
+            padding: 10px 11px 8px;
         }
         .tg2-date {
             width: fit-content;
             margin: 0 auto 10px;
             padding: 4px 8px;
             border-radius: 999px;
-            background: rgba(255,255,255,.58);
-            color: #7b8290;
+            background: rgba(255,255,255,.62);
+            color: #7a7f89;
             font-size: 10px;
             font-weight: 650;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.72);
         }
         .tg2-cycle {
             position: absolute;
             left: 11px;
             right: 11px;
-            top: 46px;
+            top: 45px;
             opacity: 0;
             transform: translateY(14px);
-            animation: tg2Cycle 14s cubic-bezier(.22,1,.36,1) infinite;
+            animation: tg2Cycle 30s cubic-bezier(.22,1,.36,1) infinite;
+            will-change: opacity, transform;
         }
-        .tg2-cycle-2 { animation-delay: 7s; }
+        .tg2-cycle-2 { animation-delay: 10s; }
+        .tg2-cycle-3 { animation-delay: 20s; }
         .tg2-bubble {
             width: fit-content;
-            max-width: 83%;
+            max-width: 84%;
             padding: 9px 12px;
-            border-radius: 18px;
-            font-size: 15px;
-            line-height: 1.28;
-            letter-spacing: -.015em;
-            box-shadow: 0 1px 2px rgba(0,0,0,.06);
+            border-radius: 19px;
+            font-size: 14.5px;
+            line-height: 1.26;
+            letter-spacing: -.018em;
+            box-shadow: 0 1px 1px rgba(0,0,0,.04);
         }
         .tg2-out {
             margin-left: auto;
             color: #fff;
-            background: linear-gradient(180deg, #27a8ff 0%, #007aff 100%);
+            background: linear-gradient(180deg, #37a9ff 0%, #007aff 100%);
             border-bottom-right-radius: 5px;
-            animation: tg2MsgOut 14s cubic-bezier(.22,1,.36,1) infinite;
+            box-shadow: 0 1px 2px rgba(0,122,255,.18);
+            animation: tg2MsgOut 30s cubic-bezier(.22,1,.36,1) infinite;
         }
-        .tg2-cycle-2 .tg2-out { animation-delay: 7s; }
+        .tg2-cycle-2 .tg2-out { animation-delay: 10s; }
+        .tg2-cycle-3 .tg2-out { animation-delay: 20s; }
         .tg2-working {
-            margin-top: 10px;
-            width: 91%;
-            padding: 12px;
-            border-radius: 21px;
-            background: rgba(255,255,255,.92);
-            border: 1px solid rgba(0,0,0,.065);
-            box-shadow: 0 14px 34px rgba(20,31,46,.11);
-            backdrop-filter: blur(18px) saturate(1.25);
-            -webkit-backdrop-filter: blur(18px) saturate(1.25);
+            margin-top: 9px;
+            width: fit-content;
+            padding: 10px 13px;
+            border-radius: 19px;
+            border-bottom-left-radius: 5px;
+            background: #e9e9eb;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             opacity: 0;
             transform: translateY(10px) scale(.985);
-            animation: tg2Working 14s cubic-bezier(.22,1,.36,1) infinite;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.62);
+            animation: tg2Working 30s cubic-bezier(.22,1,.36,1) infinite;
         }
-        .tg2-cycle-2 .tg2-working { animation-delay: 7s; }
-        .tg2-working-top { display: flex; align-items: center; gap: 8px; color: #111827; font-size: 12.7px; font-weight: 750; letter-spacing: -.01em; }
-        .tg2-spinner {
-            width: 15px;
-            height: 15px;
+        .tg2-working span {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            border: 2px solid rgba(0,122,255,.22);
-            border-top-color: #007aff;
-            animation: tg2Spin .75s linear infinite;
-            flex: 0 0 auto;
+            background: #8e8e93;
+            animation: tg2Dot 1s ease-in-out infinite;
         }
-        .tg2-steps { margin-top: 9px; display: grid; gap: 6px; }
+        .tg2-working span:nth-child(2) { animation-delay: .15s; }
+        .tg2-working span:nth-child(3) { animation-delay: .3s; }
+        .tg2-cycle-2 .tg2-working { animation-delay: 10s; }
+        .tg2-cycle-3 .tg2-working { animation-delay: 20s; }
+        .tg2-working-top { display: none; }
+        .tg2-spinner { display: none; }
+        .tg2-steps { display: none; }
         .tg2-steps span {
             display: flex;
             align-items: center;
@@ -1944,24 +1998,29 @@
             font-weight: 700;
             opacity: .56;
             transform: translateX(-4px);
-            animation: tg2Step 14s ease-in-out infinite;
+            animation: tg2Step 30s ease-in-out infinite;
         }
-        .tg2-cycle-2 .tg2-steps span { animation-delay: 7s; }
+        .tg2-cycle-2 .tg2-steps span { animation-delay: 10s; }
+        .tg2-cycle-3 .tg2-steps span { animation-delay: 20s; }
         .tg2-steps span:nth-child(2) { animation-delay: .45s; }
-        .tg2-cycle-2 .tg2-steps span:nth-child(2) { animation-delay: 7.45s; }
+        .tg2-cycle-2 .tg2-steps span:nth-child(2) { animation-delay: 10.45s; }
+        .tg2-cycle-3 .tg2-steps span:nth-child(2) { animation-delay: 20.45s; }
         .tg2-steps span:nth-child(3) { animation-delay: .9s; }
-        .tg2-cycle-2 .tg2-steps span:nth-child(3) { animation-delay: 7.9s; }
+        .tg2-cycle-2 .tg2-steps span:nth-child(3) { animation-delay: 10.9s; }
+        .tg2-cycle-3 .tg2-steps span:nth-child(3) { animation-delay: 20.9s; }
         .tg2-steps i { color: #0aa6bd; font-size: 14px; }
         .tg2-done {
-            margin-top: 10px;
-            color: #0d1117;
+            margin-top: 9px;
+            color: #1d1d1f;
             background: #e9e9eb;
             border-bottom-left-radius: 5px;
             opacity: 0;
             transform: translateY(10px) scale(.985);
-            animation: tg2Done 14s cubic-bezier(.22,1,.36,1) infinite;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.68);
+            animation: tg2Done 30s cubic-bezier(.22,1,.36,1) infinite;
         }
-        .tg2-cycle-2 .tg2-done { animation-delay: 7s; }
+        .tg2-cycle-2 .tg2-done { animation-delay: 10s; }
+        .tg2-cycle-3 .tg2-done { animation-delay: 20s; }
         .tg2-done-head { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; color: #178a46; font-size: 12px; font-weight: 800; }
         .tg2-done-head i { font-size: 14px; }
         .tg2-composer {
@@ -1969,28 +2028,30 @@
             align-items: center;
             gap: 9px;
             padding: 8px 13px 7px;
-            background: rgba(249,250,252,.84);
+            background: rgba(249,250,252,.82);
             border-top: 1px solid rgba(60,60,67,.10);
-            backdrop-filter: blur(20px) saturate(1.4);
-            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.64);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
         }
         .tg2-composer > i { color: #8e8e93; font-size: 19px; }
-        .tg2-composer .tg2-send { color: #007aff; animation: tg2Send 14s ease-in-out infinite; }
+        .tg2-composer .tg2-send { color: #007aff; animation: tg2Send 30s ease-in-out infinite; }
         .tg2-input {
             position: relative;
             flex: 1;
             min-height: 31px;
             border: 1px solid rgba(60,60,67,.18);
             border-radius: 18px;
-            background: rgba(255,255,255,.72);
+            background: rgba(255,255,255,.78);
             display: flex;
             align-items: center;
             overflow: hidden;
             padding: 0 12px;
-            color: #111318;
+            color: #1d1d1f;
             font-size: 13.6px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.84);
         }
-        .tg2-placeholder { color: #a0a5ae; animation: tg2Placeholder 14s steps(1,end) infinite; }
+        .tg2-placeholder { color: #a1a1a6; animation: tg2Placeholder 30s steps(1,end) infinite; }
         .tg2-type {
             position: absolute;
             left: 12px;
@@ -2001,8 +2062,9 @@
             max-width: 0;
             opacity: 0;
         }
-        .tg2-type-1 { animation: tg2Type1 14s linear infinite; }
-        .tg2-type-2 { animation: tg2Type2 14s linear infinite; }
+        .tg2-type-1 { animation: tg2Type1 30s linear infinite; }
+        .tg2-type-2 { animation: tg2Type2 30s linear infinite; }
+        .tg2-type-3 { animation: tg2Type3 30s linear infinite; }
         .tg2-cursor {
             position: absolute;
             left: 12px;
@@ -2013,15 +2075,16 @@
             border-radius: 2px;
             background: #007aff;
             opacity: 0;
-            animation: tg2Cursor 14s linear infinite;
+            animation: tg2Cursor 30s linear infinite;
         }
         .tg2-keyboard {
             display: grid;
             gap: 6px;
             padding: 8px 6px 9px;
-            background: rgba(205,209,216,.96);
+            background: rgba(207,211,218,.94);
             transform-origin: bottom;
-            animation: tg2Keyboard 14s ease-in-out infinite;
+            animation: tg2Keyboard 30s ease-in-out infinite;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.42);
         }
         .tg2-kb-row { display: flex; justify-content: center; gap: 5px; }
         .tg2-kb-row-mid { padding: 0 20px; }
@@ -2029,13 +2092,13 @@
             flex: 1;
             min-width: 0;
             text-align: center;
-            color: #111318;
+            color: #1d1d1f;
             background: rgba(255,255,255,.96);
             border-radius: 5px;
             padding: 8px 2px;
             font-size: 14.5px;
             line-height: 1;
-            box-shadow: 0 1px 0 rgba(0,0,0,.20);
+            box-shadow: 0 1px 0 rgba(0,0,0,.20), 0 .5px 1px rgba(0,0,0,.08);
             user-select: none;
         }
         .tg2-kb-row .tg2-special { flex: .75; background: #adb3bd; font-size: 12px; }
@@ -2044,28 +2107,55 @@
         .tg2-kb-row .tg2-return { flex: 1.15; font-size: 11px; }
         .tg2-homebar { width: 112px; height: 5px; border-radius: 999px; background: rgba(0,0,0,.84); margin: 4px auto 8px; }
 
-        @keyframes tg2Aura { 0%,100% { transform: scale(.96) translate3d(0,0,0); opacity: .58; } 50% { transform: scale(1.05) translate3d(12px,-8px,0); opacity: .92; } }
-        @keyframes tg2PhoneFloat { 0%,100% { transform: translateY(0) rotateX(0deg) rotateY(-1.2deg); } 50% { transform: translateY(-9px) rotateX(1.2deg) rotateY(1.2deg); } }
-        @keyframes tg2ProofA { 0%,17%,54%,100% { opacity: 0; transform: translateY(10px) scale(.96); } 24%,45% { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes tg2ProofB { 0%,67%,100% { opacity: 0; transform: translateY(10px) scale(.96); } 74%,92% { opacity: 1; transform: translateY(0) scale(1); } }
+        /* Container-scaled iMessage internals — keep phone content tied to the phone, not viewport */
+        .tg2-statusbar { padding: 4.2cqw 7.2cqw 2.2cqw; font-size: 3.5cqw; }
+        .tg2-header { padding: 1.9cqw 4.3cqw 2.6cqw; gap: 2.7cqw; }
+        .tg2-avatar { width: 9.2cqw; height: 9.2cqw; font-size: 3.7cqw; }
+        .tg2-name { font-size: 3.7cqw; }
+        .tg2-sub { font-size: 2.7cqw; }
+        .tg2-chat { padding: 3.1cqw; }
+        .tg2-date { font-size: 2.8cqw; margin-bottom: 3cqw; }
+        .tg2-cycle { left: 3.1cqw; right: 3.1cqw; top: 13.2cqw; }
+        .tg2-bubble { padding: 2.65cqw 3.45cqw; border-radius: 5.2cqw; font-size: 4.05cqw; line-height: 1.31; }
+        .tg2-out { border-bottom-right-radius: 1.35cqw; }
+        .tg2-done, .tg2-working { margin-top: 2.5cqw; border-bottom-left-radius: 1.35cqw; }
+        .tg2-working { padding: 2.8cqw 3.5cqw; gap: 1.05cqw; }
+        .tg2-working span { width: 1.65cqw; height: 1.65cqw; }
+        .tg2-composer { gap: 2.4cqw; padding: 2.1cqw 3.5cqw 1.8cqw; }
+        .tg2-composer > i { font-size: 5cqw; }
+        .tg2-input { min-height: 8.2cqw; border-radius: 4.8cqw; padding: 0 3.2cqw; font-size: 3.55cqw; }
+        .tg2-type { left: 3.2cqw; }
+        .tg2-cursor { left: 3.2cqw; height: 4.3cqw; }
+        .tg2-keyboard { gap: 1.55cqw; padding: 2cqw 1.55cqw 2.3cqw; }
+        .tg2-kb-row { gap: 1.28cqw; }
+        .tg2-kb-row-mid { padding: 0 5.3cqw; }
+        .tg2-kb-row span { border-radius: 1.3cqw; padding: 2.05cqw .5cqw; font-size: 3.85cqw; }
+
+        @keyframes tg2Aura { 0%,100% { transform: scale(.98) translate3d(0,0,0); opacity: .52; } 50% { transform: scale(1.04) translate3d(10px,-8px,0); opacity: .82; } }
+        @keyframes tg2Shadow { 0%,100% { transform: scaleX(.96); opacity: .62; } 50% { transform: scaleX(1.04); opacity: .76; } }
+        @keyframes tg2PhoneFloat { 0%,100% { transform: translateY(0) rotateX(0deg) rotateY(-1deg); } 50% { transform: translateY(-8px) rotateX(.8deg) rotateY(1deg); } }
+        @keyframes tg2ProofA { 0%,17%,54%,100% { opacity: 0; transform: translate3d(0,8px,0) scale(.98); filter: blur(.4px); } 24%,45% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); } }
+        @keyframes tg2ProofB { 0%,67%,100% { opacity: 0; transform: translate3d(0,8px,0) scale(.98); filter: blur(.4px); } 74%,92% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); } }
         @keyframes tg2Spin { to { transform: rotate(360deg); } }
-        @keyframes tg2Cycle { 0%,2% { opacity: 0; transform: translateY(16px); } 7%,47% { opacity: 1; transform: translateY(0); } 50%,100% { opacity: 0; transform: translateY(-12px); } }
-        @keyframes tg2MsgOut { 0%,8% { opacity: 0; transform: translateY(12px) scale(.985); } 12%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-6px) scale(.99); } }
-        @keyframes tg2Working { 0%,14% { opacity: 0; transform: translateY(10px) scale(.985); } 18%,31% { opacity: 1; transform: translateY(0) scale(1); } 36%,100% { opacity: 0; transform: translateY(-6px) scale(.99); } }
-        @keyframes tg2Done { 0%,32% { opacity: 0; transform: translateY(10px) scale(.985); } 37%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-6px) scale(.99); } }
+        @keyframes tg2Dot { 0%,100% { opacity: .38; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
+        @keyframes tg2Cycle { 0%,2% { opacity: 0; transform: translateY(14px); } 7%,47% { opacity: 1; transform: translateY(0); } 50%,100% { opacity: 0; transform: translateY(-10px); } }
+        @keyframes tg2MsgOut { 0%,8% { opacity: 0; transform: translateY(11px) scale(.99); } 12%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
+        @keyframes tg2Working { 0%,14% { opacity: 0; transform: translateY(9px) scale(.99); } 18%,31% { opacity: 1; transform: translateY(0) scale(1); } 36%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
+        @keyframes tg2Done { 0%,32% { opacity: 0; transform: translateY(9px) scale(.99); } 37%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
         @keyframes tg2Step { 0%,18% { opacity: .35; transform: translateX(-4px); } 24%,48% { opacity: 1; transform: translateX(0); } 54%,100% { opacity: .35; transform: translateX(-4px); } }
         @keyframes tg2Placeholder { 0% { opacity: 1; } 1%,100% { opacity: 0; } }
-        @keyframes tg2Type1 { 0% { max-width: 0; opacity: 1; } 15% { max-width: 180px; opacity: 1; } 16%,50% { max-width: 0; opacity: 0; } 100% { max-width: 0; opacity: 0; } }
-        @keyframes tg2Type2 { 0%,50% { max-width: 0; opacity: 0; } 51% { max-width: 0; opacity: 1; } 65% { max-width: 210px; opacity: 1; } 66%,100% { max-width: 0; opacity: 0; } }
-        @keyframes tg2Cursor { 0% { opacity: 1; left: 12px; } 15% { opacity: 1; left: 184px; } 16%,50% { opacity: 0; left: 12px; } 51% { opacity: 1; left: 12px; } 65% { opacity: 1; left: 218px; } 66%,100% { opacity: 0; left: 12px; } }
-        @keyframes tg2Send { 0%,15%,50%,65%,100% { transform: scale(1); opacity: .95; } 16%,66% { transform: scale(.84); } 17%,67% { transform: scale(1); } }
-        @keyframes tg2Keyboard { 0%,18%,50%,68%,100% { opacity: 1; transform: translateY(0); } 24%,44%,74%,94% { opacity: .72; transform: translateY(4px); } }
+        @keyframes tg2Type1 { 0% { max-width: 0; opacity: 1; } 10% { max-width: 72cqw; opacity: 1; } 11%,33.2% { max-width: 0; opacity: 0; } 100% { max-width: 0; opacity: 0; } }
+        @keyframes tg2Type2 { 0%,33.3% { max-width: 0; opacity: 0; } 34% { max-width: 0; opacity: 1; } 44% { max-width: 64cqw; opacity: 1; } 45%,66.5% { max-width: 0; opacity: 0; } 100% { max-width: 0; opacity: 0; } }
+        @keyframes tg2Type3 { 0%,66.6% { max-width: 0; opacity: 0; } 67.3% { max-width: 0; opacity: 1; } 78% { max-width: 24cqw; opacity: 1; } 79%,100% { max-width: 0; opacity: 0; } }
+        @keyframes tg2Cursor { 0% { opacity: 1; left: 3.2cqw; } 10% { opacity: 1; left: 72cqw; } 11%,33.2% { opacity: 0; left: 3.2cqw; } 34% { opacity: 1; left: 3.2cqw; } 44% { opacity: 1; left: 64cqw; } 45%,66.5% { opacity: 0; left: 3.2cqw; } 67.3% { opacity: 1; left: 3.2cqw; } 78% { opacity: 1; left: 24cqw; } 79%,100% { opacity: 0; left: 3.2cqw; } }
+        @keyframes tg2Send { 0%,10%,33%,44%,66%,78%,100% { transform: scale(1); opacity: .95; } 11%,45%,79% { transform: scale(.84); } 12%,46%,80% { transform: scale(1); } }
+        @keyframes tg2Keyboard { 0%,13%,33%,47%,66%,81%,100% { opacity: 1; transform: translateY(0); } 18%,30%,52%,64%,86%,98% { opacity: .76; transform: translateY(3px); } }
 
         @media (max-width: 1023px) {
-            .tg2-demo-stage { width: min(100%, 390px); min-height: 690px; margin-inline: auto; }
-            .tg2-proof { font-size: 11px; padding: 8px 10px; }
-            .tg2-proof-a { left: -2px; top: 20%; }
-            .tg2-proof-b { right: -4px; top: 48%; }
+            .tg2-demo-stage { width: min(100%, 390px); min-height: 650px; margin-inline: auto; }
+            .tg2-proof { font-size: 11px; padding: 7px 10px; }
+            .tg2-proof-a { left: 0; top: 21%; }
+            .tg2-proof-b { right: -2px; top: 50%; }
         }
         @media (max-width: 480px) {
             .tg2-demo-stage { min-height: 620px; transform: scale(.92); transform-origin: top center; margin-bottom: -48px; }

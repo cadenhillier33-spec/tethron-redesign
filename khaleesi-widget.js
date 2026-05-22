@@ -186,19 +186,21 @@
     const mo = new MutationObserver(wireTriggers);
     mo.observe(document.body, { childList: true, subtree: true });
 
-    // MOBILE DEDUPE: hide floating widget while the hero Khaleesi chip is on screen.
-    // Only applies to mobile (<=768px) — on desktop the widget stays persistent.
+    // DEDUPE: hide floating widget when it would visually collide with featured CTAs/demos.
     try {
         const heroChip = document.querySelector('[data-khaleesi-open]');
-        const mq = window.matchMedia('(max-width: 768px)');
-        if (heroChip && mq.matches) {
+        const phoneDemo = document.querySelector('.tg2-demo-stage');
+        const targets = [heroChip, phoneDemo].filter(Boolean);
+        if (targets.length) {
+            const visible = new WeakMap();
+            const syncHidden = () => {
+                root.classList.toggle('kh-hidden', targets.some(t => visible.get(t)));
+            };
             const io = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) root.classList.add('kh-hidden');
-                    else root.classList.remove('kh-hidden');
-                });
-            }, { threshold: 0.25 });
-            io.observe(heroChip);
+                entries.forEach(e => visible.set(e.target, e.isIntersecting));
+                syncHidden();
+            }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+            targets.forEach(t => io.observe(t));
         }
     } catch (err) { /* observer unavailable — widget simply stays visible */ }
 
