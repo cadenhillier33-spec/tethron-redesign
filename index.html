@@ -1650,24 +1650,48 @@
 
                                     <div class="tg2-cycle tg2-cycle-1">
                                         <div class="tg2-bubble tg2-out">find 10 Tampa roofing companies and draft warm owner intros</div>
-                                        <div class="tg2-working" aria-label="Tethron is typing">
-                                            <span></span><span></span><span></span>
+                                        <div class="tg2-working" aria-label="Tethron is working">
+                                            <div class="tg2-working-top">
+                                                <span class="tg2-spinner"></span>
+                                                <span>Finding owners + writing drafts…</span>
+                                            </div>
+                                            <div class="tg2-steps">
+                                                <span><i class="ph-fill ph-check-circle"></i> 14 companies found</span>
+                                                <span><i class="ph-fill ph-envelope-simple"></i> owner emails verified</span>
+                                                <span><i class="ph-fill ph-pencil-simple"></i> intros queued</span>
+                                            </div>
                                         </div>
                                         <div class="tg2-bubble tg2-in tg2-done">Found 14. I drafted each owner a personal intro and queued them for your OK before anything sends.</div>
                                     </div>
 
                                     <div class="tg2-cycle tg2-cycle-2">
                                         <div class="tg2-bubble tg2-out">go through my pipeline and chase anything cold this week</div>
-                                        <div class="tg2-working" aria-label="Tethron is typing">
-                                            <span></span><span></span><span></span>
+                                        <div class="tg2-working" aria-label="Tethron is working">
+                                            <div class="tg2-working-top">
+                                                <span class="tg2-spinner"></span>
+                                                <span>Checking CRM + open quotes…</span>
+                                            </div>
+                                            <div class="tg2-steps">
+                                                <span><i class="ph-fill ph-warning-circle"></i> 3 slipping</span>
+                                                <span><i class="ph-fill ph-paper-plane-tilt"></i> follow-ups sent</span>
+                                                <span><i class="ph-fill ph-flag"></i> Friday watch set</span>
+                                            </div>
                                         </div>
                                         <div class="tg2-bubble tg2-in tg2-done">Found 3 slipping: Mercer, Tuesday's lead, and Riggs. Followed up friendly. I'll flag anyone still dark Friday.</div>
                                     </div>
 
                                     <div class="tg2-cycle tg2-cycle-3">
                                         <div class="tg2-bubble tg2-out">clean up next week — need blocks for sales calls</div>
-                                        <div class="tg2-working" aria-label="Tethron is typing">
-                                            <span></span><span></span><span></span>
+                                        <div class="tg2-working" aria-label="Tethron is working">
+                                            <div class="tg2-working-top">
+                                                <span class="tg2-spinner"></span>
+                                                <span>Rebuilding next week…</span>
+                                            </div>
+                                            <div class="tg2-steps">
+                                                <span><i class="ph-fill ph-arrows-clockwise"></i> supplier async</span>
+                                                <span><i class="ph-fill ph-calendar-blank"></i> check-ins moved</span>
+                                                <span><i class="ph-fill ph-check-circle"></i> sales blocks open</span>
+                                            </div>
                                         </div>
                                         <div class="tg2-bubble tg2-in tg2-done">Done — supplier call moved async, check-ins bumped. Tue–Thu now have clean sales blocks.</div>
                                     </div>
@@ -1677,9 +1701,9 @@
                                     <i class="ph-fill ph-plus-circle"></i>
                                     <div class="tg2-input">
                                         <span class="tg2-placeholder">iMessage</span>
-                                        <span class="tg2-type tg2-type-1">find 10 roofing companies in Tampa</span>
-                                        <span class="tg2-type tg2-type-2">chase anything cold this week</span>
-                                        <span class="tg2-type tg2-type-3">clean up next week</span>
+                                        <span class="tg2-type tg2-type-1" style="--chars: 33ch;">find 10 roofing companies in Tampa</span>
+                                        <span class="tg2-type tg2-type-2" style="--chars: 29ch;">chase anything cold this week</span>
+                                        <span class="tg2-type tg2-type-3" style="--chars: 18ch;">clean up next week</span>
                                         <span class="tg2-cursor"></span>
                                     </div>
                                     <i class="ph-fill ph-arrow-circle-up tg2-send"></i>
@@ -1959,44 +1983,54 @@
         .tg2-cycle-3 .tg2-out { animation-delay: 20s; }
         .tg2-working {
             margin-top: 9px;
-            width: fit-content;
-            padding: 10px 13px;
-            border-radius: 19px;
-            border-bottom-left-radius: 5px;
-            background: #e9e9eb;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            width: min(88%, 276px);
+            padding: 10px;
+            border-radius: 20px;
+            border-bottom-left-radius: 6px;
+            background: rgba(233,233,235,.96);
+            display: grid;
+            gap: 7px;
             opacity: 0;
             transform: translateY(10px) scale(.985);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.62);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 1px 2px rgba(0,0,0,.04);
             animation: tg2Working 30s cubic-bezier(.22,1,.36,1) infinite;
         }
-        .tg2-working span {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #8e8e93;
-            animation: tg2Dot 1s ease-in-out infinite;
-        }
-        .tg2-working span:nth-child(2) { animation-delay: .15s; }
-        .tg2-working span:nth-child(3) { animation-delay: .3s; }
         .tg2-cycle-2 .tg2-working { animation-delay: 10s; }
         .tg2-cycle-3 .tg2-working { animation-delay: 20s; }
-        .tg2-working-top { display: none; }
-        .tg2-spinner { display: none; }
-        .tg2-steps { display: none; }
-        .tg2-steps span {
+        .tg2-working-top {
             display: flex;
             align-items: center;
             gap: 7px;
-            padding: 6px 8px;
-            border-radius: 12px;
-            background: rgba(241,245,249,.96);
-            color: #273243;
+            color: #4e5965;
             font-size: 11.8px;
             font-weight: 700;
-            opacity: .56;
+            letter-spacing: -.018em;
+        }
+        .tg2-spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,122,255,.18);
+            border-top-color: #007aff;
+            animation: tg2Spin .85s linear infinite;
+            flex: 0 0 auto;
+        }
+        .tg2-steps {
+            display: grid;
+            gap: 5px;
+        }
+        .tg2-steps span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 7px;
+            border-radius: 11px;
+            background: rgba(255,255,255,.72);
+            color: #273243;
+            font-size: 11.2px;
+            font-weight: 700;
+            opacity: .54;
             transform: translateX(-4px);
             animation: tg2Step 30s ease-in-out infinite;
         }
@@ -2059,24 +2093,17 @@
             transform: translateY(-50%);
             white-space: nowrap;
             overflow: hidden;
-            max-width: 0;
+            width: 0;
+            max-width: calc(100% - 18px);
             opacity: 0;
+            padding-right: 2px;
+            border-right: 1.8px solid #007aff;
+            line-height: 1.2;
         }
-        .tg2-type-1 { animation: tg2Type1 30s linear infinite; }
-        .tg2-type-2 { animation: tg2Type2 30s linear infinite; }
-        .tg2-type-3 { animation: tg2Type3 30s linear infinite; }
-        .tg2-cursor {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1.5px;
-            height: 16px;
-            border-radius: 2px;
-            background: #007aff;
-            opacity: 0;
-            animation: tg2Cursor 30s linear infinite;
-        }
+        .tg2-type-1 { animation: tg2Type1 30s steps(33,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-type-2 { animation: tg2Type2 30s steps(29,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-type-3 { animation: tg2Type3 30s steps(18,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-cursor { display: none; }
         .tg2-keyboard {
             display: grid;
             gap: 6px;
@@ -2119,8 +2146,11 @@
         .tg2-bubble { padding: 2.65cqw 3.45cqw; border-radius: 5.2cqw; font-size: 4.05cqw; line-height: 1.31; }
         .tg2-out { border-bottom-right-radius: 1.35cqw; }
         .tg2-done, .tg2-working { margin-top: 2.5cqw; border-bottom-left-radius: 1.35cqw; }
-        .tg2-working { padding: 2.8cqw 3.5cqw; gap: 1.05cqw; }
-        .tg2-working span { width: 1.65cqw; height: 1.65cqw; }
+        .tg2-working { padding: 2.6cqw; gap: 1.85cqw; }
+        .tg2-working-top { font-size: 3.05cqw; gap: 1.8cqw; }
+        .tg2-spinner { width: 3.1cqw; height: 3.1cqw; border-width: .52cqw; }
+        .tg2-steps { gap: 1.2cqw; }
+        .tg2-steps span { padding: 1.35cqw 1.8cqw; border-radius: 2.9cqw; font-size: 2.86cqw; gap: 1.55cqw; }
         .tg2-composer { gap: 2.4cqw; padding: 2.1cqw 3.5cqw 1.8cqw; }
         .tg2-composer > i { font-size: 5cqw; }
         .tg2-input { min-height: 8.2cqw; border-radius: 4.8cqw; padding: 0 3.2cqw; font-size: 3.55cqw; }
@@ -2140,15 +2170,16 @@
         @keyframes tg2Dot { 0%,100% { opacity: .38; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
         @keyframes tg2Cycle { 0%,2% { opacity: 0; transform: translateY(14px); } 7%,47% { opacity: 1; transform: translateY(0); } 50%,100% { opacity: 0; transform: translateY(-10px); } }
         @keyframes tg2MsgOut { 0%,8% { opacity: 0; transform: translateY(11px) scale(.99); } 12%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
-        @keyframes tg2Working { 0%,14% { opacity: 0; transform: translateY(9px) scale(.99); } 18%,31% { opacity: 1; transform: translateY(0) scale(1); } 36%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
-        @keyframes tg2Done { 0%,32% { opacity: 0; transform: translateY(9px) scale(.99); } 37%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
-        @keyframes tg2Step { 0%,18% { opacity: .35; transform: translateX(-4px); } 24%,48% { opacity: 1; transform: translateX(0); } 54%,100% { opacity: .35; transform: translateX(-4px); } }
-        @keyframes tg2Placeholder { 0% { opacity: 1; } 1%,100% { opacity: 0; } }
-        @keyframes tg2Type1 { 0% { max-width: 0; opacity: 1; } 10% { max-width: 72cqw; opacity: 1; } 11%,33.2% { max-width: 0; opacity: 0; } 100% { max-width: 0; opacity: 0; } }
-        @keyframes tg2Type2 { 0%,33.3% { max-width: 0; opacity: 0; } 34% { max-width: 0; opacity: 1; } 44% { max-width: 64cqw; opacity: 1; } 45%,66.5% { max-width: 0; opacity: 0; } 100% { max-width: 0; opacity: 0; } }
-        @keyframes tg2Type3 { 0%,66.6% { max-width: 0; opacity: 0; } 67.3% { max-width: 0; opacity: 1; } 78% { max-width: 24cqw; opacity: 1; } 79%,100% { max-width: 0; opacity: 0; } }
-        @keyframes tg2Cursor { 0% { opacity: 1; left: 3.2cqw; } 10% { opacity: 1; left: 72cqw; } 11%,33.2% { opacity: 0; left: 3.2cqw; } 34% { opacity: 1; left: 3.2cqw; } 44% { opacity: 1; left: 64cqw; } 45%,66.5% { opacity: 0; left: 3.2cqw; } 67.3% { opacity: 1; left: 3.2cqw; } 78% { opacity: 1; left: 24cqw; } 79%,100% { opacity: 0; left: 3.2cqw; } }
-        @keyframes tg2Send { 0%,10%,33%,44%,66%,78%,100% { transform: scale(1); opacity: .95; } 11%,45%,79% { transform: scale(.84); } 12%,46%,80% { transform: scale(1); } }
+        @keyframes tg2Working { 0%,15% { opacity: 0; transform: translateY(9px) scale(.99); } 19%,36% { opacity: 1; transform: translateY(0) scale(1); } 40%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
+        @keyframes tg2Done { 0%,39% { opacity: 0; transform: translateY(9px) scale(.99); } 43%,48% { opacity: 1; transform: translateY(0) scale(1); } 50%,100% { opacity: 0; transform: translateY(-5px) scale(.995); } }
+        @keyframes tg2Step { 0%,19% { opacity: .38; transform: translateX(-4px); } 24%,48% { opacity: 1; transform: translateX(0); } 54%,100% { opacity: .38; transform: translateX(-4px); } }
+        @keyframes tg2Placeholder { 0% { opacity: 1; } .35%,100% { opacity: 0; } }
+        @keyframes tg2Type1 { 0% { width: 0; opacity: 1; } 7.5% { width: min(var(--chars), calc(100% - 18px)); opacity: 1; } 10.5% { width: min(var(--chars), calc(100% - 18px)); opacity: 1; } 11%,33.2% { width: 0; opacity: 0; } 100% { width: 0; opacity: 0; } }
+        @keyframes tg2Type2 { 0%,33.3% { width: 0; opacity: 0; } 34% { width: 0; opacity: 1; } 41% { width: min(var(--chars), calc(100% - 18px)); opacity: 1; } 44% { width: min(var(--chars), calc(100% - 18px)); opacity: 1; } 45%,66.5% { width: 0; opacity: 0; } 100% { width: 0; opacity: 0; } }
+        @keyframes tg2Type3 { 0%,66.6% { width: 0; opacity: 0; } 67.3% { width: 0; opacity: 1; } 73.5% { width: min(var(--chars), calc(100% - 18px)); opacity: 1; } 78% { width: min(var(--chars), calc(100% - 18px)); opacity: 1; } 79%,100% { width: 0; opacity: 0; } }
+        @keyframes tg2Caret { 0%,49% { border-right-color: #007aff; } 50%,100% { border-right-color: transparent; } }
+        @keyframes tg2Cursor { 0%,100% { opacity: 0; } }
+        @keyframes tg2Send { 0%,10.5%,33%,44%,66%,78%,100% { transform: scale(1); opacity: .95; } 11%,45%,79% { transform: scale(.84); } 12%,46%,80% { transform: scale(1); } }
         @keyframes tg2Keyboard { 0%,13%,33%,47%,66%,81%,100% { opacity: 1; transform: translateY(0); } 18%,30%,52%,64%,86%,98% { opacity: .76; transform: translateY(3px); } }
 
         @media (max-width: 1023px) {
