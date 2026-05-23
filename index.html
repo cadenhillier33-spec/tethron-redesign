@@ -1773,8 +1773,8 @@
                                         <span class="tg2-type tg2-type-2" style="--chars: 56ch;">go through my pipeline and chase anything cold this week</span>
                                         <span class="tg2-type tg2-type-3" style="--chars: 48ch;">clean up next week — need blocks for sales calls</span>
                                         <span class="tg2-cursor"></span>
+                                        <i class="ph-fill ph-arrow-circle-up tg2-send"></i>
                                     </div>
-                                    <i class="ph-fill ph-arrow-circle-up tg2-send"></i>
                                 </div>
 
                                 <div class="tg2-keyboard" aria-hidden="true">
@@ -2127,31 +2127,55 @@
         .tg2-done-head i { font-size: 14px; }
         .tg2-composer {
             display: flex;
-            align-items: center;
-            gap: 9px;
-            padding: 8px 13px 7px;
+            align-items: flex-end;
+            gap: 7px;
+            padding: 7px 10px 6px;
             background: rgba(249,250,252,.82);
             border-top: 1px solid rgba(60,60,67,.10);
             box-shadow: inset 0 1px 0 rgba(255,255,255,.64);
             backdrop-filter: saturate(180%) blur(24px);
             -webkit-backdrop-filter: saturate(180%) blur(24px);
         }
-        .tg2-composer > i { color: #8e8e93; font-size: 19px; }
-        .tg2-composer .tg2-send { color: #007aff; animation: tg2Send 30s ease-in-out infinite; }
+        .tg2-composer > i {
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+            color: #8e8e93;
+            font-size: 21px;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+        .tg2-composer .tg2-send {
+            position: absolute;
+            right: 6px;
+            bottom: 5px;
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            color: #007aff;
+            font-size: 22px;
+            line-height: 1;
+            z-index: 2;
+            animation: tg2Send 30s ease-in-out infinite;
+        }
         .tg2-input {
             position: relative;
             flex: 1;
-            min-height: 31px;
+            min-height: 32px;
             border: 1px solid rgba(60,60,67,.18);
-            border-radius: 18px;
-            background: rgba(255,255,255,.78);
-            display: flex;
-            align-items: center;
+            border-radius: 20px;
+            background: rgba(255,255,255,.92);
+            display: block;
             overflow: hidden;
-            padding: 0 12px;
+            padding: 7px 36px 7px 12px;
             color: #1d1d1f;
             font-size: 13.6px;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.84);
+            text-align: left;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.88);
         }
         .tg2-placeholder { color: #a1a1a6; animation: tg2Placeholder 30s steps(1,end) infinite; }
         .tg2-type {
@@ -2186,28 +2210,35 @@
             animation: none !important;
         }
         .tg2-demo-stage.is-js-driven .tg2-type { display: none; }
-        .tg2-demo-stage.is-js-driven .tg2-placeholder { opacity: 1; }
+        .tg2-demo-stage.is-js-driven .tg2-placeholder {
+            position: absolute;
+            left: 3.35cqw;
+            top: 1.9cqw;
+            opacity: 1;
+            pointer-events: none;
+        }
         .tg2-demo-stage.is-js-driven .tg2-input {
-            align-items: flex-start;
-            min-height: 8.2cqw;
-            max-height: 17.2cqw;
-            padding-top: 1.55cqw;
-            padding-bottom: 1.25cqw;
+            min-height: 8.8cqw;
+            max-height: 19.4cqw;
+            padding: 1.9cqw 10.3cqw 1.65cqw 3.35cqw;
             transition: min-height .22s ease, box-shadow .22s ease;
         }
         .tg2-demo-stage.is-js-driven .tg2-input.is-typing {
-            min-height: 15.8cqw;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.84), 0 0 0 3px rgba(0,122,255,.08);
+            min-height: 17.8cqw;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.88), 0 0 0 3px rgba(0,122,255,.08);
         }
         .tg2-demo-stage.is-js-driven .tg2-live-type {
             display: block;
             width: 100%;
             color: #1d1d1f;
-            line-height: 1.2;
+            font-weight: 500;
+            letter-spacing: -.025em;
+            text-align: left;
+            line-height: 1.18;
             white-space: normal;
             overflow: hidden;
-            padding-right: 4px;
-            border-right: 1.8px solid #007aff;
+            padding-right: 2px;
+            border-right: 1.6px solid #007aff;
             opacity: 0;
         }
         .tg2-demo-stage.is-js-driven .tg2-live-type.is-visible { opacity: 1; }
@@ -2276,10 +2307,11 @@
         .tg2-spinner { width: 3.1cqw; height: 3.1cqw; border-width: .52cqw; }
         .tg2-steps { gap: 1.2cqw; }
         .tg2-steps span { padding: 1.35cqw 1.8cqw; border-radius: 2.9cqw; font-size: 2.86cqw; gap: 1.55cqw; }
-        .tg2-composer { gap: 2.4cqw; padding: 2.1cqw 3.5cqw 1.8cqw; }
-        .tg2-composer > i { font-size: 5cqw; }
-        .tg2-input { min-height: 8.2cqw; border-radius: 4.8cqw; padding: 0 3.2cqw; font-size: 3.55cqw; }
-        .tg2-type { left: 3.2cqw; }
+        .tg2-composer { gap: 1.85cqw; padding: 1.85cqw 2.65cqw 1.55cqw; }
+        .tg2-composer > i { width: 7.2cqw; height: 7.2cqw; font-size: 5.8cqw; margin-bottom: .55cqw; }
+        .tg2-input { min-height: 8.8cqw; border-radius: 5.35cqw; padding: 1.9cqw 10.3cqw 1.65cqw 3.35cqw; font-size: 3.75cqw; }
+        .tg2-composer .tg2-send { right: 1.55cqw; bottom: 1.25cqw; width: 6.7cqw; height: 6.7cqw; font-size: 6.25cqw; }
+        .tg2-type { left: 3.35cqw; }
         .tg2-cursor { left: 3.2cqw; height: 4.3cqw; }
         .tg2-keyboard { gap: 1.55cqw; padding: 2cqw 1.55cqw 2.3cqw; }
         .tg2-kb-row { gap: 1.28cqw; }
