@@ -2421,8 +2421,7 @@
                         input.classList.add('is-typing');
                         liveType.classList.add('is-visible');
                         if(placeholder) placeholder.style.opacity = '0';
-                        const chars = Math.min(prompt.length, Math.floor((t / TYPE_END) * prompt.length));
-                        liveType.textContent = prompt.slice(0, chars);
+                        liveType.textContent = prompt;
                         liveType.classList.toggle('is-caret-off', Math.floor(now / 420) % 2 === 0);
                     }
 
