@@ -985,7 +985,7 @@
             transform: translateY(-1px);
         }
 
-        /* Infinite scroll carousel — from tethron.ai */
+        /* Infinite logo/testimonial carousel base */
         .logo-carousel-wrap {
             overflow: hidden;
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -994,26 +994,12 @@
         .logo-carousel-wrap:hover .logo-carousel-track { animation-play-state: paused; }
         .logo-carousel-track {
             display: flex;
+            align-items: center;
             width: max-content;
             will-change: transform;
         }
         .logo-carousel-track.scroll-left { animation: logoScrollLeft 60s linear infinite; }
         .logo-carousel-track.scroll-right { animation: logoScrollRight 65s linear infinite; }
-        /* Integration pill tooltips (lightweight, hover-only, desktop) */
-        .logo-carousel-item[data-tip] { position: relative; }
-        .logo-carousel-item[data-tip]:hover::after {
-            content: attr(data-tip);
-            position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-            white-space: nowrap;
-            background: rgba(10,11,13,0.95); color: rgba(255,255,255,0.85);
-            border: 1px solid rgba(0,212,232,0.25);
-            padding: 6px 12px; border-radius: 8px;
-            font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
-            pointer-events: none; z-index: 10;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        .logo-carousel-item { transition: transform 0.3s ease, border-color 0.3s ease; }
-        .logo-carousel-item:hover { transform: translateY(-2px); border-color: rgba(0,212,232,0.3) !important; }
         @keyframes logoScrollLeft {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -1032,6 +1018,55 @@
             transition: opacity 0.3s;
         }
         .logo-carousel-item:hover { opacity: 1; }
+
+        /* Premium integrations logo strip — Mercury-style: real SVG marks, no cheap pills */
+        .integrations-carousel.logo-carousel-wrap {
+            padding: 18px 0 22px;
+            -webkit-mask-image: linear-gradient(to right, transparent, transparent 4%, black 16%, black 84%, transparent 96%, transparent);
+            mask-image: linear-gradient(to right, transparent, transparent 4%, black 16%, black 84%, transparent 96%, transparent);
+        }
+        .integrations-carousel .logo-carousel-track.scroll-left { animation-duration: 52s; }
+        .integrations-carousel .logo-carousel-item {
+            height: 78px;
+            margin: 0 clamp(30px, 4vw, 70px);
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            color: rgba(255,255,255,0.92);
+            opacity: 0.94;
+            filter: drop-shadow(0 10px 24px rgba(0,0,0,0.38));
+            transition: opacity 0.25s ease, color 0.25s ease, transform 0.25s ease;
+        }
+        .integrations-carousel .logo-carousel-item:hover {
+            color: #ffffff;
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+        .integration-logo-mark {
+            width: clamp(32px, 2.7vw, 42px);
+            height: clamp(32px, 2.7vw, 42px);
+            flex: 0 0 auto;
+        }
+        .integration-logo-wordmark {
+            font-size: clamp(25px, 2.2vw, 34px);
+            line-height: 1;
+            font-weight: 780;
+            letter-spacing: -0.06em;
+            color: currentColor;
+            white-space: nowrap;
+        }
+        .integration-logo-wordmark[data-name="Google Calendar"],
+        .integration-logo-wordmark[data-name="Google Reviews"] {
+            letter-spacing: -0.055em;
+        }
+        @media (max-width: 640px) {
+            .integrations-carousel.logo-carousel-wrap { padding: 8px 0 12px; }
+            .integrations-carousel .logo-carousel-item { height: 56px; margin: 0 22px; gap: 10px; }
+            .integration-logo-mark { width: 26px; height: 26px; }
+            .integration-logo-wordmark { font-size: 20px; }
+        }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -1372,10 +1407,11 @@
                 ['Shopify', 'Answers product questions, handles abandoned carts', '#7AB55C', 'M15.337 23.98l6.406-1.368s-2.326-15.732-2.342-15.838c-.015-.106-.11-.166-.187-.172-.077-.007-1.586-.118-1.586-.118s-1.052-1.045-1.168-1.161c-.04-.04-.093-.06-.146-.067l-.977 22.724zM18.403 5.42c-.024-.01-.373-.02-.945-.024-.43-.486-1.15-1.282-2.237-1.282-.039 0-.079.002-.118.005l-.012-.013c-.234-.314-.54-.47-.914-.47-2.94 0-4.347 3.683-4.796 5.583-1.12.345-1.91.59-1.999.618C6.63 10.03 6.61 10.05 6.53 10.712l-.59 5.1 14.59 2.726s2.34-.89 2.46-.93c.116-.04.125-.123.11-.195-.02-.075-2.68-12.03-2.7-12.12-.02-.09-.062-.183-.157-.238-.094-.057-.21-.066-.313-.02-.05.025-.935.38-1.527.614zM13.9 4.865c-.2.063-.413.13-.642.2-.012-.72-.125-1.54-.4-2.346.887.17 1.328.965 1.494 1.428-.15.237-.298.474-.452.718zm-1.75-2.31a4.12 4.12 0 0 0-.186-.04 4.44 4.44 0 0 1 .452 2.75c-.65.2-1.356.42-2.082.64.41-1.574 1.132-2.8 1.816-3.35zm-1.1-.32c-.05 0-.103.01-.157.033.013 0 .028.01.04.02-.12.05-.243.137-.362.25-.758.725-1.426 2.02-1.83 3.4l-2.18.67c.436-1.493 1.73-4.374 4.49-4.374z']
             ];
             const DEFAULT_COLOR = 'rgba(255,255,255,0.75)';
-            // Build a single pill with inline brand SVG + label + tooltip
+            // Build a single Mercury-style logo: official SVG mark + prominent brand wordmark
             const makePill = ([name, tip, color, pathD]) => {
                 const safeName = name.replace(/"/g, '&quot;');
-                return `<div class="logo-carousel-item glass-panel px-4 py-3 rounded-xl mx-2 flex items-center gap-2.5" data-tip="${tip}"><svg width="18" height="18" viewBox="0 0 24 24" style="flex:none" aria-hidden="true"><path fill="${color}" d="${pathD}"/></svg><span class="text-sm font-medium text-zinc-200">${safeName}</span></div>`;
+                const safeTip = tip.replace(/"/g, '&quot;');
+                return `<div class="logo-carousel-item" data-tip="${safeTip}" aria-label="${safeName} integration"><svg class="integration-logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="${pathD}"/></svg><span class="integration-logo-wordmark" data-name="${safeName}">${safeName}</span></div>`;
             };
             // Render integrations + duplicate for seamless infinite loop
             track.innerHTML = [...INTEGRATIONS, ...INTEGRATIONS].map(makePill).join('');
@@ -1411,30 +1447,29 @@
     <div id="custom-cursor"></div>
 
     <!-- 1. NAVIGATION -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/[0.06]" style="background: rgba(7,8,10,0.7); backdrop-filter: blur(20px) saturate(1.8); -webkit-backdrop-filter: blur(20px) saturate(1.8);">
+    <nav id="topnav" class="fixed top-0 w-full z-50 transition-all duration-300" style="background: transparent;">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="flex items-center gap-2 cursor-pointer no-underline">
-                <img src="logo.png" alt="Tethron" class="w-7 h-7">
-                <span class="text-lg font-semibold tracking-tight text-white">Tethron</span>
+            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="flex items-center cursor-pointer no-underline">
+                <span class="text-base font-semibold text-white" style="letter-spacing: 0.22em; text-transform: uppercase;">Tethron</span>
             </a>
 
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                <a href="#division" class="hover:text-white transition-colors">The Division</a>
-                <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
+            <div class="hidden md:flex items-center gap-9 text-sm font-medium text-zinc-300 absolute left-1/2 -translate-x-1/2">
+                <a href="#division" class="hover:text-white transition-colors inline-flex items-center gap-1.5">The Division <span class="text-[9px] opacity-60">&#9662;</span></a>
+                <a href="#how-it-works" class="hover:text-white transition-colors inline-flex items-center gap-1.5">How It Works <span class="text-[9px] opacity-60">&#9662;</span></a>
+                <a href="#capabilities" class="hover:text-white transition-colors inline-flex items-center gap-1.5">Capabilities <span class="text-[9px] opacity-60">&#9662;</span></a>
                 <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
                 <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
                 <a href="/about" class="hover:text-white transition-colors">About</a>
-                <a href="/blog" class="hover:text-white transition-colors">Blog</a>
             </div>
 
-            <div class="flex items-center gap-3">
-                <!-- Secondary: free audit (warmer prospects who want to talk first) -->
-                <button onclick="document.getElementById('audit-modal').classList.remove('hidden')" class="hidden lg:inline-block text-xs font-medium text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer">
-                    Free Audit
-                </button>
-                <!-- Primary CTA — scrolls to the Pro pricing card -->
-                <a href="#pricing" class="inline-block bg-tethron-cyan text-[#07080a] text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-xl hover:bg-[#00e3b6] transition-colors whitespace-nowrap">
-                    Get Pro →
+            <div class="flex items-center gap-4">
+                <!-- Secondary text link — matches the preview's "Log in" -->
+                <a href="https://calendly.com/cadenhillier33/30min" class="hidden lg:inline-block text-sm font-medium text-zinc-300 hover:text-white transition-colors">
+                    Log in
+                </a>
+                <!-- Primary pill CTA — matches the preview's "Get started" -->
+                <a href="#pricing" class="inline-block bg-tethron-cyan text-[#07080a] text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#00e3b6] transition-colors whitespace-nowrap">
+                    Get started
                 </a>
                 <!-- Mobile hamburger — smooth toggle with icon transition -->
                 <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center relative" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px);" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" onclick="window.__toggleMobileMenu && window.__toggleMobileMenu()">
@@ -1450,13 +1485,13 @@
         <!-- Mobile menu — frosted clear glass with slide animation -->
         <div id="mobile-menu" class="mobile-menu md:hidden px-6 pb-6 pt-2" style="background: rgba(7,8,10,0.88); backdrop-filter: blur(60px) saturate(2); -webkit-backdrop-filter: blur(60px) saturate(2); border-top: 1px solid rgba(255,255,255,0.06);">
             <div class="flex flex-col gap-1">
-                <a href="#pricing" data-mm-close class="block w-full text-center bg-tethron-cyan text-[#07080a] text-[15px] font-bold px-4 py-3 rounded-xl mb-2 hover:bg-[#00e3b6] transition-colors">Get Pro →</a>
+                <a href="#pricing" data-mm-close class="block w-full text-center bg-tethron-cyan text-[#07080a] text-[15px] font-bold px-4 py-3 rounded-full mb-2 hover:bg-[#00e3b6] transition-colors">Get started</a>
                 <a href="#division" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">The Division</a>
                 <a href="#how-it-works" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">How It Works</a>
+                <a href="#capabilities" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Capabilities</a>
                 <a href="#pricing" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Pricing</a>
                 <a href="#faq" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">FAQ</a>
                 <a href="/about" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">About</a>
-                <a href="/blog" data-mm-close class="px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">Blog</a>
                 <div class="mt-3 pt-3 border-t border-white/[0.06] flex flex-col gap-2">
                     <a href="https://calendly.com/cadenhillier33/30min" data-mm-close class="block w-full text-center px-4 py-3 rounded-xl text-[15px] font-medium text-zinc-300 hover:text-white hover:bg-white/[0.04] transition-all">
                         <i class="ph ph-phone text-tethron-cyan mr-2"></i>Book a Call
@@ -1469,93 +1504,102 @@
         </div>
     </nav>
 
+    <script>
+      (function(){
+        var nav = document.getElementById('topnav');
+        if(!nav) return;
+        function upd(){
+          if(window.scrollY > 40){
+            nav.style.background = 'rgba(7,8,10,0.8)';
+            nav.style.backdropFilter = 'blur(20px) saturate(1.8)';
+            nav.style.webkitBackdropFilter = 'blur(20px) saturate(1.8)';
+            nav.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
+          } else {
+            nav.style.background = 'transparent';
+            nav.style.backdropFilter = 'none';
+            nav.style.webkitBackdropFilter = 'none';
+            nav.style.borderBottom = 'none';
+          }
+        }
+        window.addEventListener('scroll', upd, {passive:true});
+        upd();
+      })();
+    </script>
+
     <main class="pt-32 pb-24 relative z-0 flex flex-col items-center overflow-x-hidden" style="overflow-x: clip;">
         
-        <!-- 2. HERO SECTION — Centered with orb behind -->
-        <section class="max-w-7xl mx-auto w-full px-6 flex flex-col items-center text-center mt-16 md:mt-28 relative min-h-[50vh] md:min-h-[85vh]">
+        <!-- 2. HERO SECTION — full-bleed mountain, AI working at the desk -->
+        <section class="relative w-full flex flex-col items-center text-center overflow-hidden" style="min-height: 92vh; margin-top: -8rem; padding-top: 19vh;">
+            <!-- mountain hero image -->
+            <div class="absolute inset-0 z-0 hero-bg-mountain"></div>
+            <style>.hero-bg-mountain{background:url('hero-mountain-v2.png') center 48% / cover no-repeat;} @media (max-width:767px){.hero-bg-mountain{background-position:26% 56%;}}</style>
+            <!-- top scrim for nav + headline legibility -->
+            <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(7,8,10,0.66) 0%, rgba(7,8,10,0.36) 22%, rgba(7,8,10,0.10) 42%, rgba(7,8,10,0) 60%);"></div>
+            <!-- cyan bloom toward the AI on the left -->
+            <div class="absolute inset-0 z-[1]" style="background: radial-gradient(38% 46% at 24% 60%, rgba(0,212,232,0.12) 0%, transparent 70%); mix-blend-mode: screen;"></div>
 
-            <!-- SPLINE 3D SCENE — Behind hero text (hidden on mobile) -->
-            <div class="absolute inset-0 w-full h-full z-[0] opacity-50 reveal delay-500 overflow-hidden hidden md:block" style="pointer-events: none; mix-blend-mode: lighten;">
-                <iframe src='https://my.spline.design/reactiveorb-XG9jCQD2Qj2Pb8KocqjbigRy/' frameborder='0' width='100%' height='100%' style="border:none; position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none;"></iframe>
-                <!-- Edge fades to blend into background -->
-                <div class="absolute inset-0 pointer-events-none" style="box-shadow: inset 0 0 250px 120px #07080a;"></div>
-                <div class="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none" style="background: linear-gradient(to top, #07080a 0%, transparent 100%);"></div>
-                <div class="absolute top-0 left-0 right-0 h-[20%] pointer-events-none" style="background: linear-gradient(to bottom, #07080a 0%, transparent 100%);"></div>
-                <div class="absolute left-0 top-0 bottom-0 w-[20%] pointer-events-none" style="background: linear-gradient(to right, #07080a 0%, transparent 100%);"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-[15%] pointer-events-none" style="background: linear-gradient(to left, #07080a 0%, transparent 100%);"></div>
-            </div>
-
-
-            <div class="reveal delay-100 relative z-20">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] mb-6 max-w-5xl text-gradient relative z-20">
-                    Your next employee never <span class="shimmer-text relative">clocks out.</span>
+            <div class="reveal delay-100 relative z-20 px-6">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-[1.1] mb-8 text-gradient">
+                    Your next employee<br>never <span class="shimmer-text relative">clocks out.</span>
                 </h1>
-            </div>
-
-            <div class="reveal delay-200 relative z-20">
-                <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-                    A dedicated AI employee built for your business. Deployed in days. It goes to work so you don't have to.
-                </p>
-            </div>
-
-
-            <!-- Animated Terminal Bar -->
-            <div class="terminal-bar reveal delay-200 mt-16 w-full max-w-xl px-3 sm:px-4 py-3.5 flex items-center gap-2 sm:gap-3 text-left relative z-20">
-                <span class="terminal-led" aria-hidden="true"></span>
-                <i class="ph-duotone ph-terminal-window text-tethron-cyan text-base sm:text-lg"></i>
-                <span class="terminal-time font-mono text-[10px] tracking-wider text-zinc-500 hidden sm:inline-block" id="terminal-time">[--:--:--]</span>
-                <div class="font-mono text-[12px] sm:text-[13px] text-zinc-200 flex-1 min-w-0 flex items-center gap-2 overflow-hidden whitespace-nowrap">
-                    <span class="terminal-typed" id="typewriter"></span>
-                    <span class="terminal-cursor"></span>
-                    <span class="terminal-done" id="terminal-status">✓</span>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-20">
+                    <a href="#pricing" class="inline-block bg-tethron-cyan text-[#07080a] text-sm font-bold px-8 py-4 rounded-full hover:bg-[#00e3b6] transition-colors">Get started</a>
+                    <a href="#division" class="inline-block text-white text-sm font-semibold px-8 py-4 rounded-full transition-colors" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(8px);">See it work</a>
                 </div>
-                <span class="terminal-proc font-mono text-[10px] tracking-wider text-zinc-500 whitespace-nowrap hidden sm:inline-block" id="terminal-proc">12 proc</span>
+            </div>
+
+            <!-- terminal bar kept hidden — preserves the typewriter JS targets so nothing errors -->
+            <div class="terminal-bar" style="display:none;" aria-hidden="true">
+                <span class="terminal-time" id="terminal-time">[--:--:--]</span>
+                <span class="terminal-typed" id="typewriter"></span>
+                <span class="terminal-done" id="terminal-status">&#10003;</span>
+                <span class="terminal-proc" id="terminal-proc">12 proc</span>
             </div>
         </section>
 
-        <!-- 2.5 KHALEESI CTA — Meet our AI employee live on the site -->
-        <section class="max-w-4xl mx-auto w-full px-6 mt-14 md:mt-16 relative z-[5] reveal delay-300">
-            <button type="button" data-khaleesi-open aria-label="Talk to Khaleesi — Tethron's AI employee, she'll answer anything" class="group w-full block text-left rounded-full overflow-hidden relative transition-all duration-300" style="background: linear-gradient(135deg, rgba(0,212,232,0.12) 0%, rgba(0,212,232,0.04) 40%, rgba(10,154,192,0.12) 100%); border: 1px solid rgba(0,212,232,0.28); box-shadow: 0 20px 60px rgba(0,212,232,0.18), inset 0 1px 1px rgba(255,255,255,0.14), inset 0 0 0 1px rgba(255,255,255,0.02); backdrop-filter: blur(20px) saturate(1.6); -webkit-backdrop-filter: blur(20px) saturate(1.6);">
-                <!-- Ambient glow behind button -->
-                <div class="absolute inset-0 pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(0,212,232,0.22) 0%, transparent 60%);"></div>
-                <!-- Shimmer overlay -->
-                <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 50%);"></div>
+        <!-- 2.5 MEET HERMES — Tethron's own AI employee, live on the page -->
+        <section id="meet-hermes" class="relative w-full overflow-hidden mt-16 md:mt-24">
+            <!-- ambient depth glow -->
+            <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(55% 75% at 33% 48%, rgba(0,212,232,0.10) 0%, transparent 62%);"></div>
 
-                <div class="relative flex flex-row items-center gap-3 md:gap-6 p-3 md:pl-6 md:pr-8 md:py-5">
-                    <!-- Avatar ring -->
-                    <div class="relative flex-shrink-0">
-                        <div class="absolute inset-0 rounded-full hidden md:block" style="background: radial-gradient(circle, rgba(0,212,232,0.5) 0%, transparent 70%); filter: blur(16px); transform: scale(1.35);"></div>
-                        <div class="relative w-11 h-11 md:w-[88px] md:h-[88px] rounded-full overflow-hidden" style="border: 2px solid rgba(0,212,232,0.5); box-shadow: 0 0 0 4px rgba(0,212,232,0.08), 0 10px 30px rgba(0,0,0,0.5);">
-                            <img src="khaleesi.jpg" alt="Khaleesi — AI Employee" class="w-full h-full object-cover" style="object-position: 50% 22%;" />
-                        </div>
-                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 md:bottom-1 md:right-1 md:w-[18px] md:h-[18px] rounded-full" style="background: #4ade80; border: 2px solid #07080a; box-shadow: 0 0 12px rgba(74,222,128,0.9);"></span>
-                    </div>
+            <div class="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-2 items-center relative z-[2]">
 
-                    <!-- Copy -->
-                    <div class="flex-1 text-left">
-                        <div class="hidden md:flex items-center gap-2 mb-1">
-                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-400" style="box-shadow: 0 0 8px rgba(74,222,128,0.8);"></span>
-                            <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #00d4e8;">Online now · Available 24/7</span>
-                        </div>
-                        <div class="text-base md:text-3xl font-bold tracking-tight text-white leading-tight">
-                            Talk to <span class="shimmer-text">Khaleesi</span>
-                        </div>
-                        <div class="text-[11px] md:text-[15px] text-zinc-400 mt-0.5 md:mt-1 font-medium">
-                            Tethron's AI employee — she'll answer anything<span class="hidden md:inline"> about the tiers, operators, or how it works</span>.
-                        </div>
-                    </div>
-
-                    <!-- Chevron CTA (desktop) -->
-                    <div class="hidden md:flex flex-shrink-0 items-center gap-2 px-5 py-3 rounded-full font-semibold text-sm transition-transform duration-300 group-hover:translate-x-1" style="background: linear-gradient(135deg, #00d4e8, #0A9AC0); color: #051a1f; box-shadow: 0 8px 24px rgba(0,212,232,0.4);">
-                        Chat now
-                        <i class="ph-fill ph-arrow-right text-base"></i>
-                    </div>
-                    <!-- Arrow (mobile) -->
-                    <div class="md:hidden flex-shrink-0 pr-1">
-                        <i class="ph-fill ph-arrow-right text-lg" style="color: #00d4e8;"></i>
+                <!-- LEFT — Hermes, cinematic, gazing toward the copy -->
+                <div class="lg:col-span-5 relative reveal flex justify-center lg:justify-start">
+                    <div class="relative w-full max-w-[540px]">
+                        <!-- subtle spotlight behind him — the only glow, kept super soft -->
+                        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(40% 42% at 52% 30%, rgba(0,212,232,0.16) 0%, transparent 60%); filter: blur(26px);"></div>
+                        <!-- Hermes cutout — clean bottom dissolve, no murky haze -->
+                        <img src="hermes.png" alt="Hermes — Tethron's AI employee" class="relative w-full h-auto select-none" draggable="false" style="-webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 93%); mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 93%); filter: drop-shadow(0 10px 24px rgba(0,0,0,0.32));" />
                     </div>
                 </div>
-            </button>
+
+                <!-- RIGHT — the invitation -->
+                <div class="lg:col-span-7 relative reveal delay-200 max-w-xl lg:pl-8">
+                    <div class="flex items-center gap-2 mb-5">
+                        <span class="inline-block w-2 h-2 rounded-full bg-green-400" style="box-shadow: 0 0 10px rgba(74,222,128,0.9);"></span>
+                        <span class="text-[11px] font-semibold tracking-[0.18em] uppercase" style="color: #00d4e8;">Live on this page</span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl lg:text-[3.4rem] font-bold tracking-tight text-white leading-[1.04]">
+                        Meet <span class="shimmer-text">Hermes</span>.
+                    </h2>
+
+                    <p class="text-base md:text-lg text-zinc-400 mt-5 leading-relaxed font-medium">
+                        Tethron's own AI employee — the one running this site, around the clock. Not a demo bot; the real thing, the same caliber we'd build for you. Ask him anything about the tiers, the 14 operators, or how a 72-hour build actually works.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2.5 mt-7">
+                        <button type="button" data-khaleesi-open class="text-sm px-4 py-2.5 rounded-full transition-all duration-300 hover:-translate-y-0.5" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); color: #c9cdd6;">What could an AI employee do for me?</button>
+                        <button type="button" data-khaleesi-open class="text-sm px-4 py-2.5 rounded-full transition-all duration-300 hover:-translate-y-0.5" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); color: #c9cdd6;">How fast is the build?</button>
+                    </div>
+
+                    <button type="button" data-khaleesi-open aria-label="Talk to Hermes — Tethron's AI employee, ask anything" class="group inline-flex items-center gap-2.5 mt-7 px-7 py-4 rounded-full font-semibold text-base transition-transform duration-300 hover:translate-x-0.5" style="background: linear-gradient(135deg, #00d4e8, #0A9AC0); color: #051a1f; box-shadow: 0 12px 38px rgba(0,212,232,0.34);">
+                        Talk to Hermes
+                        <i class="ph-fill ph-arrow-right text-lg"></i>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- SPLINE WAVE DIVIDER -->
@@ -1571,30 +1615,53 @@
             <div class="absolute top-0 bottom-0 right-0 w-[15%] pointer-events-none z-10" style="background: linear-gradient(to left, #07080a, transparent);"></div>
         </section>
 
-        <!-- 3. METRICS BAR -->
-        <section class="max-w-7xl mx-auto w-full px-6 mt-24">
-            <div class="glass-panel p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-8 divide-y md:divide-y-0 md:divide-x divide-tethron-border reveal">
-                
-                <div class="w-full text-center px-4 pt-4 md:pt-0">
-                    <div class="text-4xl font-bold tracking-tight text-white mb-1"><span class="counter font-mono" data-target="50">0</span>+</div>
-                    <div class="text-sm font-medium text-zinc-400 tracking-wide">AI EMPLOYEES DEPLOYED</div>
-                </div>
-                
-                <div class="w-full text-center px-4 pt-4 md:pt-0">
-                    <div class="text-4xl font-bold tracking-tight text-white mb-1"><span class="counter font-mono" data-target="40">0</span>+</div>
-                    <div class="text-sm font-medium text-zinc-400 tracking-wide">HOURS SAVED WEEKLY</div>
-                </div>
-                
-                <div class="w-full text-center px-4 pt-4 md:pt-0">
-                    <div class="text-4xl font-bold tracking-tight text-tethron-cyan mb-1"><span class="counter font-mono" data-target="100">0</span>%</div>
-                    <div class="text-sm font-medium text-zinc-400 tracking-wide">CLIENT SATISFACTION</div>
-                </div>
-
-            </div>
+        <!-- 3. POSITIONING — category-defining statement (Mercury-style big beat) -->
+        <section class="max-w-5xl mx-auto w-full px-6 py-24 md:py-32 text-center reveal">
+            <h2 class="text-4xl md:text-5xl lg:text-[3.4rem] font-bold tracking-tight text-white leading-[1.06]">
+                The <span class="shimmer-text">leader</span> in custom AI employee deployment.
+            </h2>
         </section>
 
+        <!-- 3.3 CYAN THREAD — scroll-drawn page break; the intelligence streams into the device -->
+        <section aria-hidden="true" class="relative w-full pointer-events-none flex justify-center" id="cyan-thread-break" style="height: 300px;">
+            <svg width="4" height="300" viewBox="0 0 4 300" style="filter: drop-shadow(0 0 9px rgba(0,212,232,0.7));">
+                <defs>
+                    <linearGradient id="thread-grad" x1="0" y1="0" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#00d4e8" stop-opacity="0"/>
+                        <stop offset="8%" stop-color="#00d4e8" stop-opacity="0.95"/>
+                        <stop offset="72%" stop-color="#00d4e8" stop-opacity="0.95"/>
+                        <stop offset="100%" stop-color="#00d4e8" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <line id="thread-line" x1="2" y1="0" x2="2" y2="300" stroke="url(#thread-grad)" stroke-width="1.5" stroke-linecap="round" pathLength="300" stroke-dasharray="300" stroke-dashoffset="300"/>
+            </svg>
+        </section>
+        <script>
+        (function(){
+            const line = document.getElementById('thread-line');
+            const sec = document.getElementById('cyan-thread-break');
+            if(!line || !sec) return;
+            const len = 300;
+            let raf = null;
+            function update(){
+                raf = null;
+                const r = sec.getBoundingClientRect();
+                const vh = window.innerHeight;
+                // 0 → 1 as the section's top crosses from viewport bottom to viewport top
+                const t = Math.max(0, Math.min(1, (vh - r.top) / vh));
+                // ease-in-out cubic — cinematic, not mechanical
+                const prog = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+                line.setAttribute('stroke-dashoffset', String(len * (1 - prog)));
+            }
+            function req(){ if(!raf) raf = requestAnimationFrame(update); }
+            window.addEventListener('scroll', req, { passive: true });
+            window.addEventListener('resize', req);
+            update();
+        })();
+        </script>
+
         <!-- 3.4 TALK TO YOUR TETHRON — iPhone-in-hand video w/ Tethron header swap + streaming chat -->
-        <section class="max-w-7xl mx-auto w-full px-4 md:px-6 mt-28 md:mt-36 scroll-mt-28">
+        <section class="max-w-7xl mx-auto w-full px-4 md:px-6 mt-12 md:mt-16 scroll-mt-28">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div class="reveal">
                     <p class="text-xs font-mono text-tethron-cyan tracking-[0.28em] uppercase mb-3">✦ Hands-free ops ✦</p>
@@ -2525,7 +2592,7 @@
 
         <!-- PUNCHLINE MOMENT — big typographic beat between demo and comparison -->
         <section class="w-full px-6 mt-[120px] mb-[60px] reveal">
-            <h2 class="punchline">Your business, running<br class="hidden md:block"><span class="punchline-accent">while you sleep.</span></h2>
+            <h2 class="punchline">Your business, running<br class="hidden md:block"> <span class="punchline-accent">while you sleep.</span></h2>
             <p class="punchline-sub">Every lead. Every review. Every invoice. Every post. Handled, while the house is dark.</p>
         </section>
 
@@ -2535,15 +2602,15 @@
         <!-- 6. THE COMPARISON -->
 
         <!-- 7. INTEGRATIONS — Infinite scroll carousel -->
-        <section class="w-full mt-32 overflow-hidden">
+        <section id="integrations" class="w-full mt-20 overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 text-center mb-12">
-                <p class="text-tethron-cyan text-sm font-semibold tracking-widest uppercase mb-4 reveal">Integrations</p>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-white reveal">Plugs into the tools <span class="text-tethron-cyan">you already use.</span></h2>
-                <p class="text-zinc-400 text-lg max-w-xl mx-auto reveal">No rip-and-replace. Your AI employee wires directly into your existing stack from day one.</p>
+                <p class="text-tethron-cyan text-sm font-semibold tracking-widest uppercase mb-5 reveal">Integrations</p>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 text-white max-w-4xl mx-auto reveal">Plugs into the tools <span class="text-tethron-cyan">you already use.</span></h2>
+                <p class="text-zinc-300 text-lg md:text-xl max-w-2xl mx-auto reveal">No rip-and-replace. Your AI employee wires directly into your existing stack from day one.</p>
             </div>
 
             <!-- Single unified integrations marquee — rendered from JS for cleaner maintenance + real brand SVGs -->
-            <div class="logo-carousel-wrap">
+            <div class="logo-carousel-wrap integrations-carousel">
                 <div class="logo-carousel-track scroll-left" id="integrations-track"></div>
             </div>
 
@@ -2658,23 +2725,17 @@
                     <div class="absolute -inset-0.5 bg-gradient-to-b from-tethron-cyan/20 to-transparent rounded-[20px] pointer-events-none blur-sm -z-10"></div>
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-tethron-cyan text-[#07080a] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(0,212,232,0.5)]">Most Popular</div>
 
-                    <h3 class="text-xl font-bold mb-1 text-white">Professional</h3>
-                    <p class="text-xs text-tethron-cyan uppercase tracking-wider font-semibold mb-1">Built around YOUR business</p>
-                    <p class="text-[11px] text-zinc-500 mb-4">Best for growing 5–15 person teams</p>
+                    <h3 class="text-xl font-bold mb-1 text-white">Pro</h3>
+                    <p class="text-xs text-tethron-cyan uppercase tracking-wider font-semibold mb-4">Custom-built around YOUR workflow</p>
 
                     <div class="text-3xl font-bold mb-1 text-white">$750 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
                     <div class="text-sm text-zinc-400 mb-6">+ <span class="text-tethron-cyan font-semibold">$3,500</span> one-time setup</div>
 
                     <ul class="space-y-3 mb-8 text-sm text-zinc-300 flex-1">
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Built + trained on YOUR business</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Finds + contacts new prospects</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Creates social posts + emails</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Monitors your competitors</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Strategic recommendations weekly</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Handles sales, ops + marketing</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Connects to every tool you use</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Custom workflows for your business</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Weekly optimization + reporting</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Custom-built to fit your exact workflow</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Trained on YOUR business + voice</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Runs sales, ops, marketing — full stack</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Connects to every tool you already use</li>
                     </ul>
 
                     <a href="https://buy.stripe.com/fZu6oH7HU3RO8ii1B52B20b" class="btn-glow block w-full py-3.5 rounded-full bg-tethron-cyan text-[#07080a] text-center text-sm font-bold hover:bg-[#00e3b6] transition-colors relative z-20">Deploy Now</a>                </div>
@@ -2684,49 +2745,37 @@
                     <div class="absolute inset-0 border border-tethron-cyan/20 rounded-[20px] pointer-events-none"></div>
 
                     <h3 class="text-xl font-bold mb-1 text-white">The Division</h3>
-                    <p class="text-xs uppercase tracking-wider font-semibold mb-1 text-tethron-cyan/75">A teammate in 3 days</p>
-                    <p class="text-[11px] text-zinc-500 mb-4">Best for solos &amp; 1–5 person teams</p>
+                    <p class="text-xs uppercase tracking-wider font-semibold mb-4 text-tethron-cyan/75">Pre-built operator. Live in 3 days.</p>
 
                     <!-- Lead with monthly, setup secondary -->
                     <div class="text-3xl font-bold mb-1 text-white">$700 <span class="text-sm text-zinc-500 font-normal">/mo</span></div>
                     <div class="text-sm text-zinc-400 mb-6">+ <span class="text-tethron-cyan font-semibold">$1,300</span> one-time setup</div>
 
                     <ul class="space-y-3 mb-8 text-sm text-zinc-300 flex-1">
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Pick from 14 trained AI employees</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Pick from 14 pre-built AI operators</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Interview before you hire</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> SDRs, support, ops, finance, legal</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Deploy in 3 days</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Text us 24/7 — iMessage, SMS, or email</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Connects to your core tools</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Bundle discounts on extra AI employees</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Monthly performance report</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Live in 3 days, plugged into your core tools</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Cancel anytime — no lock-in</li>
                     </ul>
 
                     <!-- Routes to /division where user actually browses + interviews + hires a specific AI employee (Stripe fires from there) -->
-                    <a href="/division" class="btn-glow block w-full py-3.5 rounded-full bg-tethron-cyan/90 text-[#07080a] text-center text-sm font-bold hover:bg-tethron-cyan transition-colors relative z-20">Build a Team</a>
-                    <p class="text-center text-[11px] text-zinc-500 mt-3">Pick from 14 trained AI employees · interview before you hire</p>                </div>
+                    <a href="/division" class="btn-glow block w-full py-3.5 rounded-full bg-tethron-cyan/90 text-[#07080a] text-center text-sm font-bold hover:bg-tethron-cyan transition-colors relative z-20">See the Team</a>                </div>
 
                 <!-- ENTERPRISE — swapped amber for deep royal cyan -->
                 <div class="glass-panel p-8 reveal delay-200 relative shadow-[0_0_50px_rgba(90,160,240,0.08)] overflow-visible flex flex-col" style="background: linear-gradient(180deg, rgba(90,160,240,0.04) 0%, rgba(7,8,10,0.85) 100%);">
                     <div class="absolute inset-0 border rounded-[20px] pointer-events-none" style="border-color: rgba(120,180,255,0.35);"></div>
                     <div class="absolute -inset-0.5 rounded-[20px] pointer-events-none blur-sm -z-10" style="background: linear-gradient(to bottom, rgba(120,180,255,0.15), transparent);"></div>
                     <h3 class="text-xl font-bold mb-1 text-white">Enterprise</h3>
-                    <p class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: rgba(160, 200, 255, 0.85);">Bespoke build · no templates</p>
-                    <p class="text-[11px] text-zinc-500 mb-4">Best for established companies scaling AI across departments</p>
+                    <p class="text-xs uppercase tracking-wider font-semibold mb-4" style="color: rgba(160, 200, 255, 0.85);">Whole departments, automated</p>
 
                     <div class="text-3xl font-bold mb-1 text-white">Custom <span class="text-sm text-zinc-500 font-normal">pricing</span></div>
                     <div class="text-sm text-zinc-400 mb-6">Scoped to your team size, workflows, and infrastructure requirements</div>
 
                     <ul class="space-y-3 mb-8 text-sm text-zinc-300 flex-1">
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Everything in Professional, plus:</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Built from scratch — zero template constraints</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Trained on your proprietary docs, SOPs + historical data</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Dedicated + isolated cloud infrastructure</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Deploy multiple AI employees across departments</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Multiple custom AI employees across your departments</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Trained on your proprietary docs, SOPs + data</li>
                         <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Custom integrations beyond our standard stack</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Founder-level partnership + weekly strategy calls</li>
-                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Enterprise-grade security + compliance support</li>
+                        <li class="flex gap-3 items-center"><i class="ph-bold ph-check text-tethron-cyan text-xs"></i> Founder-level partnership + weekly strategy</li>
                     </ul>
 
                     <a href="https://calendly.com/cadenhillier33/30min" target="_blank" rel="noopener" class="block w-full py-3.5 rounded-full text-center text-sm font-bold transition-colors relative z-20" style="background: rgba(120,180,255,0.15); border: 1px solid rgba(120,180,255,0.4); color: #a0c0ff;">Book a Call</a>                </div>
@@ -2865,10 +2914,6 @@
                     <span class="text-xl font-bold tracking-tight text-white">Tethron.ai</span>
                 </div>
                 <p class="text-sm text-zinc-500 mb-6 max-w-sm">Deploying autonomous local agents to run operations, marketing, and scheduling for main street businesses.</p>
-                <div class="flex items-center gap-2 text-xs text-zinc-400 bg-white/5 border border-white/10 w-fit px-3 py-1.5 rounded-full">
-                    <div class="w-1.5 h-1.5 rounded-full bg-tethron-cyan animate-pulse"></div>
-                    Systems Operational
-                </div>
             </div>
 
             <div>

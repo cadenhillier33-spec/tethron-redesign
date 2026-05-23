@@ -1,4 +1,4 @@
-// Khaleesi — Tethron AI employee live chat widget (tethron.ai cyan build)
+// Hermes — Tethron AI employee live chat widget (tethron.ai cyan build)
 // Self-contained. Works two ways:
 //   1) Floating bubble bottom-right (always on-screen)
 //   2) Any element with [data-khaleesi-open] or window.Khaleesi.open()
@@ -7,10 +7,10 @@
     window.__khaleesiLoaded = true;
 
     const API_URL = 'https://tethron-onboard.vercel.app/api/ask-khaleesi';
-    const AVATAR = '/khaleesi.jpg';
+    const AVATAR = '/hermes-avatar.png';
 
     const CSS = `
-    .kh-root{position:fixed;bottom:24px;right:24px;z-index:999998;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;align-items:center;gap:12px;}
+    .kh-root{position:fixed;bottom:24px;right:24px;z-index:999998;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:none;align-items:center;gap:12px;}
     .kh-label{background:rgba(10,11,13,.92);backdrop-filter:blur(14px) saturate(1.6);-webkit-backdrop-filter:blur(14px) saturate(1.6);border:1px solid rgba(0,212,232,.25);color:#e8fbff;font-size:13px;font-weight:600;letter-spacing:.2px;padding:10px 14px 10px 16px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 1px rgba(0,212,232,.12);white-space:nowrap;cursor:pointer;transform-origin:right center;animation:kh-label-in .5s cubic-bezier(.16,1,.3,1) both;}
     .kh-label .kh-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#00d4e8;margin-right:8px;vertical-align:middle;box-shadow:0 0 10px rgba(0,212,232,.9);animation:kh-dot-pulse 1.8s ease-in-out infinite;}
     @keyframes kh-label-in{from{opacity:0;transform:translateX(12px) scale(.94);}to{opacity:1;transform:translateX(0) scale(1);}}
@@ -19,7 +19,7 @@
     .kh-bubble::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(0,212,232,.45);animation:kh-ring 2.6s ease-out infinite;pointer-events:none;}
     .kh-bubble:hover{transform:scale(1.08);box-shadow:0 20px 60px rgba(0,212,232,.65),0 0 0 8px rgba(0,212,232,.12),inset 0 1px 1px rgba(255,255,255,.4);}
     .kh-bubble-inner{width:60px;height:60px;border-radius:50%;overflow:hidden;background:#07080a;}
-    .kh-bubble-inner img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:saturate(1.05) contrast(1.03);}
+    .kh-bubble-inner img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:saturate(1.05) contrast(1.03);}
     .kh-online{position:absolute;bottom:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#4ade80;border:2.5px solid #07080a;box-shadow:0 0 10px rgba(74,222,128,.8);}
     @keyframes kh-pulse{0%{box-shadow:0 14px 44px rgba(0,212,232,.45),0 0 0 0 rgba(0,212,232,.55),inset 0 1px 1px rgba(255,255,255,.35);}70%{box-shadow:0 14px 44px rgba(0,212,232,.45),0 0 0 18px rgba(0,212,232,0),inset 0 1px 1px rgba(255,255,255,.35);}100%{box-shadow:0 14px 44px rgba(0,212,232,.45),0 0 0 0 rgba(0,212,232,0),inset 0 1px 1px rgba(255,255,255,.35);}}
     @keyframes kh-ring{0%{opacity:.7;transform:scale(1);}100%{opacity:0;transform:scale(1.35);}}
@@ -29,7 +29,7 @@
     .kh-header{padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:13px;background:linear-gradient(180deg,rgba(0,212,232,.08),rgba(0,212,232,.02) 60%,transparent);position:relative;}
     .kh-header::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,232,.35),transparent);}
     .kh-header .kh-avatar{width:46px;height:46px;border-radius:50%;overflow:hidden;background:#141517;border:1.5px solid rgba(0,212,232,.3);flex-shrink:0;box-shadow:0 0 18px rgba(0,212,232,.2);}
-    .kh-header .kh-avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;}
+    .kh-header .kh-avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;}
     .kh-header .kh-meta{flex:1;min-width:0;}
     .kh-header .kh-title{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1.2;}
     .kh-header .kh-sub{font-size:11px;color:#00d4e8;margin-top:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:6px;}
@@ -76,9 +76,9 @@
     const root = document.createElement('div');
     root.className = 'kh-root';
     root.innerHTML = `
-        <div class="kh-label" id="kh-label"><span class="kh-dot"></span>Ask Khaleesi</div>
-        <div class="kh-bubble" id="kh-bubble" aria-label="Chat with Khaleesi" role="button" tabindex="0">
-            <div class="kh-bubble-inner"><img src="${AVATAR}" alt="Khaleesi" /></div>
+        <div class="kh-label" id="kh-label"><span class="kh-dot"></span>Ask Hermes</div>
+        <div class="kh-bubble" id="kh-bubble" aria-label="Chat with Hermes" role="button" tabindex="0">
+            <div class="kh-bubble-inner"><img src="${AVATAR}" alt="Hermes" /></div>
             <span class="kh-online"></span>
         </div>
     `;
@@ -88,9 +88,9 @@
     panel.className = 'kh-panel';
     panel.innerHTML = `
         <div class="kh-header">
-            <div class="kh-avatar"><img src="${AVATAR}" alt="Khaleesi" /></div>
+            <div class="kh-avatar"><img src="${AVATAR}" alt="Hermes" /></div>
             <div class="kh-meta">
-                <div class="kh-title">Khaleesi</div>
+                <div class="kh-title">Hermes</div>
                 <div class="kh-sub">AI Employee · Tethron</div>
             </div>
             <button class="kh-close" id="kh-close" aria-label="Close">×</button>
