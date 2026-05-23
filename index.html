@@ -1768,9 +1768,10 @@
                                     <i class="ph-fill ph-plus-circle"></i>
                                     <div class="tg2-input">
                                         <span class="tg2-placeholder">iMessage</span>
-                                        <span class="tg2-type tg2-type-1" style="--chars: 33ch;">find 10 roofing companies in Tampa</span>
-                                        <span class="tg2-type tg2-type-2" style="--chars: 29ch;">chase anything cold this week</span>
-                                        <span class="tg2-type tg2-type-3" style="--chars: 18ch;">clean up next week</span>
+                                        <span class="tg2-live-type" aria-hidden="true"></span>
+                                        <span class="tg2-type tg2-type-1" style="--chars: 59ch;">find 10 Tampa roofing companies and draft warm owner intros</span>
+                                        <span class="tg2-type tg2-type-2" style="--chars: 56ch;">go through my pipeline and chase anything cold this week</span>
+                                        <span class="tg2-type tg2-type-3" style="--chars: 48ch;">clean up next week — need blocks for sales calls</span>
                                         <span class="tg2-cursor"></span>
                                     </div>
                                     <i class="ph-fill ph-arrow-circle-up tg2-send"></i>
@@ -2167,10 +2168,67 @@
             border-right: 1.8px solid #007aff;
             line-height: 1.2;
         }
-        .tg2-type-1 { animation: tg2Type1 30s steps(33,end) infinite, tg2Caret 1s steps(1,end) infinite; }
-        .tg2-type-2 { animation: tg2Type2 30s steps(29,end) infinite, tg2Caret 1s steps(1,end) infinite; }
-        .tg2-type-3 { animation: tg2Type3 30s steps(18,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-type-1 { animation: tg2Type1 30s steps(59,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-type-2 { animation: tg2Type2 30s steps(56,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-type-3 { animation: tg2Type3 30s steps(48,end) infinite, tg2Caret 1s steps(1,end) infinite; }
+        .tg2-live-type { display: none; }
         .tg2-cursor { display: none; }
+        .tg2-demo-stage.is-js-driven .tg2-cycle,
+        .tg2-demo-stage.is-js-driven .tg2-out,
+        .tg2-demo-stage.is-js-driven .tg2-working,
+        .tg2-demo-stage.is-js-driven .tg2-done,
+        .tg2-demo-stage.is-js-driven .tg2-steps span,
+        .tg2-demo-stage.is-js-driven .tg2-keyboard,
+        .tg2-demo-stage.is-js-driven .tg2-send,
+        .tg2-demo-stage.is-js-driven .tg2-placeholder,
+        .tg2-demo-stage.is-js-driven .tg2-type,
+        .tg2-demo-stage.is-js-driven .tg2-proof {
+            animation: none !important;
+        }
+        .tg2-demo-stage.is-js-driven .tg2-type { display: none; }
+        .tg2-demo-stage.is-js-driven .tg2-placeholder { opacity: 1; }
+        .tg2-demo-stage.is-js-driven .tg2-input {
+            align-items: flex-start;
+            min-height: 8.2cqw;
+            max-height: 17.2cqw;
+            padding-top: 1.55cqw;
+            padding-bottom: 1.25cqw;
+            transition: min-height .22s ease, box-shadow .22s ease;
+        }
+        .tg2-demo-stage.is-js-driven .tg2-input.is-typing {
+            min-height: 15.8cqw;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.84), 0 0 0 3px rgba(0,122,255,.08);
+        }
+        .tg2-demo-stage.is-js-driven .tg2-live-type {
+            display: block;
+            width: 100%;
+            color: #1d1d1f;
+            line-height: 1.2;
+            white-space: normal;
+            overflow: hidden;
+            padding-right: 4px;
+            border-right: 1.8px solid #007aff;
+            opacity: 0;
+        }
+        .tg2-demo-stage.is-js-driven .tg2-live-type.is-visible { opacity: 1; }
+        .tg2-demo-stage.is-js-driven .tg2-live-type.is-caret-off { border-right-color: transparent; }
+        .tg2-demo-stage.is-js-driven .tg2-keyboard { opacity: 1; transform: translateY(0); transition: opacity .28s ease, transform .28s ease; }
+        .tg2-demo-stage.is-js-driven .tg2-keyboard.is-resting { opacity: .78; transform: translateY(3px); }
+        .tg2-demo-stage.is-js-driven .tg2-send { transform: scale(1); opacity: .95; transition: transform .16s ease, opacity .16s ease; }
+        .tg2-demo-stage.is-js-driven .tg2-send.is-tapping { transform: scale(.84); opacity: 1; }
+        .tg2-demo-stage.is-js-driven .tg2-cycle { opacity: 0; transform: translateY(14px); transition: opacity .35s ease, transform .35s ease; }
+        .tg2-demo-stage.is-js-driven .tg2-cycle.is-active { opacity: 1; transform: translateY(0); }
+        .tg2-demo-stage.is-js-driven .tg2-out,
+        .tg2-demo-stage.is-js-driven .tg2-working,
+        .tg2-demo-stage.is-js-driven .tg2-done { opacity: 0; transform: translateY(9px) scale(.99); transition: opacity .34s ease, transform .34s cubic-bezier(.22,1,.36,1); }
+        .tg2-demo-stage.is-js-driven .tg2-out.is-visible,
+        .tg2-demo-stage.is-js-driven .tg2-working.is-visible,
+        .tg2-demo-stage.is-js-driven .tg2-done.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+        .tg2-demo-stage.is-js-driven .tg2-working.is-done { opacity: 0; transform: translateY(-5px) scale(.995); }
+        .tg2-demo-stage.is-js-driven .tg2-steps span { opacity: .38; transform: translateX(-4px); transition: opacity .22s ease, transform .22s ease; }
+        .tg2-demo-stage.is-js-driven .tg2-steps span.is-visible { opacity: 1; transform: translateX(0); }
+        .tg2-demo-stage.is-js-driven .tg2-proof { opacity: 0; transform: translate3d(0,8px,0) scale(.98); transition: opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1), filter .35s ease; }
+        .tg2-demo-stage.is-js-driven .tg2-proof.is-visible { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
         .tg2-keyboard {
             display: grid;
             gap: 6px;
@@ -2267,6 +2325,109 @@
             }
         }
         </style>
+        <script>
+        (function(){
+            function initTg2Demo(){
+                const stage = document.querySelector('.tg2-demo-stage');
+                if(!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+                const cycles = Array.from(stage.querySelectorAll('.tg2-cycle')).map((cycle, index) => ({
+                    cycle,
+                    out: cycle.querySelector('.tg2-out'),
+                    working: cycle.querySelector('.tg2-working'),
+                    done: cycle.querySelector('.tg2-done'),
+                    steps: Array.from(cycle.querySelectorAll('.tg2-steps span')),
+                    proof: stage.querySelector(index === 0 ? '.tg2-proof-a' : '.tg2-proof-b')
+                }));
+                const input = stage.querySelector('.tg2-input');
+                const liveType = stage.querySelector('.tg2-live-type');
+                const placeholder = stage.querySelector('.tg2-placeholder');
+                const send = stage.querySelector('.tg2-send');
+                const keyboard = stage.querySelector('.tg2-keyboard');
+                if(!cycles.length || !input || !liveType || !send || !keyboard) return;
+
+                stage.classList.add('is-js-driven');
+
+                const LOOP_MS = 36000;
+                const SLOT_MS = LOOP_MS / cycles.length;
+                const TYPE_END = 4300;
+                const SEND_AT = 5400;
+                const OUT_AT = 5900;
+                const WORKING_AT = 7000;
+                const DONE_AT = 9600;
+                const FADE_AT = 11600;
+
+                function reset(){
+                    cycles.forEach(({ cycle, out, working, done, steps, proof }) => {
+                        cycle.classList.remove('is-active');
+                        out && out.classList.remove('is-visible');
+                        working && working.classList.remove('is-visible', 'is-done');
+                        done && done.classList.remove('is-visible');
+                        steps.forEach(step => step.classList.remove('is-visible'));
+                        proof && proof.classList.remove('is-visible');
+                    });
+                    liveType.textContent = '';
+                    liveType.classList.remove('is-visible', 'is-caret-off');
+                    input.classList.remove('is-typing');
+                    send.classList.remove('is-tapping');
+                    keyboard.classList.remove('is-resting');
+                    if(placeholder) placeholder.style.opacity = '1';
+                }
+
+                function render(){
+                    const now = performance.now();
+                    const loopT = now % LOOP_MS;
+                    const index = Math.min(cycles.length - 1, Math.floor(loopT / SLOT_MS));
+                    const t = loopT - index * SLOT_MS;
+                    const active = cycles[index];
+                    const prompt = active.out ? active.out.textContent.trim() : '';
+                    reset();
+
+                    active.cycle.classList.add('is-active');
+
+                    if(t < SEND_AT){
+                        input.classList.add('is-typing');
+                        liveType.classList.add('is-visible');
+                        if(placeholder) placeholder.style.opacity = '0';
+                        const chars = Math.min(prompt.length, Math.floor((t / TYPE_END) * prompt.length));
+                        liveType.textContent = prompt.slice(0, chars);
+                        liveType.classList.toggle('is-caret-off', Math.floor(now / 420) % 2 === 0);
+                    }
+
+                    if(t >= SEND_AT && t < OUT_AT + 260){
+                        send.classList.add('is-tapping');
+                    }
+                    if(t >= SEND_AT){
+                        keyboard.classList.add('is-resting');
+                    }
+                    if(t >= OUT_AT && active.out){
+                        active.out.classList.add('is-visible');
+                    }
+                    if(t >= WORKING_AT && t < DONE_AT && active.working){
+                        active.working.classList.add('is-visible');
+                        active.steps.forEach((step, stepIndex) => {
+                            if(t >= WORKING_AT + 450 + stepIndex * 520) step.classList.add('is-visible');
+                        });
+                    }
+                    if(t >= DONE_AT){
+                        active.working && active.working.classList.add('is-done');
+                        active.done && active.done.classList.add('is-visible');
+                        if(active.proof && index < 2) active.proof.classList.add('is-visible');
+                    }
+                    if(t >= FADE_AT){
+                        active.cycle.classList.remove('is-active');
+                        active.proof && active.proof.classList.remove('is-visible');
+                    }
+
+                    requestAnimationFrame(render);
+                }
+
+                requestAnimationFrame(render);
+            }
+            if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initTg2Demo);
+            else initTg2Demo();
+        })();
+        </script>
 
 
         <!-- 3.5 THE DIVISION — Cinematic 360° Carousel -->
