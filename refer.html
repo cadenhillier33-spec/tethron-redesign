@@ -1,424 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth bg-[#07080a] text-white dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Refer a Business | Tethron</title>
-  <meta name="description" content="Know a business owner who needs an AI Employee? Refer them to Tethron. If they become a client, you can earn up to $1,000." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://tethron.ai/refer" />
-  <meta property="og:title" content="Refer a Business to Tethron" />
-  <meta property="og:description" content="Earn up to $1,000 for referring a business that becomes a Tethron client." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tethron.ai/refer" />
-  <meta name="theme-color" content="#07080a" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #07080a;
-      --panel: rgba(255, 255, 255, 0.045);
-      --panel-strong: rgba(255, 255, 255, 0.075);
-      --line: rgba(255, 255, 255, 0.12);
-      --line-soft: rgba(255, 255, 255, 0.08);
-      --text: #f5f0e8;
-      --muted: rgba(245, 240, 232, 0.66);
-      --faint: rgba(245, 240, 232, 0.42);
-      --gold: #d9aa62;
-      --gold-soft: rgba(217, 170, 98, 0.18);
-      --green: #86efac;
-      --danger: #fb7185;
-      color-scheme: dark;
-    }
-
-    * { box-sizing: border-box; }
-    html { background: var(--bg); }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 18% 8%, rgba(217, 170, 98, 0.12), transparent 34rem),
-        radial-gradient(circle at 78% 16%, rgba(107, 114, 128, 0.16), transparent 30rem),
-        linear-gradient(180deg, #0a0b0e 0%, #07080a 58%, #050506 100%);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 78%);
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 26px 0;
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 0.01em;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--text); font-weight: 700; }
-    .mark {
-      width: 28px;
-      height: 28px;
-      border: 1px solid rgba(217, 170, 98, 0.45);
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      background: radial-gradient(circle, rgba(217, 170, 98, 0.13), rgba(255,255,255,0.02));
-    }
-    .mark::before { content: "T"; font-weight: 800; font-size: 13px; }
-    .nav-links { display: flex; align-items: center; gap: 22px; }
-    .nav-links a:hover { color: var(--text); }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.8fr);
-      gap: 56px;
-      align-items: start;
-      padding: 58px 0 64px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 12px;
-      border: 1px solid var(--line-soft);
-      border-radius: 999px;
-      color: var(--faint);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.025);
-    }
-    .eyebrow span { width: 6px; height: 6px; border-radius: 99px; background: var(--gold); box-shadow: 0 0 18px var(--gold); }
-
-    h1 {
-      margin: 24px 0 18px;
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(54px, 8vw, 96px);
-      line-height: 0.9;
-      letter-spacing: -0.055em;
-      font-weight: 400;
-      max-width: 780px;
-    }
-    h1 em { color: var(--gold); font-style: italic; }
-
-    .subhead {
-      max-width: 690px;
-      color: var(--muted);
-      font-size: clamp(17px, 2vw, 21px);
-      line-height: 1.55;
-      margin: 0 0 34px;
-    }
-
-    .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(217, 170, 98, 0.38);
-      background: linear-gradient(180deg, rgba(217,170,98,0.22), rgba(217,170,98,0.10));
-      color: #fff7e8;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.32);
-      cursor: pointer;
-    }
-    .button.secondary { background: transparent; border-color: var(--line); color: var(--muted); box-shadow: none; }
-    .button:hover { transform: translateY(-1px); }
-
-    .terms {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      overflow: hidden;
-      margin-top: 46px;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: var(--line-soft);
-    }
-    .term { background: rgba(8, 9, 12, 0.78); padding: 22px; min-height: 126px; }
-    .term strong { display: block; color: var(--text); font-size: 26px; letter-spacing: -0.04em; margin-bottom: 8px; }
-    .term span { color: var(--muted); font-size: 13px; line-height: 1.5; }
-
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
-      box-shadow: 0 30px 90px rgba(0,0,0,0.42);
-      overflow: hidden;
-    }
-    .card-head { padding: 24px 24px 0; }
-    .card-label { color: var(--gold); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; }
-    .card h2 { margin: 8px 0 8px; font-size: 22px; letter-spacing: -0.04em; }
-    .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
-
-    form { padding: 24px; display: grid; gap: 14px; }
-    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    label { display: grid; gap: 7px; color: var(--faint); font-size: 11px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
-    input, textarea, select {
-      width: 100%;
-      border: 1px solid var(--line-soft);
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.22);
-      color: var(--text);
-      font: inherit;
-      padding: 13px 14px;
-      outline: none;
-      transition: border-color .18s ease, background .18s ease;
-    }
-    textarea { min-height: 104px; resize: vertical; line-height: 1.45; }
-    input:focus, textarea:focus, select:focus { border-color: rgba(217, 170, 98, 0.52); background: rgba(0, 0, 0, 0.32); }
-    input::placeholder, textarea::placeholder { color: rgba(245,240,232,0.28); }
-
-    .fine-print {
-      border-top: 1px solid var(--line-soft);
-      padding: 18px 24px 24px;
-      color: var(--faint);
-      font-size: 11.5px;
-      line-height: 1.55;
-    }
-
-    .section { padding: 34px 0 70px; }
-    .section-title {
-      margin: 0 0 22px;
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(38px, 5vw, 64px);
-      line-height: 0.98;
-      font-weight: 400;
-      letter-spacing: -0.04em;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--line-soft);
-      border-bottom: 1px solid var(--line-soft);
-    }
-    .step { padding: 28px 22px; border-right: 1px solid var(--line-soft); }
-    .step:last-child { border-right: 0; }
-    .num { color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 30px; }
-    .step h3 { margin: 0 0 10px; font-size: 18px; letter-spacing: -0.03em; }
-    .step p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
-
-    .good-fit {
-      display: grid;
-      grid-template-columns: 0.8fr 1fr;
-      gap: 42px;
-      align-items: start;
-      border-top: 1px solid var(--line-soft);
-      padding-top: 40px;
-    }
-    .fit-list { display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: 18px; overflow: hidden; }
-    .fit-row { display: flex; justify-content: space-between; gap: 18px; padding: 18px 20px; background: rgba(8, 9, 12, 0.82); }
-    .fit-row strong { font-size: 14px; }
-    .fit-row span { color: var(--muted); font-size: 13px; line-height: 1.45; max-width: 360px; }
-
-    .status { min-height: 20px; color: var(--muted); font-size: 13px; line-height: 1.45; }
-    .status.ok { color: var(--green); }
-    .status.bad { color: var(--danger); }
-
-    footer { border-top: 1px solid var(--line-soft); padding: 26px 0 40px; color: var(--faint); font-size: 12px; }
-
-    @media (max-width: 880px) {
-      .hero, .good-fit { grid-template-columns: 1fr; gap: 34px; }
-      .terms, .steps { grid-template-columns: 1fr; }
-      .step { border-right: 0; border-bottom: 1px solid var(--line-soft); }
-      .step:last-child { border-bottom: 0; }
-    }
-
-    @media (max-width: 620px) {
-      .wrap { width: min(100% - 28px, 1120px); }
-      .nav-links { gap: 14px; }
-      .nav-links .hide-mobile { display: none; }
-      .hero { padding-top: 34px; }
-      .field-grid { grid-template-columns: 1fr; }
-      .term, .step { padding: 20px 18px; }
-      form, .card-head, .fine-print { padding-left: 18px; padding-right: 18px; }
-    }
-  </style>
-</head>
-<body>
-  <nav class="wrap nav" aria-label="Primary navigation">
-    <a class="brand" href="/" aria-label="Tethron home"><span class="mark"></span><span>Tethron</span></a>
-    <div class="nav-links">
-      <a class="hide-mobile" href="/">Main site</a>
-      <a href="#refer">Refer a business</a>
-    </div>
-  </nav>
-
-  <main>
-    <section class="wrap hero">
-      <div>
-        <div class="eyebrow"><span></span> Private referral program</div>
-        <h1>Know an owner who needs an <em>AI Employee?</em></h1>
-        <p class="subhead">Send them to Tethron. If the business becomes a paying client, you can earn up to $1,000. No spam. No reselling. Just a clean intro to an owner who could use the help.</p>
-        <div class="cta-row">
-          <a class="button" href="#refer">Refer a business</a>
-          <a class="button secondary" href="mailto:caden@tethron.ai?subject=Tethron%20referral">Email the referral</a>
-        </div>
-
-        <div class="terms" aria-label="Referral payout terms">
-          <div class="term"><strong>Up to $1,000</strong><span>Paid when a qualified referred business becomes a Tethron client.</span></div>
-          <div class="term"><strong>Owner-led</strong><span>Best fits are real businesses with recurring follow-up, inbox, scheduling, CRM, reporting, or client communication work.</span></div>
-          <div class="term"><strong>Clean intro</strong><span>No affiliate spam. No mass lists. No weird brokering. Quality referrals only.</span></div>
-        </div>
-      </div>
-
-      <aside class="card" id="refer" aria-label="Referral form">
-        <div class="card-head">
-          <div class="card-label">Start here</div>
-          <h2>Send the referral</h2>
-          <p>Give us enough context to know who they are, what they need, and how you know them.</p>
-        </div>
-        <form id="referralForm">
-          <div class="field-grid">
-            <label>Your name *<input name="referrerName" autocomplete="name" required placeholder="Your name" /></label>
-            <label>Your email<input name="referrerEmail" type="email" autocomplete="email" placeholder="you@example.com" /></label>
-          </div>
-          <label>Your phone<input name="referrerPhone" type="tel" autocomplete="tel" placeholder="Optional" /></label>
-
-          <div class="field-grid">
-            <label>Owner name<input name="ownerName" placeholder="Business owner" /></label>
-            <label>Company *<input name="company" required placeholder="Company name" /></label>
-          </div>
-          <div class="field-grid">
-            <label>Owner email<input name="ownerEmail" type="email" placeholder="owner@company.com" /></label>
-            <label>Owner phone<input name="ownerPhone" type="tel" placeholder="Optional" /></label>
-          </div>
-          <label>Company website<input name="website" type="url" placeholder="https://company.com" /></label>
-          <div class="field-grid">
-            <label>How do you know them?<input name="relationship" placeholder="Client, friend, partner, etc." /></label>
-            <label>Do they know you are referring them?
-              <select name="aware">
-                <option value="yes">Yes</option>
-                <option value="not yet">Not yet</option>
-                <option value="unsure">Unsure</option>
-              </select>
-            </label>
-          </div>
-          <label>What do they need help with?<textarea name="need" placeholder="Example: Their team misses follow-ups, owner is buried in inbox, CRM is a mess, scheduling takes too much time..."></textarea></label>
-          <button class="button" type="submit">Submit referral</button>
-          <div class="status" id="formStatus" role="status" aria-live="polite"></div>
-        </form>
-        <div class="fine-print">Referral payments are only made for qualified businesses that become paying Tethron clients. Tethron may decline referrals that are spam, duplicate, unqualified, already in pipeline, or submitted without enough contact context.</div>
-      </aside>
-    </section>
-
-    <section class="wrap section">
-      <h2 class="section-title">How it works.</h2>
-      <div class="steps">
-        <div class="step"><div class="num">01</div><h3>You send the intro.</h3><p>Submit the business owner, company, contact info, and why you think they need an AI Employee.</p></div>
-        <div class="step"><div class="num">02</div><h3>We qualify the fit.</h3><p>Tethron checks whether they are a serious owner-led business with workflows worth automating.</p></div>
-        <div class="step"><div class="num">03</div><h3>We run the audit.</h3><p>If it makes sense, we show them what an AI Employee would actually run across their daily operations.</p></div>
-        <div class="step"><div class="num">04</div><h3>You get paid.</h3><p>If the referral becomes a client, Tethron pays the referral reward tied to the deal.</p></div>
-      </div>
-    </section>
-
-    <section class="wrap section good-fit">
-      <div>
-        <h2 class="section-title">Who is a good referral?</h2>
-        <p class="subhead">Think owners who are busy, growing, and buried in repeatable work that should not require another hire.</p>
-      </div>
-      <div class="fit-list">
-        <div class="fit-row"><strong>Agencies</strong><span>Lead follow-up, client comms, reporting, scheduling, content operations.</span></div>
-        <div class="fit-row"><strong>Advisors and consultants</strong><span>Inbox work, CRM updates, meeting prep, proposal follow-up, client summaries.</span></div>
-        <div class="fit-row"><strong>Law and accounting firms</strong><span>Intake, reminders, document chase, scheduling, status updates, admin cleanup.</span></div>
-        <div class="fit-row"><strong>Local service businesses</strong><span>Missed calls, estimates, appointment booking, review requests, open quotes.</span></div>
-        <div class="fit-row"><strong>Med spas and clinics</strong><span>Patient follow-up, appointment flow, promotions, post-visit communication.</span></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="wrap">
-    © Tethron. Built for owner-led businesses that need execution, not another dashboard.
-  </footer>
-
-  <script>
-    const form = document.getElementById('referralForm');
-    const statusEl = document.getElementById('formStatus');
-
-    function setStatus(text, type) {
-      statusEl.textContent = text;
-      statusEl.className = 'status ' + (type || '');
-    }
-
-    function mailtoFallback(data) {
-      const lines = [
-        'New Tethron referral',
-        '',
-        `Referrer: ${data.referrerName || ''}`,
-        `Referrer email: ${data.referrerEmail || ''}`,
-        `Referrer phone: ${data.referrerPhone || ''}`,
-        '',
-        `Owner: ${data.ownerName || ''}`,
-        `Company: ${data.company || ''}`,
-        `Website: ${data.website || ''}`,
-        `Owner email: ${data.ownerEmail || ''}`,
-        `Owner phone: ${data.ownerPhone || ''}`,
-        `Relationship: ${data.relationship || ''}`,
-        `Aware: ${data.aware || ''}`,
-        '',
-        `Need: ${data.need || ''}`,
-      ];
-      const subject = encodeURIComponent(`Tethron referral${data.company ? ': ' + data.company : ''}`);
-      const body = encodeURIComponent(lines.join('\n'));
-      window.location.href = `mailto:caden@tethron.ai?subject=${subject}&body=${body}`;
-    }
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      if (!data.referrerEmail && !data.referrerPhone) {
-        setStatus('Add your email or phone so Tethron can pay/contact you.', 'bad');
-        return;
-      }
-      if (!data.company) {
-        setStatus('Add the company name so Tethron can qualify the referral.', 'bad');
-        return;
-      }
-      if (!data.ownerEmail && !data.ownerPhone) {
-        setStatus('Add the owner email or phone so the referral is actionable.', 'bad');
-        return;
-      }
-      setStatus('Submitting referral...', '');
-      try {
-        const res = await fetch('/api/referral-submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(json.error || 'Submission failed');
-        if (json.fallbackRequired) {
-          setStatus('Opening email fallback so the referral is not lost.', 'ok');
-          mailtoFallback(data);
-          return;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer a Business | Tethron</title>
+    <meta name="description" content="Refer a qualified business owner to Tethron. Earn up to $1,000 if they become a client.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tethron.ai/refer">
+    <meta property="og:title" content="Refer a Business to Tethron">
+    <meta property="og:description" content="Earn up to $1,000 for referring a business that becomes a Tethron client.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tethron.ai/refer">
+    <meta name="theme-color" content="#07080a">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: {
+                        tethron: {
+                            bg: '#07080a', cyan: '#00d4e8', darkteal: '#0A9AC0', card: '#101111',
+                            primary: '#f9f9f9', secondary: '#cecece', tertiary: '#9c9c9d', muted: '#6a6b6c',
+                            border: 'rgba(255, 255, 255, 0.06)'
+                        }
+                    }
+                }
+            }
         }
-        setStatus('Referral received. If they become a client, Tethron will follow up on payout.', 'ok');
-        form.reset();
-      } catch (err) {
-        setStatus('Could not submit directly. Opening email fallback.', 'bad');
-        mailtoFallback(data);
+    </script>
+    <style>
+        html, body { background-color:#07080a!important; color:#f9f9f9; overflow-x:clip; -webkit-font-smoothing:antialiased; font-weight:500; letter-spacing:.2px; }
+        .bg-grid{position:fixed;inset:0;z-index:-3;background-color:#07080a;background-image:linear-gradient(to right,rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.02) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,black 0%,transparent 70%)}
+        .noise-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+        .ambient-glow{position:absolute;top:-24%;left:50%;transform:translateX(-50%);width:900px;height:520px;background:radial-gradient(ellipse at center,rgba(0,212,232,.14) 0%,rgba(0,212,232,.045) 34%,transparent 68%);filter:blur(72px);pointer-events:none;z-index:-1}
+        .liquid-glass{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 24px 80px rgba(0,0,0,.28);backdrop-filter:blur(24px) saturate(1.45);-webkit-backdrop-filter:blur(24px) saturate(1.45)}
+        .liquid-strong{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 34px 110px rgba(0,0,0,.38);backdrop-filter:blur(30px) saturate(1.55);-webkit-backdrop-filter:blur(30px) saturate(1.55)}
+        .text-gradient{background:linear-gradient(180deg,#f9f9f9 0%,rgba(249,249,249,.64) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .cyan-glow{box-shadow:0 0 0 1px rgba(0,212,232,.18),0 0 38px rgba(0,212,232,.12)}
+        .field input,.field textarea,.field select{width:100%;background:rgba(7,8,10,.46);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 15px;color:#fff;outline:none;transition:border-color .18s,box-shadow .18s,background .18s}
+        .field textarea{min-height:112px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(0,212,232,.46);box-shadow:0 0 0 4px rgba(0,212,232,.08);background:rgba(7,8,10,.62)}
+        .field label{display:block;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+        .field select option{background:#101111;color:#fff}.status{display:none}.status.ok,.status.bad{display:block;margin-top:14px;border-radius:16px;padding:13px 14px;font-size:13px;line-height:1.45}.status.ok{background:rgba(0,212,170,.09);border:1px solid rgba(0,212,170,.22);color:rgba(220,255,248,.9)}.status.bad{background:rgba(255,110,110,.10);border:1px solid rgba(255,110,110,.22);color:rgba(255,225,225,.92)}
+    </style>
+</head>
+<body class="font-sans selection:bg-tethron-cyan selection:text-black">
+    <div class="bg-grid"></div>
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow"></div>
+
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300" style="background:rgba(7,8,10,.78);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border-bottom:1px solid rgba(255,255,255,.06);">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center cursor-pointer no-underline"><span class="text-base font-semibold text-white" style="letter-spacing:.22em;text-transform:uppercase;">Tethron</span></a>
+            <div class="hidden md:flex items-center gap-9 text-sm font-medium text-zinc-300 absolute left-1/2 -translate-x-1/2">
+                <a href="/#capabilities" class="hover:text-white transition-colors">Capabilities</a>
+                <a href="/#pricing" class="hover:text-white transition-colors">Pricing</a>
+                <a href="/about" class="hover:text-white transition-colors">About</a>
+                <a href="/refer" class="text-white transition-colors">Refer</a>
+            </div>
+            <a href="#refer-form" class="inline-block bg-tethron-cyan text-[#07080a] text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#00e3b6] transition-colors whitespace-nowrap">Submit referral</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-32 pb-20">
+        <section class="max-w-7xl mx-auto px-6 min-h-[calc(100vh-8rem)] flex items-center">
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center w-full">
+                <div class="lg:col-span-7">
+                    <div class="inline-flex items-center gap-2 rounded-full liquid-glass px-3.5 py-2 mb-7">
+                        <span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan shadow-[0_0_16px_rgba(0,212,232,.8)]"></span>
+                        <span class="font-mono text-[10px] tracking-[0.24em] uppercase text-zinc-400">Private referral program</span>
+                    </div>
+
+                    <h1 class="text-gradient text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-[-0.065em] leading-[0.98] max-w-4xl">
+                        Know someone who needs an AI employee?
+                    </h1>
+                    <p class="mt-7 text-lg sm:text-xl text-zinc-400 font-medium leading-relaxed max-w-2xl">
+                        Send a clean intro to a business owner with real operational drag. If they become a Tethron client, you can earn up to <span class="text-white font-semibold">$1,000</span>.
+                    </p>
+
+                    <div class="mt-9 flex flex-col sm:flex-row gap-3">
+                        <a href="#refer-form" class="inline-flex items-center justify-center bg-tethron-cyan text-[#07080a] text-sm font-bold px-6 py-3.5 rounded-full hover:bg-[#00e3b6] transition-colors">Refer a business</a>
+                        <a href="mailto:caden@tethron.ai?subject=Tethron%20referral" class="inline-flex items-center justify-center liquid-glass text-sm font-semibold px-6 py-3.5 rounded-full text-zinc-300 hover:text-white transition-colors">Email Caden instead</a>
+                    </div>
+
+                    <div class="mt-12 grid sm:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.06] max-w-3xl">
+                        <div class="bg-[#07080a]/70 p-5"><p class="font-mono text-[10px] tracking-[0.2em] uppercase text-tethron-cyan mb-3">01</p><p class="text-sm text-zinc-300 leading-relaxed">Owner-led business with budget and repeatable daily work.</p></div>
+                        <div class="bg-[#07080a]/70 p-5"><p class="font-mono text-[10px] tracking-[0.2em] uppercase text-tethron-cyan mb-3">02</p><p class="text-sm text-zinc-300 leading-relaxed">Follow up, inbox, scheduling, CRM, reporting, or client communication pain.</p></div>
+                        <div class="bg-[#07080a]/70 p-5"><p class="font-mono text-[10px] tracking-[0.2em] uppercase text-tethron-cyan mb-3">03</p><p class="text-sm text-zinc-300 leading-relaxed">No spam lists. No reselling. No duplicate pipeline games.</p></div>
+                    </div>
+                </div>
+
+                <aside class="lg:col-span-5 liquid-strong rounded-[2rem] p-6 sm:p-8 cyan-glow relative overflow-hidden">
+                    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(420px 220px at 50% 0%,rgba(0,212,232,.14),transparent 72%);"></div>
+                    <div class="relative">
+                        <p class="font-mono text-[10px] tracking-[0.24em] uppercase text-zinc-500 mb-5">Referral reward</p>
+                        <div class="flex items-end gap-3 border-b border-white/[0.07] pb-7">
+                            <span class="text-2xl text-zinc-500 mb-3">Up to</span>
+                            <span class="text-6xl sm:text-7xl font-semibold tracking-[-0.08em] text-white">$1,000</span>
+                        </div>
+                        <div class="space-y-5 pt-7 text-sm leading-relaxed text-zinc-400">
+                            <p><span class="text-white">Paid only when qualified referrals convert.</span> Amount depends on fit, deal size, relationship, and whether the business was already in our pipeline.</p>
+                            <p>This should feel like a private business intro, not an affiliate link.</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section id="refer-form" class="max-w-7xl mx-auto px-6 pt-16 scroll-mt-28">
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                <div class="lg:col-span-4 lg:sticky lg:top-28">
+                    <p class="font-mono text-xs tracking-[0.28em] uppercase text-tethron-cyan mb-4">Send the intro</p>
+                    <h2 class="text-4xl md:text-5xl font-semibold tracking-[-0.055em] leading-[1.05] text-white">Make it actionable.</h2>
+                    <p class="mt-5 text-zinc-400 leading-relaxed">Give us enough context to know who they are, what they need, and why an AI Employee would actually matter.</p>
+                    <p class="mt-6 text-xs leading-relaxed text-zinc-600">Referral payments are only made for qualified businesses that become paying Tethron clients. Tethron may decline referrals that are spam, duplicate, unqualified, already in pipeline, or submitted without enough contact context.</p>
+                </div>
+
+                <form id="referralForm" class="lg:col-span-8 liquid-strong rounded-[2rem] p-5 sm:p-8">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="field"><label>Your name *</label><input name="referrerName" autocomplete="name" required placeholder="Your name"></div>
+                        <div class="field"><label>Your email</label><input name="referrerEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
+                        <div class="field"><label>Your phone</label><input name="referrerPhone" type="tel" autocomplete="tel" placeholder="Optional"></div>
+                        <div class="field"><label>Owner name</label><input name="ownerName" placeholder="Business owner"></div>
+                        <div class="field"><label>Company *</label><input name="company" required placeholder="Company name"></div>
+                        <div class="field"><label>Company website</label><input name="website" type="url" placeholder="https://company.com"></div>
+                        <div class="field"><label>Owner email</label><input name="ownerEmail" type="email" placeholder="owner@company.com"></div>
+                        <div class="field"><label>Owner phone</label><input name="ownerPhone" type="tel" placeholder="Optional"></div>
+                        <div class="field"><label>How do you know them?</label><input name="relationship" placeholder="Client, friend, partner, etc."></div>
+                        <div class="field"><label>Do they know?</label><select name="aware"><option value="yes">Yes</option><option value="not yet">Not yet</option><option value="unsure">Unsure</option></select></div>
+                        <div class="field md:col-span-2"><label>What do they need help with?</label><textarea name="need" placeholder="Example: missed follow-ups, owner buried in inbox, CRM never updated, scheduling is manual..."></textarea></div>
+                    </div>
+                    <button type="submit" class="mt-5 w-full bg-tethron-cyan text-[#07080a] text-sm font-bold px-6 py-4 rounded-full hover:bg-[#00e3b6] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">Submit referral</button>
+                    <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-tethron-border bg-[#07080a] py-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-600">
+            <p>&copy; 2026 Tethron.ai. All rights reserved.</p>
+            <div class="flex gap-4"><a href="/privacy" class="hover:text-zinc-400 transition-colors">Privacy</a><a href="/terms" class="hover:text-zinc-400 transition-colors">Terms</a><a href="mailto:caden@tethron.ai" class="hover:text-zinc-400 transition-colors">caden@tethron.ai</a></div>
+        </div>
+    </footer>
+
+    <script>
+      const form = document.getElementById('referralForm');
+      const statusEl = document.getElementById('formStatus');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      function setStatus(text, type){ statusEl.textContent=text; statusEl.className='status ' + (type || ''); }
+      function mailtoFallback(data){
+        const lines=['New Tethron referral','',`Referrer: ${data.referrerName||''}`,`Referrer email: ${data.referrerEmail||''}`,`Referrer phone: ${data.referrerPhone||''}`,'',`Owner: ${data.ownerName||''}`,`Company: ${data.company||''}`,`Website: ${data.website||''}`,`Owner email: ${data.ownerEmail||''}`,`Owner phone: ${data.ownerPhone||''}`,`Relationship: ${data.relationship||''}`,`Aware: ${data.aware||''}`,'',`Need: ${data.need||''}`];
+        window.location.href=`mailto:caden@tethron.ai?subject=${encodeURIComponent('Tethron referral' + (data.company ? ': ' + data.company : ''))}&body=${encodeURIComponent(lines.join('\n'))}`;
       }
-    });
-  </script>
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        if(!data.referrerEmail && !data.referrerPhone){ setStatus('Add your email or phone so Tethron can pay/contact you.', 'bad'); return; }
+        if(!data.company){ setStatus('Add the company name so Tethron can qualify the referral.', 'bad'); return; }
+        if(!data.ownerEmail && !data.ownerPhone && !data.website){ setStatus('Add owner contact info or a company website.', 'bad'); return; }
+        submitBtn.disabled=true; submitBtn.textContent='Submitting...'; setStatus('', '');
+        try{
+          const res = await fetch('/api/referral-submit', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+          const json = await res.json().catch(() => ({}));
+          if(!res.ok) throw new Error(json.error || 'Submission failed');
+          if(json.fallbackRequired){ setStatus('Opening email fallback so the referral is not lost.', 'ok'); mailtoFallback(data); return; }
+          setStatus('Referral received. If they become a client, Tethron will follow up on payout.', 'ok'); form.reset();
+        } catch(err){ setStatus('Could not submit directly. Opening email fallback.', 'bad'); mailtoFallback(data); }
+        finally{ submitBtn.disabled=false; submitBtn.textContent='Submit referral'; }
+      });
+    </script>
 </body>
 </html>
