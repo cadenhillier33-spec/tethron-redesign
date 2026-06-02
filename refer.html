@@ -49,6 +49,12 @@
         .field textarea{min-height:112px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(0,212,232,.46);box-shadow:0 0 0 4px rgba(0,212,232,.08);background:rgba(7,8,10,.62)}
         .field label{display:block;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42)}
         .field select option{background:#101111;color:#fff}.status{display:none}.status.ok,.status.bad{display:block;margin-top:14px;border-radius:16px;padding:13px 14px;font-size:13px;line-height:1.45}.status.ok{background:rgba(0,212,170,.09);border:1px solid rgba(0,212,170,.22);color:rgba(220,255,248,.9)}.status.bad{background:rgba(255,110,110,.10);border:1px solid rgba(255,110,110,.22);color:rgba(255,225,225,.92)}
+        .referral-marquee{height:36px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(7,8,10,.72);overflow:hidden;white-space:nowrap;display:flex;align-items:center;mask-image:linear-gradient(90deg,transparent,black 10%,black 90%,transparent)}
+        .referral-marquee-track{display:inline-flex;align-items:center;gap:2rem;animation:referral-marquee 22s linear infinite;will-change:transform}
+        .referral-marquee span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(249,249,249,.58)}
+        .referral-marquee b{color:#00d4e8;font-weight:500}
+        @keyframes referral-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        @media (max-width:640px){.hero-title{font-size:46px!important;line-height:1.10!important;letter-spacing:-.055em!important}.hero-section{min-height:auto!important;align-items:flex-start!important}.hero-title,.hero-actions,.hero-steps{max-width:100%!important}.referral-marquee{height:34px}.referral-marquee span{font-size:9px}.mobile-nav-cta{padding-left:16px!important;padding-right:16px!important;font-size:12px!important}}
     </style>
 </head>
 <body class="font-sans selection:bg-tethron-cyan selection:text-black">
@@ -65,32 +71,41 @@
                 <a href="/about" class="hover:text-white transition-colors">About</a>
                 <a href="/refer" class="text-white transition-colors">Refer</a>
             </div>
-            <a href="#refer-form" class="inline-block bg-tethron-cyan text-[#07080a] text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#00e3b6] transition-colors whitespace-nowrap">Submit referral</a>
+            <a href="#refer-form" class="mobile-nav-cta inline-block bg-tethron-cyan text-[#07080a] text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#00e3b6] transition-colors whitespace-nowrap">Submit referral</a>
+        </div>
+        <div class="referral-marquee" aria-label="Referral payout banner">
+            <div class="referral-marquee-track">
+                <span><b>Earn up to $1,000</b> per referred client</span>
+                <span>Clean intros only</span>
+                <span><b>Earn up to $1,000</b> per referred client</span>
+                <span>Qualified businesses only</span>
+                <span><b>Earn up to $1,000</b> per referred client</span>
+                <span>Clean intros only</span>
+                <span><b>Earn up to $1,000</b> per referred client</span>
+                <span>Qualified businesses only</span>
+            </div>
         </div>
     </nav>
 
-    <main class="relative z-10 pt-32 pb-20">
-        <section class="max-w-7xl mx-auto px-6 min-h-[calc(100vh-8rem)] flex items-center">
+    <main class="relative z-10 pt-36 sm:pt-40 pb-20">
+        <section class="hero-section max-w-7xl mx-auto px-6 min-h-[calc(100vh-8rem)] flex items-center">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center w-full">
                 <div class="lg:col-span-7">
-                    <div class="inline-flex items-center gap-2 rounded-full liquid-glass px-3.5 py-2 mb-7">
-                        <span class="w-1.5 h-1.5 rounded-full bg-tethron-cyan shadow-[0_0_16px_rgba(0,212,232,.8)]"></span>
-                        <span class="font-mono text-[10px] tracking-[0.24em] uppercase text-zinc-400">Private referral program</span>
-                    </div>
-
-                    <h1 class="text-gradient text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-[-0.065em] leading-[0.98] max-w-4xl">
-                        Know someone who needs an AI employee?
+                    <h1 class="hero-title text-gradient text-[3.25rem] sm:text-6xl lg:text-7xl font-semibold tracking-[-0.06em] leading-[1.04] max-w-4xl">
+                        <span class="block sm:inline">Know someone</span>
+                        <span class="block sm:inline">who needs an</span>
+                        <span class="block sm:inline">AI employee?</span>
                     </h1>
                     <p class="mt-7 text-lg sm:text-xl text-zinc-400 font-medium leading-relaxed max-w-2xl">
                         Send a clean intro to a business owner with real operational drag. If they become a Tethron client, you can earn up to <span class="text-white font-semibold">$1,000</span>.
                     </p>
 
-                    <div class="mt-9 flex flex-col sm:flex-row gap-3">
-                        <a href="#refer-form" class="inline-flex items-center justify-center bg-tethron-cyan text-[#07080a] text-sm font-bold px-6 py-3.5 rounded-full hover:bg-[#00e3b6] transition-colors">Refer a business</a>
-                        <a href="mailto:caden@tethron.ai?subject=Tethron%20referral" class="inline-flex items-center justify-center liquid-glass text-sm font-semibold px-6 py-3.5 rounded-full text-zinc-300 hover:text-white transition-colors">Email Caden instead</a>
+                    <div class="hero-actions mt-9 flex flex-col sm:flex-row gap-3 w-full max-w-2xl">
+                        <a href="#refer-form" class="w-full sm:w-auto inline-flex items-center justify-center bg-tethron-cyan text-[#07080a] text-sm font-bold px-6 py-3.5 rounded-full hover:bg-[#00e3b6] transition-colors">Refer a business</a>
+                        <a href="mailto:caden@tethron.ai?subject=Tethron%20referral" class="w-full sm:w-auto inline-flex items-center justify-center liquid-glass text-sm font-semibold px-6 py-3.5 rounded-full text-zinc-300 hover:text-white transition-colors">Email Caden instead</a>
                     </div>
 
-                    <div class="mt-12 grid sm:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.06] max-w-3xl">
+                    <div class="hero-steps mt-12 grid sm:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.06] max-w-3xl">
                         <div class="bg-[#07080a]/70 p-5"><p class="font-mono text-[10px] tracking-[0.2em] uppercase text-tethron-cyan mb-3">01</p><p class="text-sm text-zinc-300 leading-relaxed">Owner-led business with budget and repeatable daily work.</p></div>
                         <div class="bg-[#07080a]/70 p-5"><p class="font-mono text-[10px] tracking-[0.2em] uppercase text-tethron-cyan mb-3">02</p><p class="text-sm text-zinc-300 leading-relaxed">Follow up, inbox, scheduling, CRM, reporting, or client communication pain.</p></div>
                         <div class="bg-[#07080a]/70 p-5"><p class="font-mono text-[10px] tracking-[0.2em] uppercase text-tethron-cyan mb-3">03</p><p class="text-sm text-zinc-300 leading-relaxed">No spam lists. No reselling. No duplicate pipeline games.</p></div>
