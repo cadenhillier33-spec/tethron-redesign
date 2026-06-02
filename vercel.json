@@ -3,6 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/about", "destination": "/about.html" },
+    { "source": "/refer", "destination": "/refer.html" },
 
     { "source": "/team",      "destination": "https://tethron-division.vercel.app/" },
     { "source": "/division",  "destination": "https://tethron-division.vercel.app/" },
